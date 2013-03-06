@@ -1,0 +1,42 @@
+Program
+    Initialiserer og kjører programmet i denne klassen
+
+GUI
+    Håndterer brukergrensesnittet
+    
+Calendar
+    En kalender med navn, eier og liste med avtaler/møter
+
+AbstractCalendarEvent
+    Abstrakt klasse
+    Inneholder felter og metoder som er felles for Appointment og Meeting
+
+Appointment
+    Arver fra AbstractCalendarEvent
+    Avtale (for én bruker)
+    Vises i kalenderen
+    
+Meeting
+    Arver fra AbstractCalendarEvent
+    Møte (mellom flere brukere / grupper)
+    Vises i kalenderen
+
+User
+    Brukere kan inviteres til møter
+    En bruker kan være eier av en kalender som ikke tilhører brukeren som er innlogget
+
+Group
+    Liste med brukere
+    Grupper kan inviteres til møter
+
+Notification
+    Melding som krever interaksjon fra brukeren
+
+Alarm
+    Alarm fra hendelser i en kalender
+
+ServerCommunication
+    Tar seg av kommunikasjon med serveren
+
+XMLTranslator
+    Tar seg av oversetting fra XML
