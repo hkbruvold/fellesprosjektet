@@ -322,19 +322,19 @@ addEvent</string>
      <string>x</string>
      <void method="set">
       <object idref="Point2D$Double3"/>
-      <double>287.0</double>
+      <double>167.0</double>
      </void>
     </void>
     <void class="java.awt.geom.Point2D$Double" method="getField">
      <string>y</string>
      <void method="set">
       <object idref="Point2D$Double3"/>
-      <double>299.0</double>
+      <double>294.0</double>
      </void>
     </void>
     <void method="setLocation">
-     <double>287.0</double>
-     <double>299.0</double>
+     <double>167.0</double>
+     <double>294.0</double>
     </void>
    </object>
   </void>
@@ -437,19 +437,19 @@ addEvent</string>
      <string>x</string>
      <void method="set">
       <object idref="Point2D$Double8"/>
-      <double>167.0</double>
+      <double>283.0</double>
      </void>
     </void>
     <void class="java.awt.geom.Point2D$Double" method="getField">
      <string>y</string>
      <void method="set">
       <object idref="Point2D$Double8"/>
-      <double>302.0</double>
+      <double>293.0</double>
      </void>
     </void>
     <void method="setLocation">
-     <double>167.0</double>
-     <double>302.0</double>
+     <double>283.0</double>
+     <double>293.0</double>
     </void>
    </object>
   </void>
