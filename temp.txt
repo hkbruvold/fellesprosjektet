@@ -1,1 +1,3 @@
 test
+
+SERVER: 'test' Successful!
