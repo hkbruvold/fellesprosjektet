@@ -42,6 +42,8 @@ ServerCommunication
 XMLTranslator
     Tar seg av oversetting fra XML
 
+
+
 SERVER
 Program
     Initialiserer og kjører programmet
