@@ -1,5 +1,6 @@
+CLIENT
 Program
-    Initialiserer og kjører programmet i denne klassen
+    Initialiserer og kjører programmet med denne klassen
 
 GUI
     Håndterer brukergrensesnittet
@@ -40,3 +41,13 @@ ServerCommunication
 
 XMLTranslator
     Tar seg av oversetting fra XML
+
+SERVER
+Program
+    Initialiserer og kjører programmet
+
+DatabaseCommunication
+    Tar seg av kommunikasjon med databasen
+
+ClientCommunication
+    Tar seg av kommunikasjon med klienten brukeren kobler seg til med
