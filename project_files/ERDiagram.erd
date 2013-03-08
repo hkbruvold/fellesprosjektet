@@ -19,7 +19,7 @@
 <attribute is_hidden="false" is_key="false" name="description" type=""/>
 </attributes>
 </entity>
-<entity id="17" is_weak="false" name="Room" x="385" y="361">
+<entity id="17" is_weak="false" name="Room" x="451" y="371">
 <attributes>
 <attribute is_hidden="false" is_key="true" name="roomID" type=""/>
 <attribute is_hidden="false" is_key="false" name="size" type=""/>
@@ -42,7 +42,6 @@
 <attributes>
 <attribute is_hidden="false" is_key="true" name="notificationID" type=""/>
 <attribute is_hidden="false" is_key="false" name="description" type=""/>
-<attribute is_hidden="false" is_key="false" name="appointmentID" type=""/>
 </attributes>
 </entity>
 <diamond id="14" is_weak="false" name="isParticipant" x="335" y="312">
@@ -68,12 +67,15 @@
 <diamond id="45" is_weak="false" name="" x="480" y="281">
 <attributes/>
 </diamond>
+<diamond id="48" is_weak="false" name="isRelatedTo" x="405" y="345">
+<attributes/>
+</diamond>
 <line cardinality_string="(0,n)" has_u="false" id="15" is_weak="false" role="" style="0" turned="false">
 <connection connection_side="3" direction="1" object_id="0" relation_point_x="440" relation_point_y="261"/>
 <connection connection_side="2" direction="0" object_id="14" relation_point_x="367" relation_point_y="328"/>
 </line>
 <line cardinality_string="(0,n)" has_u="false" id="16" is_weak="false" role="" style="0" turned="false">
-<connection connection_side="2" direction="0" object_id="1" relation_point_x="300" relation_point_y="322"/>
+<connection connection_side="2" direction="0" object_id="1" relation_point_x="300" relation_point_y="344"/>
 <connection connection_side="0" direction="0" object_id="14" relation_point_x="335" relation_point_y="328"/>
 </line>
 <line cardinality_string="(0,1)" has_u="false" id="19" is_weak="false" role="" style="0" turned="false">
@@ -81,7 +83,7 @@
 <connection connection_side="1" direction="1" object_id="18" relation_point_x="259" relation_point_y="412"/>
 </line>
 <line cardinality_string="(0,n)" has_u="false" id="20" is_weak="false" role="" style="0" turned="false">
-<connection connection_side="3" direction="1" object_id="17" relation_point_x="410" relation_point_y="421"/>
+<connection connection_side="0" direction="0" object_id="17" relation_point_x="451" relation_point_y="401"/>
 <connection connection_side="2" direction="0" object_id="18" relation_point_x="275" relation_point_y="428"/>
 </line>
 <line cardinality_string="(1,1)" has_u="false" id="32" is_weak="false" role="" style="0" turned="false">
@@ -117,11 +119,19 @@
 <connection connection_side="3" direction="1" object_id="41" relation_point_x="275" relation_point_y="197"/>
 </line>
 <line cardinality_string="(1,1)" has_u="false" id="46" is_weak="false" role="" style="0" turned="false">
-<connection connection_side="0" direction="0" object_id="44" relation_point_x="531" relation_point_y="343"/>
+<connection connection_side="0" direction="0" object_id="44" relation_point_x="531" relation_point_y="325"/>
 <connection connection_side="3" direction="1" object_id="45" relation_point_x="496" relation_point_y="313"/>
 </line>
 <line cardinality_string="(0,n)" has_u="false" id="47" is_weak="false" role="" style="0" turned="false">
 <connection connection_side="2" direction="0" object_id="0" relation_point_x="473" relation_point_y="201"/>
 <connection connection_side="1" direction="1" object_id="45" relation_point_x="496" relation_point_y="281"/>
+</line>
+<line cardinality_string="(0,1)" has_u="false" id="49" is_weak="false" role="" style="0" turned="false">
+<connection connection_side="0" direction="0" object_id="44" relation_point_x="531" relation_point_y="345"/>
+<connection connection_side="2" direction="0" object_id="48" relation_point_x="437" relation_point_y="361"/>
+</line>
+<line cardinality_string="(0,n)" has_u="false" id="50" is_weak="false" role="" style="0" turned="false">
+<connection connection_side="2" direction="0" object_id="1" relation_point_x="300" relation_point_y="299"/>
+<connection connection_side="0" direction="0" object_id="48" relation_point_x="405" relation_point_y="361"/>
 </line>
 </diagram>
