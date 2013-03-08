@@ -74,7 +74,13 @@
           <void method="addChild">
            <object class="com.horstmann.violet.CallNode" id="ActivationBarNode7">
             <void property="implicitParameter">
-             <object class="com.horstmann.violet.ImplicitParameterNode" id="LifelineNode4"/>
+             <object class="com.horstmann.violet.ImplicitParameterNode" id="LifelineNode4">
+              <void property="name">
+               <void property="text">
+                <string>DatabaseCommunication</string>
+               </void>
+              </void>
+             </object>
             </void>
            </object>
           </void>
