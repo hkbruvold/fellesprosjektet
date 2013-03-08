@@ -20,6 +20,9 @@ Appointment
 Meeting
     Arver fra AbstractCalendarEvent
     Møte (mellom flere brukere / grupper)
+    Har leder
+    Kan sende notification
+    Tar seg av sending og svar på invitasjoner ol.
     Vises i kalenderen
 
 User
@@ -53,3 +56,7 @@ DatabaseCommunication
 
 ClientCommunication
     Tar seg av kommunikasjon med klienten brukeren kobler seg til med
+
+XMLTranslator
+    Tar seg av oversetting fra XML
+

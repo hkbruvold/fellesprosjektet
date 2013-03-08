@@ -5,11 +5,6 @@
    <object class="com.horstmann.violet.PackageNode">
     <void method="addChild">
      <object class="com.horstmann.violet.ClassNode" id="ClassNode0">
-      <void property="attributes">
-       <void property="text">
-        <string>eventList</string>
-       </void>
-      </void>
       <void property="methods">
        <void property="text">
         <string>newEvent()
