@@ -1,0 +1,48 @@
+CREATE DATABASE IF NOT EXIST calendarDatabase;
+USE calendarDatabase;
+
+CREATE TABLE user (
+    username VARCHAR(32) NOT NULL,
+    password VARCHAR(32) NOT NULL,
+    name VARCHAR(32),
+    type TINYTEXT,
+    PRIMARY KEY (username)
+);
+
+CREATE TABLE group (
+    groupID INT NOT NULL,
+    groupname VARCHAR(32),
+    decription TINYTEXT,
+    PRIMARY KEY (groupID)
+);
+
+CREATE TABLE appointment (
+    appointmentID INT NOT NULL,
+    startDate DATE,
+    endDate DATE,
+    startTime TIME,
+    endTime TIME,
+    location VARCHAR(32),
+    description TINYTEXT,
+    PRIMARY KEY (appointmentID)
+);
+
+CREATE TABLE room (
+    roomID INT NOT NULL,
+    size INT,
+    PRIMARY KEY (roomID)
+);
+
+CREATE TABLE alarm (
+    alarmID INT NOT NULL,
+    time DATETIME,
+    PRIMARY KEY (alarmID)
+);
+
+CREATE TABLE notification (
+    notificationID INT NOT NULL,
+    description TINYTEXT,
+    appointmentID INT,
+    FOREIGN KEY (appointmentID) REFERENCES appointment(appointmentID) ON UPDATE CASCADE ON DELETE SET NULL,
+    PRIMARY KEY (notificationID)
+);
