@@ -1,0 +1,150 @@
+CREATE DATABASE IF NOT EXIST calendarDatabase;
+USE calendarDatabase;
+
+CREATE TABLE user (
+    username VARCHAR(32) NOT NULL,
+    password VARCHAR(32) NOT NULL,
+    name VARCHAR(32),
+    type TINYTEXT,
+    PRIMARY KEY (username)
+);
+
+CREATE TABLE group (
+    groupID INT NOT NULL,
+    groupname VARCHAR(32),
+    decription TINYTEXT,
+    PRIMARY KEY (groupID)
+);
+
+CREATE TABLE appointment (
+    appointmentID INT NOT NULL,
+    startDate DATE,
+    endDate DATE,
+    startTime TIME,
+    endTime TIME,
+    location VARCHAR(32),
+    description TINYTEXT,
+    PRIMARY KEY (appointmentID)
+);
+
+CREATE TABLE room (
+    roomID INT NOT NULL,
+    size INT,
+    PRIMARY KEY (roomID)
+);
+
+CREATE TABLE alarm (
+    alarmID INT NOT NULL,
+    time DATETIME,
+    PRIMARY KEY (alarmID)
+);
+
+CREATE TABLE notification (
+    notificationID INT NOT NULL,
+    description TINYTEXT,
+    appointmentID INT,
+    FOREIGN KEY (appointmentID) 
+        REFERENCES appointment(appointmentID) 
+        ON UPDATE CASCADE 
+        ON DELETE SET NULL,
+    PRIMARY KEY (notificationID)
+);
+
+CREATE TABLE isMemberOf (
+    username VARCHAR(32) NOT NULL,
+    groupID INT NOT NULL,
+    FOREIGN KEY (username) 
+        REFERENCES user(username)
+        ON UDATE CASCADE
+        ON DELETE CASCADE,
+    FOREIGN KEY (groupID)
+        REFERENCES grou(groupID)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
+    PRIMARY KEY (username, groupID)
+);
+
+CREATE TABLE notificationTo (
+    username VARCHAR(32) NOT NULL,
+    notificationID INT NOT NULL,
+    FOREIGN KEY (username)
+        REFERENCES user(username)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
+    FOREIGN KEY (notificationID)
+        REFERENCES notification(notificationID)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
+    PRIMARY KEY (username, notificationID)
+);
+
+CREATE TABLE reservedRoom (
+    appointmentID INT NOT NULL,
+    roomID INT NOT NULL,
+    FOREIGN KEY (appointmentID)
+        REFERENCES appointment(appointmentID)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
+    FOREIGN KEY (roomID)
+        REFERENCES room(roomID)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
+    PRIMARY KEY (appointmentID, roomID)
+);
+
+CREATE TABLE isOwner (
+    username VARCHAR(32) NOT NULL,
+    appointmentID INT NOT NULL,
+    FOREIGN KEY (username)
+        REFERENCES user(username)
+        ON UDPATE CASCADE
+        ON DELETE CASCADE,
+    FOREIGN KEY (appointmentID)
+        REFERENCES appointment(appointmentID)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
+    PRIMARY KEY (username, appointmentID)
+);
+
+CREATE TABLE isParticipant (
+    username VARCHAR(32) NOT NULL,
+    appointmentID INT NOT NULL,
+    status INT NOT NULL,
+    FOREIGN KEY (username)
+        REFERENCES user(username)
+        ON UDPATE CASCADE
+        ON DELETE CASCADE,
+    FOREIGN KEY (appointmentID)
+        REFERENCES appointment(appointmentID)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
+    PRIMARY KEY (username, appointmentID)
+);
+
+CREATE TABLE alarmForAppointment (
+    appointmentID INT NOT NULL,
+    alarmID INT NOT NULL,
+    FOREIGN KEY (appointmentID)
+        REFERENCES appointment(appointmentID)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
+    FOREIGN KEY (alarmID)
+        REFERENCES alarm(alarmID)
+        ON UDPATE CASCADE
+        ON DELETE CASCADE,
+    PRIMARY KEY (appointmentID, alarmID)
+);
+
+CREATE TABLE ownedByUser (
+    username VARCHAR(32) NOT NULL,
+    alarmID INT NOT NULL,
+    FOREIGN KEY (username)
+        REFERENCES user(username)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
+    FOREIGN KEY (alarmID)
+        REFERENCES alarm(alarmID)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
+    PRIMARY KEY (username, alarmID)
+);
