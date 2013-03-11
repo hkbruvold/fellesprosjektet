@@ -36,6 +36,16 @@ CREATE TABLE room (
 CREATE TABLE alarm (
     alarmID INT NOT NULL,
     time DATETIME,
+    username VARCHAR(32),
+    appointmentID INT,
+    FOREIGN KEY (username)
+        REFERENCES user(username)
+        ON UPDATE CASCADE
+        ON UPDATE CASCADE,
+    FOREIGN KEY (appointmentID) 
+        REFERENCES appointment(appointmentID) 
+        ON UPDATE CASCADE 
+        ON DELETE CASCADE,
     PRIMARY KEY (alarmID)
 );
 
@@ -43,6 +53,9 @@ CREATE TABLE notification (
     notificationID INT NOT NULL,
     description TINYTEXT,
     appointmentID INT,
-    FOREIGN KEY (appointmentID) REFERENCES appointment(appointmentID) ON UPDATE CASCADE ON DELETE SET NULL,
+    FOREIGN KEY (appointmentID) 
+        REFERENCES appointment(appointmentID) 
+        ON UPDATE CASCADE 
+        ON DELETE SET NULL,
     PRIMARY KEY (notificationID)
 );
