@@ -1,0 +1,16 @@
+A2 feil: 
+
+A01 - Pakker blir borte før mottaker mottar
+A02 - Pakker blir korrupt før mottaker mottar
+A03 - ACKs blir borte før A1 mottar
+A04 - ACKs blir korrupt før A1 mottar
+A05 - Timer går ut før ACK blir mottat av A1, men kommer etter A1 sender på nytt
+A06 - Ghost package blir sendt og den ser ut som den hører til
+
+Løsninger: 
+A01 - A2 må sende ACK hvis den har mottatt pakker
+A02 -         ____ -- ____ , Kan bare sende ACK hvis pakke ikke er korrupt
+A03 - En Timer finnes for å sikre at A1 ikke venter på pakker som ikke kommer, hvis timer går ut, sendes pakken på nytt
+A04 - Hvis pakken mottas av A1 men er korrupt venter man på timeout
+A05 - Det blir satt sekvensnummer på hver pakke, slik at A1 kan skille mellom en gammel og en ny pakke.
+A06 - Check med checksum & seq. nr
