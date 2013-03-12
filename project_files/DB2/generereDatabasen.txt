@@ -55,7 +55,7 @@ CREATE TABLE isMemberOf (
     groupID INT NOT NULL,
     FOREIGN KEY (username) 
         REFERENCES user(username)
-        ON UDATE CASCADE
+        ON UPDATE CASCADE
         ON DELETE CASCADE,
     FOREIGN KEY (groupID)
         REFERENCES grou(groupID)
@@ -97,7 +97,7 @@ CREATE TABLE isOwner (
     appointmentID INT NOT NULL,
     FOREIGN KEY (username)
         REFERENCES user(username)
-        ON UDPATE CASCADE
+        ON UPDATE CASCADE
         ON DELETE CASCADE,
     FOREIGN KEY (appointmentID)
         REFERENCES appointment(appointmentID)
@@ -112,7 +112,7 @@ CREATE TABLE isParticipant (
     status INT NOT NULL,
     FOREIGN KEY (username)
         REFERENCES user(username)
-        ON UDPATE CASCADE
+        ON UPDATE CASCADE
         ON DELETE CASCADE,
     FOREIGN KEY (appointmentID)
         REFERENCES appointment(appointmentID)
@@ -130,7 +130,7 @@ CREATE TABLE alarmForAppointment (
         ON DELETE CASCADE,
     FOREIGN KEY (alarmID)
         REFERENCES alarm(alarmID)
-        ON UDPATE CASCADE
+        ON UPDATE CASCADE
         ON DELETE CASCADE,
     PRIMARY KEY (appointmentID, alarmID)
 );
