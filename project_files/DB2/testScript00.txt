@@ -1,1 +1,16 @@
 INSERT user 
+    SET username='ola.nordmann', 
+        password='password', 
+        name='Ola Nordmann', 
+        type='employee';
+
+INSERT user 
+    SET username='kari.nordmann', 
+        password='qwerty12345', 
+        name='Kari Nordmann', 
+        type='employee';
+
+INSERT groups
+    SET groupname='Norwegians',
+        description='Employees from Norway';
+
