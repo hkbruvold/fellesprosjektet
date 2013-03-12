@@ -4,24 +4,24 @@ USE calendarDatabase;
 CREATE TABLE user (
     username VARCHAR(32) NOT NULL,
     password VARCHAR(32) NOT NULL,
-    name VARCHAR(32),
+    name VARCHAR(32) NOT NULL,
     type TINYTEXT,
     PRIMARY KEY (username)
 );
 
 CREATE TABLE groups (
     groupID INT NOT NULL AUTO_INCREMENT,
-    groupname VARCHAR(32),
+    groupname VARCHAR(32) NOT NULL,
     description TINYTEXT,
     PRIMARY KEY (groupID)
 );
 
 CREATE TABLE appointment (
     appointmentID INT NOT NULL AUTO_INCREMENT,
-    startDate DATE,
-    endDate DATE,
-    startTime TIME,
-    endTime TIME,
+    startDate DATE NOT NULL,
+    endDate DATE NOT NULL,
+    startTime TIME NOT NULL,
+    endTime TIME NOT NULL,
     location VARCHAR(32),
     description TINYTEXT,
     PRIMARY KEY (appointmentID)
@@ -36,7 +36,7 @@ CREATE TABLE room (
 
 CREATE TABLE alarm (
     alarmID INT NOT NULL AUTO_INCREMENT,
-    time DATETIME,
+    time DATETIME NOT NULL,
     PRIMARY KEY (alarmID)
 );
 
