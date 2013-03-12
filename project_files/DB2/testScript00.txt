@@ -48,6 +48,9 @@ INSERT appointment
 
 INSERT appointment
     SET startDate='2013-03-14',
+        endDate='2013-03-12',
+        startTime='15:10',
+        endTime='16:20',
         location='NTNU',
         description='testing';
 
