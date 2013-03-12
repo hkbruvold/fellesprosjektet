@@ -1,4 +1,4 @@
-CREATE DATABASE IF NOT EXIST calendarDatabase;
+CREATE DATABASE IF NOT EXISTS calendarDatabase;
 USE calendarDatabase;
 
 CREATE TABLE user (
