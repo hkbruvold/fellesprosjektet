@@ -46,6 +46,7 @@ public class Login extends JPanel{
 		c.gridy = 1;
 		add(passwordField,c);
 		
+		c.anchor = GridBagConstraints.LINE_END;	
 		c.gridx = 2;
 		c.gridy = 3;
 		add(button,c);
@@ -58,6 +59,7 @@ public class Login extends JPanel{
 		frame.setResizable(false);
 		frame.setLocationRelativeTo(null);
 		frame.getContentPane().add(new Login());
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.pack();
 		frame.setVisible(true);
 	}
