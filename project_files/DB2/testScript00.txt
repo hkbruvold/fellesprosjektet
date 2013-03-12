@@ -14,3 +14,60 @@ INSERT groups
     SET groupname='Norwegians',
         description='Employees from Norway';
 
+INSERT groups
+    SET groupname='Male',
+        description='Male employees';
+
+INSERT groups
+    SET groupname='Female',
+        description='Female employees';
+
+INSERT isMemberOf
+    SET username='ola.nordmann',
+        groupID=1;
+
+INSERT isMemberOf
+    SET username='kari.nordmann',
+        groupID=1;
+
+INSERT isMemberOf
+    SET username='ola.nordmann',
+        groupID=2;
+
+INSERT isMemberOf
+    SET username='kari.nordmann',
+        groupID=3;
+
+INSERT appointment
+    SET startDate='2013-03-12',
+        endDate='2013-03-12',
+        startTime='15:10',
+        endTime='16:20',
+        location='Trondheim',
+        description='test1234';
+
+INSERT appointment
+    SET startDate='2013-03-14',
+        location='NTNU',
+        description='testing';
+
+INSERT isOwner
+    SET username='ola.nordmann',
+        appointmentID=1;
+
+INSERT isParticipant
+    SET username='kari.nordmann',
+        appointmentID=1,
+        status=0;
+
+INSERT isOwner
+    SET username='kari.nordmann',
+        appointmentID=2;
+
+UPDATE user 
+    SET username='olanor' 
+    WHERE username='ola.nordmann';
+
+DELETE FROM appointment
+    WHERE appointmentID=1;
+
