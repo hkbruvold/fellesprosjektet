@@ -41,7 +41,7 @@ public class Login extends JPanel implements ActionListener {
 		passwordLabel = new JLabel("Passord");
 		userField = new JTextField(15);
 		passwordField = new JPasswordField(15);
-		closeButton = new JButton("Close");
+		closeButton = new JButton("Lukk");
 		logInButton = new JButton("Logg inn");
 
 		c.insets = new Insets(0,0,5,0);
