@@ -10,14 +10,14 @@ CREATE TABLE user (
 );
 
 CREATE TABLE groups (
-    groupID INT NOT NULL,
+    groupID INT NOT NULL AUTO_INCREMENT,
     groupname VARCHAR(32),
     description TINYTEXT,
     PRIMARY KEY (groupID)
 );
 
 CREATE TABLE appointment (
-    appointmentID INT NOT NULL,
+    appointmentID INT NOT NULL AUTO_INCREMENT,
     startDate DATE,
     endDate DATE,
     startTime TIME,
@@ -28,20 +28,20 @@ CREATE TABLE appointment (
 );
 
 CREATE TABLE room (
-    roomID INT NOT NULL,
+    roomID INT NOT NULL AUTO_INCREMENT,
     size INT,
     description TINYTEXT,
     PRIMARY KEY (roomID)
 );
 
 CREATE TABLE alarm (
-    alarmID INT NOT NULL,
+    alarmID INT NOT NULL AUTO_INCREMENT,
     time DATETIME,
     PRIMARY KEY (alarmID)
 );
 
 CREATE TABLE notification (
-    notificationID INT NOT NULL,
+    notificationID INT NOT NULL AUTO_INCREMENT,
     description TINYTEXT,
     appointmentID INT,
     FOREIGN KEY (appointmentID) 
