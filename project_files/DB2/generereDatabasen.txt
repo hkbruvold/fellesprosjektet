@@ -148,3 +148,4 @@ CREATE TABLE ownedByUser (
         ON DELETE CASCADE,
     PRIMARY KEY (username, alarmID)
 );
+
