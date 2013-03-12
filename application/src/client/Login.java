@@ -4,16 +4,16 @@ import java.awt.*;
 import javax.swing.*;
 
 public class Login extends JPanel{
-	
+	private static final int LINE_START = GridBagConstraints.LINE_START;
+	private static final int LINE_END = GridBagConstraints.LINE_END;
 	private JPanel panel;
 	private JLabel userLabel, passwordLabel;
 	private JTextField userField;
 	private JPasswordField passwordField;
-	private JButton button;
+	private JButton logInButton;
 	private GridBagConstraints c;
 	
 	public Login(){
-		
 		c = new GridBagConstraints();
 		setLayout(new GridBagLayout());
 		
@@ -21,35 +21,23 @@ public class Login extends JPanel{
 		passwordLabel = new JLabel("Passord");
 		userField = new JTextField(20);
 		passwordField = new JPasswordField(20);
-		button = new JButton("Logg inn");
+		logInButton = new JButton("Logg inn");
 		
 		c.insets = new Insets(0,0,5,0);
-		
 		c.ipadx = 10;
-		c.anchor = GridBagConstraints.LINE_END;
-		c.gridx = 0;
-		c.gridy = 0;
-		add(userLabel,c);
 		
-		c.anchor = GridBagConstraints.LINE_START;
-		c.gridx = 2;
-		c.gridy = 0;
-		add(userField,c);
-		
-		c.anchor = GridBagConstraints.LINE_END;	
-		c.gridx = 0;
-		c.gridy = 1;
-		add(passwordLabel,c);
-		
-		c.anchor = GridBagConstraints.LINE_START;
-		c.gridx = 2;
-		c.gridy = 1;
-		add(passwordField,c);
-		
-		c.anchor = GridBagConstraints.LINE_END;	
-		c.gridx = 2;
-		c.gridy = 3;
-		add(button,c);
+		addComponent(userLabel, LINE_END, 0, 0);
+		addComponent(userField, LINE_START, 1, 0);
+		addComponent(passwordLabel, LINE_END, 0, 1);
+		addComponent(passwordField, LINE_START, 1, 1);
+		addComponent(logInButton, LINE_END, 1, 2);
+	}
+	
+	private void addComponent(JComponent component, int anchor, int gridx, int gridy) {
+		c.anchor = anchor;
+		c.gridx = gridx;
+		c.gridy = gridy;
+		add(component, c);
 	}
 	
 	public static void main(String[] args){
