@@ -9,7 +9,7 @@ CREATE TABLE user (
     PRIMARY KEY (username)
 );
 
-CREATE TABLE group (
+CREATE TABLE groups (
     groupID INT NOT NULL,
     groupname VARCHAR(32),
     decription TINYTEXT,
@@ -58,7 +58,7 @@ CREATE TABLE isMemberOf (
         ON UPDATE CASCADE
         ON DELETE CASCADE,
     FOREIGN KEY (groupID)
-        REFERENCES grou(groupID)
+        REFERENCES groups(groupID)
         ON UPDATE CASCADE
         ON DELETE CASCADE,
     PRIMARY KEY (username, groupID)
