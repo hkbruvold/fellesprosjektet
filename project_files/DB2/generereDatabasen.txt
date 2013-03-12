@@ -12,7 +12,7 @@ CREATE TABLE user (
 CREATE TABLE groups (
     groupID INT NOT NULL,
     groupname VARCHAR(32),
-    decription TINYTEXT,
+    description TINYTEXT,
     PRIMARY KEY (groupID)
 );
 
