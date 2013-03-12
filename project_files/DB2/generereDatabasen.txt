@@ -30,6 +30,7 @@ CREATE TABLE appointment (
 CREATE TABLE room (
     roomID INT NOT NULL,
     size INT,
+    description TINYTEXT,
     PRIMARY KEY (roomID)
 );
 
