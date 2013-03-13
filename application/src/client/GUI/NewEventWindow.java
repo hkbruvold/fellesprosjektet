@@ -178,6 +178,10 @@ public class NewEventWindow extends JPanel implements ActionListener {
 			String description = descriptionField.getText();
 			String location = locationField.getText();
 			Alarm alarm = null;
+			if(!meetingCheckBox.isSelected() && ((participantsList.getSelectedIndices().length>0))){
+				//TODO warn the user that you can't have participants if the Appointment is not a meeting.
+				
+			}
 			if(alarmCheckBox.isSelected()){
 				new Alarm(fromDateField.getText(), alarmTimeBeforeField.getText(), "");
 			}
