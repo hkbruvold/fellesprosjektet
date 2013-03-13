@@ -5,7 +5,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.*;
+
+import client.AbstractCalendarEvent;
 import client.Alarm;
+import client.Appointment;
+import client.Calendar;
+import client.Meeting;
 
 import client.User;
 
@@ -32,7 +37,6 @@ public class NewEventWindow extends JPanel implements ActionListener {
 	private static final int SIZE_FIELD = 12;
 	
 	private static final int LINE_START = GridBagConstraints.LINE_START;
-	private static final int CENTER = GridBagConstraints.CENTER;
 	private static final int LINE_END = GridBagConstraints.LINE_END;
 	
 	private JFrame frame;
@@ -43,7 +47,12 @@ public class NewEventWindow extends JPanel implements ActionListener {
 	private JButton deleteButton, closeButton, saveButton;
 	private GridBagConstraints c;
 
-	public NewEventWindow() {
+	private Calendar calendar;
+	private User user;
+
+	public NewEventWindow(Calendar calendar, User user) {
+		this.calendar = calendar;
+		this.user = user;
 		initFrame();
 		initPanel();
 		
@@ -157,23 +166,35 @@ public class NewEventWindow extends JPanel implements ActionListener {
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-//		if (e.getSource().equals(usernameField)) {
-//			// TODO
-//		} else if (e.getSource().equals(passwordField)) {
-//			// TODO
-		if (e.getSource().equals(closeButton)) {
+		if (e.getSource().equals(deleteButton)) {
+			// TODO delete the event, update database
+			frame.dispose();
+		} else if (e.getSource().equals(closeButton)) {
 			frame.dispose();
 		} else if (e.getSource().equals(saveButton)) {
-			// TODO save new event, set the message string for alarm
+			AbstractCalendarEvent calendarEvent;
+			String startDateTime = fromDateField.getText() + " " + fromTimeField.getText();
+			String endDateTime = toDateField.getText() + " " + toTimeField.getText();
+			String description = descriptionField.getText();
+			String location = locationField.getText();
+			Alarm alarm = null;
 			if(alarmCheckBox.isSelected()){
 				new Alarm(fromDateField.getText(), alarmTimeBeforeField.getText(), "");
 			}
+			if (meetingCheckBox.isSelected()) {
+				calendarEvent = new Meeting(calendar, startDateTime, endDateTime, description, location, alarm, user);
+			} else {
+				calendarEvent = new Appointment(calendar, startDateTime, endDateTime, description, location, alarm, user);
+			}
+			// TODO save new event, set the message string for alarm
 			frame.dispose(); // Close if successful; show error message if not?
 		}
 	}
 	
 	public static void main(String[] args) {
-		new NewEventWindow();
+		User user = new User("Ola");
+		Calendar calendar = new Calendar("Ola's calendar", user);
+		new NewEventWindow(calendar, user);
 	}
 
 }
