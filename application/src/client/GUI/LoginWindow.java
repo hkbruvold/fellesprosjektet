@@ -8,6 +8,16 @@ import javax.swing.*;
 
 @SuppressWarnings("serial")
 public class LoginWindow extends JPanel implements ActionListener {
+	private static final int SIZE_FIELD = 15;
+
+	private static final String FRAME_NAME = "Logg inn";
+
+	private static final String LABEL_USERNAME = "Brukernavn";
+	private static final String LABEL_PASSWORD = "Passord";
+	
+	private static final String BUTTON_CLOSE = "Lukk";
+	private static final String BUTTON_LOG_IN = "Logg inn";
+	
 	private static final int LINE_START = GridBagConstraints.LINE_START;
 	private static final int LINE_END = GridBagConstraints.LINE_END;
 	private JFrame frame;
@@ -26,7 +36,7 @@ public class LoginWindow extends JPanel implements ActionListener {
 	}
 
 	private void initFrame() {
-		frame = new JFrame("Logg inn");
+		frame = new JFrame(FRAME_NAME);
 		frame.setPreferredSize(new Dimension(300, 130));
 		frame.setResizable(false);
 		frame.setLocationRelativeTo(null);
@@ -38,12 +48,12 @@ public class LoginWindow extends JPanel implements ActionListener {
 		c = new GridBagConstraints();
 		setLayout(new GridBagLayout());
 
-		usernameLabel = new JLabel("Brukernavn");
-		passwordLabel = new JLabel("Passord");
-		usernameField = new JTextField(15);
-		passwordField = new JPasswordField(15);
-		closeButton = new JButton("Lukk");
-		logInButton = new JButton("Logg inn");
+		usernameLabel = new JLabel(LABEL_USERNAME);
+		passwordLabel = new JLabel(LABEL_PASSWORD);
+		usernameField = new JTextField(SIZE_FIELD);
+		passwordField = new JPasswordField(SIZE_FIELD);
+		closeButton = new JButton(BUTTON_CLOSE);
+		logInButton = new JButton(BUTTON_LOG_IN);
 
 		c.insets = new Insets(0,0,5,0);
 		c.ipadx = 10;
