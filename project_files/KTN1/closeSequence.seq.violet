@@ -663,6 +663,82 @@ closed</string>
     </void>
    </object>
   </void>
+  <void method="addNode">
+   <object class="com.horstmann.violet.NoteNode" id="NoteNode4">
+    <void property="color">
+     <object class="java.awt.Color">
+      <int>245</int>
+      <int>245</int>
+      <int>245</int>
+      <int>255</int>
+     </object>
+    </void>
+    <void property="text">
+     <void property="text">
+      <string>closeRequest()</string>
+     </void>
+    </void>
+   </object>
+   <object class="java.awt.geom.Point2D$Double" id="Point2D$Double20">
+    <void class="java.awt.geom.Point2D$Double" method="getField">
+     <string>x</string>
+     <void method="set">
+      <object idref="Point2D$Double20">
+       <void class="java.awt.geom.Point2D$Double" method="getField">
+        <string>y</string>
+        <void method="set">
+         <object idref="Point2D$Double20">
+          <void method="setLocation">
+           <double>975.0</double>
+           <double>143.0</double>
+          </void>
+         </object>
+         <double>143.0</double>
+        </void>
+       </void>
+      </object>
+      <double>975.0</double>
+     </void>
+    </void>
+   </object>
+  </void>
+  <void method="addNode">
+   <object class="com.horstmann.violet.PointNode" id="PointNode4">
+    <void id="Rectangle2D$Double7" property="bounds">
+     <void method="setRect">
+      <double>902.0</double>
+      <double>138.0</double>
+      <double>0.0</double>
+      <double>0.0</double>
+     </void>
+    </void>
+    <void property="bounds">
+     <object idref="Rectangle2D$Double7"/>
+    </void>
+   </object>
+   <object class="java.awt.geom.Point2D$Double" id="Point2D$Double21">
+    <void class="java.awt.geom.Point2D$Double" method="getField">
+     <string>x</string>
+     <void method="set">
+      <object idref="Point2D$Double21">
+       <void class="java.awt.geom.Point2D$Double" method="getField">
+        <string>y</string>
+        <void method="set">
+         <object idref="Point2D$Double21">
+          <void method="setLocation">
+           <double>902.0</double>
+           <double>138.0</double>
+          </void>
+         </object>
+         <double>138.0</double>
+        </void>
+       </void>
+      </object>
+      <double>902.0</double>
+     </void>
+    </void>
+   </object>
+  </void>
   <void method="connect">
    <object class="com.horstmann.violet.CallEdge">
     <void property="middleLabel">
@@ -778,6 +854,15 @@ closed</string>
    <object class="com.horstmann.violet.CallEdge"/>
    <object idref="NoteNode3"/>
    <object idref="PointNode3"/>
+  </void>
+  <void method="connect">
+   <object class="com.horstmann.violet.ReturnEdge">
+    <void property="lineStyle">
+     <object class="com.horstmann.violet.LineStyle" field="SOLID"/>
+    </void>
+   </object>
+   <object idref="NoteNode4"/>
+   <object idref="PointNode4"/>
   </void>
  </object>
 </java>
