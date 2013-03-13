@@ -9,6 +9,10 @@ public class User {
 	
 	// TODO
 	
+	public String toString() {
+		return name;
+	}
+	
 	public String getName() {
 		return name;
 	}
