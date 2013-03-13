@@ -8,6 +8,15 @@ public abstract class AbstractCalendarEvent {
 	private String location; //Room? Both?
 	private Alarm alarm;
 	
+	public AbstractCalendarEvent(Calendar calendar, String startDateTime, String endDateTime, String description, String location, Alarm alarm) {
+		this.calendar = calendar;
+		this.startDateTime = startDateTime;
+		this.endDateTime = endDateTime;
+		this.description = description;
+		this.location = location;
+		this.alarm = alarm;
+	}
+	
 	// TODO
 	
 	public Calendar getCalendar() {

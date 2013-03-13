@@ -8,6 +8,11 @@ public class Meeting extends AbstractCalendarEvent {
 	private ArrayList<User> usersAccepted;
 	private ArrayList<User> usersDeclined;
 	
+	public Meeting(Calendar calendar, String startDateTime, String endDateTime, String description, String location, Alarm alarm, User leader) { // TODO temp
+		super(calendar, startDateTime, endDateTime, description, location, alarm);
+		this.leader = leader;
+	}
+	
 	// TODO
 	
 	public void sendNotification() {
