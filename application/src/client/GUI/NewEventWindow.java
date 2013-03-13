@@ -53,7 +53,7 @@ public class NewEventWindow extends JPanel implements ActionListener {
 	
 	private void initFrame() {
 		frame = new JFrame(FRAME_NAME);
-		frame.setPreferredSize(new Dimension(300, 400)); // TODO temp
+		frame.setPreferredSize(new Dimension(300, 300)); // TODO temp
 		frame.setResizable(false);
 		frame.setLocationRelativeTo(null);
 		frame.getContentPane().add(this);
@@ -105,38 +105,51 @@ public class NewEventWindow extends JPanel implements ActionListener {
 		saveButton = new JButton(BUTTON_SAVE);
 	}
 	private void addComponents() {
-		addComponent(descriptionLabel, 0, 0, LINE_END);
-		addComponent(descriptionField, 1, 0, LINE_START);
+		addComponent(descriptionLabel, 0, 0, 1, LINE_END);
+		c.fill = GridBagConstraints.HORIZONTAL;
+		addComponent(descriptionField, 1, 0, 3, LINE_START);
+		c.fill = GridBagConstraints.NONE;
 	
-		addComponent(fromLabel, 0, 1, LINE_END);
-		addComponent(fromDateField, 1, 1, LINE_START);
-		addComponent(fromTimeField, 1, 1, LINE_END);
+		addComponent(fromLabel, 0, 1, 1, LINE_END);
+		c.fill = GridBagConstraints.HORIZONTAL;
+		addComponent(fromDateField, 1, 1, 2, LINE_START);
+		addComponent(fromTimeField, 3, 1, 1, LINE_START);
+		c.fill = GridBagConstraints.NONE;
 		
-		addComponent(toLabel, 0, 2, LINE_END);
-		addComponent(toDateField, 1, 2, LINE_START);
-		addComponent(toTimeField, 1, 2, LINE_END);
+		addComponent(toLabel, 0, 2, 1, LINE_END);
+		c.fill = GridBagConstraints.HORIZONTAL;
+		addComponent(toDateField, 1, 2, 2, LINE_START);
+		addComponent(toTimeField, 3, 2, 1, LINE_START);
+		c.fill = GridBagConstraints.NONE;
 		
-		addComponent(locationLabel, 0, 3, LINE_END);
-		addComponent(locationField, 1, 3, LINE_START);
+		addComponent(locationLabel, 0, 3, 1, LINE_END);
+		c.fill = GridBagConstraints.HORIZONTAL;
+		addComponent(locationField, 1, 3, 3, LINE_START);
+		c.fill = GridBagConstraints.NONE;
 		
-		addComponent(alarmLabel, 0, 4, LINE_END);
-		addComponent(alarmCheckBox, 1, 4, LINE_START);
-		addComponent(alarmTimeBeforeLabel, 1, 4, CENTER);
-		addComponent(alarmTimeBeforeField, 1, 4, LINE_END);
+		addComponent(alarmLabel, 0, 4, 1, LINE_END);
+		addComponent(alarmCheckBox, 1, 4, 1, LINE_START);
+		addComponent(alarmTimeBeforeLabel, 2, 4, 1, LINE_END);
+		c.fill = GridBagConstraints.HORIZONTAL;
+		addComponent(alarmTimeBeforeField, 3, 4, 1, LINE_START);
+		c.fill = GridBagConstraints.NONE;
 		
-		addComponent(meetingLabel, 0, 5, LINE_END);
-		addComponent(meetingCheckBox, 1, 5, LINE_START);
+		addComponent(meetingLabel, 0, 5, 1, LINE_END);
+		addComponent(meetingCheckBox, 1, 5, 1, LINE_START);
 		
-		addComponent(participantsLabel, 0, 6, GridBagConstraints.FIRST_LINE_END);
-		addComponent(participantsList, 1, 6, LINE_START);
+		addComponent(participantsLabel, 0, 6, 1, GridBagConstraints.FIRST_LINE_END);
+		c.fill = GridBagConstraints.HORIZONTAL;
+		addComponent(participantsList, 1, 6, 3, LINE_START);
+		c.fill = GridBagConstraints.NONE;
 		
-		addComponent(deleteButton, 0, 7, LINE_END);
-		addComponent(closeButton, 1, 7, LINE_START);
-		addComponent(saveButton, 1, 7, LINE_END);
+		addComponent(deleteButton, 0, 7, 1, LINE_START);
+		addComponent(closeButton, 2, 7, 1, LINE_START);
+		addComponent(saveButton, 3, 7, 1, LINE_END);
 	}
-	private void addComponent(JComponent component, int gridx, int gridy, int anchor) {
+	private void addComponent(JComponent component, int gridx, int gridy, int gridwidth, int anchor) {
 		c.gridx = gridx;
 		c.gridy = gridy;
+		c.gridwidth = gridwidth;
 		c.anchor = anchor;
 		add(component, c);
 	}
