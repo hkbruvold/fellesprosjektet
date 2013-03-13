@@ -2,4 +2,4 @@ bin
 .metadata
 *.log
 .settings
-
+*\Thumbs.db
