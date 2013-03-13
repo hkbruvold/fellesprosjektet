@@ -9,6 +9,7 @@ public class Alarm {
 		this.date = date;
 		this.time = time;
 		this.message = message;
+		// TODO write to database
 	}
 	public Alarm(String date, String time) {
 		this(date, time, null);
