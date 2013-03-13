@@ -165,6 +165,10 @@ public class NewEventWindow extends JPanel implements ActionListener {
 			frame.dispose();
 		} else if (e.getSource().equals(saveButton)) {
 			// TODO save new event, set the message string for alarm
+			if(!meetingCheckBox.isSelected() && ((participantsList.getSelectedIndices().length>0))){
+				//TODO warn the user that you can't have participants if the Appointment is not a meeting.
+				
+			}
 			if(alarmCheckBox.isSelected()){
 				new Alarm(fromDateField.getText(), alarmTimeBeforeField.getText(), "");
 			}
