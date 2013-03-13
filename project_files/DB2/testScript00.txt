@@ -74,3 +74,14 @@ UPDATE user
 DELETE FROM appointment
     WHERE appointmentID=1;
 
+INSERT alarm
+    SET time='2013-03-15 16:00';
+
+INSERT alarmForAppointment
+    SET appointmentID=2,
+        alarmID=1;
+
+INSERT ownedByUser
+    SET username='olanor',
+        alarmID=1;
+
