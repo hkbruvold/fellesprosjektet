@@ -3,6 +3,8 @@ package client.GUI;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 
 import javax.swing.*;
 
@@ -15,7 +17,7 @@ import client.Meeting;
 import client.User;
 
 @SuppressWarnings("serial")
-public class NewEventWindow extends JPanel implements ActionListener {
+public class NewEventWindow extends JPanel implements ActionListener, ItemListener {
 	private static final String FRAME_NAME = "Avtale / Møte";
 	
 	private static final String LABEL_DESCRIPTION = "Beskrivelse";
@@ -80,10 +82,7 @@ public class NewEventWindow extends JPanel implements ActionListener {
 		c.ipadx = 10;
 
 		addComponents();
-
-		deleteButton.addActionListener(this);
-		closeButton.addActionListener(this);
-		saveButton.addActionListener(this);
+		addListeners();
 	}
 	private void initComponents() {
 		descriptionLabel = new JLabel(LABEL_DESCRIPTION);
@@ -107,6 +106,7 @@ public class NewEventWindow extends JPanel implements ActionListener {
 		meetingCheckBox = new JCheckBox();
 		participantsList = new JList<User>(/* TODO */);
 		participantsList.setBackground(Color.WHITE);
+		participantsList.setEnabled(false);
 		// temp:
 		participantsList.setListData(new User[]{new User("Ola"), new User("Kari"), new User("Nordmann")});
 		
@@ -163,7 +163,13 @@ public class NewEventWindow extends JPanel implements ActionListener {
 		c.anchor = anchor;
 		add(component, c);
 	}
-	
+	private void addListeners() {
+		meetingCheckBox.addItemListener(this);
+		deleteButton.addActionListener(this);
+		closeButton.addActionListener(this);
+		saveButton.addActionListener(this);
+	}
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource().equals(deleteButton)) {
@@ -184,14 +190,16 @@ public class NewEventWindow extends JPanel implements ActionListener {
 			if (meetingCheckBox.isSelected()) {
 				calendarEvent = new Meeting(calendar, startDateTime, endDateTime, description, location, alarm, user);
 			} else {
-				if (participantsList.getSelectedIndices().length>0) {
-					//TODO warn the user that you can't have participants if the Appointment is not a meeting.
-//					 return; // ??
-				}
 				calendarEvent = new Appointment(calendar, startDateTime, endDateTime, description, location, alarm, user);
 			}
 			// TODO save new event, set the message string for alarm
 			frame.dispose(); // Close if successful; show error message if not?
+		}
+	}
+	@Override
+	public void itemStateChanged(ItemEvent e) {
+		if (e.getSource().equals(meetingCheckBox)) {
+			participantsList.setEnabled(meetingCheckBox.isSelected());
 		}
 	}
 	
@@ -200,5 +208,6 @@ public class NewEventWindow extends JPanel implements ActionListener {
 		Calendar calendar = new Calendar("Ola's calendar", user);
 		new NewEventWindow(calendar, user);
 	}
+
 
 }
