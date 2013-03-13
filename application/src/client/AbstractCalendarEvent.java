@@ -2,10 +2,8 @@ package client;
 
 public abstract class AbstractCalendarEvent {
 	private Calendar calendar;
-	private String startDate;
-	private String startTime;
-	private String endDate;
-	private String endTime;
+	private String startDateTime;
+	private String endDateTime;
 	private String description;
 	private String location; //Room? Both?
 	private Alarm alarm;
@@ -19,32 +17,18 @@ public abstract class AbstractCalendarEvent {
 		this.calendar = calendar;
 		// TODO update database!
 	}
-	public String getStartDate() {
-		return startDate;
+	public String getStartDateTime() {
+		return startDateTime;
 	}
-	public void setStartDate(String startDate) {
-		this.startDate = startDate;
+	public void setStartDateTime(String startDateTime) {
+		this.startDateTime = startDateTime;
 		// TODO update database!
 	}
-	public String getStartTime() {
-		return startTime;
+	public String getEndDateTime() {
+		return endDateTime;
 	}
-	public void setStartTime(String startTime) {
-		this.startTime = startTime;
-		// TODO update database!
-	}
-	public String getEndDate() {
-		return endDate;
-	}
-	public void setEndDate(String endDate) {
-		this.endDate = endDate;
-		// TODO update database!
-	}
-	public String getEndTime() {
-		return endTime;
-	}
-	public void setEndTime(String endTime) {
-		this.endTime = endTime;
+	public void setEndDateTime(String endDateTime) {
+		this.endDateTime = endDateTime;
 		// TODO update database!
 	}
 	public String getDescription() {
