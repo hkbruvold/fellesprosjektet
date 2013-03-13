@@ -1,46 +1,45 @@
-CREATE DATABASE IF NOT EXIST calendarDatabase;
+CREATE DATABASE IF NOT EXISTS calendarDatabase;
 USE calendarDatabase;
 
 CREATE TABLE user (
     username VARCHAR(32) NOT NULL,
     password VARCHAR(32) NOT NULL,
-    name VARCHAR(32),
+    name VARCHAR(32) NOT NULL,
     type TINYTEXT,
     PRIMARY KEY (username)
 );
 
-CREATE TABLE group (
-    groupID INT NOT NULL,
-    groupname VARCHAR(32),
-    decription TINYTEXT,
+CREATE TABLE groups (
+    groupID INT NOT NULL AUTO_INCREMENT,
+    groupname VARCHAR(32) NOT NULL,
+    description TINYTEXT,
     PRIMARY KEY (groupID)
 );
 
 CREATE TABLE appointment (
-    appointmentID INT NOT NULL,
-    startDate DATE,
-    endDate DATE,
-    startTime TIME,
-    endTime TIME,
+    appointmentID INT NOT NULL AUTO_INCREMENT,
+    startDateTime DATETIME NOT NULL,
+    endDateTime DATETIME NOT NULL,
     location VARCHAR(32),
     description TINYTEXT,
     PRIMARY KEY (appointmentID)
 );
 
 CREATE TABLE room (
-    roomID INT NOT NULL,
+    roomID INT NOT NULL AUTO_INCREMENT,
     size INT,
+    description TINYTEXT,
     PRIMARY KEY (roomID)
 );
 
 CREATE TABLE alarm (
-    alarmID INT NOT NULL,
-    time DATETIME,
+    alarmID INT NOT NULL AUTO_INCREMENT,
+    time DATETIME NOT NULL,
     PRIMARY KEY (alarmID)
 );
 
 CREATE TABLE notification (
-    notificationID INT NOT NULL,
+    notificationID INT NOT NULL AUTO_INCREMENT,
     description TINYTEXT,
     appointmentID INT,
     FOREIGN KEY (appointmentID) 
@@ -55,10 +54,10 @@ CREATE TABLE isMemberOf (
     groupID INT NOT NULL,
     FOREIGN KEY (username) 
         REFERENCES user(username)
-        ON UDATE CASCADE
+        ON UPDATE CASCADE
         ON DELETE CASCADE,
     FOREIGN KEY (groupID)
-        REFERENCES grou(groupID)
+        REFERENCES groups(groupID)
         ON UPDATE CASCADE
         ON DELETE CASCADE,
     PRIMARY KEY (username, groupID)
@@ -97,7 +96,7 @@ CREATE TABLE isOwner (
     appointmentID INT NOT NULL,
     FOREIGN KEY (username)
         REFERENCES user(username)
-        ON UDPATE CASCADE
+        ON UPDATE CASCADE
         ON DELETE CASCADE,
     FOREIGN KEY (appointmentID)
         REFERENCES appointment(appointmentID)
@@ -112,7 +111,7 @@ CREATE TABLE isParticipant (
     status INT NOT NULL,
     FOREIGN KEY (username)
         REFERENCES user(username)
-        ON UDPATE CASCADE
+        ON UPDATE CASCADE
         ON DELETE CASCADE,
     FOREIGN KEY (appointmentID)
         REFERENCES appointment(appointmentID)
@@ -130,7 +129,7 @@ CREATE TABLE alarmForAppointment (
         ON DELETE CASCADE,
     FOREIGN KEY (alarmID)
         REFERENCES alarm(alarmID)
-        ON UDPATE CASCADE
+        ON UPDATE CASCADE
         ON DELETE CASCADE,
     PRIMARY KEY (appointmentID, alarmID)
 );
@@ -148,3 +147,4 @@ CREATE TABLE ownedByUser (
         ON DELETE CASCADE,
     PRIMARY KEY (username, alarmID)
 );
+
