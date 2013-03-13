@@ -7,6 +7,11 @@ public class Calendar {
 	private User owner;
 	private ArrayList<AbstractCalendarEvent> events;
 	
+	public Calendar(String name, User owner) {
+		this.name = name;
+		this.owner = owner;
+	}
+	
 	// TODO
 	
 	public String getName() {

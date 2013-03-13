@@ -6,6 +6,11 @@ public class Group {
 	private String name;
 	private ArrayList<User> members;
 	
+	public Group(String name) {
+		this.name = name;
+		members = new ArrayList<User>();
+	}
+	
 	// TODO
 	
 	public String getName() {
