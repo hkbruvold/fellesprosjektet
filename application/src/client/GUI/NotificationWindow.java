@@ -1,5 +1,9 @@
 package client.GUI;
 
-public class NotificationWindow {
+import client.Notification;
 
+public class NotificationWindow {
+	private Notification notification;
+	
+	
 }
