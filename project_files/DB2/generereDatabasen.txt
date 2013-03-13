@@ -18,10 +18,8 @@ CREATE TABLE groups (
 
 CREATE TABLE appointment (
     appointmentID INT NOT NULL AUTO_INCREMENT,
-    startDate DATE NOT NULL,
-    endDate DATE NOT NULL,
-    startTime TIME NOT NULL,
-    endTime TIME NOT NULL,
+    startDateTime DATETIME NOT NULL,
+    endDateTime DATETIME NOT NULL,
     location VARCHAR(32),
     description TINYTEXT,
     PRIMARY KEY (appointmentID)

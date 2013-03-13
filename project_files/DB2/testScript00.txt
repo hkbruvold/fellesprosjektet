@@ -39,18 +39,14 @@ INSERT isMemberOf
         groupID=3;
 
 INSERT appointment
-    SET startDate='2013-03-12',
-        endDate='2013-03-12',
-        startTime='15:10',
-        endTime='16:20',
+    SET startDateTime='2013-03-12 12:30',
+        endDateTime='2013-03-12 13:00',
         location='Trondheim',
         description='test1234';
 
 INSERT appointment
-    SET startDate='2013-03-14',
-        endDate='2013-03-12',
-        startTime='15:10',
-        endTime='16:20',
+    SET startDateTime='2013-03-14 15:00',
+        endDateTime='2013-03-12 16:20',
         location='NTNU',
         description='testing';
 
