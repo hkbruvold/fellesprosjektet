@@ -85,3 +85,8 @@ INSERT ownedByUser
     SET username='olanor',
         alarmID=1;
 
+UPDATE user
+    SET username='ola.nor',
+        password='Pa55w0rD'
+    WHERE username='olanor';
+
