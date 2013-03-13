@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 @SuppressWarnings("serial")
-public class Login extends JPanel implements ActionListener {
+public class LoginWindow extends JPanel implements ActionListener {
 	private static final int LINE_START = GridBagConstraints.LINE_START;
 	private static final int LINE_END = GridBagConstraints.LINE_END;
 	private JFrame frame;
@@ -17,7 +17,7 @@ public class Login extends JPanel implements ActionListener {
 	private JButton closeButton, logInButton;
 	private GridBagConstraints c;
 
-	public Login(){
+	public LoginWindow(){
 		initFrame();
 		initPanel();
 
@@ -82,6 +82,6 @@ public class Login extends JPanel implements ActionListener {
 	}
 
 	public static void main(String[] args){
-		new Login();
+		new LoginWindow();
 	}
 }
