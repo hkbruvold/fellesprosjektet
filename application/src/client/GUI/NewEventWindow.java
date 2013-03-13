@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.*;
+import client.Alarm;
 
 import client.User;
 
@@ -163,7 +164,10 @@ public class NewEventWindow extends JPanel implements ActionListener {
 		if (e.getSource().equals(closeButton)) {
 			frame.dispose();
 		} else if (e.getSource().equals(saveButton)) {
-			// TODO save new event
+			// TODO save new event, set the message string for alarm
+			if(alarmCheckBox.isSelected()){
+				new Alarm(fromDateField.getText(), alarmTimeBeforeField.getText(), "");
+			}
 			frame.dispose(); // Close if successful; show error message if not?
 		}
 	}
