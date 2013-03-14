@@ -1,5 +1,7 @@
 package temp;
 
+import java.util.Arrays;
+
 import client.*;
 
 public class TestObjects {
@@ -43,6 +45,18 @@ public class TestObjects {
 		group.addMember(getUser01());
 		group.addMember(getUser02());
 		return group;
+	}
+	public static Group getGroup02() {
+		Group group = new Group("Group02");
+		group.addMembers(Arrays.asList(new User[]{getUser00(), getUser01(), getUser02()}));
+		return group;
+	}
+	
+	public static User[] getUserArray00() {
+		return new User[]{getUser00(), getUser02()};
+	}
+	public static User[] getUserArray01() {
+		return new User[]{getUser00(), getUser01(), getUser02()};
 	}
 	
 	public static Meeting getMeeting00() {

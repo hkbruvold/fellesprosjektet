@@ -53,10 +53,12 @@ public class NewEventWindow extends JPanel implements ActionListener, ItemListen
 
 	private Calendar calendar;
 	private User user;
+	private User[] userArray;
 
-	public NewEventWindow(Calendar calendar, User user) {
+	public NewEventWindow(Calendar calendar, User user, User[] userArray) {
 		this.calendar = calendar;
 		this.user = user;
+		this.userArray = userArray;
 		initFrame();
 		initPanel();
 		
@@ -109,8 +111,7 @@ public class NewEventWindow extends JPanel implements ActionListener, ItemListen
 		participantsList = new JList<User>(/* TODO */);
 		participantsList.setBackground(Color.WHITE);
 		participantsList.setEnabled(false);
-		// temp:
-		participantsList.setListData(new User[]{new User("Ola"), new User("Kari"), new User("Nordmann")});
+		participantsList.setListData(userArray);
 		
 		deleteButton = new JButton(BUTTON_DELETE);
 		closeButton = new JButton(BUTTON_CLOSE);
@@ -206,7 +207,7 @@ public class NewEventWindow extends JPanel implements ActionListener, ItemListen
 	}
 	
 	public static void main(String[] args) {
-		new NewEventWindow(TestObjects.getCalendar00(), TestObjects.getUser02());
+		new NewEventWindow(TestObjects.getCalendar00(), TestObjects.getUser02(), TestObjects.getUserArray01());
 	}
 
 
