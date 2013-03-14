@@ -190,7 +190,7 @@ public class NewEventWindow extends JPanel implements ActionListener, ItemListen
 			String location = locationField.getText();
 			Alarm alarm = null;
 			if(alarmCheckBox.isSelected()){
-				new Alarm(fromDateField.getText(), alarmTimeBeforeField.getText(), "");
+				alarm = new Alarm(fromDateField.getText(), alarmTimeBeforeField.getText(), "");
 			}
 			if (meetingCheckBox.isSelected()) {
 				calendarEvent = new Meeting(calendar, startDateTime, endDateTime, description, location, alarm, user);

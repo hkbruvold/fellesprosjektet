@@ -16,7 +16,7 @@ public abstract class AbstractCalendarEvent implements Serializeable {
 	private String description;
 	@Element
 	private String location; //Room? Both?
-	@Element
+	@Element(required=false)
 	private Alarm alarm;
 	
 	public AbstractCalendarEvent(Calendar calendar, String startDateTime, String endDateTime, String description, String location, Alarm alarm) {
