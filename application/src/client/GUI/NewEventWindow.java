@@ -65,7 +65,21 @@ public class NewEventWindow extends JPanel implements ActionListener, ItemListen
 		
 		frame.pack();
 		frame.setVisible(true);
-//		System.out.println(frame.getWidth() + ", " + frame.getHeight());
+	}
+	
+	public NewEventWindow(AbstractCalendarEvent event, User[] userArray) {
+		this.calendar = event.getCalendar();
+		this.userArray = userArray;
+		initFrame();
+		initPanel();
+		if (event instanceof Appointment) {
+			this.user = ((Appointment) event).getOwner();
+		} else if (event instanceof Meeting) {
+			this.user = ((Meeting) event).getLeader();
+		}
+		// TODO
+		frame.pack();
+		frame.setVisible(true);
 	}
 	
 	private void initFrame() {
