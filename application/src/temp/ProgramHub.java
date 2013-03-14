@@ -14,26 +14,26 @@ import server.*;
 
 public class ProgramHub extends JPanel implements ActionListener {
 	private static final String FRAME_NAME = "Program hub";
-	
+
 	private static final String BUTTON_LOGIN = "LogIn"; 
 	private static final String BUTTON_MEETING_INVITATION = "MeetingInvitation"; 
 	private static final String BUTTON_NEW_EVENT = "NewEvent";
 	private static final String BUTTON_NOTIFICATION = "Notification";
 	private static final String BUTTON_TEST_DATABASE = "TestDatabase";
 	private static final String BUTTON_CLOSE = "Close";
-	
+
 	private JFrame frame;
 	private JButton loginButton, meetingInvitationButton, newEventButton, notificationButton, testDatabaseButton, closeButton;
 	private GridBagConstraints c;
-	
+
 	public ProgramHub() {
 		initFrame();
 		initPanel();
-		
+
 		frame.pack();
 		frame.setVisible(true);
 	}
-	
+
 	private void initFrame() {
 		frame = new JFrame(FRAME_NAME);
 		frame.setPreferredSize(new Dimension(400, 150));
@@ -45,18 +45,18 @@ public class ProgramHub extends JPanel implements ActionListener {
 	private void initPanel() {
 		c = new GridBagConstraints();
 		setLayout(new GridBagLayout());
-		
+
 		loginButton = new JButton(BUTTON_LOGIN);
 		meetingInvitationButton = new JButton(BUTTON_MEETING_INVITATION);
 		newEventButton = new JButton(BUTTON_NEW_EVENT);
 		notificationButton = new JButton(BUTTON_NOTIFICATION);
 		testDatabaseButton = new JButton(BUTTON_TEST_DATABASE);
 		closeButton = new JButton(BUTTON_CLOSE);
-		
+
 		c.anchor = GridBagConstraints.CENTER;
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.ipadx = 10;
-		
+
 		addComponent(loginButton, 0, 0, 1);
 		addComponent(meetingInvitationButton, 1, 0, 1);
 		addComponent(newEventButton, 2, 0, 1);
@@ -65,7 +65,7 @@ public class ProgramHub extends JPanel implements ActionListener {
 
 		c.insets = new Insets(5,0,0,0);
 		addComponent(closeButton, 0, 2, 1);
-		
+
 		loginButton.addActionListener(this);
 		meetingInvitationButton.addActionListener(this);
 		newEventButton.addActionListener(this);
@@ -79,26 +79,24 @@ public class ProgramHub extends JPanel implements ActionListener {
 		c.gridwidth = gridwidth;
 		add(component, c);
 	}
-	
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource().equals(closeButton)) {
 			frame.dispose();
 		} else if (e.getSource().equals(loginButton)) {
 			new LoginWindow();
-		} else {
-			if (e.getSource().equals(meetingInvitationButton)) {
-				new MeetingInvitationWindow(TestObjects.getMeeting00());
-			} else if (e.getSource().equals(newEventButton)) {
-				new NewEventWindow(TestObjects.getCalendar00(), TestObjects.getUser00());
-			} else if (e.getSource().equals(notificationButton)) {
-				new NotificationWindow(TestObjects.getNotification00());
-			} else if (e.getSource().equals(testDatabaseButton)) {
-				new TempTestDatabase();
-			}
+		} else if (e.getSource().equals(meetingInvitationButton)) {
+			new MeetingInvitationWindow(TestObjects.getMeeting00());
+		} else if (e.getSource().equals(newEventButton)) {
+			new NewEventWindow(TestObjects.getCalendar00(), TestObjects.getUser00());
+		} else if (e.getSource().equals(notificationButton)) {
+			new NotificationWindow(TestObjects.getNotification00());
+		} else if (e.getSource().equals(testDatabaseButton)) {
+			new TempTestDatabase();
 		}
 	}
-	
+
 	public static void main(String[] args) {
 		new ProgramHub();
 	}
