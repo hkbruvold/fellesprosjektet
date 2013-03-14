@@ -16,17 +16,19 @@ public class TempTestDatabase extends JPanel implements ActionListener {
 	private static final String LABEL_USERNAME = "Brukernavn";
 	private static final String LABEL_PASSWORD = "Passord";
 	private static final String LABEL_QUERY = "Query";
+	private static final String LABEL_UPDATE = "Update";
 	
 	private static final String BUTTON_CLOSE = "Lukk";
-	private static final String BUTTON_LOG_IN = "Logg inn";
+	private static final String BUTTON_QUERY = "Send query";
+	private static final String BUTTON_UPDATE = "Send update";
 	
 	private static final int LINE_START = GridBagConstraints.LINE_START;
 	private static final int LINE_END = GridBagConstraints.LINE_END;
 	private JFrame frame;
-	private JLabel serverUrlLabel, usernameLabel, passwordLabel, queryLabel;
-	private JTextField serverUrlField, usernameField, queryField;
+	private JLabel serverUrlLabel, usernameLabel, passwordLabel, queryLabel, updateLabel;
+	private JTextField serverUrlField, usernameField, queryField, updateField;
 	private JPasswordField passwordField;
-	private JButton closeButton, testButton;
+	private JButton closeButton, queryButton, updateButton;
 	private GridBagConstraints c;
 
 	public TempTestDatabase(){
@@ -39,7 +41,7 @@ public class TempTestDatabase extends JPanel implements ActionListener {
 
 	private void initFrame() {
 		frame = new JFrame(FRAME_NAME);
-		frame.setPreferredSize(new Dimension(300, 200));
+		frame.setPreferredSize(new Dimension(400, 250));
 		frame.setResizable(false);
 		frame.setLocationRelativeTo(null);
 		frame.getContentPane().add(this);
@@ -54,14 +56,17 @@ public class TempTestDatabase extends JPanel implements ActionListener {
 		usernameLabel = new JLabel(LABEL_USERNAME);
 		passwordLabel = new JLabel(LABEL_PASSWORD);
 		queryLabel = new JLabel(LABEL_QUERY);
+		updateLabel = new JLabel(LABEL_UPDATE);
 		
 		serverUrlField = new JTextField("localhost:port/databaseName", SIZE_FIELD);
 		usernameField = new JTextField(SIZE_FIELD);
 		passwordField = new JPasswordField(SIZE_FIELD);
 		queryField = new JTextField(SIZE_FIELD);
+		updateField = new JTextField(SIZE_FIELD);
 		
+		queryButton = new JButton(BUTTON_QUERY);
+		updateButton = new JButton(BUTTON_UPDATE);
 		closeButton = new JButton(BUTTON_CLOSE);
-		testButton = new JButton(BUTTON_LOG_IN);
 
 		c.insets = new Insets(0,0,5,0);
 		c.ipadx = 10;
@@ -72,13 +77,26 @@ public class TempTestDatabase extends JPanel implements ActionListener {
 		addComponent(usernameField, 1, 1, 2, LINE_START);
 		addComponent(passwordLabel, 0, 2, 1, LINE_END);
 		addComponent(passwordField, 1, 2, 2, LINE_START);
+
 		addComponent(queryLabel, 0, 3, 1, LINE_END);
 		addComponent(queryField, 1, 3, 2, LINE_START);
-		addComponent(closeButton, 1, 4, 1, LINE_START);
-		addComponent(testButton, 2, 4, 1, LINE_END);
+		c.fill = GridBagConstraints.HORIZONTAL;
+		addComponent(queryButton, 3, 3, 1, LINE_END);
+		c.fill = GridBagConstraints.NONE;
+
+		addComponent(updateLabel, 0, 4, 1, LINE_END);
+		addComponent(updateField, 1, 4, 2, LINE_START);
+		c.fill = GridBagConstraints.HORIZONTAL;
+		addComponent(updateButton, 3, 4, 1, LINE_END);
+		c.fill = GridBagConstraints.NONE;
+		
+		c.fill = GridBagConstraints.HORIZONTAL;
+		addComponent(closeButton, 3, 5, 1, LINE_START);
+		c.fill = GridBagConstraints.NONE;
 
 		closeButton.addActionListener(this);
-		testButton.addActionListener(this);
+		updateButton.addActionListener(this);
+		queryButton.addActionListener(this);
 	}
 
 	private void addComponent(JComponent component, int gridx, int gridy, int gridwidth, int anchor) {
@@ -92,7 +110,7 @@ public class TempTestDatabase extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource().equals(closeButton)) {
 			frame.dispose();
-		} else if (e.getSource().equals(testButton)) {
+		} else if (e.getSource().equals(queryButton)) {
 			String serverUrl = "jdbc:mysql://" + serverUrlField.getText();
 			String username = usernameField.getText();
 			char[] password = passwordField.getPassword();
@@ -100,6 +118,14 @@ public class TempTestDatabase extends JPanel implements ActionListener {
 			DatabaseConnection dbConn = new DatabaseConnection(serverUrl, username, password);
 			DatabaseCommunication dbComm = new DatabaseCommunication(dbConn);
 			dbComm.query(query);
+		} else if (e.getSource().equals(updateButton)) {
+			String serverUrl = "jdbc:mysql://" + serverUrlField.getText();
+			String username = usernameField.getText();
+			char[] password = passwordField.getPassword();
+			String update = updateField.getText();
+			DatabaseConnection dbConn = new DatabaseConnection(serverUrl, username, password);
+			DatabaseCommunication dbComm = new DatabaseCommunication(dbConn);
+			dbComm.update(update);
 		}
 	}
 

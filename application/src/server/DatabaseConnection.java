@@ -2,6 +2,7 @@ package server;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -33,9 +34,17 @@ public class DatabaseConnection {
 		connection.close();
 	}
 
-	public ResultSet query(String query) throws SQLException, ClassNotFoundException {
+	public ResultSet query(String sql) throws SQLException, ClassNotFoundException {
 		Statement st = connection.createStatement();
-		return st.executeQuery(query);
+		return st.executeQuery(sql);
 	}
 	
+	public void update(String sql) throws SQLException {
+		Statement st = connection.createStatement();
+		st.executeUpdate(sql);
+	}
+	
+	public PreparedStatement preparedStatement(String sql) throws SQLException {
+		return connection.prepareStatement(sql);
+	}
 }

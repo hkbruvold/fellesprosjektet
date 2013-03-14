@@ -30,16 +30,18 @@ public class DatabaseCommunication {
 			
 			rs.close();
 			dbConn.close();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		}
 	}
-	public void /* status */ insert(/* TODO */) { // insert single element to database
-		// TODO
+	public void /* status */ update(String update) { // insert single element to database
+		try {
+			dbConn.init();
+			dbConn.update(update);
+			dbConn.close();
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	public void /* status */ insertBatch(/* TODO */) { // batch insert (multiple items) to database
 		// TODO
