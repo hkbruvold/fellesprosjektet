@@ -106,13 +106,13 @@ public class NewEventWindow extends JPanel implements ActionListener, ItemListen
 		toTimeField = new JTextField(FIELD_TIME);
 		locationField = new JTextField(SIZE_FIELD);
 		alarmTimeBeforeField = new JTextField(FIELD_TIME);
+		alarmTimeBeforeField.setEnabled(false);
 		
 		alarmCheckBox = new JCheckBox();
 		meetingCheckBox = new JCheckBox();
-		participantsList = new JList<User>(/* TODO */);
+		participantsList = new JList<User>(userArray);
 		participantsList.setBackground(Color.WHITE);
 		participantsList.setEnabled(false);
-		participantsList.setListData(userArray);
 		
 		deleteButton = new JButton(BUTTON_DELETE);
 		closeButton = new JButton(BUTTON_CLOSE);
@@ -168,6 +168,7 @@ public class NewEventWindow extends JPanel implements ActionListener, ItemListen
 		add(component, c);
 	}
 	private void addListeners() {
+		alarmCheckBox.addItemListener(this);
 		meetingCheckBox.addItemListener(this);
 		deleteButton.addActionListener(this);
 		closeButton.addActionListener(this);
@@ -206,6 +207,8 @@ public class NewEventWindow extends JPanel implements ActionListener, ItemListen
 	public void itemStateChanged(ItemEvent e) {
 		if (e.getSource().equals(meetingCheckBox)) {
 			participantsList.setEnabled(meetingCheckBox.isSelected());
+		} else if (e.getSource().equals(alarmCheckBox)) {
+			alarmTimeBeforeField.setEnabled(alarmCheckBox.isSelected());
 		}
 	}
 	
