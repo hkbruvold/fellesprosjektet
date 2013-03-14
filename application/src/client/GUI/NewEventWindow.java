@@ -194,6 +194,9 @@ public class NewEventWindow extends JPanel implements ActionListener, ItemListen
 			}
 			if (meetingCheckBox.isSelected()) {
 				calendarEvent = new Meeting(calendar, startDateTime, endDateTime, description, location, alarm, user);
+				for (User participant : participantsList.getSelectedValuesList()) {
+					((Meeting)calendarEvent).inviteParticipant(participant);
+				}
 			} else {
 				calendarEvent = new Appointment(calendar, startDateTime, endDateTime, description, location, alarm, user);
 			}
