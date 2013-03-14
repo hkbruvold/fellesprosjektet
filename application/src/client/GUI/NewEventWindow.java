@@ -17,6 +17,7 @@ import client.Calendar;
 import client.Meeting;
 
 import client.User;
+import client.XMLTranslator;
 
 @SuppressWarnings("serial")
 public class NewEventWindow extends JPanel implements ActionListener, ItemListener {
@@ -196,9 +197,11 @@ public class NewEventWindow extends JPanel implements ActionListener, ItemListen
 				calendarEvent = new Appointment(calendar, startDateTime, endDateTime, description, location, alarm, user);
 			}
 			// TODO save new event, set the message string for alarm
+			XMLTranslator.toXML(calendarEvent);
 			frame.dispose(); // Close if successful; show error message if not?
 		}
 	}
+
 	@Override
 	public void itemStateChanged(ItemEvent e) {
 		if (e.getSource().equals(meetingCheckBox)) {
