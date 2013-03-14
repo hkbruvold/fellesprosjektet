@@ -63,7 +63,10 @@ public class TestObjects {
 		return new Meeting(getCalendar00(), DATE_TIME_0, DATE_TIME_1, DESCRIPTION, LOCATION, getAlarm00(), getUser00());
 	}
 	public static Meeting getMeeting01() {
-		return new Meeting(getCalendar01(), DATE_TIME_0, DATE_TIME_1, DESCRIPTION, LOCATION, getAlarm01(), getUser01());
+		Meeting meeting = new Meeting(getCalendar01(), DATE_TIME_0, DATE_TIME_1, DESCRIPTION, LOCATION, getAlarm01(), getUser01());
+		meeting.inviteParticipant(getUser00());
+		meeting.inviteParticipant(getUser01());
+		return meeting;
 	}
 	
 	public static Notification getNotification00() {

@@ -5,6 +5,6 @@ import client.XMLTranslator;
 
 public class XMLTester {
 	public static void main(String[] args) {
-		XMLTranslator.toXML(TestObjects.getMeeting00());
+		XMLTranslator.toXML(TestObjects.getMeeting01());
 	}
 }

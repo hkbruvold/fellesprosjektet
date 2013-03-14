@@ -10,6 +10,9 @@ public class Meeting extends AbstractCalendarEvent implements Serializeable {
 	
 	public Meeting(Calendar calendar, String startDateTime, String endDateTime, String description, String location, Alarm alarm, User leader) { // TODO temp
 		super(calendar, startDateTime, endDateTime, description, location, alarm);
+		usersInvited = new ArrayList<User>();
+		usersAccepted = new ArrayList<User>();
+		usersDeclined = new ArrayList<User>();
 		this.leader = leader;
 	}
 	
@@ -18,10 +21,12 @@ public class Meeting extends AbstractCalendarEvent implements Serializeable {
 	public void sendNotification() {
 		// TODO (remember database)
 	}
-	public void addParticipant() {
+	public void inviteParticipant(User user) {
+		usersInvited.add(user);
 		// TODO (remember database)
 	}
-	public void removeParticipant() {
+	public void removeParticipant(User user) {
+		usersInvited.remove(user);
 		// TODO (remember database)
 	}
 	public void acceptInvite() {
