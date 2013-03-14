@@ -31,6 +31,18 @@ public class XMLTranslator {
 			e.printStackTrace();
 		}
 	}
+	public static void toXML(Calendar calendar){
+		Serializer serializer = new Persister();
+		File result = new File("example.xml");
+		try {
+			serializer.write(calendar, result);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	
 	public void /* model */ toModel(/* xml */) {
 		// TODO
 	}
