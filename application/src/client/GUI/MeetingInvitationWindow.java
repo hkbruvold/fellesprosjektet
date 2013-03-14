@@ -112,11 +112,14 @@ public class MeetingInvitationWindow extends JPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource().equals(closeButton)) {
+			// TODO ?
 			frame.dispose();
 		} else if (e.getSource().equals(declineButton)) {
 			// TODO (remember database!)
+			frame.dispose();
 		} else if (e.getSource().equals(acceptButton)) {
 			// TODO (remember database!)
+			frame.dispose();
 		}
 	}
 
