@@ -1,6 +1,6 @@
 package client;
 
-public class Appointment extends AbstractCalendarEvent {
+public class Appointment extends AbstractCalendarEvent implements Serializeable {
 	private User owner;
 
 	public Appointment(Calendar calendar, String startDateTime, String endDateTime, String description, String location, Alarm alarm, User owner) { // TODO temp

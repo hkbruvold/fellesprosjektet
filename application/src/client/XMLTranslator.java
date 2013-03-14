@@ -10,38 +10,15 @@ public class XMLTranslator {
 	
 	// TODO
 	
-	public static void toXML(AbstractCalendarEvent calendarEvent){
+	public static void toXML(Serializeable object) {
 		Serializer serializer = new Persister();
 		File result = new File("example.xml");
 		try {
-			serializer.write(calendarEvent, result);
+			serializer.write(object, result);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	
-	}
-	public static void toXML(Alarm alarm){
-		Serializer serializer = new Persister();
-		File result = new File("example.xml");
-		try {
-			serializer.write(alarm, result);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-	public static void toXML(Calendar calendar){
-		Serializer serializer = new Persister();
-		File result = new File("example.xml");
-		try {
-			serializer.write(calendar, result);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-	
 	
 	public void /* model */ toModel(/* xml */) {
 		// TODO

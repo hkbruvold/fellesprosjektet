@@ -1,6 +1,6 @@
 package client;
 
-public class User {
+public class User implements Serializeable {
 	private String name;
 	
 	public User(String name) {

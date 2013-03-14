@@ -1,6 +1,6 @@
 package client;
 
-public class Alarm {
+public class Alarm implements Serializeable {
 	private String date; // Should we use something other
 	private String time; // than String for these?
 	private String message;

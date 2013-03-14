@@ -3,7 +3,7 @@ package client;
 import java.util.List;
 import java.util.ArrayList;
 
-public class Group {
+public class Group implements Serializeable {
 	private String name;
 	private ArrayList<User> members;
 	

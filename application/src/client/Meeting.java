@@ -2,7 +2,7 @@ package client;
 
 import java.util.ArrayList;
 
-public class Meeting extends AbstractCalendarEvent {
+public class Meeting extends AbstractCalendarEvent implements Serializeable {
 	private User leader;
 	private ArrayList<User> usersInvited;
 	private ArrayList<User> usersAccepted;

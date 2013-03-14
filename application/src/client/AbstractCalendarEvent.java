@@ -1,6 +1,6 @@
 package client;
 
-public abstract class AbstractCalendarEvent {
+public abstract class AbstractCalendarEvent implements Serializeable {
 	private Calendar calendar;
 	private String startDateTime;
 	private String endDateTime;

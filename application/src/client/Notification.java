@@ -1,6 +1,6 @@
 package client;
 
-public class Notification {
+public class Notification implements Serializeable {
 	private String message;
 	// TODO private 'something' options;
 	
