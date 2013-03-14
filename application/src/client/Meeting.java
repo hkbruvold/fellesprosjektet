@@ -2,10 +2,15 @@ package client;
 
 import java.util.ArrayList;
 
+import org.simpleframework.xml.ElementList;
+
 public class Meeting extends AbstractCalendarEvent implements Serializeable {
 	private User leader;
+	@ElementList
 	private ArrayList<User> usersInvited;
+	@ElementList
 	private ArrayList<User> usersAccepted;
+	@ElementList
 	private ArrayList<User> usersDeclined;
 	
 	public Meeting(Calendar calendar, String startDateTime, String endDateTime, String description, String location, Alarm alarm, User leader) { // TODO temp
