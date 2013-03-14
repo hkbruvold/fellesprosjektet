@@ -8,6 +8,8 @@ import java.awt.event.ItemListener;
 
 import javax.swing.*;
 
+import temp.TestObjects;
+
 import client.AbstractCalendarEvent;
 import client.Alarm;
 import client.Appointment;
@@ -204,9 +206,7 @@ public class NewEventWindow extends JPanel implements ActionListener, ItemListen
 	}
 	
 	public static void main(String[] args) {
-		User user = new User("Ola");
-		Calendar calendar = new Calendar("Ola's calendar", user);
-		new NewEventWindow(calendar, user);
+		new NewEventWindow(TestObjects.getCalendar00(), TestObjects.getUser02());
 	}
 
 

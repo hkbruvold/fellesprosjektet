@@ -6,6 +6,8 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
+import temp.TestObjects;
+
 import client.Notification;
 
 @SuppressWarnings("serial")
@@ -73,8 +75,7 @@ public class NotificationWindow extends JPanel implements ActionListener { // TO
 	}
 
 	public static void main(String[] args) {
-		Notification notification = new Notification("Notification message \nLine two");
-		new NotificationWindow(notification);
+		new NotificationWindow(TestObjects.getNotification01());
 	}
 	
 }

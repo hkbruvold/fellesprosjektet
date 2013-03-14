@@ -6,6 +6,8 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
+import temp.TestObjects;
+
 import client.*;
 
 @SuppressWarnings("serial")
@@ -124,17 +126,7 @@ public class MeetingInvitationWindow extends JPanel implements ActionListener {
 	}
 
 	public static void main(String[] args) {
-		// Init test parameters
-		Calendar calendar = new Calendar("Cal", new User("Ola"));
-		String startDateTime = "2013-10-10 20:10";
-		String endDateTime = "2013-10-10 22:00";
-		String description = "Meeting description";
-		String location = "p15";
-		Alarm alarm = new Alarm("2013-10-09", "14:00");
-		User leader = new User("Kari");
-		Meeting testMeeting = new Meeting(calendar, startDateTime, endDateTime, description, location, alarm, leader);
-		// Run
-		new MeetingInvitationWindow(testMeeting);
+		new MeetingInvitationWindow(TestObjects.getMeeting00());
 	}
 	
 }

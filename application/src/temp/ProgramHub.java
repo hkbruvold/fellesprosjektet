@@ -9,7 +9,6 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
-import client.*;
 import client.GUI.*;
 import server.*;
 
@@ -89,21 +88,11 @@ public class ProgramHub extends JPanel implements ActionListener {
 			new LoginWindow();
 		} else {
 			if (e.getSource().equals(meetingInvitationButton)) {
-				Calendar calendar = new Calendar("cal", new User("Ola"));
-				String startDateTime = "2013-03-10 10:10";
-				String endDateTime = "2013-03-10 10:15";
-				String description = "Description";
-				String location = "Location";
-				Alarm alarm = new Alarm("2013-03-10", "10:10");
-				User leader = new User("Kari");
-				Meeting meeting = new Meeting(calendar, startDateTime, endDateTime, description, location, alarm, leader);
-				new MeetingInvitationWindow(meeting);
+				new MeetingInvitationWindow(TestObjects.getMeeting00());
 			} else if (e.getSource().equals(newEventButton)) {
-				User user = new User("Ola");
-				Calendar calendar = new Calendar("cal", user);
-				new NewEventWindow(calendar, user);
+				new NewEventWindow(TestObjects.getCalendar00(), TestObjects.getUser00());
 			} else if (e.getSource().equals(notificationButton)) {
-				new NotificationWindow(new Notification("Message"));
+				new NotificationWindow(TestObjects.getNotification00());
 			} else if (e.getSource().equals(testDatabaseButton)) {
 				new TempTestDatabase();
 			}
