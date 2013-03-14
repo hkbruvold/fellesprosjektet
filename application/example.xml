@@ -1,0 +1,27 @@
+<meeting>
+   <calendar>
+      <name>Bob</name>
+      <owner>
+         <name>Bob</name>
+      </owner>
+   </calendar>
+   <startDateTime>2013-10-10 20.00</startDateTime>
+   <endDateTime>2013-10-12 22.00</endDateTime>
+   <description>Description</description>
+   <location>Location</location>
+   <alarm>
+      <date>2013-10-12</date>
+      <time>22.00</time>
+      <message>Description</message>
+   </alarm>
+   <usersInvited>
+      <user>
+         <name>Alice</name>
+      </user>
+      <user>
+         <name>Bob</name>
+      </user>
+   </usersInvited>
+   <usersAccepted/>
+   <usersDeclined/>
+</meeting>

@@ -1,11 +1,22 @@
 package client;
 
+import org.simpleframework.xml.Attribute;
+import org.simpleframework.xml.Element;
+import org.simpleframework.xml.Root;
+
+@Root
 public abstract class AbstractCalendarEvent implements Serializeable {
+	@Element
 	private Calendar calendar;
+	@Element
 	private String startDateTime;
+	@Element
 	private String endDateTime;
+	@Element
 	private String description;
+	@Element
 	private String location; //Room? Both?
+	@Element
 	private Alarm alarm;
 	
 	public AbstractCalendarEvent(Calendar calendar, String startDateTime, String endDateTime, String description, String location, Alarm alarm) {
