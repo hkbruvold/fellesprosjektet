@@ -29,10 +29,10 @@ public class TestObjects {
 	}
 	
 	public static Calendar getCalendar00() {
-		return new Calendar(getUser00().getName(), getUser00());
+		return new Calendar(getUser00().getName() + "'s calendar", getUser00());
 	}
 	public static Calendar getCalendar01() {
-		return new Calendar(getUser01().getName(), getUser01());
+		return new Calendar(getUser01().getName() + "'s calendar", getUser01());
 	}
 	
 	public static Group getGroup00() {
