@@ -60,12 +60,15 @@ public class TestObjects {
 	}
 	
 	public static Meeting getMeeting00() {
-		return new Meeting(getCalendar00(), DATE_TIME_0, DATE_TIME_1, DESCRIPTION, LOCATION, getAlarm00(), getUser00());
+		Meeting meeting = new Meeting(getCalendar00(), DATE_TIME_0, DATE_TIME_1, DESCRIPTION, LOCATION, getAlarm00(), getUser00());
+		meeting.acceptInvite(getUser01());
+		meeting.declineInvite(getUser02());
+		return meeting;
 	}
 	public static Meeting getMeeting01() {
 		Meeting meeting = new Meeting(getCalendar01(), DATE_TIME_0, DATE_TIME_1, DESCRIPTION, LOCATION, getAlarm01(), getUser01());
 		meeting.inviteParticipant(getUser00());
-		meeting.inviteParticipant(getUser01());
+		meeting.inviteParticipant(getUser02());
 		return meeting;
 	}
 	

@@ -23,21 +23,31 @@ public class Meeting extends AbstractCalendarEvent implements Serializeable {
 	
 	// TODO
 	
-	public void sendNotification() {
+	public void sendNotification() { // Unused?
 		// TODO (remember database)
 	}
 	public void inviteParticipant(User user) {
 		usersInvited.add(user);
+		usersAccepted.remove(user);
+		usersDeclined.remove(user);
 		// TODO (remember database)
 	}
 	public void removeParticipant(User user) {
 		usersInvited.remove(user);
+		usersAccepted.remove(user);
+		usersDeclined.remove(user);
 		// TODO (remember database)
 	}
-	public void acceptInvite() {
+	public void acceptInvite(User user) {
+		usersInvited.remove(user);
+		usersAccepted.add(user);
+		usersDeclined.remove(user);
 		// TODO (remember database)
 	}
-	public void declineInvite() {
+	public void declineInvite(User user) {
+		usersInvited.remove(user);
+		usersAccepted.remove(user);
+		usersDeclined.add(user);
 		// TODO (remember database)
 	}
 	
