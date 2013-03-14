@@ -1,5 +1,6 @@
 package client;
 
+import java.util.List;
 import java.util.ArrayList;
 
 public class Group {
@@ -26,6 +27,13 @@ public class Group {
 	public void addMember(User newMember) {
 		members.add(newMember);
 		// TODO update database!
+	}
+
+	public void addMembers(List<User> users) {
+		members.addAll(users);
+	}
+	public int getSize() {
+		return members.size();
 	}
 	
 }
