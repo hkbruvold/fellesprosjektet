@@ -1,7 +1,6 @@
 package client;
 
 import java.io.File;
-
 import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.core.Persister;
 
@@ -20,10 +19,16 @@ public class XMLTranslator {
 		}
 	}
 	
-	public Serializeable toModel() {
+	public static Serializeable toModel() {
 		Serializer serializer = new Persister();
 		File source = new File("example.xml");
-		Serializeable object = serializer.read(Serializeable.class, source);
+		Serializeable object = null;
+		try {
+			object = serializer.read(Serializeable.class, source);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return object;
 
 	}
