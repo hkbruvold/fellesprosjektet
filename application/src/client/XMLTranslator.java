@@ -20,7 +20,11 @@ public class XMLTranslator {
 		}
 	}
 	
-	public void /* model */ toModel(/* xml */) {
-		// TODO
+	public Serializeable toModel() {
+		Serializer serializer = new Persister();
+		File source = new File("example.xml");
+		Serializeable object = serializer.read(Serializeable.class, source);
+		return object;
+
 	}
 }
