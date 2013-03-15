@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.util.ArrayList;
 
 import javax.swing.*;
 
@@ -39,10 +40,13 @@ public class NewEventWindow extends JPanel implements ActionListener, ItemListen
 	private static final String BUTTON_CLOSE = "Lukk";
 	private static final String BUTTON_SAVE = "Lagre";
 	
+	private static final String TOOLTIP_NOT_SAVED = "Avtalen/Møtet er ikke lagret. Trykk \"" + BUTTON_CLOSE + "\" for å avbryte";
+	
 	private static final int SIZE_FIELD = 12;
 	
 	private static final int LINE_START = GridBagConstraints.LINE_START;
 	private static final int LINE_END = GridBagConstraints.LINE_END;
+
 	
 	private JFrame frame;
 	private JLabel descriptionLabel, fromLabel, toLabel, locationLabel, alarmLabel, alarmTimeBeforeLabel, meetingLabel, participantsLabel;
@@ -52,6 +56,7 @@ public class NewEventWindow extends JPanel implements ActionListener, ItemListen
 	private JButton deleteButton, closeButton, saveButton;
 	private GridBagConstraints c;
 
+	private AbstractCalendarEvent calendarEvent;
 	private Calendar calendar;
 	private User user;
 	private User[] userArray;
@@ -63,11 +68,15 @@ public class NewEventWindow extends JPanel implements ActionListener, ItemListen
 		initFrame();
 		initPanel();
 		
+		deleteButton.setEnabled(false);
+		deleteButton.setToolTipText(TOOLTIP_NOT_SAVED);
+		
 		frame.pack();
 		frame.setVisible(true);
 	}
 	
 	public NewEventWindow(AbstractCalendarEvent event, User[] userArray) {
+		this.calendarEvent = event;
 		this.calendar = event.getCalendar();
 		this.userArray = userArray;
 		initFrame();
@@ -77,7 +86,31 @@ public class NewEventWindow extends JPanel implements ActionListener, ItemListen
 		} else if (event instanceof Meeting) {
 			this.user = ((Meeting) event).getLeader();
 		}
+		
+		descriptionField.setText(event.getDescription());
+		fromDateField.setText(event.getStartDateTime().split(" ")[0]);
+		fromTimeField.setText(event.getStartDateTime().split(" ")[1]);
+		toDateField.setText(event.getEndDateTime().split(" ")[0]);
+		toTimeField.setText(event.getEndDateTime().split(" ")[1]);
+		locationField.setText(event.getLocation());
+		alarmCheckBox.setSelected(event.getAlarm() != null);
+		if (alarmCheckBox.isSelected()) {
+			alarmTimeBeforeField.setText("00:00"); // TEMP!
+			// TODO set alarmTimeBeforeField
+		}
+		if (event instanceof Meeting) {
+			meetingCheckBox.setSelected(true);
+			ArrayList<User> allInvitedUsers = new ArrayList<User>();
+			allInvitedUsers.addAll(((Meeting) event).getUsersInvited());
+			allInvitedUsers.addAll(((Meeting) event).getUsersAccepted());
+			allInvitedUsers.addAll(((Meeting) event).getUsersDeclined());
+			for (User user : allInvitedUsers) {
+				//TODO set selected values
+			}
+		}
+		
 		// TODO
+		
 		frame.pack();
 		frame.setVisible(true);
 	}
@@ -192,7 +225,7 @@ public class NewEventWindow extends JPanel implements ActionListener, ItemListen
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource().equals(deleteButton)) {
-			// TODO delete the event, update database
+			// TODO delete the event, update database // use *calendarEvent*
 			frame.dispose();
 		} else if (e.getSource().equals(closeButton)) {
 			frame.dispose();
@@ -230,7 +263,8 @@ public class NewEventWindow extends JPanel implements ActionListener, ItemListen
 	}
 	
 	public static void main(String[] args) {
-		new NewEventWindow(TestObjects.getCalendar00(), TestObjects.getUser02(), TestObjects.getUserArray01());
+//		new NewEventWindow(TestObjects.getCalendar00(), TestObjects.getUser02(), TestObjects.getUserArray01());
+		new NewEventWindow(TestObjects.getMeeting01(), TestObjects.getUserArray01());
 	}
 
 

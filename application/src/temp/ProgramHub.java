@@ -12,18 +12,22 @@ import javax.swing.*;
 import client.GUI.*;
 import server.*;
 
+@SuppressWarnings("serial")
 public class ProgramHub extends JPanel implements ActionListener {
 	private static final String FRAME_NAME = "Program hub";
 
 	private static final String BUTTON_LOGIN = "LogIn"; 
 	private static final String BUTTON_MEETING_INVITATION = "MeetingInvitation"; 
 	private static final String BUTTON_NEW_EVENT = "NewEvent";
+	private static final String BUTTON_OLD_EVENT = "NewEvent (see tool tip)";
 	private static final String BUTTON_NOTIFICATION = "Notification";
 	private static final String BUTTON_TEST_DATABASE = "TestDatabase";
 	private static final String BUTTON_CLOSE = "Close";
+	
+	private static final String TOOLTIP_BUTTON_OLD_EVENT = "NewEventWindow with a previously made event. Not yet fully implemented";
 
 	private JFrame frame;
-	private JButton loginButton, meetingInvitationButton, newEventButton, notificationButton, testDatabaseButton, closeButton;
+	private JButton loginButton, meetingInvitationButton, newEventButton, oldEventButton, notificationButton, testDatabaseButton, closeButton;
 	private GridBagConstraints c;
 
 	public ProgramHub() {
@@ -51,7 +55,10 @@ public class ProgramHub extends JPanel implements ActionListener {
 		newEventButton = new JButton(BUTTON_NEW_EVENT);
 		notificationButton = new JButton(BUTTON_NOTIFICATION);
 		testDatabaseButton = new JButton(BUTTON_TEST_DATABASE);
+		oldEventButton = new JButton(BUTTON_OLD_EVENT);
 		closeButton = new JButton(BUTTON_CLOSE);
+		
+		oldEventButton.setToolTipText(TOOLTIP_BUTTON_OLD_EVENT);
 
 		c.anchor = GridBagConstraints.CENTER;
 		c.fill = GridBagConstraints.HORIZONTAL;
@@ -62,6 +69,7 @@ public class ProgramHub extends JPanel implements ActionListener {
 		addComponent(newEventButton, 2, 0, 1);
 		addComponent(notificationButton, 0, 1, 1);
 		addComponent(testDatabaseButton, 1, 1, 1);
+		addComponent(oldEventButton, 2, 1, 1);
 
 		c.insets = new Insets(5,0,0,0);
 		addComponent(closeButton, 0, 2, 1);
@@ -71,6 +79,7 @@ public class ProgramHub extends JPanel implements ActionListener {
 		newEventButton.addActionListener(this);
 		notificationButton.addActionListener(this);
 		testDatabaseButton.addActionListener(this);
+		oldEventButton.addActionListener(this);
 		closeButton.addActionListener(this);
 	}
 	private void addComponent(JComponent component, int gridx, int gridy, int gridwidth) {
@@ -94,6 +103,8 @@ public class ProgramHub extends JPanel implements ActionListener {
 			new NotificationWindow(TestObjects.getNotification00());
 		} else if (e.getSource().equals(testDatabaseButton)) {
 			new TempTestDatabase();
+		} else if (e.getSource().equals(oldEventButton)) {
+			new NewEventWindow(TestObjects.getMeeting01(), TestObjects.getUserArray01());
 		}
 	}
 

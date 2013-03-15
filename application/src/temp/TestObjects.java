@@ -5,6 +5,9 @@ import java.util.Arrays;
 import client.*;
 
 public class TestObjects {
+	private static final User CHARLIE = new User("charlie", "Charlie", "Employer");
+	private static final User BOB = new User("bob", "Bob", "Employer");
+	private static final User ALICE = new User("alice", "Alice", "Employer");
 	private static final String DATE_0 = "2013-10-10";
 	private static final String DATE_1 = "2013-10-12";
 	private static final String TIME_0 = "20.00";
@@ -80,13 +83,13 @@ public class TestObjects {
 	}
 	
 	public static User getUser00() {
-		return new User("Alice");
+		return ALICE;
 	}
 	public static User getUser01() {
-		return new User("Bob");
+		return BOB;
 	}
 	public static User getUser02() {
-		return new User("Charlie");
+		return CHARLIE;
 	}
 	
 	
