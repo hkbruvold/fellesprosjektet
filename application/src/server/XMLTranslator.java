@@ -20,8 +20,13 @@ public class XMLTranslator {
 	public Serializeable toModel() {
 		Serializer serializer = new Persister();
 		File source = new File("example.xml");
-		Serializeable object = serializer.read(Serializeable.class, source);
+		Serializeable object = null;
+		try {
+			object = serializer.read(Serializeable.class, source);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return object;
-
 	}
 }
