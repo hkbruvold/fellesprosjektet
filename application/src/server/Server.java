@@ -4,21 +4,26 @@ import java.net.*;
 import java.io.*;
 
 public class Server {
-    public static void main(String[] args) throws IOException {
-        ServerSocket serverSocket = null;
-        boolean listening = true;
+	private static final int PORT = 4444;
+	private static ServerSocket serverSocket;
+	private static boolean listening;
 
-        try {
-            serverSocket = new ServerSocket(4444);
-        } catch (IOException e) {
-            System.err.println("Could not listen on port: 4444.");
-            System.exit(-1);
-        }
+	public static void main(String[] args) throws IOException {
+		listening = true;
+		
+		try {
+			serverSocket = new ServerSocket(PORT);
+		} catch (IOException e) {
+			System.err.println("Could not listen on port: 4444.");
+			System.exit(-1);
+		}
 
-        while (listening){
-	    new ServerThread(serverSocket.accept()).start();
-
-        serverSocket.close();
-        }
-    }
+		ServerThread st;
+		while (listening){
+			st = new ServerThread(serverSocket.accept());
+			st.start();
+			serverSocket.close();
+			serverSocket = new ServerSocket(PORT);
+		}
+	}
 }
