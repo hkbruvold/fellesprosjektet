@@ -5,6 +5,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.*;
+import javax.xml.XMLConstants;
+
+import data.Authentication;
+import data.XMLTranslator;
 
 @SuppressWarnings("serial")
 public class LoginWindow extends JPanel implements ActionListener {
@@ -87,7 +91,7 @@ public class LoginWindow extends JPanel implements ActionListener {
 		} else if (e.getSource().equals(closeButton)) {
 			frame.dispose();
 		} else if (e.getSource().equals(logInButton)) {
-			// TODO logIn
+			XMLTranslator.toXML(new Authentication(usernameField.getText(), passwordField.getText(), "LOGIN"));
 			frame.dispose(); // Close if successful; show error message if not?
 		}
 	}
