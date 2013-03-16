@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import javax.swing.*;
 
@@ -104,9 +105,12 @@ public class NewEventWindow extends JPanel implements ActionListener, ItemListen
 			allInvitedUsers.addAll(((Meeting) event).getUsersInvited());
 			allInvitedUsers.addAll(((Meeting) event).getUsersAccepted());
 			allInvitedUsers.addAll(((Meeting) event).getUsersDeclined());
+			int[] indecies = new int[allInvitedUsers.size()];
+			int i = 0;
 			for (User user : allInvitedUsers) {
-				//TODO set selected values
+				indecies[i++] = Arrays.asList(userArray).indexOf(user);
 			}
+			participantsList.setSelectedIndices(indecies);
 		}
 		
 		// TODO
