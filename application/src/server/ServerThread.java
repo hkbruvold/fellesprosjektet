@@ -34,8 +34,8 @@ public class ServerThread extends Thread {
 				System.out.println(input);
 				input = in.readLine();
 			}
+			out.write("Server says: Hello");
 			System.out.println("Server: Receiving end\n");
-                        out.write("Server says: Hello");
 			System.out.println("Server: closing (thread)");
 			out.close();
 			in.close();
