@@ -25,7 +25,7 @@ public class XMLTranslator {
 		Serializeable object = null;
 		try {
 			if (serializer.validate(Alarm.class, source)) {
-				
+
 			} 
 		} catch (Exception e) {
 			System.out.println("wrong one...");
@@ -51,15 +51,13 @@ public class XMLTranslator {
 		} catch (Exception e) {
 			System.out.println("wrong one...");
 		}
+		// start nødvendig.
 		try {
-			if (serializer.validate(Meeting.class, source)) {
-				System.out.println("Correct one!");
-				object = serializer.read(Meeting.class, source);
-			} 
+			object = serializer.read(Meeting.class, source);
 		} catch (Exception e) {
-			System.out.println("wrong one... maybe");
 			e.printStackTrace();
 		}
+		// slutt nødvendig. Trenger ikke mer enn dette.
 		try {
 			if (serializer.validate(Notification.class, source)) {
 
