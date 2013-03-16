@@ -1,10 +1,13 @@
-package server;
+package temp;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.*;
+
+import server.DatabaseCommunication;
+import server.DatabaseConnection;
 
 @SuppressWarnings("serial")
 public class TempTestDatabase extends JPanel implements ActionListener {
