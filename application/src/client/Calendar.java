@@ -7,6 +7,9 @@ public class Calendar implements Serializeable {
 	private User owner;
 	private ArrayList<AbstractCalendarEvent> events;
 	
+	public Calendar(){
+		
+	}
 	public Calendar(String name, User owner) {
 		this.name = name;
 		this.owner = owner;

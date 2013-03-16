@@ -24,53 +24,39 @@ public class XMLTranslator {
 		File source = new File("example.xml");
 		Serializeable object = null;
 		try {
-			if (serializer.validate(Alarm.class, source)) {
-
-			} 
+			object = serializer.read(Alarm.class, source);
 		} catch (Exception e) {
-			System.out.println("wrong one...");
+			e.printStackTrace();
 		}
 		try {
-			if (serializer.validate(Appointment.class, source)) {
-
-			} 
+			object = serializer.read(Appointment.class, source);
 		} catch (Exception e) {
-			System.out.println("wrong one...");
+			e.printStackTrace();
 		}
 		try {
-			if (serializer.validate(Calendar.class, source)) {
-
-			} 
+			object = serializer.read(Calendar.class, source);
 		} catch (Exception e) {
-			System.out.println("wrong one...");
+			e.printStackTrace();
 		}
 		try {
-			if (serializer.validate(Group.class, source)) {
-
-			} 
+			object = serializer.read(Group.class, source);
 		} catch (Exception e) {
-			System.out.println("wrong one...");
+			e.printStackTrace();
 		}
-		// start nødvendig.
 		try {
 			object = serializer.read(Meeting.class, source);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		// slutt nødvendig. Trenger ikke mer enn dette.
 		try {
-			if (serializer.validate(Notification.class, source)) {
-
-			} 
+			object = serializer.read(Notification.class, source);
 		} catch (Exception e) {
-			System.out.println("wrong one...");
+			e.printStackTrace();
 		}
 		try {
-			if (serializer.validate(User.class, source)) {
-
-			}
+			object = serializer.read(User.class, source);
 		} catch (Exception e) {
-			System.out.println("wrong one...");
+			e.printStackTrace();
 		}
 		return object;
 

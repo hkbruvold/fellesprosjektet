@@ -4,7 +4,9 @@ public class Alarm implements Serializeable {
 	private String date; // Should we use something other
 	private String time; // than String for these?
 	private String message;
-	
+	public Alarm(){
+		
+	}
 	public Alarm(String date, String time, String message) {
 		this.date = date;
 		this.time = time;
