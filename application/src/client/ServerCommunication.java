@@ -11,7 +11,7 @@ public class ServerCommunication {
 	
 	// TODO
 	
-	public void /*status*/ logIn (/* TODO */) {
+	public void login (String username, String password ) {
 		// TODO
 	}
 	public void /*status*/ logOut (/* TODO */) {

@@ -5,6 +5,7 @@ import java.util.Arrays;
 import client.*;
 import data.Alarm;
 import data.Appointment;
+import data.Authentication;
 import data.Calendar;
 import data.Group;
 import data.Meeting;
@@ -15,6 +16,8 @@ public class TestObjects {
 	private static final User CHARLIE = new User("charlie", "Charlie", "Employer");
 	private static final User BOB = new User("bob", "Bob", "Employer");
 	private static final User ALICE = new User("alice", "Alice", "Employer");
+	private static final String LOGIN = "login";
+	private static final String LOGOUT = "logout";
 	private static final String DATE_0 = "2013-10-10";
 	private static final String DATE_1 = "2013-10-12";
 	private static final String TIME_0 = "20.00";
@@ -24,6 +27,9 @@ public class TestObjects {
 	private static final String DESCRIPTION = "Description";
 	private static final String LOCATION = "Location";
 	
+	public static Authentication getAuthentication00(){
+		return new Authentication("ALICE", "123", LOGIN );
+	}
 	public static Alarm getAlarm00() {
 		return new Alarm(DATE_0, TIME_0);
 	}

@@ -58,6 +58,11 @@ public class XMLTranslator {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		try {
+			object = serializer.read(Authentication.class, source);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return object;
 
 	}
