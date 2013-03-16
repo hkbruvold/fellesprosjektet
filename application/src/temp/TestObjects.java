@@ -3,6 +3,13 @@ package temp;
 import java.util.Arrays;
 
 import client.*;
+import data.Alarm;
+import data.Appointment;
+import data.Calendar;
+import data.Group;
+import data.Meeting;
+import data.Notification;
+import data.User;
 
 public class TestObjects {
 	private static final User CHARLIE = new User("charlie", "Charlie", "Employer");

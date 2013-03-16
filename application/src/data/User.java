@@ -1,4 +1,4 @@
-package client;
+package data;
 
 public class User implements Serializeable {
 	private String username;

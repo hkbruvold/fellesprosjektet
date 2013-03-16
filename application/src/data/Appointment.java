@@ -1,4 +1,4 @@
-package client;
+package data;
 
 public class Appointment extends AbstractCalendarEvent implements Serializeable {
 	private User owner;

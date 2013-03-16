@@ -9,6 +9,7 @@ import javax.swing.*;
 import temp.TestObjects;
 
 import client.*;
+import data.Meeting;
 
 @SuppressWarnings("serial")
 public class MeetingInvitationWindow extends JPanel implements ActionListener {

@@ -1,4 +1,4 @@
-package client;
+package data;
 
 import java.io.File;
 import org.simpleframework.xml.Serializer;

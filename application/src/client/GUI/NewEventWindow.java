@@ -12,14 +12,14 @@ import javax.swing.*;
 
 import temp.TestObjects;
 
-import client.AbstractCalendarEvent;
-import client.Alarm;
-import client.Appointment;
-import client.Calendar;
-import client.Meeting;
 
-import client.User;
-import client.XMLTranslator;
+import data.AbstractCalendarEvent;
+import data.Alarm;
+import data.Appointment;
+import data.Calendar;
+import data.Meeting;
+import data.User;
+import data.XMLTranslator;
 
 @SuppressWarnings("serial")
 public class NewEventWindow extends JPanel implements ActionListener, ItemListener {

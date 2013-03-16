@@ -1,4 +1,4 @@
-package client;
+package data;
 
 public class Notification implements Serializeable {
 	private String message;

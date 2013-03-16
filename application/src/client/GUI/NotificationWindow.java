@@ -8,7 +8,7 @@ import javax.swing.*;
 
 import temp.TestObjects;
 
-import client.Notification;
+import data.Notification;
 
 @SuppressWarnings("serial")
 public class NotificationWindow extends JPanel implements ActionListener { // TODO This needs a fix

@@ -3,7 +3,8 @@ package server;
 import java.io.File;
 import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.core.Persister;
-import client.Serializeable;
+
+import data.Serializeable;
 
 public class XMLTranslator {
 

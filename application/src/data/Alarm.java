@@ -1,4 +1,4 @@
-package client;
+package data;
 
 public class Alarm implements Serializeable {
 	private String date; // Should we use something other

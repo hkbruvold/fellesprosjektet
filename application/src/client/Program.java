@@ -1,5 +1,7 @@
 package client;
 
+import data.AbstractCalendarEvent;
+
 public class Program {
 	// TODO Fields?
 	
