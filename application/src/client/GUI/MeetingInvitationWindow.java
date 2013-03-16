@@ -118,10 +118,11 @@ public class MeetingInvitationWindow extends JPanel implements ActionListener {
 			// TODO ?
 			frame.dispose();
 		} else if (e.getSource().equals(declineButton)) {
-			// TODO (remember database!)
+			// TODO Set user based on the user of the program
+			meeting.declineInvite(user);
 			frame.dispose();
 		} else if (e.getSource().equals(acceptButton)) {
-			// TODO (remember database!)
+			meeting.acceptInvite(user);
 			frame.dispose();
 		}
 	}
