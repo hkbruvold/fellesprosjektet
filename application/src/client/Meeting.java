@@ -13,6 +13,9 @@ public class Meeting extends AbstractCalendarEvent implements Serializeable {
 	@ElementList
 	private ArrayList<User> usersDeclined;
 	
+	public Meeting(){
+		
+	}
 	public Meeting(Calendar calendar, String startDateTime, String endDateTime, String description, String location, Alarm alarm, User leader) { // TODO temp
 		super(calendar, startDateTime, endDateTime, description, location, alarm);
 		usersInvited = new ArrayList<User>();
