@@ -2,6 +2,8 @@ package server;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Properties;
 
 public class DatabaseCommunication {
 	private DatabaseConnection dbConn;
@@ -10,12 +12,14 @@ public class DatabaseCommunication {
 		this.dbConn = dbConn;
 	}
 
-	public void /*result*/ query(String query) {
+	public ArrayList<Properties> query(String query) {
+		ArrayList<Properties> result = null;
 		try {
-			makeQuery(query);
+			result = makeQuery(query);
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		}
+		return result;
 	}
 	public int update(String update) {
 		try {
@@ -31,23 +35,24 @@ public class DatabaseCommunication {
 		return -2;
 	}
 
-	private void /*result*/ makeQuery(String query) throws ClassNotFoundException, SQLException {
+	private ArrayList<Properties> makeQuery(String query) throws ClassNotFoundException, SQLException {
 		dbConn.init();
+		ArrayList<Properties> result = new ArrayList<Properties>();
 		ResultSet rs = dbConn.query(query);
 		rs.beforeFirst();
 		int colCount = rs.getMetaData().getColumnCount();
 		while (rs.next()) {
-			// TODO temp - should make *result*
+			Properties p = new Properties();
 			for (int i = 1; i < colCount+1; i++) {
-				System.out.print(rs.getMetaData().getColumnLabel(i) + ": ");
-				System.out.println(rs.getString(i));
+				String label = rs.getMetaData().getColumnLabel(i);
+				String data = rs.getString(i);
+				p.setProperty(label, data);
 			}
-			System.out.println();
-			// end temp
+			result.add(p);
 		}
 		rs.close();
 		dbConn.close();
-//		return *result*;
+		return result;
 	}
 	private void makeUpdate(String update) throws ClassNotFoundException, SQLException {
 		dbConn.init();

@@ -4,9 +4,11 @@ public class Alarm implements Serializeable {
 	private String date; // Should we use something other
 	private String time; // than String for these?
 	private String message;
+	private int id;
+	
 	public Alarm(){
-		
 	}
+	
 	public Alarm(String date, String time, String message) {
 		this.date = date;
 		this.time = time;
@@ -39,6 +41,12 @@ public class Alarm implements Serializeable {
 	public void setMessage(String message) {
 		this.message = message;
 		// TODO update database!
+	}
+	public int getID() {
+		return id;
+	}
+	public void setID(int id) {
+		this.id = id;
 	}
 	
 }

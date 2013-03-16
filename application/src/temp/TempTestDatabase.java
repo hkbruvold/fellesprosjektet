@@ -3,6 +3,9 @@ package temp;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.Properties;
 
 import javax.swing.*;
 
@@ -120,7 +123,15 @@ public class TempTestDatabase extends JPanel implements ActionListener {
 			String query = queryField.getText();
 			DatabaseConnection dbConn = new DatabaseConnection(serverUrl, username, password);
 			DatabaseCommunication dbComm = new DatabaseCommunication(dbConn);
-			dbComm.query(query);
+			ArrayList<Properties> result = dbComm.query(query);
+			for (Properties properties : result) {
+				Enumeration<Object> keys = properties.keys();
+				while (keys.hasMoreElements()) {
+					String nextElement = (String) keys.nextElement();
+					System.out.println(nextElement.toString() + ": " + properties.getProperty(nextElement));
+				}
+				System.out.println();
+			}
 		} else if (e.getSource().equals(updateButton)) {
 			String serverUrl = "jdbc:mysql://" + serverUrlField.getText();
 			String username = usernameField.getText();
