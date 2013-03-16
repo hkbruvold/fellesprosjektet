@@ -6,7 +6,6 @@ public class User implements Serializeable {
 	private String type;
 	
 	public User(){
-		
 	}
 	public User(String username, String name, String type) {
 		this.username = username;
@@ -17,7 +16,7 @@ public class User implements Serializeable {
 	// TODO
 	
 	public String toString() {
-		return name;
+		return String.format("Username: %s, Name: %s, Type: %s", username, name, type);
 	}
 	
 	public String getUsername() {

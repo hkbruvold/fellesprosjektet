@@ -4,11 +4,12 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class Group implements Serializeable {
+	private int id; // TODO
 	private String name;
+	private String description; // TODO
 	private ArrayList<User> members;
 	
 	public Group(){
-		
 	}
 	public Group(String name) {
 		this.name = name;
@@ -16,6 +17,10 @@ public class Group implements Serializeable {
 	}
 	
 	// TODO
+	
+	public String tosString() {
+		return String.format("ID: %s, Group name: %s, Description: %s, Number of members: %s", id, name, description, members.size());
+	}
 	
 	public String getName() {
 		return name;

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.simpleframework.xml.ElementList;
 
 public class Meeting extends AbstractCalendarEvent implements Serializeable {
+	private int id; // TODO
 	private User leader;
 	@ElementList
 	private ArrayList<User> usersInvited;
@@ -14,7 +15,6 @@ public class Meeting extends AbstractCalendarEvent implements Serializeable {
 	private ArrayList<User> usersDeclined;
 	
 	public Meeting(){
-		
 	}
 	public Meeting(Calendar calendar, String startDateTime, String endDateTime, String description, String location, Alarm alarm, User leader) { // TODO temp
 		super(calendar, startDateTime, endDateTime, description, location, alarm);
@@ -25,6 +25,10 @@ public class Meeting extends AbstractCalendarEvent implements Serializeable {
 	}
 	
 	// TODO
+
+	public String toString() {
+		return String.format("ID: %s, Description: %s, Start: %s, End: %s, Location: %s, Leader: %s", id, description, startDateTime, endDateTime, location, leader.getUsername());
+	}
 	
 	public void sendNotification() { // Unused?
 		// TODO (remember database)

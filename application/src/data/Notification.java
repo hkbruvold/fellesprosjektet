@@ -1,10 +1,11 @@
 package data;
 
 public class Notification implements Serializeable {
+	private int id; // TODO
 	private String message;
 	// TODO private 'something' options;
+	
 	public Notification(){
-		
 	}
 	public Notification(String message) {
 		this.message = message;
@@ -12,6 +13,10 @@ public class Notification implements Serializeable {
 	}
 	
 	// TODO
+	
+	public String toString() {
+		return String.format("ID: %s, Message: %s", id, message);
+	}
 	
 	public String getMessage() {
 		return message;

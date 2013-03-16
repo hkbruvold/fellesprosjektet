@@ -7,20 +7,19 @@ import org.simpleframework.xml.Root;
 @Root
 public abstract class AbstractCalendarEvent implements Serializeable {
 	@Element
-	private Calendar calendar;
+	protected Calendar calendar;
 	@Element
-	private String startDateTime;
+	protected String startDateTime;
 	@Element
-	private String endDateTime;
+	protected String endDateTime;
 	@Element
-	private String description;
+	protected String description;
 	@Element
-	private String location; //Room? Both?
+	protected String location; //Room? Both?
 	@Element(required=false)
-	private Alarm alarm;
+	protected Alarm alarm;
 	
 	public AbstractCalendarEvent(){
-		
 	}
 	public AbstractCalendarEvent(Calendar calendar, String startDateTime, String endDateTime, String description, String location, Alarm alarm) {
 		this.calendar = calendar;
