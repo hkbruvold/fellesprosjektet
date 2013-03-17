@@ -2,45 +2,41 @@ package server;
 
 import java.net.*;
 import java.io.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ServerThread extends Thread {
 	private Socket socket = null;
 
 	public ServerThread(Socket socket) {
-		super();
-		this.socket = socket;
+            super();
+            this.socket = socket;
 	}
 
 	@Override
 	public void run() {
-		try {
-			PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
-			BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            try {
+                ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
+                ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
 			
-			System.out.println("Server: Sending start");
-			System.out.println("Server: Sending end\n");
-
-			System.out.println("Server: Receiving start");
-			String input = null;
-			if (in.ready()) {
-				input = in.readLine();
-			} else {
-				System.out.println("not ready");
-			}
-			while (input != null) {
-				System.out.println(input);
-				input = in.readLine();
-			}
-			out.write("Server says: Hello");
-			System.out.println("Server: Receiving end\n");
-			System.out.println("Server: closing (thread)");
-			out.close();
-			in.close();
-			socket.close();
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
+                out.writeObject(new String("Server says: Hello with object"));
+                out.flush();
+                
+                Object input = null;
+                while (input == null) {
+                    input = in.readObject();
+                }
+                        
+                System.out.println(input);
+                        
+                System.out.println("Server: closing (thread)");
+                out.close();
+                in.close();
+                socket.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
 }

@@ -37,6 +37,8 @@ public class NewEventWindow extends JPanel implements ActionListener, ItemListen
 	private static final String FIELD_DATE = "ееее-MM-DD";
 	private static final String FIELD_TIME = "TT:MM";
 
+	private static final String BUTTON_LOCATION_SET_TEXT = "Bruk: Tekst";
+	private static final String BUTTON_LOCATION_SET_ROOM = "Bruk: Rom";
 	private static final String BUTTON_DELETE = "Slett";
 	private static final String BUTTON_CLOSE = "Lukk";
 	private static final String BUTTON_SAVE = "Lagre";
@@ -54,7 +56,7 @@ public class NewEventWindow extends JPanel implements ActionListener, ItemListen
 	private JTextField descriptionField, fromDateField, fromTimeField, toDateField, toTimeField, locationField, alarmTimeBeforeField;
 	private JCheckBox alarmCheckBox, meetingCheckBox;
 	private JList<User> participantsList;
-	private JButton deleteButton, closeButton, saveButton;
+	private JButton locationButton, deleteButton, closeButton, saveButton;
 	private GridBagConstraints c;
 
 	private AbstractCalendarEvent calendarEvent;
@@ -166,6 +168,7 @@ public class NewEventWindow extends JPanel implements ActionListener, ItemListen
 		participantsList.setEnabled(false);
 		participantsList.setCellRenderer(new UserRenderer());
 		
+		locationButton = new JButton(BUTTON_LOCATION_SET_ROOM);
 		deleteButton = new JButton(BUTTON_DELETE);
 		closeButton = new JButton(BUTTON_CLOSE);
 		saveButton = new JButton(BUTTON_SAVE);
@@ -190,8 +193,9 @@ public class NewEventWindow extends JPanel implements ActionListener, ItemListen
 		
 		addComponent(locationLabel, 0, 3, 1, LINE_END);
 		c.fill = GridBagConstraints.HORIZONTAL;
-		addComponent(locationField, 1, 3, 3, LINE_START);
+		addComponent(locationField, 1, 3, 2, LINE_START);
 		c.fill = GridBagConstraints.NONE;
+		addComponent(locationButton, 3, 3, 1, LINE_START);
 		
 		addComponent(alarmLabel, 0, 4, 1, LINE_END);
 		addComponent(alarmCheckBox, 1, 4, 1, LINE_START);
@@ -222,6 +226,7 @@ public class NewEventWindow extends JPanel implements ActionListener, ItemListen
 	private void addListeners() {
 		alarmCheckBox.addItemListener(this);
 		meetingCheckBox.addItemListener(this);
+		locationButton.addActionListener(this);
 		deleteButton.addActionListener(this);
 		closeButton.addActionListener(this);
 		saveButton.addActionListener(this);
@@ -234,6 +239,16 @@ public class NewEventWindow extends JPanel implements ActionListener, ItemListen
 			frame.dispose();
 		} else if (e.getSource().equals(closeButton)) {
 			frame.dispose();
+		} else if (e.getSource().equals(locationButton)) {
+			if (locationButton.getText().equals(BUTTON_LOCATION_SET_ROOM)) {
+				new RoomSelectionWindow(); // TODO needs to return the room.
+				locationField.setEnabled(false);
+				locationButton.setText(BUTTON_LOCATION_SET_TEXT);
+			} else if (locationButton.getText().equals(BUTTON_LOCATION_SET_TEXT)) {
+				// TODO
+				locationField.setEnabled(true);
+				locationButton.setText(BUTTON_LOCATION_SET_ROOM);
+			}
 		} else if (e.getSource().equals(saveButton)) {
 			AbstractCalendarEvent calendarEvent;
 			String startDateTime = fromDateField.getText() + " " + fromTimeField.getText();
