@@ -85,7 +85,13 @@ public class MainWindow extends JFrame {
 		gbc_lblYear.gridy = 1;
 		getContentPane().add(lblYear, gbc_lblYear);
 		
-		JComboBox yearNumberBox = new JComboBox();
+		final JComboBox yearNumberBox = new JComboBox();
+		yearNumberBox.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				calendarPane.setYear(yearNumberBox.getSelectedIndex());
+				calendarPane.updateDates();
+			}
+		});
 		yearNumberBox.setModel(new DefaultComboBoxModel(new String[] {"2013","2014","2015","2016","2017"}));
 
 		
