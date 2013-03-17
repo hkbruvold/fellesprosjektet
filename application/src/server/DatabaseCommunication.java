@@ -46,7 +46,7 @@ public class DatabaseCommunication {
 			for (int i = 1; i < colCount+1; i++) {
 				String label = rs.getMetaData().getColumnLabel(i);
 				String data = rs.getString(i);
-				p.setProperty(label, data);
+				p.setProperty(label, (data != null ? data : ""));
 			}
 			result.add(p);
 		}

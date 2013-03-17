@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Calendar implements Serializeable {
 	private String name;
 	private User owner;
-	private ArrayList<AbstractCalendarEvent> events;
+	private ArrayList<Event> events;
 	
 	public Calendar(){
 	}
@@ -24,15 +24,13 @@ public class Calendar implements Serializeable {
 	public User getOwner() {
 		return owner;
 	}
-	public ArrayList<AbstractCalendarEvent> getEvents() {
+	public ArrayList<Event> getEvents() {
 		return events;
 	}
-	public void addEvent(AbstractCalendarEvent event) {
+	public void addEvent(Event event) {
 		events.add(event);
-		// TODO update database??
 	}
-	public void addEvents(ArrayList<AbstractCalendarEvent> events) {
+	public void addEvents(ArrayList<Event> events) {
 		events.addAll(events);
-		// TODO update database??
 	}
 }
