@@ -30,13 +30,13 @@ public class DatabaseMethods {
 
 	private static final String SELECT_FROM = "SELECT %s FROM %s";
 	private static final String SELECT_FROM_WHERE = "SELECT %s FROM %s WHERE %s";
-	
+
 	private DatabaseCommunication dbComm;
-	
+
 	public DatabaseMethods(DatabaseCommunication dbComm) {
 		this.dbComm = dbComm;
 	}
-	
+
 	public ArrayList<Alarm> queryAlarms() {
 		ArrayList<Alarm> alarms = new ArrayList<Alarm>();
 		ArrayList<Properties> pl = dbComm.query(String.format(SELECT_FROM, FIELDS_ALARM, TABLE_ALARM));
@@ -57,7 +57,7 @@ public class DatabaseMethods {
 		String message = p.getProperty("message");
 		String username = p.getProperty("username");
 		String eventID = p.getProperty("eventID");
-		
+
 		alarm.setID(Integer.parseInt(id));
 		alarm.setDate(dateTime.split(" ")[0]);
 		alarm.setTime(dateTime.split(" ")[1]);
@@ -66,7 +66,8 @@ public class DatabaseMethods {
 		alarm.setEvent(queryEvent(Integer.parseInt(eventID)));
 		return alarm;
 	}
-	
+
+
 	public ArrayList<Event> queryEvents() {
 		ArrayList<Event> events = new ArrayList<Event>();
 		ArrayList<Properties> pl = dbComm.query(String.format(SELECT_FROM, FIELDS_EVENT, TABLE_EVENT));
@@ -83,7 +84,8 @@ public class DatabaseMethods {
 	private Event makeEvent(Properties p) {
 		return null;
 	}
-	
+
+
 	public ArrayList<Group> queryGroups() {
 		ArrayList<Group> groups = new ArrayList<Group>();
 		ArrayList<Properties> pl = dbComm.query(String.format(SELECT_FROM, FIELDS_GROUPS, TABLE_GROUPS));
@@ -100,7 +102,8 @@ public class DatabaseMethods {
 	private Group makeGroup(Properties p) {
 		return null;
 	}
-	
+
+
 	public ArrayList<Notification> queryNotifications() {
 		ArrayList<Notification> notifications = new ArrayList<Notification>();
 		ArrayList<Properties> pl = dbComm.query(String.format(SELECT_FROM, FIELDS_NOTIFICATION, TABLE_NOTIFICATION));
@@ -117,30 +120,47 @@ public class DatabaseMethods {
 	private Notification makeNotification(Properties p) {
 		return null;
 	}
-	
+
+
 	public ArrayList<Room> queryRooms() {
-		return null;
+		ArrayList<Room> rooms = new ArrayList<Room>();
+		ArrayList<Properties> pl = dbComm.query(String.format(SELECT_FROM, FIELDS_ROOM, TABLE_ROOM));
+		for (Properties p : pl) {
+			rooms.add(makeRoom(p));
+		}
+		return rooms;
 	}
 	public Room queryRoom(int roomID) {
-		return null;
+		ArrayList<Properties> pl = dbComm.query(String.format(SELECT_FROM_WHERE, FIELDS_ROOM, TABLE_ROOM, "roomID=" + roomID));
+		Properties p = pl.get(0);
+		return makeRoom(p);
 	}
 	private Room makeRoom(Properties p) {
 		return null;
 	}
-	
+
+
 	public ArrayList<User> queryUsers() {
-		return null;
+		ArrayList<User> users = new ArrayList<User>();
+		ArrayList<Properties> pl = dbComm.query(String.format(SELECT_FROM, FIELDS_USER, TABLE_USER));
+		for (Properties p : pl) {
+			users.add(makeUser(p));
+		}
+		return users;
 	}
 	public User queryUser(String username) {
-		return null;
+		ArrayList<Properties> pl = dbComm.query(String.format(SELECT_FROM_WHERE, FIELDS_USER, TABLE_USER, "username=" + username));
+		Properties p = pl.get(0);
+		return makeUser(p);
 	}
 	private User makeUser(Properties p) {
 		return null;
 	}
-	
-	
-	
-	
+
+
+
+
+
 	public static void main(String[] args) {
 		DatabaseConnection dbConn = new DatabaseConnection("jdbc:mysql://localhost:3306/calendarDatabase", "root", "skip".toCharArray());
 		DatabaseCommunication dbComm = new DatabaseCommunication(dbConn);
