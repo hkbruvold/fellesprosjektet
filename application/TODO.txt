@@ -1,6 +1,7 @@
 TODO:
 
 __Unassigned__
+Add option for selecting room in NewEventWindow
 Server-client communication (sending/receiving objects)
 Make TODO list
 
@@ -9,5 +10,4 @@ Main/calendar window
 	Framework in place
 
 __Kjell__
-Add option for selecting room in NewEventWindow
 Database/application communication
