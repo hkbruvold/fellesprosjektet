@@ -29,10 +29,8 @@ public class Calendar implements Serializeable {
 	}
 	public void addEvent(Event event) {
 		events.add(event);
-		// TODO update database??
 	}
 	public void addEvents(ArrayList<Event> events) {
 		events.addAll(events);
-		// TODO update database??
 	}
 }

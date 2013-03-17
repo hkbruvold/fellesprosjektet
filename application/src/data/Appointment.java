@@ -22,7 +22,6 @@ public class Appointment extends Event implements Serializeable {
 	}
 	public void setOwner(User owner) {
 		this.owner = owner;
-		// TODO update database!
 	}
 	
 }

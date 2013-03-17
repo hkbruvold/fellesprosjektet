@@ -35,7 +35,6 @@ public class Group implements Serializeable {
 	}
 	public void setName(String name) {
 		this.name = name;
-		// TODO update database!
 	}
 	public String getDescription() {
 		return description;
@@ -48,7 +47,6 @@ public class Group implements Serializeable {
 	}
 	public void addMember(User newMember) {
 		members.add(newMember);
-		// TODO update database!
 	}
 	public void addMembers(List<User> users) {
 		members.addAll(users);

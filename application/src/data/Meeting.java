@@ -31,32 +31,25 @@ public class Meeting extends Event implements Serializeable {
 				id, description, startDateTime, endDateTime, location, leader.getUsername(), usersInvited, usersAccepted, usersDeclined);
 	}
 	
-	public void sendNotification() { // Unused?
-		// TODO (remember database)
-	}
 	public void inviteParticipant(User user) {
 		usersInvited.add(user);
 		usersAccepted.remove(user);
 		usersDeclined.remove(user);
-		// TODO (remember database)
 	}
 	public void removeParticipant(User user) {
 		usersInvited.remove(user);
 		usersAccepted.remove(user);
 		usersDeclined.remove(user);
-		// TODO (remember database)
 	}
 	public void acceptInvite(User user) {
 		usersInvited.remove(user);
 		usersAccepted.add(user);
 		usersDeclined.remove(user);
-		// TODO (remember database)
 	}
 	public void declineInvite(User user) {
 		usersInvited.remove(user);
 		usersAccepted.remove(user);
 		usersDeclined.add(user);
-		// TODO (remember database)
 	}
 	
 	public User getLeader() {
@@ -71,11 +64,5 @@ public class Meeting extends Event implements Serializeable {
 	public ArrayList<User> getUsersDeclined() {
 		return usersDeclined;
 	}
-//	@Override
-//	public String toString() {
-//		return "Meeting [leader=" + leader + ", usersInvited=" + usersInvited
-//				+ ", usersAccepted=" + usersAccepted + ", usersDeclined="
-//				+ usersDeclined + "]";
-//	}
 	
 }
