@@ -26,17 +26,16 @@ public class Client {
             } else {
             	System.out.println("not ready");
             }
-            
-            System.out.println("Client: Sending start");
-            out.write("Client says: Hello");
-            System.out.println("Client: Sending end\n");
-            
             while (input == null) {
                 input = in.readLine();
             }
             
             System.out.println(input);
             System.out.println("Client: Receiving end\n");
+
+            System.out.println("Client: Sending start");
+            out.write("Client says: Hello");
+            System.out.println("Client: Sending end\n");
             
         } catch (UnknownHostException e) {
             System.err.println("Could not find host");
