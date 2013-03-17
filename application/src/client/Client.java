@@ -2,28 +2,28 @@ package client;
 
 import java.io.*;
 import java.net.*;
- 
+
 public class Client {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
     	String hostadress = "127.0.0.1";
     	int port = 4444;
         Socket socket = null;
-        PrintWriter out = null;
-        BufferedReader in = null;
+        ObjectOutputStream out = null;
+        ObjectInputStream in = null;
  
         try {
             socket = new Socket(hostadress, port);
-            out = new PrintWriter(socket.getOutputStream(), true);
-            in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            out = new ObjectOutputStream(socket.getOutputStream());
+            in = new ObjectInputStream(socket.getInputStream());
             
-            String input = null;
+            Object input = null;
             while (input == null) {
-                input = in.readLine();
+                input = in.readObject();
             }
             
             System.out.println(input);
             
-            out.println("Client says: Hello");
+            out.writeObject(new String("Client says: Hello with object"));
             out.flush();
             
             System.out.println("Client: closing");

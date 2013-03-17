@@ -2,6 +2,8 @@ package server;
 
 import java.net.*;
 import java.io.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ServerThread extends Thread {
 	private Socket socket = null;
@@ -14,15 +16,15 @@ public class ServerThread extends Thread {
 	@Override
 	public void run() {
             try {
-                PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
-                BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+                ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
+                ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
 			
-                out.println("Server says: Hello");
+                out.writeObject(new String("Server says: Hello with object"));
                 out.flush();
                 
-                String input = null;
+                Object input = null;
                 while (input == null) {
-                    input = in.readLine();
+                    input = in.readObject();
                 }
                         
                 System.out.println(input);
@@ -32,6 +34,8 @@ public class ServerThread extends Thread {
                 in.close();
                 socket.close();
             } catch (IOException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             }
         }
