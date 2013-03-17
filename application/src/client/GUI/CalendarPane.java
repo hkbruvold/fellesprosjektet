@@ -143,7 +143,7 @@ public class CalendarPane extends JPanel {
 						dates = df.parse(year + " " + week + " " + (i % 8));
 					}
 					else {
-						dates = df.parse(year + " " + (week + 1) + " " + (i % 8));
+						dates = df.parse(year + " " + (week) + " " + (i % 8));
 					}
 				} catch (ParseException e) {
 					e.printStackTrace();
@@ -156,7 +156,7 @@ public class CalendarPane extends JPanel {
 		}
 
 		try {
-			dates = (new SimpleDateFormat("yyyy w u")).parse(year + " " + week + " " + 4);
+			dates = (new SimpleDateFormat("yyyy w u")).parse(year + " " + week + " " + 0);
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
