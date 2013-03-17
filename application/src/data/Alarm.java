@@ -1,10 +1,12 @@
 package data;
 
 public class Alarm implements Serializeable {
-	private int id; // TODO
-	private String date; // Should we use something other
-	private String time; // than String for these?
-	private String message; // TODO
+	private int id;
+	private String date;
+	private String time;
+	private String message;
+	private User owner;
+	private AbstractCalendarEvent event;
 	
 	public Alarm(){
 	}
@@ -51,6 +53,20 @@ public class Alarm implements Serializeable {
 	public void setMessage(String message) {
 		this.message = message;
 		// TODO update database!
+	}
+	public User getOwner() {
+		return owner;
+	}
+	public void setOwner(User owner) {
+		this.owner = owner;
+		// TODO update database?
+	}
+	public AbstractCalendarEvent getEvent() {
+		return event;
+	}
+	public void setEvent(AbstractCalendarEvent event) {
+		this.event = event;
+		// TODO update database?
 	}
 	
 }

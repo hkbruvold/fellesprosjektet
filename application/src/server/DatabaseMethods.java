@@ -6,16 +6,13 @@ import java.util.Properties;
 import data.*;
 
 public class DatabaseMethods {
-	private static final String FIELDS_ALARM = "alarmID, time";
-	private static final String FIELDS_ALARM_FOR_APPOINTMENT = "appointmentID, alarmID";
+	private static final String FIELDS_ALARM = "alarmID, time, message, username, appointmentID";
 	private static final String FIELDS_APPOINTMENT = "appointmentID, startDateTime, endDateTime, location, description";
 	private static final String FIELDS_GROUPS = "groupID, groupname, description";
 	private static final String FIELDS_IS_MEMBER_OF = "username, groupID";
-	private static final String FIELDS_IS_OWNER = "username, appointmentID";
 	private static final String FIELDS_IS_PARTICIPANT = "username, appointmentID, status";
 	private static final String FIELDS_NOTIFICATION = "notificationID, description, appointmentID";
 	private static final String FIELDS_NOTIFICATION_TO = "username, notificationID";
-	private static final String FIELDS_OWNED_BY_USER = "username, alarmID";
 	private static final String FIELDS_RESERVED_ROOM = "appointmentID, roomID";
 	private static final String FIELDS_ROOM = "roomID, size, description";
 	private static final String FIELDS_USER = "username, password, name, type";
@@ -40,11 +37,15 @@ public class DatabaseMethods {
 		Alarm alarm = new Alarm();
 		String id = p.getProperty("alarmID");
 		String dateTime = p.getProperty("time");
+		String message = p.getProperty("message");
+		String username = p.getProperty("username");
+		String appointmentID = p.getProperty("appointmentID");
 		
 		alarm.setID(Integer.parseInt(id));
 		alarm.setDate(dateTime.split(" ")[0]);
 		alarm.setTime(dateTime.split(" ")[1]);
-		alarm.setMessage("TODO! Not stored in database"); // TODO
+		alarm.setMessage(message);
+//		alarm.set
 		return alarm;
 	}
 	
