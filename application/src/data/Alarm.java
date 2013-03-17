@@ -36,37 +36,32 @@ public class Alarm implements Serializeable {
 	public String getDate() {
 		return date;
 	}
-	public void setDate(String date, boolean updateDatabase) {
+	public void setDate(String date) {
 		this.date = date;
-		// TODO update database?
 	}
 	public String getTime() {
 		return time;
 	}
-	public void setTime(String time, boolean updateDatabase) {
+	public void setTime(String time) {
 		this.time = time;
-		// TODO update database!
 	}
 	public String getMessage() {
 		return message;
 	}
-	public void setMessage(String message, boolean updateDatabase) {
+	public void setMessage(String message) {
 		this.message = message;
-		// TODO update database?
 	}
 	public User getOwner() {
 		return owner;
 	}
-	public void setOwner(User owner, boolean updateDatabase) {
+	public void setOwner(User owner) {
 		this.owner = owner;
-		// TODO update database?
 	}
 	public Event getEvent() {
 		return event;
 	}
-	public void setEvent(Event event, boolean updateDatabase) {
+	public void setEvent(Event event) {
 		this.event = event;
-		// TODO update database?
 	}
 	
 }
