@@ -17,6 +17,17 @@ public class DatabaseMethods {
 	private static final String FIELDS_ROOM = TableFields.ROOM.getFieldsString();
 	private static final String FIELDS_USER = TableFields.USER.getFieldsString();
 
+	private static final String TABLE_ALARM = TableFields.ALARM.getTableName();
+	private static final String TABLE_EVENT = TableFields.EVENT.getTableName();
+	private static final String TABLE_GROUPS = TableFields.GROUPS.getTableName();
+	private static final String TABLE_IS_MEMBER_OF = TableFields.IS_MEMBER_OF.getTableName();
+	private static final String TABLE_IS_PARTICIPANT = TableFields.IS_PARTICIPANT.getTableName();
+	private static final String TABLE_NOTIFICATION = TableFields.NOTIFICATION.getTableName();
+	private static final String TABLE_NOTIFICATION_TO = TableFields.NOTIFICATION_TO.getTableName();
+	private static final String TABLE_RESERVED_ROOM = TableFields.RESERVED_ROOM.getTableName();
+	private static final String TABLE_ROOM = TableFields.ROOM.getTableName();
+	private static final String TABLE_USER = TableFields.USER.getTableName();
+
 	private static final String SELECT_FROM = "SELECT %s FROM %s";
 	private static final String SELECT_FROM_WHERE = "SELECT %s FROM %s WHERE %s";
 	
@@ -28,14 +39,14 @@ public class DatabaseMethods {
 	
 	public ArrayList<Alarm> queryAlarms() {
 		ArrayList<Alarm> alarms = new ArrayList<Alarm>();
-		ArrayList<Properties> pl = dbComm.query(String.format(SELECT_FROM, FIELDS_ALARM, "alarm"));
+		ArrayList<Properties> pl = dbComm.query(String.format(SELECT_FROM, FIELDS_ALARM, TABLE_ALARM));
 		for (Properties p : pl) {
 			alarms.add(makeAlarm(p));
 		}
 		return alarms;
 	}
 	public Alarm queryAlarm(int alarmID) {
-		ArrayList<Properties> pl = dbComm.query(String.format(SELECT_FROM_WHERE, FIELDS_ALARM, "alarm", "alarmID=" + alarmID));
+		ArrayList<Properties> pl = dbComm.query(String.format(SELECT_FROM_WHERE, FIELDS_ALARM, TABLE_ALARM, "alarmID=" + alarmID));
 		Properties p = pl.get(0);
 		return makeAlarm(p);
 	}
@@ -48,39 +59,72 @@ public class DatabaseMethods {
 		String eventID = p.getProperty("eventID");
 		
 		alarm.setID(Integer.parseInt(id));
-		alarm.setDate(dateTime.split(" ")[0], false);
-		alarm.setTime(dateTime.split(" ")[1], false);
-		alarm.setMessage(message, false);
-		alarm.setOwner(queryUser(username), false);
-		alarm.setEvent(queryEvent(Integer.parseInt(eventID)), false);
+		alarm.setDate(dateTime.split(" ")[0]);
+		alarm.setTime(dateTime.split(" ")[1]);
+		alarm.setMessage(message);
+		alarm.setOwner(queryUser(username));
+		alarm.setEvent(queryEvent(Integer.parseInt(eventID)));
 		return alarm;
 	}
 	
 	public ArrayList<Event> queryEvents() {
-		return null;
+		ArrayList<Event> events = new ArrayList<Event>();
+		ArrayList<Properties> pl = dbComm.query(String.format(SELECT_FROM, FIELDS_EVENT, TABLE_EVENT));
+		for (Properties p : pl) {
+			events.add(makeEvent(p));
+		}
+		return events;
 	}
 	public Event queryEvent(int eventID) {
+		ArrayList<Properties> pl = dbComm.query(String.format(SELECT_FROM_WHERE, FIELDS_EVENT, TABLE_EVENT, "eventID=" + eventID));
+		Properties p = pl.get(0);
+		return makeEvent(p);
+	}
+	private Event makeEvent(Properties p) {
 		return null;
 	}
 	
 	public ArrayList<Group> queryGroups() {
-		return null;
+		ArrayList<Group> groups = new ArrayList<Group>();
+		ArrayList<Properties> pl = dbComm.query(String.format(SELECT_FROM, FIELDS_GROUPS, TABLE_GROUPS));
+		for (Properties p : pl) {
+			groups.add(makeGroup(p));
+		}
+		return groups;
 	}
 	public Group queryGroup(int groupID) {
+		ArrayList<Properties> pl = dbComm.query(String.format(SELECT_FROM_WHERE, FIELDS_GROUPS, TABLE_GROUPS, "groupID=" + groupID));
+		Properties p = pl.get(0);
+		return makeGroup(p);
+	}
+	private Group makeGroup(Properties p) {
 		return null;
 	}
 	
 	public ArrayList<Notification> queryNotifications() {
-		return null;
+		ArrayList<Notification> notifications = new ArrayList<Notification>();
+		ArrayList<Properties> pl = dbComm.query(String.format(SELECT_FROM, FIELDS_NOTIFICATION, TABLE_NOTIFICATION));
+		for (Properties p : pl) {
+			notifications.add(makeNotification(p));
+		}
+		return notifications;
 	}
-	public Group queryNotification(int notificationID) {
+	public Notification queryNotification(int notificationID) {
+		ArrayList<Properties> pl = dbComm.query(String.format(SELECT_FROM_WHERE, FIELDS_NOTIFICATION, TABLE_NOTIFICATION, "notificationID=" + notificationID));
+		Properties p = pl.get(0);
+		return makeNotification(p);
+	}
+	private Notification makeNotification(Properties p) {
 		return null;
 	}
 	
 	public ArrayList<Room> queryRooms() {
 		return null;
 	}
-	public Group queryRoom(int roomID) {
+	public Room queryRoom(int roomID) {
+		return null;
+	}
+	private Room makeRoom(Properties p) {
 		return null;
 	}
 	
@@ -88,6 +132,9 @@ public class DatabaseMethods {
 		return null;
 	}
 	public User queryUser(String username) {
+		return null;
+	}
+	private User makeUser(Properties p) {
 		return null;
 	}
 	
