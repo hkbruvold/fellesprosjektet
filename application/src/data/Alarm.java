@@ -6,7 +6,7 @@ public class Alarm implements Serializeable {
 	private String time;
 	private String message;
 	private User owner;
-	private AbstractCalendarEvent event;
+	private Event event;
 	
 	public Alarm(){
 	}
@@ -36,35 +36,35 @@ public class Alarm implements Serializeable {
 	public String getDate() {
 		return date;
 	}
-	public void setDate(String date) {
+	public void setDate(String date, boolean updateDatabase) {
 		this.date = date;
-		// TODO update database!
+		// TODO update database?
 	}
 	public String getTime() {
 		return time;
 	}
-	public void setTime(String time) {
+	public void setTime(String time, boolean updateDatabase) {
 		this.time = time;
 		// TODO update database!
 	}
 	public String getMessage() {
 		return message;
 	}
-	public void setMessage(String message) {
+	public void setMessage(String message, boolean updateDatabase) {
 		this.message = message;
-		// TODO update database!
+		// TODO update database?
 	}
 	public User getOwner() {
 		return owner;
 	}
-	public void setOwner(User owner) {
+	public void setOwner(User owner, boolean updateDatabase) {
 		this.owner = owner;
 		// TODO update database?
 	}
-	public AbstractCalendarEvent getEvent() {
+	public Event getEvent() {
 		return event;
 	}
-	public void setEvent(AbstractCalendarEvent event) {
+	public void setEvent(Event event, boolean updateDatabase) {
 		this.event = event;
 		// TODO update database?
 	}

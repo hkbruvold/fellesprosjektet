@@ -1,6 +1,6 @@
 package data;
 
-public class Appointment extends AbstractCalendarEvent implements Serializeable {
+public class Appointment extends Event implements Serializeable {
 	private User owner;
 	
 	public Appointment(){

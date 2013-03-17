@@ -5,7 +5,7 @@ import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Root;
 
 @Root
-public abstract class AbstractCalendarEvent implements Serializeable {
+public abstract class Event implements Serializeable {
 	@Element
 	protected int id;
 	@Element
@@ -21,12 +21,12 @@ public abstract class AbstractCalendarEvent implements Serializeable {
 	@Element(required=false)
 	protected Alarm alarm;
 	
-	public AbstractCalendarEvent(){
+	public Event(){
 	}
 	/**
 	 * Use id = -1 when creating new objects. Actual ID should come from database
 	 */
-	public AbstractCalendarEvent(int id, Calendar calendar, String startDateTime, String endDateTime, String description, String location, Alarm alarm) {
+	public Event(int id, Calendar calendar, String startDateTime, String endDateTime, String description, String location, Alarm alarm) {
 		this.id = id;
 		this.calendar = calendar;
 		this.startDateTime = startDateTime;

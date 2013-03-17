@@ -13,7 +13,7 @@ import javax.swing.*;
 import temp.TestObjects;
 
 
-import data.AbstractCalendarEvent;
+import data.Event;
 import data.Alarm;
 import data.Appointment;
 import data.Calendar;
@@ -59,7 +59,7 @@ public class NewEventWindow extends JPanel implements ActionListener, ItemListen
 	private JButton locationButton, deleteButton, closeButton, saveButton;
 	private GridBagConstraints c;
 
-	private AbstractCalendarEvent calendarEvent;
+	private Event calendarEvent;
 	private Calendar calendar;
 	private User user;
 	private User[] userArray;
@@ -78,7 +78,7 @@ public class NewEventWindow extends JPanel implements ActionListener, ItemListen
 		frame.setVisible(true);
 	}
 	
-	public NewEventWindow(AbstractCalendarEvent event, User[] userArray) {
+	public NewEventWindow(Event event, User[] userArray) {
 		this.calendarEvent = event;
 		this.calendar = event.getCalendar();
 		this.userArray = userArray;
@@ -250,7 +250,7 @@ public class NewEventWindow extends JPanel implements ActionListener, ItemListen
 				locationButton.setText(BUTTON_LOCATION_SET_ROOM);
 			}
 		} else if (e.getSource().equals(saveButton)) {
-			AbstractCalendarEvent calendarEvent;
+			Event calendarEvent;
 			String startDateTime = fromDateField.getText() + " " + fromTimeField.getText();
 			String endDateTime = toDateField.getText() + " " + toTimeField.getText();
 			String description = descriptionField.getText();
