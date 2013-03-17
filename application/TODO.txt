@@ -6,4 +6,5 @@ Main/calendar window
 Make TODO list
 
 __Kjell__
-Fix database/application conflicts
+Add option for selecting room in NewEventWindow
+Database/application communication
