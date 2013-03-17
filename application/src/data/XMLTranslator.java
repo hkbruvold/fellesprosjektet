@@ -40,42 +40,42 @@ public class XMLTranslator {
 		try {
 			object = serializer.read(Alarm.class, source);
 		} catch (Exception e) {
-			e.printStackTrace();
+//			e.printStackTrace();
 		}
 		try {
 			object = serializer.read(Appointment.class, source);
 		} catch (Exception e) {
-			e.printStackTrace();
+//			e.printStackTrace();
 		}
 		try {
 			object = serializer.read(Calendar.class, source);
 		} catch (Exception e) {
-			e.printStackTrace();
+//			e.printStackTrace();
 		}
 		try {
 			object = serializer.read(Group.class, source);
 		} catch (Exception e) {
-			e.printStackTrace();
+//			e.printStackTrace();
 		}
 		try {
 			object = serializer.read(Meeting.class, source);
 		} catch (Exception e) {
-			e.printStackTrace();
+//			e.printStackTrace();
 		}
 		try {
 			object = serializer.read(Notification.class, source);
 		} catch (Exception e) {
-			e.printStackTrace();
+//			e.printStackTrace();
 		}
 		try {
 			object = serializer.read(User.class, source);
 		} catch (Exception e) {
-			e.printStackTrace();
+//			e.printStackTrace();
 		}
 		try {
 			object = serializer.read(Authentication.class, source);
 		} catch (Exception e) {
-			e.printStackTrace();
+//			e.printStackTrace();
 		}
 		return object;
 
