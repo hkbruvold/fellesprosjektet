@@ -16,18 +16,19 @@ CREATE TABLE groups (
     PRIMARY KEY (groupID)
 );
 
-CREATE TABLE appointment (
-    appointmentID INT NOT NULL AUTO_INCREMENT,
+CREATE TABLE event (
+    eventID INT NOT NULL AUTO_INCREMENT,
     startDateTime DATETIME NOT NULL,
     endDateTime DATETIME NOT NULL,
     location VARCHAR(32),
     description TINYTEXT,
     owner VARCHAR(32) NOT NULL,
+    isMeeting BIT(1) NOT NULL,
     FOREIGN KEY (owner) 
         REFERENCES user(username)
         ON UPDATE CASCADE
         ON DELETE CASCADE,
-    PRIMARY KEY (appointmentID)
+    PRIMARY KEY (eventID)
 );
 
 CREATE TABLE room (
@@ -42,13 +43,13 @@ CREATE TABLE alarm (
     time DATETIME NOT NULL,
     message TINYTEXT,
     username VARCHAR(32) NOT NULL,
-    appointmentID INT NOT NULL,
+    eventID INT NOT NULL,
     FOREIGN KEY (username) 
         REFERENCES user(username)
         ON UPDATE CASCADE
         ON DELETE CASCADE,
-    FOREIGN KEY (appointmentID)
-        REFERENCES appointment(appointmentID)
+    FOREIGN KEY (eventID)
+        REFERENCES event(eventID)
         ON UPDATE CASCADE
         ON DELETE CASCADE,
     PRIMARY KEY (alarmID)
@@ -57,9 +58,9 @@ CREATE TABLE alarm (
 CREATE TABLE notification (
     notificationID INT NOT NULL AUTO_INCREMENT,
     description TINYTEXT,
-    appointmentID INT,
-    FOREIGN KEY (appointmentID) 
-        REFERENCES appointment(appointmentID) 
+    eventID INT,
+    FOREIGN KEY (eventID) 
+        REFERENCES event(eventID) 
         ON UPDATE CASCADE 
         ON DELETE SET NULL,
     PRIMARY KEY (notificationID)
@@ -94,31 +95,31 @@ CREATE TABLE notificationTo (
 );
 
 CREATE TABLE reservedRoom (
-    appointmentID INT NOT NULL,
+    eventID INT NOT NULL,
     roomID INT NOT NULL,
-    FOREIGN KEY (appointmentID)
-        REFERENCES appointment(appointmentID)
+    FOREIGN KEY (eventID)
+        REFERENCES event(eventID)
         ON UPDATE CASCADE
         ON DELETE CASCADE,
     FOREIGN KEY (roomID)
         REFERENCES room(roomID)
         ON UPDATE CASCADE
         ON DELETE CASCADE,
-    PRIMARY KEY (appointmentID, roomID)
+    PRIMARY KEY (eventID, roomID)
 );
 
 CREATE TABLE isParticipant (
     username VARCHAR(32) NOT NULL,
-    appointmentID INT NOT NULL,
+    eventID INT NOT NULL,
     status INT NOT NULL,
     FOREIGN KEY (username)
         REFERENCES user(username)
         ON UPDATE CASCADE
         ON DELETE CASCADE,
-    FOREIGN KEY (appointmentID)
-        REFERENCES appointment(appointmentID)
+    FOREIGN KEY (eventID)
+        REFERENCES event(eventID)
         ON UPDATE CASCADE
         ON DELETE CASCADE,
-    PRIMARY KEY (username, appointmentID)
+    PRIMARY KEY (username, eventID)
 );
 
