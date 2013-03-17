@@ -34,14 +34,14 @@ public class TestObjects {
 		return new Alarm(DATE_0, TIME_0);
 	}
 	public static Alarm getAlarm01() {
-		return new Alarm(DATE_1, TIME_1, DESCRIPTION);
+		return new Alarm(-1, DATE_1, TIME_1, DESCRIPTION);
 	}
 	
 	public static Appointment getAppointment00() {
-		return new Appointment(getCalendar00(), DATE_TIME_0, DATE_TIME_1, DESCRIPTION, LOCATION, getAlarm00(), getUser00());
+		return new Appointment(-1, getCalendar00(), DATE_TIME_0, DATE_TIME_1, DESCRIPTION, LOCATION, getAlarm00(), getUser00());
 	}
 	public static Appointment getAppointment01() {
-		return new Appointment(getCalendar01(), DATE_TIME_0, DATE_TIME_1, DESCRIPTION, LOCATION, getAlarm01(), getUser01());
+		return new Appointment(-1, getCalendar01(), DATE_TIME_0, DATE_TIME_1, DESCRIPTION, LOCATION, getAlarm01(), getUser01());
 	}
 	
 	public static Calendar getCalendar00() {
@@ -52,18 +52,18 @@ public class TestObjects {
 	}
 	
 	public static Group getGroup00() {
-		Group group = new Group("Group00");
+		Group group = new Group(-1, "Group00", "");
 		group.addMember(getUser00());
 		return group;
 	}
 	public static Group getGroup01() {
-		Group group = new Group("Group01");
+		Group group = new Group(-1, "Group01", "");
 		group.addMember(getUser01());
 		group.addMember(getUser02());
 		return group;
 	}
 	public static Group getGroup02() {
-		Group group = new Group("Group02");
+		Group group = new Group(-1, "Group02", "All test-users");
 		group.addMembers(Arrays.asList(new User[]{getUser00(), getUser01(), getUser02()}));
 		return group;
 	}
@@ -76,23 +76,23 @@ public class TestObjects {
 	}
 	
 	public static Meeting getMeeting00() {
-		Meeting meeting = new Meeting(getCalendar00(), DATE_TIME_0, DATE_TIME_1, DESCRIPTION, LOCATION, getAlarm00(), getUser00());
+		Meeting meeting = new Meeting(-1, getCalendar00(), DATE_TIME_0, DATE_TIME_1, DESCRIPTION, LOCATION, getAlarm00(), getUser00());
 		meeting.acceptInvite(getUser01());
 		meeting.declineInvite(getUser02());
 		return meeting;
 	}
 	public static Meeting getMeeting01() {
-		Meeting meeting = new Meeting(getCalendar01(), DATE_TIME_0, DATE_TIME_1, DESCRIPTION, LOCATION, getAlarm01(), getUser01());
+		Meeting meeting = new Meeting(-1, getCalendar01(), DATE_TIME_0, DATE_TIME_1, DESCRIPTION, LOCATION, getAlarm01(), getUser01());
 		meeting.inviteParticipant(getUser00());
 		meeting.inviteParticipant(getUser02());
 		return meeting;
 	}
 	
 	public static Notification getNotification00() {
-		return new Notification(DESCRIPTION);
+		return new Notification(-1, DESCRIPTION);
 	}
 	public static Notification getNotification01() {
-		return new Notification(DESCRIPTION + "\n" + LOCATION);
+		return new Notification(-1, DESCRIPTION + "\n" + LOCATION);
 	}
 	
 	public static User getUser00() {
