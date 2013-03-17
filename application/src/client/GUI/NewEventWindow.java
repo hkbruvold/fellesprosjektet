@@ -164,6 +164,7 @@ public class NewEventWindow extends JPanel implements ActionListener, ItemListen
 		participantsList = new JList<User>(userArray);
 		participantsList.setBackground(Color.WHITE);
 		participantsList.setEnabled(false);
+		participantsList.setCellRenderer(new UserRenderer());
 		
 		deleteButton = new JButton(BUTTON_DELETE);
 		closeButton = new JButton(BUTTON_CLOSE);
