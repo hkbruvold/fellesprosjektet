@@ -17,7 +17,7 @@ public class Calendar implements Serializeable {
 	// TODO
 	
 	public String toString() {
-		return String.format("Calendar name: %s, User: %s, Number of events: %s", name, owner.getUsername(), events.size());
+		return String.format("Calendar; Name: %s, User: %s, Number of events: %s", name, owner.getUsername(), events.size());
 	}
 	
 	public String getName() {

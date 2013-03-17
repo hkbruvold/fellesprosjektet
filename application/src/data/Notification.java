@@ -15,7 +15,7 @@ public class Notification implements Serializeable {
 	// TODO
 	
 	public String toString() {
-		return String.format("ID: %s, Message: %s", id, message);
+		return String.format("Notification; ID: %s, Message: %s", id, message);
 	}
 	
 	public String getMessage() {

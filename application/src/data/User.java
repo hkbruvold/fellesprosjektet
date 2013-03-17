@@ -16,7 +16,7 @@ public class User implements Serializeable {
 	// TODO
 	
 	public String toString() {
-		return String.format("Username: %s, Name: %s, Type: %s", username, name, type);
+		return String.format("User; Username: %s, Name: %s, Type: %s", username, name, type);
 	}
 	
 	public String getUsername() {

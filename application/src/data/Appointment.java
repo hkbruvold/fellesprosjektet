@@ -14,7 +14,7 @@ public class Appointment extends AbstractCalendarEvent implements Serializeable 
 	// TODO
 	
 	public String toString() {
-		return String.format("ID: %s, Description: %s, Start: %s, End: %s, Location: %s, Owner: %s", id, description, startDateTime, endDateTime, location, owner.getUsername());
+		return String.format("Appointment; ID: %s, Description: %s, Start: %s, End: %s, Location: %s, Owner: %s", id, description, startDateTime, endDateTime, location, owner.getUsername());
 	}
 	
 	public User getOwner() {

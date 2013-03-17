@@ -19,7 +19,7 @@ public class Group implements Serializeable {
 	// TODO
 	
 	public String tosString() {
-		return String.format("ID: %s, Group name: %s, Description: %s, Number of members: %s", id, name, description, members.size());
+		return String.format("Group; ID: %s, Group name: %s, Description: %s, Number of members: %s", id, name, description, members.size());
 	}
 	
 	public String getName() {

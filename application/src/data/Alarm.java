@@ -21,7 +21,7 @@ public class Alarm implements Serializeable {
 	// TODO
 	
 	public String toString() {
-		return String.format("ID: %s, Date: %s, Time: %s, Message: %s", id, date, time, message);
+		return String.format("Alarm; ID: %s, Date: %s, Time: %s, Message: %s", id, date, time, message);
 	}
 	
 	public String getDate() {
