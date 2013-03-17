@@ -82,7 +82,7 @@ public class DatabaseMethods {
 		return makeEvent(p);
 	}
 	private Event makeEvent(Properties p) {
-		return null;
+		return null; // remember to add participants!
 	}
 
 
@@ -100,7 +100,7 @@ public class DatabaseMethods {
 		return makeGroup(p);
 	}
 	private Group makeGroup(Properties p) {
-		return null;
+		return null; // remember to add users to the group!
 	}
 
 
@@ -183,7 +183,10 @@ public class DatabaseMethods {
 		return user;
 	}
 
-
+	// TODO notification_to
+	// TODO reserved_room
+	
+	// TODO consider: is_member_of & is_participant
 
 
 
