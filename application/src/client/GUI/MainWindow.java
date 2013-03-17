@@ -66,7 +66,7 @@ public class MainWindow extends JFrame {
 		final JComboBox weekNumberBox = new JComboBox();
 		weekNumberBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				calendarPane.setWeek(weekNumberBox.getSelectedIndex());
+				calendarPane.setWeek(weekNumberBox.getSelectedIndex()+1);
 				calendarPane.updateDates();
 			}
 		});
@@ -88,7 +88,7 @@ public class MainWindow extends JFrame {
 		final JComboBox yearNumberBox = new JComboBox();
 		yearNumberBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				calendarPane.setYear(yearNumberBox.getSelectedIndex());
+				calendarPane.setYear(yearNumberBox.getSelectedIndex()+2013);
 				calendarPane.updateDates();
 			}
 		});
