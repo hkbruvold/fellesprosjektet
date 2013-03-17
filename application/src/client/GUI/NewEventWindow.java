@@ -164,6 +164,7 @@ public class NewEventWindow extends JPanel implements ActionListener, ItemListen
 		participantsList = new JList<User>(userArray);
 		participantsList.setBackground(Color.WHITE);
 		participantsList.setEnabled(false);
+		participantsList.setCellRenderer(new UserRenderer());
 		
 		deleteButton = new JButton(BUTTON_DELETE);
 		closeButton = new JButton(BUTTON_CLOSE);
@@ -241,15 +242,15 @@ public class NewEventWindow extends JPanel implements ActionListener, ItemListen
 			String location = locationField.getText();
 			Alarm alarm = null;
 			if(alarmCheckBox.isSelected()){
-				alarm = new Alarm(fromDateField.getText(), alarmTimeBeforeField.getText(), "");
+				alarm = new Alarm(-1, fromDateField.getText(), alarmTimeBeforeField.getText(), "");
 			}
 			if (meetingCheckBox.isSelected()) {
-				calendarEvent = new Meeting(calendar, startDateTime, endDateTime, description, location, alarm, user);
+				calendarEvent = new Meeting(-1, calendar, startDateTime, endDateTime, description, location, alarm, user);
 				for (User participant : participantsList.getSelectedValuesList()) {
 					((Meeting)calendarEvent).inviteParticipant(participant);
 				}
 			} else {
-				calendarEvent = new Appointment(calendar, startDateTime, endDateTime, description, location, alarm, user);
+				calendarEvent = new Appointment(-1, calendar, startDateTime, endDateTime, description, location, alarm, user);
 			}
 			// TODO save new event, set the message string for alarm
 			XMLTranslator.toXML(calendarEvent);

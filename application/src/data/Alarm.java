@@ -8,22 +8,29 @@ public class Alarm implements Serializeable {
 	
 	public Alarm(){
 	}
-	public Alarm(String date, String time, String message) {
+	/**
+	 * Use id = -1 when creating new objects. Actual ID should come from database
+	 */
+	public Alarm(int id, String date, String time, String message) {
+		this.id = id;
 		this.date = date;
 		this.time = time;
 		this.message = message;
-		// TODO write to database???
 	}
 	public Alarm(String date, String time) {
-		this(date, time, null);
+		this(-1, date, time, null);
 	}
 
-	// TODO
-	
 	public String toString() {
 		return String.format("Alarm; ID: %s, Date: %s, Time: %s, Message: %s", id, date, time, message);
 	}
 	
+	public int getID() {
+		return id;
+	}
+	public void setID(int id) {
+		this.id = id;
+	}
 	public String getDate() {
 		return date;
 	}
@@ -44,12 +51,6 @@ public class Alarm implements Serializeable {
 	public void setMessage(String message) {
 		this.message = message;
 		// TODO update database!
-	}
-	public int getID() {
-		return id;
-	}
-	public void setID(int id) {
-		this.id = id;
 	}
 	
 }
