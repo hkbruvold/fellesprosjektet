@@ -21,35 +21,49 @@ public enum TableFields {
 	}),
 	GROUPS ("groups",
 			new String[] {
-			
+			"groupID",
+			"groupname",
+			"description"
 	}),
 	NOTIFICATION("notification",
 			new String[] {
-			
+			"notificationID",
+			"description",
+			"eventID"
 	}),
 	ROOM("room",
 			new String[] {
-			
+			"roomID",
+			"size",
+			"description"
 	}),
 	USER("user",
 			new String[] {
-			
+			"username",
+			"password",
+			"name",
+			"type"
 	}),
 	IS_MEMBER_OF("isMemberOf",
 			new String[] {
-			
+			"username",
+			"groupID"
 	}),
 	IS_PARTICIPANT("isParticipant",
 			new String[] {
-			
+			"username",
+			"eventID",
+			"status"
 	}),
 	NOTIFICATION_TO("notificationTo",
 			new String[] {
-			
+			"username",
+			"notification"
 	}),
 	RESERVED_ROOM("reservedRoom",
 			new String[] {
-			
+			"eventID",
+			"roomID"
 	});
 	
 	
