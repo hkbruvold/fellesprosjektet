@@ -42,14 +42,14 @@ INSERT appointment
     SET startDateTime='2013-03-12 12:30',
         endDateTime='2013-03-12 13:00',
         location='Trondheim',
-        description='test1234'
+        description='test1234',
         owner='ola.nordmann';
 
 INSERT appointment
     SET startDateTime='2013-03-14 15:00',
         endDateTime='2013-03-12 16:20',
         location='NTNU',
-        description='testing'
+        description='testing',
         owner='kari.nordmann';
 
 INSERT isParticipant
@@ -65,8 +65,8 @@ DELETE FROM appointment
     WHERE appointmentID=1;
 
 INSERT alarm
-    SET time='2013-03-15 16:00'
-        username='olanor'
+    SET time='2013-03-15 16:00',
+        username='olanor',
         appointmentID=2;
 
 UPDATE user
