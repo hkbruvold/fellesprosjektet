@@ -96,7 +96,7 @@ public class ProgramHub extends JPanel implements ActionListener {
 		} else if (e.getSource().equals(loginButton)) {
 			new LoginWindow();
 		} else if (e.getSource().equals(meetingInvitationButton)) {
-			new MeetingInvitationWindow(TestObjects.getMeeting00());
+			new MeetingInvitationWindow(TestObjects.getMeeting00(),TestObjects.getUser01());
 		} else if (e.getSource().equals(newEventButton)) {
 			new NewEventWindow(TestObjects.getCalendar00(), TestObjects.getUser00(), TestObjects.getUserArray01());
 		} else if (e.getSource().equals(notificationButton)) {
