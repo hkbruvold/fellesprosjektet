@@ -17,9 +17,6 @@ public class ServerThread extends Thread {
 			PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
 			BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 			
-//			System.out.println("Server: handshake start");
-//			System.out.println("Server: handshake end\n");
-			
 			System.out.println("Server: Sending start");
 			System.out.println("Server: Sending end\n");
 
