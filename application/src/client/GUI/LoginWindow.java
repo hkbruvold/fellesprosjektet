@@ -7,6 +7,8 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 import javax.xml.XMLConstants;
 
+import client.ServerCommunication;
+
 import data.Authentication;
 import data.XMLTranslator;
 
@@ -91,7 +93,7 @@ public class LoginWindow extends JPanel implements ActionListener {
 		} else if (e.getSource().equals(closeButton)) {
 			frame.dispose();
 		} else if (e.getSource().equals(logInButton)) {
-			XMLTranslator.toXML(new Authentication(usernameField.getText(), passwordField.getText(), "LOGIN"));
+			ServerCommunication.login(usernameField.getText(),passwordField.getText());
 			frame.dispose(); // Close if successful; show error message if not?
 		}
 	}

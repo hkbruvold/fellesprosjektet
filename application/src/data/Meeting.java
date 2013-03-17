@@ -70,5 +70,11 @@ public class Meeting extends AbstractCalendarEvent implements Serializeable {
 	public ArrayList<User> getUsersDeclined() {
 		return usersDeclined;
 	}
+	@Override
+	public String toString() {
+		return "Meeting [leader=" + leader + ", usersInvited=" + usersInvited
+				+ ", usersAccepted=" + usersAccepted + ", usersDeclined="
+				+ usersDeclined + "]";
+	}
 	
 }

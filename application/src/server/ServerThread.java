@@ -21,7 +21,6 @@ public class ServerThread extends Thread {
 //			System.out.println("Server: handshake end\n");
 			
 			System.out.println("Server: Sending start");
-			out.write("Server says: Hello");
 			System.out.println("Server: Sending end\n");
 
 			System.out.println("Server: Receiving start");
@@ -35,8 +34,8 @@ public class ServerThread extends Thread {
 				System.out.println(input);
 				input = in.readLine();
 			}
+			out.write("Server says: Hello");
 			System.out.println("Server: Receiving end\n");
-
 			System.out.println("Server: closing (thread)");
 			out.close();
 			in.close();

@@ -10,6 +10,7 @@ import temp.TestObjects;
 
 import client.*;
 import data.Meeting;
+import data.User;
 
 @SuppressWarnings("serial")
 public class MeetingInvitationWindow extends JPanel implements ActionListener {
@@ -29,15 +30,16 @@ public class MeetingInvitationWindow extends JPanel implements ActionListener {
 	private static final int LINE_END = GridBagConstraints.LINE_END;
 
 	private Meeting meeting;
+	private User user;
 	private JFrame frame;
 	private JLabel descriptionLabel, startTimeLabel, endTimeLabel, locationLabel, leaderLabel;
 	private JTextField descriptionField, startTimeField, endTimeField, locationField, leaderField;
 	private JButton closeButton, declineButton, acceptButton;
 	private GridBagConstraints c;
 	
-	public MeetingInvitationWindow(Meeting meeting) {
+	public MeetingInvitationWindow(Meeting meeting, User user) {
 		this.meeting = meeting;
-		
+		this.user = user;
 		initFrame();
 		initPanel();
 		
@@ -120,15 +122,17 @@ public class MeetingInvitationWindow extends JPanel implements ActionListener {
 		} else if (e.getSource().equals(declineButton)) {
 			// TODO Set user based on the user of the program
 			meeting.declineInvite(user);
+			System.out.println(meeting.toString());
 			frame.dispose();
 		} else if (e.getSource().equals(acceptButton)) {
 			meeting.acceptInvite(user);
+			System.out.println(meeting.toString());
 			frame.dispose();
 		}
 	}
 
 	public static void main(String[] args) {
-		new MeetingInvitationWindow(TestObjects.getMeeting00());
+		new MeetingInvitationWindow(TestObjects.getMeeting00(),TestObjects.getUser00());
 	}
 	
 }

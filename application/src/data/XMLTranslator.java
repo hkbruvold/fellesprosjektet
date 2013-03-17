@@ -1,6 +1,8 @@
 package data;
 
 import java.io.File;
+import java.io.OutputStream;
+
 import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.core.Persister;
 
@@ -17,6 +19,18 @@ public class XMLTranslator {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public static OutputStream toXMLStream(Serializeable object){
+		Serializer serializer = new Persister();
+		OutputStream ostream = null;
+		try {
+			serializer.write(object, ostream);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return ostream;
 	}
 
 	public static Serializeable toModel() {

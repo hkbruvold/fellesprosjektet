@@ -26,10 +26,11 @@ public class Client {
             } else {
             	System.out.println("not ready");
             }
-            while (input != null) {
-            	System.out.println(input);
-            	input = in.readLine();
+            while (input == null) {
+                input = in.readLine();
             }
+            
+            System.out.println(input);
             System.out.println("Client: Receiving end\n");
 
             System.out.println("Client: Sending start");

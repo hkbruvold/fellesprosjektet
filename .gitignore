@@ -5,3 +5,5 @@ bin
 *\Thumbs.db
 *\example.xml
 
+/application/nbproject/private/
+/application/build/

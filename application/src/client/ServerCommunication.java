@@ -2,6 +2,9 @@ package client;
 
 import java.net.URL;
 
+import data.Authentication;
+import data.XMLTranslator;
+
 public class ServerCommunication {
 	private URL serverURL;
 	
@@ -12,7 +15,8 @@ public class ServerCommunication {
 	// TODO
 	
 	public void login (String username, String password ) {
-		// TODO
+		Authentication auth = new Authentication(username, password, "LOGIN");
+		data.XMLTranslator.toXMLStream(auth);
 	}
 	public void /*status*/ logOut (/* TODO */) {
 		// TODO
