@@ -11,7 +11,12 @@ public class Group implements Serializeable {
 	
 	public Group(){
 	}
-	public Group(String name) {
+	/**
+	 * @param id
+	 * Use -1 when creating new objects! Database should set actual id
+	 * @param name
+	 */
+	public Group(int id, String name) {
 		this.name = name;
 		members = new ArrayList<User>();
 	}
@@ -21,7 +26,10 @@ public class Group implements Serializeable {
 	public String tosString() {
 		return String.format("Group; ID: %s, Group name: %s, Description: %s, Number of members: %s", id, name, description, members.size());
 	}
-	
+
+	public int getId() {
+		return id;
+	}
 	public String getName() {
 		return name;
 	}
@@ -36,7 +44,6 @@ public class Group implements Serializeable {
 		members.add(newMember);
 		// TODO update database!
 	}
-
 	public void addMembers(List<User> users) {
 		members.addAll(users);
 	}
