@@ -1,0 +1,9 @@
+TODO:
+
+__Unassigned__
+Server-client communication
+Main/calendar window
+Make TODO list
+
+__Kjell__
+Fix database/application conflicts
