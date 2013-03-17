@@ -18,25 +18,21 @@ public class Client {
             
 //            System.out.println("Client: handshake start");
 //            System.out.println("Client: handshake end\n");
-
-            System.out.println("Client: Receiving start");
+            
             String input = null;
-            if (in.ready()) {
-            	input = in.readLine();
-            } else {
-            	System.out.println("not ready");
-            }
             while (input == null) {
                 input = in.readLine();
             }
             
             System.out.println(input);
-            System.out.println("Client: Receiving end\n");
-
-            System.out.println("Client: Sending start");
-            out.write("Client says: Hello");
-            System.out.println("Client: Sending end\n");
             
+            out.println("Client says: Hello");
+            out.flush();
+            
+            System.out.println("Client: closing");
+            out.close();
+            in.close();
+            socket.close();
         } catch (UnknownHostException e) {
             System.err.println("Could not find host");
             System.exit(1);
@@ -44,13 +40,6 @@ public class Client {
             System.err.println("Could not get IO for host");
             System.exit(1);
         }
- 
- 
-        System.out.println("Client: closing");
-        
-        out.close();
-        in.close();
-        socket.close();
     }
 
 }
