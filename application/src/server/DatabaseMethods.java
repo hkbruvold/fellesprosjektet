@@ -6,16 +6,16 @@ import java.util.Properties;
 import data.*;
 
 public class DatabaseMethods {
-	private static final String FIELDS_ALARM = "alarmID, time, message, username, eventID";
-	private static final String FIELDS_EVENT = "eventID, startDateTime, endDateTime, location, description";
-	private static final String FIELDS_GROUPS = "groupID, groupname, description";
-	private static final String FIELDS_IS_MEMBER_OF = "username, groupID";
-	private static final String FIELDS_IS_PARTICIPANT = "username, eventID, status";
-	private static final String FIELDS_NOTIFICATION = "notificationID, description, eventID";
-	private static final String FIELDS_NOTIFICATION_TO = "username, notificationID";
-	private static final String FIELDS_RESERVED_ROOM = "eventID, roomID";
-	private static final String FIELDS_ROOM = "roomID, size, description";
-	private static final String FIELDS_USER = "username, password, name, type";
+	private static final String FIELDS_ALARM = TableFields.ALARM.getFieldsString();
+	private static final String FIELDS_EVENT = TableFields.EVENT.getFieldsString();
+	private static final String FIELDS_GROUPS = TableFields.GROUPS.getFieldsString();
+	private static final String FIELDS_IS_MEMBER_OF = TableFields.IS_MEMBER_OF.getFieldsString();
+	private static final String FIELDS_IS_PARTICIPANT = TableFields.IS_PARTICIPANT.getFieldsString();
+	private static final String FIELDS_NOTIFICATION = TableFields.NOTIFICATION.getFieldsString();
+	private static final String FIELDS_NOTIFICATION_TO = TableFields.NOTIFICATION_TO.getFieldsString();
+	private static final String FIELDS_RESERVED_ROOM = TableFields.RESERVED_ROOM.getFieldsString();
+	private static final String FIELDS_ROOM = TableFields.ROOM.getFieldsString();
+	private static final String FIELDS_USER = TableFields.USER.getFieldsString();
 
 	private static final String SELECT_FROM = "SELECT %s FROM %s";
 	private static final String SELECT_FROM_WHERE = "SELECT %s FROM %s WHERE %s";
@@ -45,14 +45,14 @@ public class DatabaseMethods {
 		String dateTime = p.getProperty("time");
 		String message = p.getProperty("message");
 		String username = p.getProperty("username");
-		String appointmentID = p.getProperty("eventID");
+		String eventID = p.getProperty("eventID");
 		
 		alarm.setID(Integer.parseInt(id));
 		alarm.setDate(dateTime.split(" ")[0], false);
 		alarm.setTime(dateTime.split(" ")[1], false);
 		alarm.setMessage(message, false);
 		alarm.setOwner(queryUser(username), false);
-		alarm.setEvent(queryEvent(Integer.parseInt(appointmentID)), false);
+		alarm.setEvent(queryEvent(Integer.parseInt(eventID)), false);
 		return alarm;
 	}
 	
