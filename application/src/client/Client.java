@@ -16,9 +16,6 @@ public class Client {
             out = new PrintWriter(socket.getOutputStream(), true);
             in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             
-//            System.out.println("Client: handshake start");
-//            System.out.println("Client: handshake end\n");
-            
             String input = null;
             while (input == null) {
                 input = in.readLine();

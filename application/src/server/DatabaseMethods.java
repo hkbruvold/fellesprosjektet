@@ -25,24 +25,31 @@ public class DatabaseMethods {
 	
 	public static ArrayList<Alarm> queryAlarm(DatabaseCommunication dbComm) {
 		ArrayList<Alarm> alarms = new ArrayList<Alarm>();
-		
+		ArrayList<Properties> pl = dbComm.query(String.format(SELECT_FROM, FIELDS_ALARM, "alarm"));
+		for (Properties p : pl) {
+			alarms.add(makeAlarm(p));
+		}
 		return alarms;
 	}
 	public static Alarm queryAlarm(DatabaseCommunication dbComm, int alarmID) {
-		Alarm alarm = new Alarm();
 		ArrayList<Properties> pl = dbComm.query(String.format(SELECT_FROM_WHERE, FIELDS_ALARM, "alarm", "alarmID=" + alarmID));
 		Properties p = pl.get(0);
-		
+		return makeAlarm(p);
+	}
+	private static Alarm makeAlarm(Properties p) {
+		Alarm alarm = new Alarm();
 		String id = p.getProperty("alarmID");
 		String dateTime = p.getProperty("time");
 		
 		alarm.setID(Integer.parseInt(id));
 		alarm.setDate(dateTime.split(" ")[0]);
-		alarm.setMessage("TODO! Not stored in database");
 		alarm.setTime(dateTime.split(" ")[1]);
-		
+		alarm.setMessage("TODO! Not stored in database"); // TODO
 		return alarm;
 	}
+	
+	
+	
 	
 	
 	
