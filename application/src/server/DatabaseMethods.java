@@ -118,7 +118,15 @@ public class DatabaseMethods {
 		return makeNotification(p);
 	}
 	private Notification makeNotification(Properties p) {
-		return null;
+		Notification notification = new Notification();
+		String id = p.getProperty("notificationID");
+		String description = p.getProperty("description");
+		String eventID = p.getProperty("eventID");
+		
+		notification.setId(Integer.parseInt(id));
+		notification.setMessage(description);
+		notification.setEvent(eventID != null ? queryEvent(Integer.parseInt(eventID)) : null);
+		return notification;
 	}
 
 
