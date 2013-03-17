@@ -30,10 +30,10 @@ public class ServerThread extends Thread {
 			} else {
 				System.out.println("not ready");
 			}
-			while (input == null) {
+			while (input != null) {
+				System.out.println(input);
 				input = in.readLine();
 			}
-			System.out.println(input);
 			out.write("Server says: Hello");
 			System.out.println("Server: Receiving end\n");
 			System.out.println("Server: closing (thread)");
