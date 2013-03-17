@@ -136,7 +136,15 @@ public class DatabaseMethods {
 		return makeRoom(p);
 	}
 	private Room makeRoom(Properties p) {
-		return null;
+		Room room = new Room();
+		String roomId = p.getProperty("roomID");
+		String size = p.getProperty("size");
+		String description = p.getProperty("description");
+		
+		room.setId(Integer.parseInt(roomId));
+		room.setSize(Integer.parseInt(size));
+		room.setDescription(description);
+		return room;
 	}
 
 
@@ -154,7 +162,17 @@ public class DatabaseMethods {
 		return makeUser(p);
 	}
 	private User makeUser(Properties p) {
-		return null;
+		User user = new User();
+		String username = p.getProperty("username");
+		String password = p.getProperty("password");
+		String name = p.getProperty("name");
+		String type = p.getProperty("type");
+		
+		user.setUsername(username);
+		user.setPassword(password);
+		user.setName(name);
+		user.setType(type);
+		return user;
 	}
 
 
