@@ -93,7 +93,8 @@ public class LoginWindow extends JPanel implements ActionListener {
 		} else if (e.getSource().equals(closeButton)) {
 			frame.dispose();
 		} else if (e.getSource().equals(logInButton)) {
-			ServerCommunication.login(usernameField.getText(),passwordField.getText());
+			ServerCommunication sc = new ServerCommunication("TODO"); // TODO
+			sc.login(usernameField.getText(),passwordField.getPassword().toString());
 			frame.dispose(); // Close if successful; show error message if not?
 		}
 	}

@@ -27,7 +27,8 @@ public class Meeting extends AbstractCalendarEvent implements Serializeable {
 	// TODO
 
 	public String toString() {
-		return String.format("ID: %s, Description: %s, Start: %s, End: %s, Location: %s, Leader: %s", id, description, startDateTime, endDateTime, location, leader.getUsername());
+		return String.format("Meeting; ID: %s, Description: %s, Start: %s, End: %s, Location: %s, Leader: %s, Invited: %s, Accepted: %s, Declined: %s", 
+				id, description, startDateTime, endDateTime, location, leader.getUsername(), usersInvited, usersAccepted, usersDeclined);
 	}
 	
 	public void sendNotification() { // Unused?
@@ -70,11 +71,11 @@ public class Meeting extends AbstractCalendarEvent implements Serializeable {
 	public ArrayList<User> getUsersDeclined() {
 		return usersDeclined;
 	}
-	@Override
-	public String toString() {
-		return "Meeting [leader=" + leader + ", usersInvited=" + usersInvited
-				+ ", usersAccepted=" + usersAccepted + ", usersDeclined="
-				+ usersDeclined + "]";
-	}
+//	@Override
+//	public String toString() {
+//		return "Meeting [leader=" + leader + ", usersInvited=" + usersInvited
+//				+ ", usersAccepted=" + usersAccepted + ", usersDeclined="
+//				+ usersDeclined + "]";
+//	}
 	
 }

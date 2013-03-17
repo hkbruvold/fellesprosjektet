@@ -1,5 +1,6 @@
 package client;
 
+import java.net.MalformedURLException;
 import java.net.URL;
 
 import data.Authentication;
@@ -10,6 +11,14 @@ public class ServerCommunication {
 	
 	public ServerCommunication(URL serverURL) {
 		this.serverURL = serverURL;
+	}
+	public ServerCommunication(String serverURL) {
+		try {
+			this.serverURL = new URL(serverURL);
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	// TODO
