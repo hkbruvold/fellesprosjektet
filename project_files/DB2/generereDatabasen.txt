@@ -35,6 +35,17 @@ CREATE TABLE room (
 CREATE TABLE alarm (
     alarmID INT NOT NULL AUTO_INCREMENT,
     time DATETIME NOT NULL,
+    message TINYTEXT,
+    username VARCHAR(32) NOT NULL,
+    appointmentID INT NOT NULL,
+    FOREIGN KEY (username) 
+        REFERENCES user(username)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
+    FOREIGN KEY (appointmentID)
+        REFERENCES appointment(appointmentID)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
     PRIMARY KEY (alarmID)
 );
 
@@ -118,33 +129,5 @@ CREATE TABLE isParticipant (
         ON UPDATE CASCADE
         ON DELETE CASCADE,
     PRIMARY KEY (username, appointmentID)
-);
-
-CREATE TABLE alarmForAppointment (
-    appointmentID INT NOT NULL,
-    alarmID INT NOT NULL,
-    FOREIGN KEY (appointmentID)
-        REFERENCES appointment(appointmentID)
-        ON UPDATE CASCADE
-        ON DELETE CASCADE,
-    FOREIGN KEY (alarmID)
-        REFERENCES alarm(alarmID)
-        ON UPDATE CASCADE
-        ON DELETE CASCADE,
-    PRIMARY KEY (appointmentID, alarmID)
-);
-
-CREATE TABLE ownedByUser (
-    username VARCHAR(32) NOT NULL,
-    alarmID INT NOT NULL,
-    FOREIGN KEY (username)
-        REFERENCES user(username)
-        ON UPDATE CASCADE
-        ON DELETE CASCADE,
-    FOREIGN KEY (alarmID)
-        REFERENCES alarm(alarmID)
-        ON UPDATE CASCADE
-        ON DELETE CASCADE,
-    PRIMARY KEY (username, alarmID)
 );
 
