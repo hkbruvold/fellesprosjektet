@@ -14,8 +14,6 @@ public class Calendar implements Serializeable {
 		this.owner = owner;
 	}
 	
-	// TODO
-	
 	public String toString() {
 		return String.format("Calendar; Name: %s, User: %s, Number of events: %s", name, owner.getUsername(), events.size());
 	}
@@ -31,6 +29,10 @@ public class Calendar implements Serializeable {
 	}
 	public void addEvent(AbstractCalendarEvent event) {
 		events.add(event);
-		// TODO update database!
+		// TODO update database??
+	}
+	public void addEvents(ArrayList<AbstractCalendarEvent> events) {
+		events.addAll(events);
+		// TODO update database??
 	}
 }

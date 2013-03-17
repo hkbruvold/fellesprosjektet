@@ -7,6 +7,8 @@ import org.simpleframework.xml.Root;
 @Root
 public abstract class AbstractCalendarEvent implements Serializeable {
 	@Element
+	protected int id;
+	@Element
 	protected Calendar calendar;
 	@Element
 	protected String startDateTime;
@@ -21,7 +23,11 @@ public abstract class AbstractCalendarEvent implements Serializeable {
 	
 	public AbstractCalendarEvent(){
 	}
-	public AbstractCalendarEvent(Calendar calendar, String startDateTime, String endDateTime, String description, String location, Alarm alarm) {
+	/**
+	 * Use id = -1 when creating new objects. Actual ID should come from database
+	 */
+	public AbstractCalendarEvent(int id, Calendar calendar, String startDateTime, String endDateTime, String description, String location, Alarm alarm) {
+		this.id = id;
 		this.calendar = calendar;
 		this.startDateTime = startDateTime;
 		this.endDateTime = endDateTime;
@@ -30,8 +36,12 @@ public abstract class AbstractCalendarEvent implements Serializeable {
 		this.alarm = alarm;
 	}
 	
-	// TODO
-	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	public Calendar getCalendar() {
 		return calendar;
 	}
