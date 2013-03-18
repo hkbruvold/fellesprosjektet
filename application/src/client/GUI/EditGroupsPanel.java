@@ -3,6 +3,7 @@ package client.GUI;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
+import javax.swing.ComboBoxModel;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -11,8 +12,13 @@ import javax.swing.JLabel;
 import java.awt.GridBagConstraints;
 import javax.swing.JComboBox;
 import java.awt.Insets;
+import java.util.ArrayList;
+
 import javax.swing.Box;
 import javax.swing.JButton;
+
+import data.Group;
+import data.Room;
 
 public class EditGroupsPanel extends JFrame {
 
@@ -22,6 +28,7 @@ public class EditGroupsPanel extends JFrame {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
+
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -57,8 +64,11 @@ public class EditGroupsPanel extends JFrame {
 		gbc_lblGroups.gridx = 0;
 		gbc_lblGroups.gridy = 1;
 		contentPane.add(lblGroups, gbc_lblGroups);
-		
-		JComboBox comboBox = new JComboBox();
+		//TODO pull grouplist from server
+		ArrayList<Group> groups = new ArrayList<Group>();
+		groups.add(temp.TestObjects.getGroup00());
+		groups.add(temp.TestObjects.getGroup01());
+		JComboBox comboBox = new JComboBox(groups.toArray());
 		GridBagConstraints gbc_comboBox = new GridBagConstraints();
 		gbc_comboBox.insets = new Insets(0, 0, 5, 0);
 		gbc_comboBox.fill = GridBagConstraints.HORIZONTAL;
