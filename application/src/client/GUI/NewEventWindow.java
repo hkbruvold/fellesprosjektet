@@ -63,6 +63,20 @@ public class NewEventWindow extends JPanel implements ActionListener, ItemListen
 	private Calendar calendar;
 	private User user;
 	private User[] userArray;
+	
+	private Event model;
+
+	public void NewEventView(Event model) {
+		this.model = model;
+	}
+
+	public Event getModel() {
+		return model;
+	}
+
+	public void setModel(Event model) {
+		this.model = model;
+	}
 
 	public NewEventWindow(Calendar calendar, User user, User[] userArray) {
 		this.calendar = calendar;
