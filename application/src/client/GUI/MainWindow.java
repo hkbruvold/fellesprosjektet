@@ -12,6 +12,9 @@ import java.awt.event.ActionEvent;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.swing.Box;
 
 import temp.TestObjects;
@@ -47,6 +50,9 @@ public class MainWindow extends JFrame {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		Date currentDate = new Date();
+		int week = Integer.parseInt((new SimpleDateFormat("w")).format(currentDate));
+		System.out.println(week);
 		setBounds(100, 100, 1024, 576);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		GridBagLayout gridBagLayout = new GridBagLayout();
@@ -66,7 +72,7 @@ public class MainWindow extends JFrame {
 		final JComboBox weekNumberBox = new JComboBox();
 		weekNumberBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				calendarPane.setWeek(weekNumberBox.getSelectedIndex());
+				calendarPane.setWeek(weekNumberBox.getSelectedIndex()+1);
 				calendarPane.updateDates();
 			}
 		});
@@ -85,7 +91,13 @@ public class MainWindow extends JFrame {
 		gbc_lblYear.gridy = 1;
 		getContentPane().add(lblYear, gbc_lblYear);
 		
-		JComboBox yearNumberBox = new JComboBox();
+		final JComboBox yearNumberBox = new JComboBox();
+		yearNumberBox.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				calendarPane.setYear(yearNumberBox.getSelectedIndex()+2013);
+				calendarPane.updateDates();
+			}
+		});
 		yearNumberBox.setModel(new DefaultComboBoxModel(new String[] {"2013","2014","2015","2016","2017"}));
 
 		
@@ -138,5 +150,6 @@ public class MainWindow extends JFrame {
 		gbc_logOutButton.gridx = 0;
 		gbc_logOutButton.gridy = 3;
 		getContentPane().add(logOutButton, gbc_logOutButton);
+		weekNumberBox.setSelectedIndex(week-1);
 	}
 }

@@ -5,7 +5,7 @@ import java.util.Properties;
 
 import data.*;
 
-public class DatabaseMethods {
+public class DatabaseQueries {
 	private static final String FIELDS_ALARM = TableFields.ALARM.getFieldsString();
 	private static final String FIELDS_EVENT = TableFields.EVENT.getFieldsString();
 	private static final String FIELDS_GROUPS = TableFields.GROUPS.getFieldsString();
@@ -27,13 +27,17 @@ public class DatabaseMethods {
 	private static final String TABLE_RESERVED_ROOM = TableFields.RESERVED_ROOM.getTableName();
 	private static final String TABLE_ROOM = TableFields.ROOM.getTableName();
 	private static final String TABLE_USER = TableFields.USER.getTableName();
+	
+	private static final String BIT_FALSE = "0";
+	private static final String BIT_TRUE = "1";
 
 	private static final String SELECT_FROM = "SELECT %s FROM %s";
 	private static final String SELECT_FROM_WHERE = "SELECT %s FROM %s WHERE %s";
 
 	private DatabaseCommunication dbComm;
+	private User currentUser;
 
-	public DatabaseMethods(DatabaseCommunication dbComm) {
+	public DatabaseQueries(DatabaseCommunication dbComm) {
 		this.dbComm = dbComm;
 	}
 
@@ -82,7 +86,35 @@ public class DatabaseMethods {
 		return makeEvent(p);
 	}
 	private Event makeEvent(Properties p) {
-		return null;
+		Event event = null;
+		String id = p.getProperty("eventID");
+		String start = p.getProperty("startDataTime");
+		String end = p.getProperty("endDateTime");
+		String location = p.getProperty("location");
+		String description = p.getProperty("description");
+		String owner = p.getProperty("owner");
+		String isMeeting = p.getProperty("isMeeting");
+		
+		if (isMeeting.equals(BIT_FALSE)) {
+			event = new Appointment();
+		} else if (isMeeting.equals(BIT_TRUE)) {
+			event = new Meeting();
+		}
+		event.setId(Integer.parseInt(id));
+		event.setStartDateTime(start);
+		event.setEndDateTime(end);
+		event.setLocation(location);
+		event.setDescription(description);
+		// remember room reservation?
+		if (event instanceof Appointment) {
+			((Appointment)event).setOwner(queryUser(owner));
+			// get alarm
+		} else if (event instanceof Meeting) {
+			((Meeting)event).setLeader(queryUser(owner));
+			// get alarm
+			// remember to add participants!
+		}
+		return event; 
 	}
 
 
@@ -100,7 +132,16 @@ public class DatabaseMethods {
 		return makeGroup(p);
 	}
 	private Group makeGroup(Properties p) {
-		return null;
+		Group group = new Group();
+		String id = p.getProperty("groupID");
+		String groupname = p.getProperty("groupname");
+		String description = p.getProperty("description");
+		
+		group.setId(Integer.parseInt(id));
+		group.setName(groupname);
+		group.setDescription(description);
+		// remember to add users to the group!
+		return group;
 	}
 
 
@@ -118,7 +159,15 @@ public class DatabaseMethods {
 		return makeNotification(p);
 	}
 	private Notification makeNotification(Properties p) {
-		return null;
+		Notification notification = new Notification();
+		String id = p.getProperty("notificationID");
+		String description = p.getProperty("description");
+		String eventID = p.getProperty("eventID");
+		
+		notification.setId(Integer.parseInt(id));
+		notification.setMessage(description);
+		notification.setEvent(eventID != null ? queryEvent(Integer.parseInt(eventID)) : null);
+		return notification;
 	}
 
 
@@ -136,7 +185,15 @@ public class DatabaseMethods {
 		return makeRoom(p);
 	}
 	private Room makeRoom(Properties p) {
-		return null;
+		Room room = new Room();
+		String roomId = p.getProperty("roomID");
+		String size = p.getProperty("size");
+		String description = p.getProperty("description");
+		
+		room.setId(Integer.parseInt(roomId));
+		room.setSize(Integer.parseInt(size));
+		room.setDescription(description);
+		return room;
 	}
 
 
@@ -154,18 +211,31 @@ public class DatabaseMethods {
 		return makeUser(p);
 	}
 	private User makeUser(Properties p) {
-		return null;
+		User user = new User();
+		String username = p.getProperty("username");
+		String password = p.getProperty("password");
+		String name = p.getProperty("name");
+		String type = p.getProperty("type");
+		
+		user.setUsername(username);
+		user.setPassword(password);
+		user.setName(name);
+		user.setType(type);
+		return user;
 	}
 
-
+	// TODO notification_to
+	// TODO reserved_room
+	
+	// TODO consider: is_member_of & is_participant
 
 
 
 	public static void main(String[] args) {
 		DatabaseConnection dbConn = new DatabaseConnection("jdbc:mysql://localhost:3306/calendarDatabase", "root", "skip".toCharArray());
 		DatabaseCommunication dbComm = new DatabaseCommunication(dbConn);
-		DatabaseMethods dm = new DatabaseMethods(dbComm);
-		Alarm alarm = dm.queryAlarm(1);
-		System.out.println(alarm);
+		DatabaseQueries dm = new DatabaseQueries(dbComm);
+		Event event = dm.queryEvent(2);
+		System.out.println(event);
 	}
 }
