@@ -11,19 +11,26 @@ import javax.swing.JLabel;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.Choice;
+import java.util.ArrayList;
+
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.Box;
+import javax.swing.JList;
+import javax.swing.AbstractListModel;
+import javax.swing.ListModel;
+
+import data.User;
 
 public class NewGroupWindow extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textField;
 	private JTextField textField_1;
-	private JTextField textField_2;
 	private JButton btnExit;
 	private JButton btnSave;
 	private Box horizontalBox;
+	private JList memberList;
 
 	/**
 	 * Launch the application.
@@ -54,7 +61,7 @@ public class NewGroupWindow extends JFrame {
 		gbl_contentPane.columnWidths = new int[]{0, 0, 0, 0, 0, 0};
 		gbl_contentPane.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0};
 		gbl_contentPane.columnWeights = new double[]{0.0, 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
-		gbl_contentPane.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_contentPane.rowWeights = new double[]{0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		contentPane.setLayout(gbl_contentPane);
 		
 		JLabel labelName = new JLabel("Navn");
@@ -99,14 +106,20 @@ public class NewGroupWindow extends JFrame {
 		gbc_labelMembers.gridy = 3;
 		contentPane.add(labelMembers, gbc_labelMembers);
 		
-		textField_2 = new JTextField();
-		GridBagConstraints gbc_textField_2 = new GridBagConstraints();
-		gbc_textField_2.insets = new Insets(0, 0, 5, 5);
-		gbc_textField_2.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField_2.gridx = 3;
-		gbc_textField_2.gridy = 3;
-		contentPane.add(textField_2, gbc_textField_2);
-		textField_2.setColumns(10);
+		//TODO Get all users from server
+		ArrayList<User> users = new ArrayList<User>();
+		//Temporary!
+		users.add(temp.TestObjects.getUser00());
+		users.add(temp.TestObjects.getUser01());
+		users.add(temp.TestObjects.getUser02());
+		
+		memberList = new JList(users.toArray());
+		GridBagConstraints gbc_memberList = new GridBagConstraints();
+		gbc_memberList.insets = new Insets(0, 0, 5, 5);
+		gbc_memberList.fill = GridBagConstraints.BOTH;
+		gbc_memberList.gridx = 3;
+		gbc_memberList.gridy = 3;
+		contentPane.add(memberList, gbc_memberList);
 		
 		horizontalBox = Box.createHorizontalBox();
 		GridBagConstraints gbc_horizontalBox = new GridBagConstraints();
