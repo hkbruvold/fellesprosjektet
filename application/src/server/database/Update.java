@@ -1,5 +1,7 @@
 package server.database;
 
+import java.util.ArrayList;
+
 import data.*;
 
 import temp.TestObjects;
@@ -80,11 +82,21 @@ public class Update {
 		String updateString = String.format(INSERT_INTO_VALUES, TABLE_EVENT, FIELDS_EVENT, values.toString());
 		System.out.println(updateString);
 //		dbComm.update(updateString);
+		// TODO event.setId( get id from database );
 		if (event instanceof Appointment) {
 			insertIsOwner(((Appointment)event).getOwner(), event);
 		} else if (event instanceof Meeting) {
 			insertIsOwner(((Meeting)event).getLeader(), event);
-			// TODO add relations!
+			Meeting meeting = (Meeting)event;
+			for (User user : meeting.getUsersInvited()) {
+				insertIsParticipant(user, event, PARTICIPANT_STATUS_INVITED);
+			}
+			for (User user : meeting.getUsersAccepted()) {
+				insertIsParticipant(user, event, PARTICIPANT_STATUS_ACCEPTED);
+			}
+			for (User user : meeting.getUsersDeclined()) {
+				insertIsParticipant(user, event, PARTICIPANT_STATUS_DECLINED);
+			}
 		}
 	}
 	
@@ -151,6 +163,16 @@ public class Update {
 //		dbComm.update(updateString);
 	}
 	
+	public void insertIsParticipant(User user, Event event, String status) {
+		StringBuilder values = new StringBuilder();
+		values.append("'").append(user.getUsername()).append("'").append(", ");
+		values.append(event.getId()).append(", ");
+		values.append("'").append(status).append("'").append(" ");
+		String updateString = String.format(INSERT_INTO_VALUES, TABLE_IS_PARTICIPANT, FIELDS_IS_PARTICIPANT, values.toString());
+		System.out.println(updateString);
+//		dbComm.update(updateString);
+	}
+	
 	// TODO Add insert, update and delete methods
 	// NB! Remember relations!
 	
@@ -163,7 +185,7 @@ public class Update {
 		System.out.println();
 		update.insertAlarm(TestObjects.getAlarm00());
 		System.out.println();
-		update.insertEvent(TestObjects.getAppointment00());
+		update.insertEvent(TestObjects.getMeeting00());
 		System.out.println();
 		update.insertGroup(TestObjects.getGroup02());
 		System.out.println();

@@ -29,6 +29,8 @@ public class TestObjects {
 	private static final String DESCRIPTION = "Description";
 	private static final String LOCATION = "Location";
 	
+	private static final int DEFAULT_ID = 0;
+	
 	public static Authentication getAuthentication00(){
 		return new Authentication("ALICE", "123", LOGIN );
 	}
@@ -54,18 +56,18 @@ public class TestObjects {
 	}
 	
 	public static Group getGroup00() {
-		Group group = new Group(-1, "Group00", "");
+		Group group = new Group(DEFAULT_ID, "Group00", "");
 		group.addMember(getUser00());
 		return group;
 	}
 	public static Group getGroup01() {
-		Group group = new Group(-1, "Group01", "");
+		Group group = new Group(DEFAULT_ID, "Group01", "");
 		group.addMember(getUser01());
 		group.addMember(getUser02());
 		return group;
 	}
 	public static Group getGroup02() {
-		Group group = new Group(-1, "Group02", "All test-users");
+		Group group = new Group(DEFAULT_ID, "Group02", "All test-users");
 		group.addMembers(Arrays.asList(new User[]{getUser00(), getUser01(), getUser02()}));
 		return group;
 	}
@@ -78,23 +80,23 @@ public class TestObjects {
 	}
 	
 	public static Meeting getMeeting00() {
-		Meeting meeting = new Meeting(-1, getCalendar00(), DATE_TIME_0, DATE_TIME_1, DESCRIPTION, LOCATION, getUser00());
+		Meeting meeting = new Meeting(DEFAULT_ID, getCalendar00(), DATE_TIME_0, DATE_TIME_1, DESCRIPTION, LOCATION, getUser00());
 		meeting.acceptInvite(getUser01());
 		meeting.declineInvite(getUser02());
 		return meeting;
 	}
 	public static Meeting getMeeting01() {
-		Meeting meeting = new Meeting(-1, getCalendar01(), DATE_TIME_0, DATE_TIME_1, DESCRIPTION, LOCATION, getUser01());
+		Meeting meeting = new Meeting(DEFAULT_ID, getCalendar01(), DATE_TIME_0, DATE_TIME_1, DESCRIPTION, LOCATION, getUser01());
 		meeting.inviteParticipant(getUser00());
 		meeting.inviteParticipant(getUser02());
 		return meeting;
 	}
 	
 	public static Notification getNotification00() {
-		return new Notification(-1, DESCRIPTION);
+		return new Notification(DEFAULT_ID, DESCRIPTION);
 	}
 	public static Notification getNotification01() {
-		return new Notification(-1, DESCRIPTION + " : " + LOCATION);
+		return new Notification(DEFAULT_ID, DESCRIPTION + " : " + LOCATION);
 	}
 	
 	public static User getUser00() {
