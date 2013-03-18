@@ -172,7 +172,7 @@ public class MainWindow extends JFrame {
 		gbc_calendarPane.gridy = 2;
 		getContentPane().add(calendarPane, gbc_calendarPane);
 		
-		JButton logOutButton = new JButton("Log out");
+		JButton logOutButton = new JButton("Logg av");
 		logOutButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			}
