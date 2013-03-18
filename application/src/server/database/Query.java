@@ -34,11 +34,11 @@ public class Query {
 	private static final String FIELDS_ROOM = TableFields.ROOM.getFieldsString();
 	private static final String FIELDS_USER = TableFields.USER.getFieldsString();
 
-	private static final String BIT_FALSE = "0";
-	private static final String BIT_TRUE = "1";
-
 	private static final String SELECT_FROM = "SELECT %s FROM %s";
 	private static final String SELECT_FROM_WHERE = "SELECT %s FROM %s WHERE %s";
+
+	private static final String BIT_FALSE = "0";
+	private static final String BIT_TRUE = "1";
 
 	private static final String PARTICIPANT_STATUS_INVITED = "0";
 	private static final String PARTICIPANT_STATUS_ACCEPTED = "1";
