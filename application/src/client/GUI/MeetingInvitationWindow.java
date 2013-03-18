@@ -30,6 +30,7 @@ public class MeetingInvitationWindow extends JPanel implements ActionListener {
 	private static final int LINE_END = GridBagConstraints.LINE_END;
 
 	private Meeting meeting;
+	private Event model;
 	private User user;
 	private JFrame frame;
 	private JLabel descriptionLabel, startTimeLabel, endTimeLabel, locationLabel, leaderLabel;
@@ -45,6 +46,9 @@ public class MeetingInvitationWindow extends JPanel implements ActionListener {
 		
 		frame.pack();
 		frame.setVisible(true);
+	}
+	public Event getModel() {
+		return model;
 	}
 	
 	private void initFrame() {

@@ -12,6 +12,9 @@ import java.awt.event.ActionEvent;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.swing.Box;
 
 import temp.TestObjects;
@@ -47,6 +50,9 @@ public class MainWindow extends JFrame {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		Date currentDate = new Date();
+		int week = Integer.parseInt((new SimpleDateFormat("w")).format(currentDate));
+		System.out.println(week);
 		setBounds(100, 100, 1024, 576);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		GridBagLayout gridBagLayout = new GridBagLayout();
@@ -144,5 +150,6 @@ public class MainWindow extends JFrame {
 		gbc_logOutButton.gridx = 0;
 		gbc_logOutButton.gridy = 3;
 		getContentPane().add(logOutButton, gbc_logOutButton);
+		weekNumberBox.setSelectedIndex(week-1);
 	}
 }

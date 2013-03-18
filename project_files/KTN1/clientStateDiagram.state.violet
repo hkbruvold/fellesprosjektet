@@ -5,7 +5,7 @@
    <object class="com.horstmann.violet.StateNode" id="StateNode0">
     <void property="name">
      <void property="text">
-      <string>closed</string>
+      <string>CLOSED</string>
      </void>
     </void>
    </object>
@@ -19,15 +19,15 @@
         <void method="set">
          <object idref="Point2D$Double0">
           <void method="setLocation">
-           <double>554.0</double>
-           <double>191.0</double>
+           <double>547.0</double>
+           <double>186.0</double>
           </void>
          </object>
-         <double>191.0</double>
+         <double>186.0</double>
         </void>
        </void>
       </object>
-      <double>554.0</double>
+      <double>547.0</double>
      </void>
     </void>
    </object>
@@ -44,15 +44,15 @@
         <void method="set">
          <object idref="Point2D$Double1">
           <void method="setLocation">
-           <double>615.0</double>
-           <double>126.0</double>
+           <double>618.0</double>
+           <double>122.0</double>
           </void>
          </object>
-         <double>126.0</double>
+         <double>122.0</double>
         </void>
        </void>
       </object>
-      <double>615.0</double>
+      <double>618.0</double>
      </void>
     </void>
    </object>
@@ -61,7 +61,7 @@
    <object class="com.horstmann.violet.StateNode" id="StateNode1">
     <void property="name">
      <void property="text">
-      <string>waiting for SYN-ACK</string>
+      <string>SYN_SENT</string>
      </void>
     </void>
    </object>
@@ -75,15 +75,15 @@
         <void method="set">
          <object idref="Point2D$Double2">
           <void method="setLocation">
-           <double>748.0</double>
-           <double>207.0</double>
+           <double>794.0</double>
+           <double>216.0</double>
           </void>
          </object>
-         <double>207.0</double>
+         <double>216.0</double>
         </void>
        </void>
       </object>
-      <double>748.0</double>
+      <double>794.0</double>
      </void>
     </void>
    </object>
@@ -92,9 +92,7 @@
    <object class="com.horstmann.violet.StateNode" id="StateNode2">
     <void property="name">
      <void property="text">
-      <string>connected - 
-ready to 
-send/receive</string>
+      <string>ESTABLISHED</string>
      </void>
     </void>
    </object>
@@ -108,15 +106,15 @@ send/receive</string>
         <void method="set">
          <object idref="Point2D$Double3">
           <void method="setLocation">
-           <double>602.0</double>
-           <double>346.0</double>
+           <double>783.0</double>
+           <double>367.0</double>
           </void>
          </object>
-         <double>346.0</double>
+         <double>367.0</double>
         </void>
        </void>
       </object>
-      <double>602.0</double>
+      <double>783.0</double>
      </void>
     </void>
    </object>
@@ -125,7 +123,7 @@ send/receive</string>
    <object class="com.horstmann.violet.StateNode" id="StateNode3">
     <void property="name">
      <void property="text">
-      <string>waiting for ACK</string>
+      <string>FIN_WAIT_1</string>
      </void>
     </void>
    </object>
@@ -139,15 +137,15 @@ send/receive</string>
         <void method="set">
          <object idref="Point2D$Double4">
           <void method="setLocation">
-           <double>813.0</double>
-           <double>367.0</double>
+           <double>732.0</double>
+           <double>485.0</double>
           </void>
          </object>
-         <double>367.0</double>
+         <double>485.0</double>
         </void>
        </void>
       </object>
-      <double>813.0</double>
+      <double>732.0</double>
      </void>
     </void>
    </object>
@@ -156,7 +154,7 @@ send/receive</string>
    <object class="com.horstmann.violet.StateNode" id="StateNode4">
     <void property="name">
      <void property="text">
-      <string>waiting for ACK</string>
+      <string>FIN_WAIT_2</string>
      </void>
     </void>
    </object>
@@ -170,27 +168,21 @@ send/receive</string>
         <void method="set">
          <object idref="Point2D$Double5">
           <void method="setLocation">
-           <double>423.0</double>
-           <double>368.0</double>
+           <double>538.0</double>
+           <double>497.0</double>
           </void>
          </object>
-         <double>368.0</double>
+         <double>497.0</double>
         </void>
        </void>
       </object>
-      <double>423.0</double>
+      <double>538.0</double>
      </void>
     </void>
    </object>
   </void>
   <void method="addNode">
-   <object class="com.horstmann.violet.StateNode" id="StateNode5">
-    <void property="name">
-     <void property="text">
-      <string>waiting for FIN</string>
-     </void>
-    </void>
-   </object>
+   <object class="com.horstmann.violet.product.diagram.state.CircularFinalStateNode" id="CircularFinalStateNode0"/>
    <object class="java.awt.geom.Point2D$Double" id="Point2D$Double6">
     <void class="java.awt.geom.Point2D$Double" method="getField">
      <string>x</string>
@@ -201,21 +193,27 @@ send/receive</string>
         <void method="set">
          <object idref="Point2D$Double6">
           <void method="setLocation">
-           <double>410.0</double>
-           <double>261.0</double>
+           <double>489.0</double>
+           <double>140.0</double>
           </void>
          </object>
-         <double>261.0</double>
+         <double>140.0</double>
         </void>
        </void>
       </object>
-      <double>410.0</double>
+      <double>489.0</double>
      </void>
     </void>
    </object>
   </void>
   <void method="addNode">
-   <object class="com.horstmann.violet.product.diagram.state.CircularFinalStateNode" id="CircularFinalStateNode0"/>
+   <object class="com.horstmann.violet.StateNode" id="StateNode5">
+    <void property="name">
+     <void property="text">
+      <string>TIME_WAIT</string>
+     </void>
+    </void>
+   </object>
    <object class="java.awt.geom.Point2D$Double" id="Point2D$Double7">
     <void class="java.awt.geom.Point2D$Double" method="getField">
      <string>x</string>
@@ -226,46 +224,15 @@ send/receive</string>
         <void method="set">
          <object idref="Point2D$Double7">
           <void method="setLocation">
-           <double>538.0</double>
-           <double>133.0</double>
+           <double>461.0</double>
+           <double>321.0</double>
           </void>
          </object>
-         <double>133.0</double>
+         <double>321.0</double>
         </void>
        </void>
       </object>
-      <double>538.0</double>
-     </void>
-    </void>
-   </object>
-  </void>
-  <void method="addNode">
-   <object class="com.horstmann.violet.StateNode" id="StateNode6">
-    <void property="name">
-     <void property="text">
-      <string>(nothing)</string>
-     </void>
-    </void>
-   </object>
-   <object class="java.awt.geom.Point2D$Double" id="Point2D$Double8">
-    <void class="java.awt.geom.Point2D$Double" method="getField">
-     <string>x</string>
-     <void method="set">
-      <object idref="Point2D$Double8">
-       <void class="java.awt.geom.Point2D$Double" method="getField">
-        <string>y</string>
-        <void method="set">
-         <object idref="Point2D$Double8">
-          <void method="setLocation">
-           <double>607.0</double>
-           <double>460.0</double>
-          </void>
-         </object>
-         <double>460.0</double>
-        </void>
-       </void>
-      </object>
-      <double>607.0</double>
+      <double>461.0</double>
      </void>
     </void>
    </object>
@@ -282,7 +249,7 @@ send/receive</string>
   <void method="connect">
    <object class="com.horstmann.violet.StateTransitionEdge">
     <void property="label">
-     <string>send SYN</string>
+     <string>connect() / send SYN</string>
     </void>
    </object>
    <object idref="StateNode0"/>
@@ -291,7 +258,7 @@ send/receive</string>
   <void method="connect">
    <object class="com.horstmann.violet.StateTransitionEdge">
     <void property="label">
-     <string>send ACK</string>
+     <string>receive SYN-ACK, send ACK</string>
     </void>
    </object>
    <object idref="StateNode1"/>
@@ -300,39 +267,20 @@ send/receive</string>
   <void method="connect">
    <object class="com.horstmann.violet.StateTransitionEdge">
     <void property="label">
-     <string>send DATA</string>
+     <string>close() / send FIN</string>
     </void>
    </object>
    <object idref="StateNode2"/>
    <object idref="StateNode3"/>
   </void>
   <void method="connect">
-   <object class="com.horstmann.violet.StateTransitionEdge"/>
+   <object class="com.horstmann.violet.StateTransitionEdge">
+    <void property="label">
+     <string>receive ACK</string>
+    </void>
+   </object>
    <object idref="StateNode3"/>
-   <object idref="StateNode2"/>
-  </void>
-  <void method="connect">
-   <object class="com.horstmann.violet.StateTransitionEdge">
-    <void property="label">
-     <string>send FIN</string>
-    </void>
-   </object>
-   <object idref="StateNode2"/>
    <object idref="StateNode4"/>
-  </void>
-  <void method="connect">
-   <object class="com.horstmann.violet.StateTransitionEdge"/>
-   <object idref="StateNode4"/>
-   <object idref="StateNode5"/>
-  </void>
-  <void method="connect">
-   <object class="com.horstmann.violet.StateTransitionEdge">
-    <void property="label">
-     <string>send ACK</string>
-    </void>
-   </object>
-   <object idref="StateNode5"/>
-   <object idref="StateNode0"/>
   </void>
   <void method="connect">
    <object class="com.horstmann.violet.StateTransitionEdge">
@@ -346,29 +294,29 @@ send/receive</string>
   <void method="connect">
    <object class="com.horstmann.violet.StateTransitionEdge">
     <void property="label">
-     <string>receive DATA</string>
+     <string>receive FIN, send ACK</string>
     </void>
    </object>
-   <object idref="StateNode2"/>
-   <object idref="StateNode6"/>
+   <object idref="StateNode4"/>
+   <object idref="StateNode5"/>
   </void>
   <void method="connect">
    <object class="com.horstmann.violet.StateTransitionEdge">
     <void property="label">
-     <string>send ACK</string>
+     <string>wait 30 sec</string>
     </void>
    </object>
-   <object idref="StateNode6"/>
-   <object idref="StateNode2"/>
+   <object idref="StateNode5"/>
+   <object idref="StateNode0"/>
   </void>
   <void method="connect">
    <object class="com.horstmann.violet.StateTransitionEdge">
     <void property="label">
-     <string>send again</string>
+     <string>sind(), receive()</string>
     </void>
    </object>
-   <object idref="StateNode3"/>
-   <object idref="StateNode3"/>
+   <object idref="StateNode2"/>
+   <object idref="StateNode2"/>
   </void>
  </object>
 </java>

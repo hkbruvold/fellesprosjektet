@@ -63,6 +63,20 @@ public class NewEventWindow extends JPanel implements ActionListener, ItemListen
 	private Calendar calendar;
 	private User user;
 	private User[] userArray;
+	
+	private Event model;
+
+	public void NewEventView(Event model) {
+		this.model = model;
+	}
+
+	public Event getModel() {
+		return model;
+	}
+
+	public void setModel(Event model) {
+		this.model = model;
+	}
 
 	public NewEventWindow(Calendar calendar, User user, User[] userArray) {
 		this.calendar = calendar;
@@ -267,6 +281,7 @@ public class NewEventWindow extends JPanel implements ActionListener, ItemListen
 			} else {
 				calendarEvent = new Appointment(-1, calendar, startDateTime, endDateTime, description, location, alarm, user);
 			}
+			CalendarPane.addEvent(calendarEvent);
 			// TODO save new event, set the message string for alarm
 			XMLTranslator.toXML(calendarEvent);
 			frame.dispose(); // Close if successful; show error message if not?
