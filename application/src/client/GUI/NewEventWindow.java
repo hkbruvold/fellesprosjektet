@@ -281,6 +281,7 @@ public class NewEventWindow extends JPanel implements ActionListener, ItemListen
 			} else {
 				calendarEvent = new Appointment(-1, calendar, startDateTime, endDateTime, description, location, alarm, user);
 			}
+			CalendarPane.addEvent(calendarEvent);
 			// TODO save new event, set the message string for alarm
 			XMLTranslator.toXML(calendarEvent);
 			frame.dispose(); // Close if successful; show error message if not?
