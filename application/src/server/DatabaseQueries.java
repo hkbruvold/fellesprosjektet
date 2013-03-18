@@ -113,7 +113,7 @@ public class DatabaseQueries {
 		event.setLocation(location);
 		event.setDescription(description);
 		event.setAlarm(queryAlarm(currentUser, Integer.parseInt(id)));
-		// remember room reservation?
+		// TODO remember room reservation?
 		if (event instanceof Appointment) {
 			((Appointment)event).setOwner(queryOwner(Integer.parseInt(id)));
 		} else if (event instanceof Meeting) {
@@ -151,7 +151,8 @@ public class DatabaseQueries {
 		group.setId(Integer.parseInt(id));
 		group.setName(groupname);
 		group.setDescription(description);
-		// remember to add users to the group!
+		ArrayList<User> members = queryMembers(Integer.parseInt(id));
+		group.addMembers(members);
 		return group;
 	}
 
@@ -173,11 +174,11 @@ public class DatabaseQueries {
 		Notification notification = new Notification();
 		String id = p.getProperty("notificationID");
 		String description = p.getProperty("description");
-//		String eventID = p.getProperty("eventID");
+//	TODO String eventID = p.getProperty("eventID");
 		
 		notification.setId(Integer.parseInt(id));
 		notification.setMessage(description);
-//		notification.setEvent(eventID != null ? queryEvent(Integer.parseInt(eventID)) : null);
+//	TODO notification.setEvent(eventID != null ? queryEvent(Integer.parseInt(eventID)) : null);
 		return notification;
 	}
 
@@ -248,6 +249,15 @@ public class DatabaseQueries {
 			users.add(queryUser(p.getProperty("username")));
 		}
 		return users;
+	}
+	
+	private ArrayList<User> queryMembers(int groupID) {
+		ArrayList<Properties> pl = dbComm.query(String.format(SELECT_FROM_WHERE, FIELDS_IS_MEMBER_OF, TABLE_IS_MEMBER_OF, "groupID=" + groupID));
+		ArrayList<User> members = new ArrayList<User>();
+		for (Properties p : pl) {
+			members.add(queryUser(p.getProperty("username")));
+		}
+		return members;
 	}
 	
 	// notification_to
