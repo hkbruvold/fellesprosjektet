@@ -17,6 +17,7 @@ public class TestObjects {
 	private static final User CHARLIE = new User("charlie", "Charlie", "Employer");
 	private static final User BOB = new User("bob", "Bob", "Employer");
 	private static final User ALICE = new User("alice", "Alice", "Employer");
+	
 	private static final String LOGIN = "login";
 	private static final String LOGOUT = "logout";
 	private static final String DATE_0 = "2013-10-10";
@@ -32,10 +33,10 @@ public class TestObjects {
 		return new Authentication("ALICE", "123", LOGIN );
 	}
 	public static Alarm getAlarm00() {
-		return new Alarm(DATE_0, TIME_0);
+		return new Alarm(-1, TIME_0, "");
 	}
 	public static Alarm getAlarm01() {
-		return new Alarm(-1, DATE_1, TIME_1, DESCRIPTION);
+		return new Alarm(-1, TIME_1, DESCRIPTION);
 	}
 	
 	public static Appointment getAppointment00() {

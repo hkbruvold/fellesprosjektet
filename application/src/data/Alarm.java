@@ -2,8 +2,7 @@ package data;
 
 public class Alarm implements Serializeable {
 	private int id;
-	private String date;
-	private String time;
+	private String timeBefore;
 	private String message;
 	private User owner;
 	private Event event;
@@ -13,18 +12,14 @@ public class Alarm implements Serializeable {
 	/**
 	 * Use id = -1 when creating new objects. Actual ID should come from database
 	 */
-	public Alarm(int id, String date, String time, String message) {
+	public Alarm(int id, String timeBefore, String message) {
 		this.id = id;
-		this.date = date;
-		this.time = time;
+		this.timeBefore = timeBefore;
 		this.message = message;
 	}
-	public Alarm(String date, String time) {
-		this(-1, date, time, null);
-	}
-
+	
 	public String toString() {
-		return String.format("Alarm; ID: %s, Date: %s, Time: %s, Message: %s", id, date, time, message);
+		return String.format("Alarm; ID: %s, Time: %s, Message: %s", id, timeBefore, message);
 	}
 	
 	public int getID() {
@@ -33,17 +28,11 @@ public class Alarm implements Serializeable {
 	public void setID(int id) {
 		this.id = id;
 	}
-	public String getDate() {
-		return date;
+	public String getTimeBefore() {
+		return timeBefore;
 	}
-	public void setDate(String date) {
-		this.date = date;
-	}
-	public String getTime() {
-		return time;
-	}
-	public void setTime(String time) {
-		this.time = time;
+	public void setTimeBefore(String timeBefore) {
+		this.timeBefore = timeBefore;
 	}
 	public String getMessage() {
 		return message;

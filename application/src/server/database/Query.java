@@ -73,7 +73,7 @@ public class Query {
 		String username = p.getProperty("username");
 		String eventID = p.getProperty("eventID");
 
-		alarm.setTime(time);
+		alarm.setTimeBefore(time);
 		alarm.setMessage(message);
 		alarm.setOwner(queryUser(username));
 		alarm.setEvent(queryEvent(Integer.parseInt(eventID)));
