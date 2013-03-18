@@ -1,15 +1,19 @@
 TODO:
 
 __Unassigned__
-Add option for selecting room in NewEventWindow
+
 Add option to add alarm to meeting (when invited)
 ??? Add interface for adding users, adding users to groups
-Server-client communication (sending/receiving objects)
+Server-client communication (sending/receiving objects), High priority
 Make TODO list
+Main/calendar window (framework in place)
 
 __Kaare__
-Main/calendar window
-	Framework in place
+Add window for new user
+Add window for making/editing groups
 
 __Kjell__
 Database/application communication
+
+__Vegard__
+Add option for selecting room in NewEventWindow

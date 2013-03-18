@@ -22,12 +22,7 @@ CREATE TABLE event (
     endDateTime DATETIME NOT NULL,
     location VARCHAR(32),
     description TINYTEXT,
-    owner VARCHAR(32) NOT NULL,
     isMeeting BIT(1) NOT NULL,
-    FOREIGN KEY (owner) 
-        REFERENCES user(username)
-        ON UPDATE CASCADE
-        ON DELETE CASCADE,
     PRIMARY KEY (eventID)
 );
 
@@ -39,8 +34,7 @@ CREATE TABLE room (
 );
 
 CREATE TABLE alarm (
-    alarmID INT NOT NULL AUTO_INCREMENT,
-    time DATETIME NOT NULL,
+    time TIME NOT NULL,
     message TINYTEXT,
     username VARCHAR(32) NOT NULL,
     eventID INT NOT NULL,
@@ -52,17 +46,12 @@ CREATE TABLE alarm (
         REFERENCES event(eventID)
         ON UPDATE CASCADE
         ON DELETE CASCADE,
-    PRIMARY KEY (alarmID)
+    PRIMARY KEY (username, eventID)
 );
 
 CREATE TABLE notification (
     notificationID INT NOT NULL AUTO_INCREMENT,
     description TINYTEXT,
-    eventID INT,
-    FOREIGN KEY (eventID) 
-        REFERENCES event(eventID) 
-        ON UPDATE CASCADE 
-        ON DELETE SET NULL,
     PRIMARY KEY (notificationID)
 );
 
@@ -80,6 +69,20 @@ CREATE TABLE isMemberOf (
     PRIMARY KEY (username, groupID)
 );
 
+CREATE TABLE isOwner (
+    username VARCHAR(32) NOT NULL,
+    eventID INT NOT NULL,
+    FOREIGN KEY (username)
+        REFERENCES user(username)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
+    FOREIGN KEY (eventID)
+        REFERENCES event(eventID)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
+    PRIMARY KEY (username, eventID)
+);
+
 CREATE TABLE notificationTo (
     username VARCHAR(32) NOT NULL,
     notificationID INT NOT NULL,
@@ -92,6 +95,20 @@ CREATE TABLE notificationTo (
         ON UPDATE CASCADE
         ON DELETE CASCADE,
     PRIMARY KEY (username, notificationID)
+);
+
+CREATE TABLE notificationForEvent (
+    notificationID INT NOT NULL,
+    eventID INT NOT NULL,
+    FOREIGN KEY (notificationID)
+        REFERENCES notification(notificationID)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
+    FOREIGN KEY (eventID)
+        REFERENCES event(eventID)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
+    PRIMARY KEY (notificationID, eventID)
 );
 
 CREATE TABLE reservedRoom (

@@ -1,6 +1,8 @@
 package data;
 
 import java.io.File;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 
 import org.simpleframework.xml.Serializer;
@@ -21,9 +23,9 @@ public class XMLTranslator {
 		}
 	}
 	
-	public static OutputStream toXMLStream(Serializeable object){
+	public static ObjectOutputStream toXMLStream(Serializeable object){
 		Serializer serializer = new Persister();
-		OutputStream ostream = null;
+		ObjectOutputStream ostream = null;
 		try {
 			serializer.write(object, ostream);
 		} catch (Exception e) {

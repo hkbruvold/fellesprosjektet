@@ -25,7 +25,7 @@ public class ServerCommunication {
 	
 	public void login (String username, String password ) {
 		Authentication auth = new Authentication(username, password, "LOGIN");
-		data.XMLTranslator.toXMLStream(auth);
+		Client.sendObject(data.XMLTranslator.toXMLStream(auth));
 	}
 	public void /*status*/ logOut (/* TODO */) {
 		// TODO
