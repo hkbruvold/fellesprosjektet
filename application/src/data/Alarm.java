@@ -1,7 +1,6 @@
 package data;
 
 public class Alarm implements Serializeable {
-	private int id;
 	private String timeBefore;
 	private String message;
 	private User owner;
@@ -9,25 +8,15 @@ public class Alarm implements Serializeable {
 	
 	public Alarm(){
 	}
-	/**
-	 * Use id = -1 when creating new objects. Actual ID should come from database
-	 */
-	public Alarm(int id, String timeBefore, String message) {
-		this.id = id;
+	public Alarm(String timeBefore, String message) {
 		this.timeBefore = timeBefore;
 		this.message = message;
 	}
 	
 	public String toString() {
-		return String.format("Alarm; ID: %s, Time: %s, Message: %s", id, timeBefore, message);
+		return String.format("Alarm; Time: %s, Message: %s, Owner: %s, Event: %s", timeBefore, message, owner.getUsername(), event.getId());
 	}
 	
-	public int getID() {
-		return id;
-	}
-	public void setID(int id) {
-		this.id = id;
-	}
 	public String getTimeBefore() {
 		return timeBefore;
 	}
