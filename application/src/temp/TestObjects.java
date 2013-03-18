@@ -33,10 +33,10 @@ public class TestObjects {
 		return new Authentication("ALICE", "123", LOGIN );
 	}
 	public static Alarm getAlarm00() {
-		return new Alarm(-1, TIME_0, "");
+		return new Alarm(TIME_0, "");
 	}
 	public static Alarm getAlarm01() {
-		return new Alarm(-1, TIME_1, DESCRIPTION);
+		return new Alarm(TIME_1, DESCRIPTION);
 	}
 	
 	public static Appointment getAppointment00() {
