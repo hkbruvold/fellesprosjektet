@@ -171,13 +171,14 @@ public class CalendarPane extends JPanel {
 		panel.add(comp);
 	}
 	
-	public void addEvent(NewEventWindow event) {
-		String start = (new SimpleDateFormat("MM HH mm u")).format(event.getModel().getStartDateTime());
-		String end = (new SimpleDateFormat("MM HH mm u")).format(event.getModel().getEndDateTime());
+	public void addEvent(Event event) {
+		String start = (new SimpleDateFormat("MM HH mm u")).format(event.getStartDateTime());
+		String end = (new SimpleDateFormat("MM HH mm u")).format(event.getEndDateTime());
 		int day = Integer.parseInt(start.substring(9, 10));
 		int hour = Integer.parseInt(start.substring(3, 5));
 		int duration = Integer.parseInt(end.substring(3, 5)) - Integer.parseInt(start.substring(3, 5));
-		addToCalendar(event, day, hour, 1, duration);
+		EventComponent comp = new EventComponent(event);
+		addToCalendar(comp, day, hour, 1, duration);
 	}
 	
 	public static void setWeek(int newweek){

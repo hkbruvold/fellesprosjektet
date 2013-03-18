@@ -64,21 +64,10 @@ public class NewEventWindow extends JPanel implements ActionListener, ItemListen
 	private User user;
 	private User[] userArray;
 	
-	private Event model;
-
-	public void NewEventView(Event model) {
-		this.model = model;
-	}
-
-	public Event getModel() {
-		return model;
-	}
-
-	public void setModel(Event model) {
-		this.model = model;
-	}
-
-	public NewEventWindow(Calendar calendar, User user, User[] userArray) {
+	private CalendarPane calendarPane;
+	
+	public NewEventWindow(CalendarPane calendarPane, Calendar calendar, User user, User[] userArray) {
+		this.calendarPane = calendarPane;
 		this.calendar = calendar;
 		this.user = user;
 		this.userArray = userArray;
@@ -92,7 +81,8 @@ public class NewEventWindow extends JPanel implements ActionListener, ItemListen
 		frame.setVisible(true);
 	}
 	
-	public NewEventWindow(Event event, User[] userArray) {
+	public NewEventWindow(CalendarPane calendarPane, Event event, User[] userArray) {
+		this.calendarPane = calendarPane;
 		this.calendarEvent = event;
 		this.calendar = event.getCalendar();
 		this.userArray = userArray;
@@ -281,7 +271,7 @@ public class NewEventWindow extends JPanel implements ActionListener, ItemListen
 			} else {
 				calendarEvent = new Appointment(-1, calendar, startDateTime, endDateTime, description, location, alarm, user);
 			}
-			CalendarPane.addEvent(calendarEvent);
+			calendarPane.addEvent(calendarEvent);
 			// TODO save new event, set the message string for alarm
 			XMLTranslator.toXML(calendarEvent);
 			frame.dispose(); // Close if successful; show error message if not?
@@ -299,7 +289,7 @@ public class NewEventWindow extends JPanel implements ActionListener, ItemListen
 	
 	public static void main(String[] args) {
 //		new NewEventWindow(TestObjects.getCalendar00(), TestObjects.getUser02(), TestObjects.getUserArray01());
-		new NewEventWindow(TestObjects.getMeeting01(), TestObjects.getUserArray01());
+		new NewEventWindow(new CalendarPane(), TestObjects.getMeeting01(), TestObjects.getUserArray01());
 	}
 
 

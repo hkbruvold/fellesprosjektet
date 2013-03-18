@@ -152,7 +152,7 @@ public class MainWindow extends JFrame {
 		JButton btnnewEvent = new JButton("New Event");
 		btnnewEvent.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				new NewEventWindow(TestObjects.getCalendar00(), TestObjects.getUser00(), TestObjects.getUserArray01());
+				new NewEventWindow(calendarPane, TestObjects.getCalendar00(), TestObjects.getUser00(), TestObjects.getUserArray01());
 			}
 		});
 		verticalBox.add(btnnewEvent);
