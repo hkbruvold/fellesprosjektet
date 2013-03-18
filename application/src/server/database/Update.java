@@ -60,7 +60,9 @@ public class Update {
 		values.append("'").append(alarm.getMessage()).append("'").append(", ");
 		values.append("'").append(alarm.getOwner().getUsername()).append("'").append(", ");
 		values.append(alarm.getEvent().getId()).append(" ");
-		dbComm.update(String.format(INSERT_INTO_VALUES, TABLE_ALARM, FIELDS_ALARM, values.toString()));
+		String updateString = String.format(INSERT_INTO_VALUES, TABLE_ALARM, FIELDS_ALARM, values.toString());
+		System.out.println(updateString);
+//		dbComm.update(updateString);
 	}
 	
 	public void insertEvent(Event event) {
@@ -75,12 +77,42 @@ public class Update {
 		} else if (event instanceof Meeting) {
 			values.append(BIT_TRUE).append(" ");
 		}
-		dbComm.update(String.format(INSERT_INTO_VALUES, TABLE_EVENT, FIELDS_EVENT, values.toString()));
+		String updateString = String.format(INSERT_INTO_VALUES, TABLE_EVENT, FIELDS_EVENT, values.toString());
+		System.out.println(updateString);
+//		dbComm.update(updateString);
 		if (event instanceof Meeting) {
 			// TODO add relations!
 		}
 	}
 	
+	public void insertGroup(Group group) {
+		StringBuilder values = new StringBuilder();
+		values.append(group.getId()).append(", ");
+		values.append("'").append(group.getName()).append("'").append(", ");
+		values.append("'").append(group.getDescription()).append("'").append(" ");
+		String updateString = String.format(INSERT_INTO_VALUES, TABLE_GROUPS, FIELDS_GROUPS, values.toString());
+		System.out.println(updateString);
+//		dbComm.update(updateString);
+		// TODO relations
+	}
+	
+	public void insertNotification(Notification notification) {
+		StringBuilder values = new StringBuilder();
+		values.append(notification.getId()).append(", ");
+		values.append("'").append(notification.getMessage()).append("'").append(" ");
+		String updateString = String.format(INSERT_INTO_VALUES, TABLE_NOTIFICATION, FIELDS_NOTIFICATION, values.toString());
+		System.out.println(updateString);
+//		dbComm.update(updateString);
+		// TODO relations
+	}
+	
+	public void insertRoom(Room room) {
+		StringBuilder values = new StringBuilder();
+		
+		String updateString = String.format(INSERT_INTO_VALUES, TABLE_ROOM, FIELDS_ROOM, values.toString());
+		System.out.println(updateString);
+		dbComm.update(updateString);
+	}
 	
 	// TODO Add insert, update and delete methods
 	// NB! Remember relations!
@@ -91,6 +123,9 @@ public class Update {
 		DatabaseCommunication dbComm = new DatabaseCommunication(dbConn);
 		Update update = new Update(TestObjects.getUser00(), dbComm);
 		update.insertAlarm(TestObjects.getAlarm00());
+		update.insertEvent(TestObjects.getAppointment00());
+		update.insertGroup(TestObjects.getGroup02());
+		update.insertNotification(TestObjects.getNotification01());
 	}
 
 }
