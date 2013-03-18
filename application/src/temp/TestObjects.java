@@ -22,8 +22,8 @@ public class TestObjects {
 	private static final String LOGOUT = "logout";
 	private static final String DATE_0 = "2013-10-10";
 	private static final String DATE_1 = "2013-10-12";
-	private static final String TIME_0 = "20.00";
-	private static final String TIME_1 = "22.00";
+	private static final String TIME_0 = "20:00";
+	private static final String TIME_1 = "22:00";
 	private static final String DATE_TIME_0 = DATE_0 + " " + TIME_0;
 	private static final String DATE_TIME_1 = DATE_1 + " " + TIME_1;
 	private static final String DESCRIPTION = "Description";
@@ -33,17 +33,17 @@ public class TestObjects {
 		return new Authentication("ALICE", "123", LOGIN );
 	}
 	public static Alarm getAlarm00() {
-		return new Alarm(TIME_0, "");
+		return new Alarm(TIME_0, "", getUser00(), getAppointment00());
 	}
 	public static Alarm getAlarm01() {
-		return new Alarm(TIME_1, DESCRIPTION);
+		return new Alarm(TIME_1, DESCRIPTION, getUser01(), getMeeting01());
 	}
 	
 	public static Appointment getAppointment00() {
-		return new Appointment(-1, getCalendar00(), DATE_TIME_0, DATE_TIME_1, DESCRIPTION, LOCATION, getAlarm00(), getUser00());
+		return new Appointment(2, getCalendar00(), DATE_TIME_0, DATE_TIME_1, DESCRIPTION, LOCATION, getUser00());
 	}
 	public static Appointment getAppointment01() {
-		return new Appointment(-1, getCalendar01(), DATE_TIME_0, DATE_TIME_1, DESCRIPTION, LOCATION, getAlarm01(), getUser01());
+		return new Appointment(2, getCalendar01(), DATE_TIME_0, DATE_TIME_1, DESCRIPTION, LOCATION, getUser01());
 	}
 	
 	public static Calendar getCalendar00() {
@@ -78,13 +78,13 @@ public class TestObjects {
 	}
 	
 	public static Meeting getMeeting00() {
-		Meeting meeting = new Meeting(-1, getCalendar00(), DATE_TIME_0, DATE_TIME_1, DESCRIPTION, LOCATION, getAlarm00(), getUser00());
+		Meeting meeting = new Meeting(-1, getCalendar00(), DATE_TIME_0, DATE_TIME_1, DESCRIPTION, LOCATION, getUser00());
 		meeting.acceptInvite(getUser01());
 		meeting.declineInvite(getUser02());
 		return meeting;
 	}
 	public static Meeting getMeeting01() {
-		Meeting meeting = new Meeting(-1, getCalendar01(), DATE_TIME_0, DATE_TIME_1, DESCRIPTION, LOCATION, getAlarm01(), getUser01());
+		Meeting meeting = new Meeting(-1, getCalendar01(), DATE_TIME_0, DATE_TIME_1, DESCRIPTION, LOCATION, getUser01());
 		meeting.inviteParticipant(getUser00());
 		meeting.inviteParticipant(getUser02());
 		return meeting;

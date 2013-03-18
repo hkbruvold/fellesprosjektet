@@ -26,14 +26,13 @@ public abstract class Event implements Serializeable {
 	/**
 	 * Use id = -1 when creating new objects. Actual ID should come from database
 	 */
-	public Event(int id, Calendar calendar, String startDateTime, String endDateTime, String description, String location, Alarm alarm) {
+	public Event(int id, Calendar calendar, String startDateTime, String endDateTime, String description, String location) {
 		this.id = id;
 		this.calendar = calendar;
 		this.startDateTime = startDateTime;
 		this.endDateTime = endDateTime;
 		this.description = description;
 		this.location = location;
-		this.alarm = alarm;
 	}
 	
 	public int getId() {

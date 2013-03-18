@@ -8,8 +8,8 @@ public class Appointment extends Event implements Serializeable {
 	/**
 	 * Use id = -1 when creating new objects. Actual ID should come from database
 	 */
-	public Appointment(int id, Calendar calendar, String startDateTime, String endDateTime, String description, String location, Alarm alarm, User owner) { // TODO temp
-		super(id, calendar, startDateTime, endDateTime, description, location, alarm);
+	public Appointment(int id, Calendar calendar, String startDateTime, String endDateTime, String description, String location, User owner) { // TODO temp
+		super(id, calendar, startDateTime, endDateTime, description, location);
 		this.owner = owner;
 	}
 	

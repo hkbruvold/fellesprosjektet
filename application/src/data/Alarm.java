@@ -8,9 +8,11 @@ public class Alarm implements Serializeable {
 	
 	public Alarm(){
 	}
-	public Alarm(String timeBefore, String message) {
+	public Alarm(String timeBefore, String message, User owner, Event event) {
 		this.timeBefore = timeBefore;
 		this.message = message;
+		this.owner = owner;
+		this.event = event;
 	}
 	
 	public String toString() {
