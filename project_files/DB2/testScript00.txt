@@ -43,16 +43,22 @@ INSERT event
         endDateTime='2013-03-12 13:00',
         location='Trondheim',
         description='test1234',
-        owner='ola.nordmann',
         isMeeting=1;
+
+INSERT isOwner
+    SET username='ola.nordmann',
+        eventID=1;
 
 INSERT event
     SET startDateTime='2013-03-14 15:00',
         endDateTime='2013-03-12 16:20',
         location='NTNU',
         description='testing',
-        owner='kari.nordmann',
         isMeeting=0;
+
+INSERT isOwner
+    SET username='kari.nordmann',
+        eventID=2;
 
 INSERT isParticipant
     SET username='kari.nordmann',
