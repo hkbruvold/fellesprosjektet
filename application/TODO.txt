@@ -2,11 +2,15 @@ TODO:
 
 __Unassigned__
 
-Add option to add alarm to meeting (when invited)
 ??? Add interface for adding users, adding users to groups
-Server-client communication (sending/receiving objects), High priority
 Make TODO list
 Main/calendar window (framework in place)
+
+__Eivind__???
+Server-client communication (sending/receiving objects), High priority
+
+__Hans-Kristian__
+Add option to add alarm to meeting (when invited)
 
 __Kaare__
 Add window for making/editing groups
