@@ -24,7 +24,7 @@ public abstract class Event implements Serializeable {
 	public Event(){
 	}
 	/**
-	 * Use id = -1 when creating new objects. Actual ID should come from database
+	 * Use id = 0 when creating new objects. Actual ID should come from database
 	 */
 	public Event(int id, Calendar calendar, String startDateTime, String endDateTime, String description, String location) {
 		this.id = id;

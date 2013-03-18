@@ -6,7 +6,7 @@ public class Appointment extends Event implements Serializeable {
 	public Appointment(){
 	}
 	/**
-	 * Use id = -1 when creating new objects. Actual ID should come from database
+	 * Use id = 0 when creating new objects. Actual ID should come from database
 	 */
 	public Appointment(int id, Calendar calendar, String startDateTime, String endDateTime, String description, String location, User owner) { // TODO temp
 		super(id, calendar, startDateTime, endDateTime, description, location);

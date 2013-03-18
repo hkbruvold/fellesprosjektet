@@ -12,7 +12,7 @@ public class Group implements Serializeable {
 	public Group(){
 	}
 	/**
-	 * Use id = -1 when creating new objects. Actual id should come from database
+	 * Use id = 0 when creating new objects. Actual id should come from database
 	 */
 	public Group(int id, String name, String description) {
 		this.name = name;

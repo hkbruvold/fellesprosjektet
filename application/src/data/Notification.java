@@ -9,7 +9,7 @@ public class Notification implements Serializeable {
 	public Notification(){
 	}
 	/**
-	 * Use id = -1 when creating new objects. Actual ID should come from database
+	 * Use id = 0 when creating new objects. Actual ID should come from database
 	 */
 	public Notification(int id, String message) {
 		this(id, message, null);

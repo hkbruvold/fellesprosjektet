@@ -6,7 +6,7 @@ public class Room {
 	private String description;
 	
 	/**
-	 * Use id = -1 when creating new objects. Actual ID should come from database
+	 * Use id = 0 when creating new objects. Actual ID should come from database
 	 */
 	public Room() {
 	}
