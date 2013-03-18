@@ -18,6 +18,7 @@ import data.Alarm;
 import data.Appointment;
 import data.Calendar;
 import data.Meeting;
+import data.Room;
 import data.User;
 import data.XMLTranslator;
 
@@ -234,6 +235,12 @@ public class NewEventWindow extends JPanel implements ActionListener, ItemListen
 		closeButton.addActionListener(this);
 		saveButton.addActionListener(this);
 	}
+	
+	public void setRoom(Room room) {
+		// TODO add room to event? add room to this?
+		// NB! Need to update database!!
+		locationField.setText(room.toString());
+	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -244,12 +251,13 @@ public class NewEventWindow extends JPanel implements ActionListener, ItemListen
 			frame.dispose();
 		} else if (e.getSource().equals(locationButton)) {
 			if (locationButton.getText().equals(BUTTON_LOCATION_SET_ROOM)) {
-				new RoomSelectionWindow(); // TODO needs to return the room.
+				new RoomSelectionWindow(this);
 				locationField.setEnabled(false);
 				locationButton.setText(BUTTON_LOCATION_SET_TEXT);
 			} else if (locationButton.getText().equals(BUTTON_LOCATION_SET_TEXT)) {
 				// TODO
 				locationField.setEnabled(true);
+				locationField.setText("");
 				locationButton.setText(BUTTON_LOCATION_SET_ROOM);
 			}
 		} else if (e.getSource().equals(saveButton)) {

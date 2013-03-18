@@ -16,6 +16,10 @@ public class Room {
 		this.description = description;
 	}
 	
+	public String toString() {
+		return description + " (" + id + ")";
+	}
+	
 	public int getId() {
 		return id;
 	}
@@ -34,10 +38,5 @@ public class Room {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	@Override
-	public String toString() {
-		return ""+description+" ("+size+")";
-	}
-	
 	
 }

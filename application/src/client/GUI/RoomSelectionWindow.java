@@ -7,6 +7,7 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import javax.swing.JButton;
 import javax.swing.JComponent;
@@ -15,6 +16,9 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.ListModel;
+import javax.swing.ListSelectionModel;
+
+import temp.TestObjects;
 
 import data.Notification;
 import data.Room;
@@ -29,17 +33,23 @@ public class RoomSelectionWindow extends JPanel implements ActionListener {
 	private static final int LINE_START = GridBagConstraints.LINE_START;
 	private static final int LINE_END = GridBagConstraints.LINE_END;
 
-	private ArrayList<Room> availRoomList=new ArrayList<Room>();  //import from server
-	private String[] testRooms ={temp.TestObjects.getRoom00().toString(),temp.TestObjects.getRoom01().toString()};
-	private String[] availRooms;
+	private ArrayList<Room> availRoomList;
 	private JFrame frame;
-	private JList<String> roomList; // TODO?
+	private JList<Room> roomList = new JList<Room>();
 	private JButton closeButton;
 	private JButton saveButton;
 	private GridBagConstraints c;
 
-	public RoomSelectionWindow() {
-		
+	private NewEventWindow newEventWindow;
+	
+	public RoomSelectionWindow() { // Temporary; For testing
+		initFrame();
+		initPanel();
+		frame.pack();
+		frame.setVisible(true);
+	}
+	public RoomSelectionWindow(NewEventWindow newEventWindow) {
+		this.newEventWindow = newEventWindow;
 		initFrame();
 		initPanel();
 		
@@ -61,12 +71,12 @@ public class RoomSelectionWindow extends JPanel implements ActionListener {
 		
 		saveButton = new JButton(BUTTON_SAVE);
 		closeButton = new JButton(BUTTON_CLOSE);
-		roomList = new JList<String>(testRooms);
+		roomList = new JList<Room>(getRoomArray());
+		roomList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		
 		c.insets = new Insets(0,0,5,0);
 		c.ipadx = 10;
 		
-		setAvailRooms();
 		addComponent(roomList, 0, 0, 1, LINE_END);
 		addComponent(closeButton, 0, 1, 1, LINE_START);
 		addComponent(saveButton, 1, 1, 1, LINE_END);
@@ -85,15 +95,30 @@ public class RoomSelectionWindow extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource().equals(closeButton)) {
 			frame.dispose();
+		} else if (e.getSource().equals(saveButton)) {
+			newEventWindow.setRoom(roomList.getSelectedValue());
+			frame.dispose();
 		}
 	}
 	
-	public void setAvailRooms(){		
-		availRooms=new String[availRoomList.size()];
-		
-		for (int i=0; i<availRoomList.size();i++){
-			availRooms[i]=availRoomList.get(i).toString();
+	private Room[] getRoomArray() {
+		getAvailableRooms();
+		return makeRoomArray();
+	}
+	private void getAvailableRooms() {
+		availRoomList = new ArrayList<Room>();
+		// TODO get from server (and database)
+		availRoomList.add(TestObjects.getRoom00()); // Temporary!
+		availRoomList.add(TestObjects.getRoom01()); // Temporary!
+		availRoomList.add(TestObjects.getRoom02()); // Temporary!
+	}
+	private Room[] makeRoomArray() {
+		Room[] rooms = new Room[availRoomList.size()];
+		int i = 0;
+		for (Room room : availRoomList) {
+			rooms[i++] = room;
 		}
+		return rooms;
 	}
 	
 	public static void main(String[] args) {
