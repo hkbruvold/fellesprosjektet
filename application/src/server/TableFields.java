@@ -16,7 +16,6 @@ public enum TableFields {
 			"endDateTime",
 			"location",
 			"description",
-			"owner",
 			"isMeeting"
 	}),
 	GROUPS ("groups",
@@ -28,8 +27,7 @@ public enum TableFields {
 	NOTIFICATION("notification",
 			new String[] {
 			"notificationID",
-			"description",
-			"eventID"
+			"description"
 	}),
 	ROOM("room",
 			new String[] {
@@ -49,6 +47,11 @@ public enum TableFields {
 			"username",
 			"groupID"
 	}),
+	IS_OWNER("isOwner",
+			new String[] {
+			"username",
+			"eventID"
+	}),
 	IS_PARTICIPANT("isParticipant",
 			new String[] {
 			"username",
@@ -59,6 +62,11 @@ public enum TableFields {
 			new String[] {
 			"username",
 			"notification"
+	}),
+	NOTIFICATION_FOR_EVENT("notificationForEvent",
+			new String[] {
+			"notificationID",
+			"eventID"
 	}),
 	RESERVED_ROOM("reservedRoom",
 			new String[] {

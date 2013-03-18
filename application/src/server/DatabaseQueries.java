@@ -92,7 +92,7 @@ public class DatabaseQueries {
 		String end = p.getProperty("endDateTime");
 		String location = p.getProperty("location");
 		String description = p.getProperty("description");
-		String owner = p.getProperty("owner");
+//		String owner = p.getProperty("owner");
 		String isMeeting = p.getProperty("isMeeting");
 		
 		if (isMeeting.equals(BIT_FALSE)) {
@@ -107,10 +107,10 @@ public class DatabaseQueries {
 		event.setDescription(description);
 		// remember room reservation?
 		if (event instanceof Appointment) {
-			((Appointment)event).setOwner(queryUser(owner));
+//			((Appointment)event).setOwner(queryUser(owner));
 			// get alarm
 		} else if (event instanceof Meeting) {
-			((Meeting)event).setLeader(queryUser(owner));
+//			((Meeting)event).setLeader(queryUser(owner));
 			// get alarm
 			// remember to add participants!
 		}
@@ -162,11 +162,11 @@ public class DatabaseQueries {
 		Notification notification = new Notification();
 		String id = p.getProperty("notificationID");
 		String description = p.getProperty("description");
-		String eventID = p.getProperty("eventID");
+//		String eventID = p.getProperty("eventID");
 		
 		notification.setId(Integer.parseInt(id));
 		notification.setMessage(description);
-		notification.setEvent(eventID != null ? queryEvent(Integer.parseInt(eventID)) : null);
+//		notification.setEvent(eventID != null ? queryEvent(Integer.parseInt(eventID)) : null);
 		return notification;
 	}
 
@@ -226,8 +226,10 @@ public class DatabaseQueries {
 
 	// TODO notification_to
 	// TODO reserved_room
-	
-	// TODO consider: is_member_of & is_participant
+	// TODO is_member_of
+	// TODO is_owner
+	// TODO is_participant
+	// TODO notification_for_event
 
 
 
