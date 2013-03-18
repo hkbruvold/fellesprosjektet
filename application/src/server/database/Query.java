@@ -3,7 +3,6 @@ package server.database;
 import java.util.ArrayList;
 import java.util.Properties;
 
-import server.TableFields;
 import temp.TestObjects;
 
 import data.*;

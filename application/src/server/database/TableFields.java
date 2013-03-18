@@ -1,4 +1,4 @@
-package server;
+package server.database;
 
 public enum TableFields {
 	ALARM ("alarm",
