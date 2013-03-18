@@ -87,7 +87,7 @@ public class MainWindow extends JFrame {
 			}
 		});
 		btnDecrease.setMinimumSize(new Dimension(16, 16));
-		btnDecrease.setIcon(new ImageIcon(MainWindow.class.getResource("/client/GUI/gtk-remove.png")));
+		btnDecrease.setIcon(new ImageIcon(MainWindow.class.getResource("/gtk-remove.png")));
 		GridBagConstraints gbc_btnDecrease = new GridBagConstraints();
 		gbc_btnDecrease.anchor = GridBagConstraints.EAST;
 		gbc_btnDecrease.insets = new Insets(0, 0, 5, 5);
@@ -109,7 +109,7 @@ public class MainWindow extends JFrame {
 			}
 		});
 		weekIncrease.setMinimumSize(new Dimension(16, 16));
-		weekIncrease.setIcon(new ImageIcon(MainWindow.class.getResource("/client/GUI/gtk-add.png")));
+		weekIncrease.setIcon(new ImageIcon(MainWindow.class.getResource("/gtk-add.png")));
 		GridBagConstraints gbc_weekIncrease = new GridBagConstraints();
 		gbc_weekIncrease.anchor = GridBagConstraints.EAST;
 		gbc_weekIncrease.insets = new Insets(0, 0, 5, 5);
