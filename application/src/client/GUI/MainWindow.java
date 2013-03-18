@@ -73,7 +73,7 @@ public class MainWindow extends JFrame {
 			}
 		});
 		
-		JLabel chooseWeekLabel = new JLabel("Week:");
+		JLabel chooseWeekLabel = new JLabel("Uke:");
 		GridBagConstraints gbc_chooseWeekLabel = new GridBagConstraints();
 		gbc_chooseWeekLabel.insets = new Insets(0, 0, 5, 5);
 		gbc_chooseWeekLabel.gridx = 2;
@@ -117,7 +117,7 @@ public class MainWindow extends JFrame {
 		gbc_weekIncrease.gridy = 1;
 		getContentPane().add(weekIncrease, gbc_weekIncrease);
 		
-		JLabel lblYear = new JLabel("Year:");
+		JLabel lblYear = new JLabel("\u00C5r:");
 		GridBagConstraints gbc_lblYear = new GridBagConstraints();
 		gbc_lblYear.insets = new Insets(0, 0, 5, 5);
 		gbc_lblYear.gridx = 7;
@@ -149,7 +149,7 @@ public class MainWindow extends JFrame {
 		gbc_verticalBox.gridy = 2;
 		getContentPane().add(verticalBox, gbc_verticalBox);
 		
-		JButton btnnewEvent = new JButton("New Event");
+		JButton btnnewEvent = new JButton("Ny Avtale");
 		btnnewEvent.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				new NewEventWindow(calendarPane, TestObjects.getCalendar00(), TestObjects.getUser00(), TestObjects.getUserArray01());
@@ -157,10 +157,10 @@ public class MainWindow extends JFrame {
 		});
 		verticalBox.add(btnnewEvent);
 		
-		JButton btnMessages = new JButton("Messages");
+		JButton btnMessages = new JButton("Meldinger");
 		verticalBox.add(btnMessages);
 		
-		JButton btnViewCalendars = new JButton("View Calendars");
+		JButton btnViewCalendars = new JButton("Se kalendre");
 		verticalBox.add(btnViewCalendars);
 		
 		calendarPane = new CalendarPane();
