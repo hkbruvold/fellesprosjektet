@@ -94,7 +94,7 @@ public class TestObjects {
 		return new Notification(-1, DESCRIPTION);
 	}
 	public static Notification getNotification01() {
-		return new Notification(-1, DESCRIPTION + "\n" + LOCATION);
+		return new Notification(-1, DESCRIPTION + " : " + LOCATION);
 	}
 	
 	public static User getUser00() {
