@@ -62,7 +62,7 @@ public class NewUserWindow extends JFrame {
 		gbl_contentPane.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		contentPane.setLayout(gbl_contentPane);
 		
-		JLabel lblNewLabel = new JLabel("Username");
+		JLabel lblNewLabel = new JLabel("Brukernavn");
 		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
 		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
 		gbc_lblNewLabel.gridx = 1;
@@ -78,7 +78,7 @@ public class NewUserWindow extends JFrame {
 		contentPane.add(usernameField, gbc_usernameField);
 		usernameField.setColumns(10);
 		
-		JLabel lblNewLabel_1 = new JLabel("Password");
+		JLabel lblNewLabel_1 = new JLabel("Passord");
 		GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
 		gbc_lblNewLabel_1.insets = new Insets(0, 0, 5, 5);
 		gbc_lblNewLabel_1.gridx = 1;
@@ -94,7 +94,7 @@ public class NewUserWindow extends JFrame {
 		contentPane.add(passwordField, gbc_passwordField);
 		passwordField.setColumns(10);
 		
-		JLabel lblNewLabel_2 = new JLabel("Name");
+		JLabel lblNewLabel_2 = new JLabel("Navn");
 		GridBagConstraints gbc_lblNewLabel_2 = new GridBagConstraints();
 		gbc_lblNewLabel_2.insets = new Insets(0, 0, 5, 5);
 		gbc_lblNewLabel_2.gridx = 1;
@@ -132,7 +132,7 @@ public class NewUserWindow extends JFrame {
 		gbc_horizontalBox.gridy = 5;
 		contentPane.add(horizontalBox, gbc_horizontalBox);
 		
-		JButton btnNewButton = new JButton("Save");
+		JButton btnNewButton = new JButton("Lagre");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				//TODO send to database
@@ -142,7 +142,7 @@ public class NewUserWindow extends JFrame {
 		});
 		horizontalBox.add(btnNewButton);
 		
-		JButton btnNewButton_1 = new JButton("Exit");
+		JButton btnNewButton_1 = new JButton("Lukk");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				jFrame.dispose();

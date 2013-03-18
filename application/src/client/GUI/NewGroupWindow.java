@@ -57,7 +57,7 @@ public class NewGroupWindow extends JFrame {
 		gbl_contentPane.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		contentPane.setLayout(gbl_contentPane);
 		
-		JLabel labelName = new JLabel("Name");
+		JLabel labelName = new JLabel("Navn");
 		GridBagConstraints gbc_labelName = new GridBagConstraints();
 		gbc_labelName.anchor = GridBagConstraints.EAST;
 		gbc_labelName.insets = new Insets(0, 0, 5, 5);
@@ -74,7 +74,7 @@ public class NewGroupWindow extends JFrame {
 		contentPane.add(textField, gbc_textField);
 		textField.setColumns(10);
 		
-		JLabel labelDescription = new JLabel("Description");
+		JLabel labelDescription = new JLabel("Beskrivelse");
 		GridBagConstraints gbc_labelDescription = new GridBagConstraints();
 		gbc_labelDescription.anchor = GridBagConstraints.EAST;
 		gbc_labelDescription.insets = new Insets(0, 0, 5, 5);
@@ -91,7 +91,7 @@ public class NewGroupWindow extends JFrame {
 		contentPane.add(textField_1, gbc_textField_1);
 		textField_1.setColumns(10);
 		
-		JLabel labelMembers = new JLabel("Members");
+		JLabel labelMembers = new JLabel("Medlemmer");
 		GridBagConstraints gbc_labelMembers = new GridBagConstraints();
 		gbc_labelMembers.anchor = GridBagConstraints.WEST;
 		gbc_labelMembers.insets = new Insets(0, 0, 5, 5);
@@ -115,10 +115,10 @@ public class NewGroupWindow extends JFrame {
 		gbc_horizontalBox.gridy = 7;
 		contentPane.add(horizontalBox, gbc_horizontalBox);
 		
-		btnSave = new JButton("Save");
+		btnSave = new JButton("Lagre");
 		horizontalBox.add(btnSave);
 		
-		btnExit = new JButton("Exit");
+		btnExit = new JButton("Lukk");
 		horizontalBox.add(btnExit);
 	}
 
