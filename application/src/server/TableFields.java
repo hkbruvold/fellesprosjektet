@@ -3,7 +3,6 @@ package server;
 public enum TableFields {
 	ALARM ("alarm",
 			new String[] {
-			"alarmID",
 			"time",
 			"message",
 			"username",

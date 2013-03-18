@@ -67,5 +67,17 @@ public class Meeting extends Event implements Serializeable {
 	public ArrayList<User> getUsersDeclined() {
 		return usersDeclined;
 	}
+	public void setUsersInvited(ArrayList<User> invited) {
+		usersInvited.clear();
+		usersInvited.addAll(invited);
+	}
+	public void setUsersAccepted(ArrayList<User> accepted) {
+		usersAccepted.clear();
+		usersAccepted.addAll(accepted);
+	}
+	public void setUsersDeclined(ArrayList<User> declined) {
+		usersDeclined.clear();
+		usersDeclined.addAll(declined);
+	}
 	
 }

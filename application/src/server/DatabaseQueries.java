@@ -40,6 +40,10 @@ public class DatabaseQueries {
 	private static final String SELECT_FROM = "SELECT %s FROM %s";
 	private static final String SELECT_FROM_WHERE = "SELECT %s FROM %s WHERE %s";
 
+	private static final String PARTICIPANT_STATUS_INVITED = "0";
+	private static final String PARTICIPANT_STATUS_ACCEPTED = "1";
+	private static final String PARTICIPANT_STATUS_DECLINED = "2";
+	
 	private User currentUser;
 	private DatabaseCommunication dbComm;
 
@@ -56,22 +60,19 @@ public class DatabaseQueries {
 		}
 		return alarms;
 	}
-	public Alarm queryAlarm(int alarmID) {
-		ArrayList<Properties> pl = dbComm.query(String.format(SELECT_FROM_WHERE, FIELDS_ALARM, TABLE_ALARM, "alarmID=" + alarmID));
+	private Alarm queryAlarm(User user, int eventID) {
+		ArrayList<Properties> pl = dbComm.query(String.format(SELECT_FROM_WHERE, FIELDS_ALARM, TABLE_ALARM, "username='" + user.getUsername() + "', eventID=" + eventID));
 		Properties p = pl.get(0);
 		return makeAlarm(p);
 	}
 	private Alarm makeAlarm(Properties p) {
 		Alarm alarm = new Alarm();
-		String id = p.getProperty("alarmID");
-		String dateTime = p.getProperty("time");
+		String time = p.getProperty("time");
 		String message = p.getProperty("message");
 		String username = p.getProperty("username");
 		String eventID = p.getProperty("eventID");
 
-		alarm.setID(Integer.parseInt(id));
-		alarm.setDate(dateTime.split(" ")[0]);
-		alarm.setTime(dateTime.split(" ")[1]);
+		alarm.setTime(time);
 		alarm.setMessage(message);
 		alarm.setOwner(queryUser(username));
 		alarm.setEvent(queryEvent(Integer.parseInt(eventID)));
@@ -117,7 +118,12 @@ public class DatabaseQueries {
 			((Appointment)event).setOwner(queryOwner(Integer.parseInt(id)));
 		} else if (event instanceof Meeting) {
 			((Meeting)event).setLeader(queryOwner(Integer.parseInt(id)));
-			// remember to add participants!
+			ArrayList<User> invited = queryParticipants(Integer.parseInt(id), PARTICIPANT_STATUS_INVITED);
+			ArrayList<User> accepted = queryParticipants(Integer.parseInt(id), PARTICIPANT_STATUS_ACCEPTED);
+			ArrayList<User> declined = queryParticipants(Integer.parseInt(id), PARTICIPANT_STATUS_DECLINED);
+			((Meeting)event).setUsersInvited(invited);
+			((Meeting)event).setUsersAccepted(accepted);
+			((Meeting)event).setUsersDeclined(declined);
 		}
 		return event; 
 	}
@@ -235,10 +241,13 @@ public class DatabaseQueries {
 		return queryUser(p.getProperty("username"));
 	}
 	
-	private Alarm queryAlarm(User user, int eventID) {
-		ArrayList<Properties> pl = dbComm.query(String.format(SELECT_FROM_WHERE, FIELDS_ALARM, TABLE_ALARM, "username='" + user.getUsername() + "', eventID=" + eventID));
-		Properties p = pl.get(0);
-		return makeAlarm(p);
+	private ArrayList<User> queryParticipants(int eventID, String status) {
+		ArrayList<Properties> pl = dbComm.query(String.format(SELECT_FROM_WHERE, FIELDS_IS_PARTICIPANT, TABLE_IS_PARTICIPANT, "eventID=" + eventID + ", status=" + status));
+		ArrayList<User> users = new ArrayList<User>();
+		for (Properties p : pl) {
+			users.add(queryUser(p.getProperty("username")));
+		}
+		return users;
 	}
 	
 	// notification_to
@@ -253,8 +262,8 @@ public class DatabaseQueries {
 	public static void main(String[] args) {
 		DatabaseConnection dbConn = new DatabaseConnection("jdbc:mysql://localhost:3306/calendarDatabase", "root", "skip".toCharArray());
 		DatabaseCommunication dbComm = new DatabaseCommunication(dbConn);
-		DatabaseQueries dm = new DatabaseQueries(TestObjects.getUser00(), dbComm);
-		Event event = dm.queryEvent(2);
+		DatabaseQueries dq = new DatabaseQueries(TestObjects.getUser00(), dbComm);
+		Event event = dq.queryEvent(2);
 		System.out.println(event);
 	}
 }
