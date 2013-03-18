@@ -12,7 +12,10 @@ __Kaare__
 Add window for making/editing groups
 
 __Kjell__
-Database/application communication
+Database queries (mostly done)
+Database insert
+Database update
+Database delete
 
 __Vegard__
 Add option for selecting room in NewEventWindow
