@@ -5,7 +5,7 @@ import java.util.Properties;
 
 import data.*;
 
-public class DatabaseMethods {
+public class DatabaseQueries {
 	private static final String FIELDS_ALARM = TableFields.ALARM.getFieldsString();
 	private static final String FIELDS_EVENT = TableFields.EVENT.getFieldsString();
 	private static final String FIELDS_GROUPS = TableFields.GROUPS.getFieldsString();
@@ -35,8 +35,9 @@ public class DatabaseMethods {
 	private static final String SELECT_FROM_WHERE = "SELECT %s FROM %s WHERE %s";
 
 	private DatabaseCommunication dbComm;
+	private User currentUser;
 
-	public DatabaseMethods(DatabaseCommunication dbComm) {
+	public DatabaseQueries(DatabaseCommunication dbComm) {
 		this.dbComm = dbComm;
 	}
 
@@ -233,7 +234,7 @@ public class DatabaseMethods {
 	public static void main(String[] args) {
 		DatabaseConnection dbConn = new DatabaseConnection("jdbc:mysql://localhost:3306/calendarDatabase", "root", "skip".toCharArray());
 		DatabaseCommunication dbComm = new DatabaseCommunication(dbConn);
-		DatabaseMethods dm = new DatabaseMethods(dbComm);
+		DatabaseQueries dm = new DatabaseQueries(dbComm);
 		Event event = dm.queryEvent(2);
 		System.out.println(event);
 	}
