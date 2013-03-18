@@ -25,11 +25,12 @@ public class ProgramHub extends JPanel implements ActionListener {
 	private static final String BUTTON_TEST_DATABASE = "TestDatabase";
 	private static final String BUTTON_ALARM = "AlarmTest";
 	private static final String BUTTON_CLOSE = "Close";
+	private static final String BUTTON_NEW_GROUP = "New Group";
 	
 	private static final String TOOLTIP_BUTTON_OLD_EVENT = "NewEventWindow with a previously made event. Not yet fully implemented";
 
 	private JFrame frame;
-	private JButton loginButton, meetingInvitationButton, newEventButton, oldEventButton, notificationButton, testDatabaseButton, alarmButton, closeButton;
+	private JButton loginButton, meetingInvitationButton, newEventButton, oldEventButton, notificationButton, testDatabaseButton, alarmButton, newGroupButton, closeButton;
 	private GridBagConstraints c;
 
 	public ProgramHub() {
@@ -58,6 +59,7 @@ public class ProgramHub extends JPanel implements ActionListener {
 		notificationButton = new JButton(BUTTON_NOTIFICATION);
 		testDatabaseButton = new JButton(BUTTON_TEST_DATABASE);
 		oldEventButton = new JButton(BUTTON_OLD_EVENT);
+		newGroupButton = new JButton(BUTTON_NEW_GROUP);
 		alarmButton = new JButton(BUTTON_ALARM);
 		closeButton = new JButton(BUTTON_CLOSE);
 		
@@ -74,6 +76,7 @@ public class ProgramHub extends JPanel implements ActionListener {
 		addComponent(testDatabaseButton, 1, 1, 1);
 		addComponent(oldEventButton, 2, 1, 1);
 		addComponent(alarmButton, 0, 2, 1);
+		addComponent(newGroupButton,1,2,1);
 
 		c.insets = new Insets(5,0,0,0);
 		addComponent(closeButton, 0, 3, 1);
@@ -86,6 +89,7 @@ public class ProgramHub extends JPanel implements ActionListener {
 		oldEventButton.addActionListener(this);
 		alarmButton.addActionListener(this);
 		closeButton.addActionListener(this);
+		newGroupButton.addActionListener(this);
 	}
 	private void addComponent(JComponent component, int gridx, int gridy, int gridwidth) {
 		c.gridx = gridx;
@@ -112,7 +116,11 @@ public class ProgramHub extends JPanel implements ActionListener {
 			new NewEventWindow(new CalendarPane(), TestObjects.getMeeting01(), TestObjects.getUserArray01());
 		} else if (e.getSource().equals(alarmButton)) {
 			new AlarmWindow(TestObjects.getAlarm01());
+		} else if (e.getSource().equals(newGroupButton)) {
+			new NewGroupWindow();
 		}
+		
+		
 	}
 
 	public static void main(String[] args) {
