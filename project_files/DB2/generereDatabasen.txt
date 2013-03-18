@@ -22,12 +22,7 @@ CREATE TABLE event (
     endDateTime DATETIME NOT NULL,
     location VARCHAR(32),
     description TINYTEXT,
-    owner VARCHAR(32) NOT NULL,
     isMeeting BIT(1) NOT NULL,
-    FOREIGN KEY (owner) 
-        REFERENCES user(username)
-        ON UPDATE CASCADE
-        ON DELETE CASCADE,
     PRIMARY KEY (eventID)
 );
 
@@ -58,11 +53,6 @@ CREATE TABLE alarm (
 CREATE TABLE notification (
     notificationID INT NOT NULL AUTO_INCREMENT,
     description TINYTEXT,
-    eventID INT,
-    FOREIGN KEY (eventID) 
-        REFERENCES event(eventID) 
-        ON UPDATE CASCADE 
-        ON DELETE SET NULL,
     PRIMARY KEY (notificationID)
 );
 
