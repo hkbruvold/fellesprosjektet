@@ -70,6 +70,20 @@ CREATE TABLE isMemberOf (
     PRIMARY KEY (username, groupID)
 );
 
+CREATE TABLE isOwner (
+    username VARCHAR(32) NOT NULL,
+    eventID INT NOT NULL,
+    FOREIGN KEY (username)
+        REFERENCES user(username)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
+    FOREIGN KEY (eventID)
+        REFERENCES event(eventID)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
+    PRIMARY KEY (username, eventID)
+);
+
 CREATE TABLE notificationTo (
     username VARCHAR(32) NOT NULL,
     notificationID INT NOT NULL,
@@ -82,6 +96,20 @@ CREATE TABLE notificationTo (
         ON UPDATE CASCADE
         ON DELETE CASCADE,
     PRIMARY KEY (username, notificationID)
+);
+
+CREATE TABLE notificationForEvent (
+    notificationID INT NOT NULL,
+    eventID INT NOT NULL,
+    FOREIGN KEY (notificationID)
+        REFERENCES notification(notificationID)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
+    FOREIGN KEY (eventID)
+        REFERENCES event(eventID)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
+    PRIMARY KEY (notificationID, eventID)
 );
 
 CREATE TABLE reservedRoom (
