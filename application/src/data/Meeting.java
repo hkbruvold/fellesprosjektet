@@ -55,6 +55,9 @@ public class Meeting extends Event implements Serializeable {
 	public User getLeader() {
 		return leader;
 	}
+	public void setLeader(User leader) {
+		this.leader = leader;
+	}
 	public ArrayList<User> getUsersInvited() {
 		return usersInvited;
 	}
