@@ -53,7 +53,6 @@ public class CalendarPane extends JPanel {
 		currentDate = new Date();
 		year = Integer.parseInt((new SimpleDateFormat("yyyy")).format(currentDate));
 		week = Integer.parseInt((new SimpleDateFormat("w")).format(currentDate));
-		
 		initialize();
 	}
 
