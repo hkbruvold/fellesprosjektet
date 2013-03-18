@@ -34,8 +34,7 @@ CREATE TABLE room (
 );
 
 CREATE TABLE alarm (
-    alarmID INT NOT NULL AUTO_INCREMENT,
-    time DATETIME NOT NULL,
+    time TIME NOT NULL,
     message TINYTEXT,
     username VARCHAR(32) NOT NULL,
     eventID INT NOT NULL,
@@ -47,7 +46,7 @@ CREATE TABLE alarm (
         REFERENCES event(eventID)
         ON UPDATE CASCADE
         ON DELETE CASCADE,
-    PRIMARY KEY (alarmID)
+    PRIMARY KEY (username, eventID)
 );
 
 CREATE TABLE notification (

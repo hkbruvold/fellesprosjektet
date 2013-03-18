@@ -73,7 +73,7 @@ DELETE FROM event
     WHERE eventID=1;
 
 INSERT alarm
-    SET time='2013-03-15 16:00',
+    SET time='16:00',
         username='olanor',
         eventID=2;
 
