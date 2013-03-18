@@ -1,13 +1,14 @@
-package server;
+package server.database;
 
 import java.util.ArrayList;
 import java.util.Properties;
 
+import server.TableFields;
 import temp.TestObjects;
 
 import data.*;
 
-public class DatabaseQueries {
+public class Query {
 	private static final String FIELDS_ALARM = TableFields.ALARM.getFieldsString();
 	private static final String FIELDS_EVENT = TableFields.EVENT.getFieldsString();
 	private static final String FIELDS_GROUPS = TableFields.GROUPS.getFieldsString();
@@ -47,7 +48,7 @@ public class DatabaseQueries {
 	private User currentUser;
 	private DatabaseCommunication dbComm;
 
-	public DatabaseQueries(User currentUser, DatabaseCommunication dbComm) {
+	public Query(User currentUser, DatabaseCommunication dbComm) {
 		this.currentUser = currentUser;
 		this.dbComm = dbComm;
 	}
@@ -273,8 +274,8 @@ public class DatabaseQueries {
 	public static void main(String[] args) {
 		DatabaseConnection dbConn = new DatabaseConnection("jdbc:mysql://localhost:3306/calendarDatabase", "root", "skip".toCharArray());
 		DatabaseCommunication dbComm = new DatabaseCommunication(dbConn);
-		DatabaseQueries dq = new DatabaseQueries(TestObjects.getUser00(), dbComm);
-		Event event = dq.queryEvent(2);
+		Query query = new Query(TestObjects.getUser00(), dbComm);
+		Event event = query.queryEvent(2);
 		System.out.println(event);
 	}
 	

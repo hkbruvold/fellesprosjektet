@@ -9,8 +9,8 @@ import java.util.Properties;
 
 import javax.swing.*;
 
-import server.DatabaseCommunication;
-import server.DatabaseConnection;
+import server.database.DatabaseCommunication;
+import server.database.DatabaseConnection;
 
 @SuppressWarnings("serial")
 public class TempTestDatabase extends JPanel implements ActionListener {
