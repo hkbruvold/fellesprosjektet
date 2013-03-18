@@ -174,11 +174,11 @@ public class DatabaseQueries {
 		Notification notification = new Notification();
 		String id = p.getProperty("notificationID");
 		String description = p.getProperty("description");
-//	TODO String eventID = p.getProperty("eventID");
 		
 		notification.setId(Integer.parseInt(id));
 		notification.setMessage(description);
-//	TODO notification.setEvent(eventID != null ? queryEvent(Integer.parseInt(eventID)) : null);
+		Event event = queryNotificationEvent(Integer.parseInt(id));
+		notification.setEvent(event);
 		return notification;
 	}
 
@@ -260,15 +260,16 @@ public class DatabaseQueries {
 		return members;
 	}
 	
-	// notification_to
-	// reserved_room
-	// is_member_of
-	// is_owner
-	// is_participant
-	// notification_for_event
+	private Event queryNotificationEvent(int notificationID) {
+		ArrayList<Properties> pl = dbComm.query(String.format(SELECT_FROM_WHERE, FIELDS_NOTIFICATION_FOR_EVENT, TABLE_NOTIFICATION_FOR_EVENT, "notificationID=" + notificationID));
+		Properties p = pl.get(0);
+		Event event = queryEvent(Integer.parseInt(p.getProperty("eventID")));
+		return event;
+	}
 
-
-
+	// TODO notification_to
+	
+	
 	public static void main(String[] args) {
 		DatabaseConnection dbConn = new DatabaseConnection("jdbc:mysql://localhost:3306/calendarDatabase", "root", "skip".toCharArray());
 		DatabaseCommunication dbComm = new DatabaseCommunication(dbConn);
@@ -276,4 +277,5 @@ public class DatabaseQueries {
 		Event event = dq.queryEvent(2);
 		System.out.println(event);
 	}
+	
 }
