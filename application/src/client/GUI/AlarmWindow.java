@@ -1,5 +1,6 @@
 package client.GUI;
 
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -8,24 +9,24 @@ import javax.swing.*;
 
 import temp.TestObjects;
 
-import data.Notification;
+import data.Alarm;
 
 @SuppressWarnings("serial")
-public class NotificationWindow extends JPanel implements ActionListener { // TODO This needs a fix
+public class AlarmWindow extends JPanel implements ActionListener { // TODO This needs a fix
 	private static final String FRAME_NAME = "Beskjed"; 
 	private static final String BUTTON_CLOSE = "Lukk";
 
 	private static final int LINE_START = GridBagConstraints.LINE_START;
 	private static final int LINE_END = GridBagConstraints.LINE_END;
 
-	private Notification notification;
+	private Alarm alarm;
 	private JFrame frame;
 	private JTextArea notificationTextArea; // TODO?
 	private JButton closeButton;
 	private GridBagConstraints c;
 	
-	public NotificationWindow(Notification notification) {
-		this.notification = notification;
+	public AlarmWindow(Alarm alarm) {
+		this.alarm = alarm;
 		
 		initFrame();
 		initPanel();
@@ -46,7 +47,7 @@ public class NotificationWindow extends JPanel implements ActionListener { // TO
 		c = new GridBagConstraints();
 		setLayout(new GridBagLayout());
 		
-		notificationTextArea = new JTextArea(notification.getMessage());
+		notificationTextArea = new JTextArea(alarm.getMessage());
 		notificationTextArea.setEditable(false);
 		notificationTextArea.setBackground(frame.getBackground());
 		closeButton = new JButton(BUTTON_CLOSE);
@@ -75,7 +76,7 @@ public class NotificationWindow extends JPanel implements ActionListener { // TO
 	}
 
 	public static void main(String[] args) {
-		new NotificationWindow(TestObjects.getNotification01());
+		new AlarmWindow(TestObjects.getAlarm00());
 	}
 	
 }

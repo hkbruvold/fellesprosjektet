@@ -1,5 +1,7 @@
 package client;
 
+import data.Event;
+
 public class Program {
 	// TODO Fields?
 	
@@ -12,10 +14,10 @@ public class Program {
 	public void newEvent(/* TODO */) {
 		// TODO (remember database!)
 	}
-	public void editEvent(AbstractCalendarEvent event/*, TODO */) {
+	public void editEvent(Event event/*, TODO */) {
 		// TODO (remember database!)
 	}
-	public void removeEvent(AbstractCalendarEvent event) {
+	public void removeEvent(Event event) {
 		// TODO (remember database!)
 	}
 	

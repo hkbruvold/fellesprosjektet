@@ -2,4 +2,8 @@ bin
 .metadata
 *.log
 .settings
+*\Thumbs.db
+*\example.xml
 
+/application/nbproject/private/
+/application/build/

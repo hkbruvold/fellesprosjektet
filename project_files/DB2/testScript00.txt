@@ -38,48 +38,38 @@ INSERT isMemberOf
     SET username='kari.nordmann',
         groupID=3;
 
-INSERT appointment
+INSERT event
     SET startDateTime='2013-03-12 12:30',
         endDateTime='2013-03-12 13:00',
         location='Trondheim',
-        description='test1234';
+        description='test1234',
+        owner='ola.nordmann',
+        isMeeting=1;
 
-INSERT appointment
+INSERT event
     SET startDateTime='2013-03-14 15:00',
         endDateTime='2013-03-12 16:20',
         location='NTNU',
-        description='testing';
-
-INSERT isOwner
-    SET username='ola.nordmann',
-        appointmentID=1;
+        description='testing',
+        owner='kari.nordmann',
+        isMeeting=0;
 
 INSERT isParticipant
     SET username='kari.nordmann',
-        appointmentID=1,
+        eventID=1,
         status=0;
-
-INSERT isOwner
-    SET username='kari.nordmann',
-        appointmentID=2;
 
 UPDATE user 
     SET username='olanor' 
     WHERE username='ola.nordmann';
 
-DELETE FROM appointment
-    WHERE appointmentID=1;
+DELETE FROM event
+    WHERE eventID=1;
 
 INSERT alarm
-    SET time='2013-03-15 16:00';
-
-INSERT alarmForAppointment
-    SET appointmentID=2,
-        alarmID=1;
-
-INSERT ownedByUser
-    SET username='olanor',
-        alarmID=1;
+    SET time='2013-03-15 16:00',
+        username='olanor',
+        eventID=2;
 
 UPDATE user
     SET username='ola.nor',

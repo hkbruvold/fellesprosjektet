@@ -5,6 +5,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.*;
+import javax.xml.XMLConstants;
+
+import client.ServerCommunication;
+
+import data.Authentication;
+import data.XMLTranslator;
 
 @SuppressWarnings("serial")
 public class LoginWindow extends JPanel implements ActionListener {
@@ -58,12 +64,12 @@ public class LoginWindow extends JPanel implements ActionListener {
 		c.insets = new Insets(0,0,5,0);
 		c.ipadx = 10;
 
-		addComponent(usernameLabel, 0, 0, LINE_END);
-		addComponent(usernameField, 1, 0, LINE_START);
-		addComponent(passwordLabel, 0, 1, LINE_END);
-		addComponent(passwordField, 1, 1, LINE_START);
-		addComponent(closeButton, 1, 2, LINE_START); // Hmmm...
-		addComponent(logInButton, 1, 2, LINE_END);   // Hmmm...
+		addComponent(usernameLabel, 0, 0, 1, LINE_END);
+		addComponent(usernameField, 1, 0, 2, LINE_START);
+		addComponent(passwordLabel, 0, 1, 1, LINE_END);
+		addComponent(passwordField, 1, 1, 2, LINE_START);
+		addComponent(closeButton, 1, 2, 1, LINE_START); // Hmmm...
+		addComponent(logInButton, 2, 2, 1, LINE_END);   // Hmmm...
 
 		usernameField.addActionListener(this);
 		passwordField.addActionListener(this);
@@ -71,9 +77,10 @@ public class LoginWindow extends JPanel implements ActionListener {
 		logInButton.addActionListener(this);
 	}
 
-	private void addComponent(JComponent component, int gridx, int gridy, int anchor) {
+	private void addComponent(JComponent component, int gridx, int gridy, int gridwidth, int anchor) {
 		c.gridx = gridx;
 		c.gridy = gridy;
+		c.gridwidth = gridwidth;
 		c.anchor = anchor;
 		add(component, c);
 	}
@@ -86,7 +93,8 @@ public class LoginWindow extends JPanel implements ActionListener {
 		} else if (e.getSource().equals(closeButton)) {
 			frame.dispose();
 		} else if (e.getSource().equals(logInButton)) {
-			// TODO logIn
+			ServerCommunication sc = new ServerCommunication("TODO"); // TODO
+			sc.login(usernameField.getText(),passwordField.getPassword().toString());
 			frame.dispose(); // Close if successful; show error message if not?
 		}
 	}
