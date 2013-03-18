@@ -98,12 +98,15 @@ public class TestObjects {
 	}
 	
 	public static User getUser00() {
+		ALICE.setPassword("123");
 		return ALICE;
 	}
 	public static User getUser01() {
+		BOB.setPassword("123");
 		return BOB;
 	}
 	public static User getUser02() {
+		CHARLIE.setPassword("123");
 		return CHARLIE;
 	}
 	

@@ -5,12 +5,12 @@ public enum TableFields {
 			new String[] {
 			"time",
 			"message",
-			"username",
-			"eventID"
+			"username", //p
+			"eventID" //p
 	}),
 	EVENT ("event",
 			new String[] {
-			"eventID",
+			"eventID", //p
 			"startDateTime",
 			"endDateTime",
 			"location",
@@ -19,58 +19,58 @@ public enum TableFields {
 	}),
 	GROUPS ("groups",
 			new String[] {
-			"groupID",
+			"groupID", //p
 			"groupname",
 			"description"
 	}),
 	NOTIFICATION("notification",
 			new String[] {
-			"notificationID",
+			"notificationID", //p
 			"description"
 	}),
 	ROOM("room",
 			new String[] {
-			"roomID",
+			"roomID", //p
 			"size",
 			"description"
 	}),
 	USER("user",
 			new String[] {
-			"username",
+			"username", //p
 			"password",
 			"name",
 			"type"
 	}),
 	IS_MEMBER_OF("isMemberOf",
 			new String[] {
-			"username",
-			"groupID"
+			"username", //p
+			"groupID" //p
 	}),
 	IS_OWNER("isOwner",
 			new String[] {
-			"username",
-			"eventID"
+			"username", //p
+			"eventID" //p
 	}),
 	IS_PARTICIPANT("isParticipant",
 			new String[] {
-			"username",
-			"eventID",
+			"username", //p
+			"eventID", //p
 			"status"
 	}),
 	NOTIFICATION_TO("notificationTo",
 			new String[] {
-			"username",
-			"notification"
+			"username", //p
+			"notificationID" //p
 	}),
 	NOTIFICATION_FOR_EVENT("notificationForEvent",
 			new String[] {
-			"notificationID",
-			"eventID"
+			"notificationID", //p
+			"eventID" //p
 	}),
 	RESERVED_ROOM("reservedRoom",
 			new String[] {
-			"eventID",
-			"roomID"
+			"eventID", //p
+			"roomID" //p
 	});
 	
 	

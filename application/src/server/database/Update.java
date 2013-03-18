@@ -80,7 +80,10 @@ public class Update {
 		String updateString = String.format(INSERT_INTO_VALUES, TABLE_EVENT, FIELDS_EVENT, values.toString());
 		System.out.println(updateString);
 //		dbComm.update(updateString);
-		if (event instanceof Meeting) {
+		if (event instanceof Appointment) {
+			insertIsOwner(((Appointment)event).getOwner(), event);
+		} else if (event instanceof Meeting) {
+			insertIsOwner(((Meeting)event).getLeader(), event);
 			// TODO add relations!
 		}
 	}
@@ -93,7 +96,10 @@ public class Update {
 		String updateString = String.format(INSERT_INTO_VALUES, TABLE_GROUPS, FIELDS_GROUPS, values.toString());
 		System.out.println(updateString);
 //		dbComm.update(updateString);
-		// TODO relations
+		// TODO group.setID( get id from database );
+		for (User user : group.getMembers()) {
+			insertIsMemberOf(user, group);
+		}
 	}
 	
 	public void insertNotification(Notification notification) {
@@ -108,10 +114,41 @@ public class Update {
 	
 	public void insertRoom(Room room) {
 		StringBuilder values = new StringBuilder();
-		
+		values.append(room.getId()).append(", ");
+		values.append(room.getSize()).append(", ");
+		values.append("'").append(room.getDescription()).append("'").append(" ");
 		String updateString = String.format(INSERT_INTO_VALUES, TABLE_ROOM, FIELDS_ROOM, values.toString());
 		System.out.println(updateString);
-		dbComm.update(updateString);
+//		dbComm.update(updateString);
+	}
+	
+	public void insertUser(User user) {
+		StringBuilder values = new StringBuilder();
+		values.append("'").append(user.getUsername()).append("'").append(", ");
+		values.append("'").append(user.getPassword()).append("'").append(", ");
+		values.append("'").append(user.getName()).append("'").append(", ");
+		values.append("'").append(user.getType()).append("'").append(" ");
+		String updateString = String.format(INSERT_INTO_VALUES, TABLE_USER, FIELDS_USER, values.toString());
+		System.out.println(updateString);
+//		dbComm.update(updateString);
+	}
+	
+	public void insertIsMemberOf(User user, Group group) {
+		StringBuilder values = new StringBuilder();
+		values.append("'").append(user.getUsername()).append("'").append(", ");
+		values.append(group.getId()).append(" ");
+		String updateString = String.format(INSERT_INTO_VALUES, TABLE_IS_MEMBER_OF, FIELDS_IS_MEMBER_OF, values.toString());
+		System.out.println(updateString);
+//		dbComm.update(updateString);
+	}
+	
+	public void insertIsOwner(User user, Event event) {
+		StringBuilder values = new StringBuilder();
+		values.append("'").append(user.getUsername()).append("'").append(", ");
+		values.append(event.getId()).append(" ");
+		String updateString = String.format(INSERT_INTO_VALUES, TABLE_IS_OWNER, FIELDS_IS_OWNER, values.toString());
+		System.out.println(updateString);
+//		dbComm.update(updateString);
 	}
 	
 	// TODO Add insert, update and delete methods
@@ -122,10 +159,20 @@ public class Update {
 		DatabaseConnection dbConn = new DatabaseConnection("jdbc:mysql://localhost:3306/calendarDatabase", "root", "skip".toCharArray());
 		DatabaseCommunication dbComm = new DatabaseCommunication(dbConn);
 		Update update = new Update(TestObjects.getUser00(), dbComm);
+		
+		System.out.println();
 		update.insertAlarm(TestObjects.getAlarm00());
+		System.out.println();
 		update.insertEvent(TestObjects.getAppointment00());
+		System.out.println();
 		update.insertGroup(TestObjects.getGroup02());
+		System.out.println();
 		update.insertNotification(TestObjects.getNotification01());
+		System.out.println();
+		update.insertRoom(TestObjects.getRoom01());
+		System.out.println();
+		update.insertUser(TestObjects.getUser01());
+		System.out.println();
 	}
 
 }
