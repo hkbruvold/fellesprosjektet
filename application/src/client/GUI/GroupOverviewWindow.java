@@ -20,7 +20,7 @@ import javax.swing.JButton;
 import data.Group;
 import data.Room;
 
-public class EditGroupsPanel extends JFrame {
+public class GroupOverviewWindow extends JFrame {
 
 	private JPanel contentPane;
 
@@ -32,7 +32,7 @@ public class EditGroupsPanel extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					EditGroupsPanel frame = new EditGroupsPanel();
+					GroupOverviewWindow frame = new GroupOverviewWindow();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -44,7 +44,7 @@ public class EditGroupsPanel extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public EditGroupsPanel() {
+	public GroupOverviewWindow() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
