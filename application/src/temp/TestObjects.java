@@ -10,6 +10,7 @@ import data.Calendar;
 import data.Group;
 import data.Meeting;
 import data.Notification;
+import data.Room;
 import data.User;
 
 public class TestObjects {
@@ -105,5 +106,18 @@ public class TestObjects {
 		return CHARLIE;
 	}
 	
+	public static Room getRoom01() {
+		Room room=new Room(02,6,"R2");
+		return room;
+	}
 	
+	public static Room getRoom00() {
+		Room room=new Room(00,7,"R1");
+		return room;
+	}
+	
+	public static Room getRoom02() {
+		Room room=new Room(02,5,"R3");
+		return room;
+	}
 }
