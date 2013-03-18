@@ -104,6 +104,7 @@ public class DatabaseMethods {
 		event.setEndDateTime(end);
 		event.setLocation(location);
 		event.setDescription(description);
+		// remember room reservation?
 		if (event instanceof Appointment) {
 			((Appointment)event).setOwner(queryUser(owner));
 			// get alarm
@@ -130,7 +131,16 @@ public class DatabaseMethods {
 		return makeGroup(p);
 	}
 	private Group makeGroup(Properties p) {
-		return null; // remember to add users to the group!
+		Group group = new Group();
+		String id = p.getProperty("groupID");
+		String groupname = p.getProperty("groupname");
+		String description = p.getProperty("description");
+		
+		group.setId(Integer.parseInt(id));
+		group.setName(groupname);
+		group.setDescription(description);
+		// remember to add users to the group!
+		return group;
 	}
 
 
