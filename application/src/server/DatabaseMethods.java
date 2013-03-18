@@ -27,6 +27,9 @@ public class DatabaseMethods {
 	private static final String TABLE_RESERVED_ROOM = TableFields.RESERVED_ROOM.getTableName();
 	private static final String TABLE_ROOM = TableFields.ROOM.getTableName();
 	private static final String TABLE_USER = TableFields.USER.getTableName();
+	
+	private static final String BIT_FALSE = "0";
+	private static final String BIT_TRUE = "1";
 
 	private static final String SELECT_FROM = "SELECT %s FROM %s";
 	private static final String SELECT_FROM_WHERE = "SELECT %s FROM %s WHERE %s";
@@ -82,7 +85,34 @@ public class DatabaseMethods {
 		return makeEvent(p);
 	}
 	private Event makeEvent(Properties p) {
-		return null; // remember to add participants!
+		Event event = null;
+		String id = p.getProperty("eventID");
+		String start = p.getProperty("startDataTime");
+		String end = p.getProperty("endDateTime");
+		String location = p.getProperty("location");
+		String description = p.getProperty("description");
+		String owner = p.getProperty("owner");
+		String isMeeting = p.getProperty("isMeeting");
+		
+		if (isMeeting.equals(BIT_FALSE)) {
+			event = new Appointment();
+		} else if (isMeeting.equals(BIT_TRUE)) {
+			event = new Meeting();
+		}
+		event.setId(Integer.parseInt(id));
+		event.setStartDateTime(start);
+		event.setEndDateTime(end);
+		event.setLocation(location);
+		event.setDescription(description);
+		if (event instanceof Appointment) {
+			((Appointment)event).setOwner(queryUser(owner));
+			// get alarm
+		} else if (event instanceof Meeting) {
+			((Meeting)event).setLeader(queryUser(owner));
+			// get alarm
+			// remember to add participants!
+		}
+		return event; 
 	}
 
 
@@ -194,7 +224,7 @@ public class DatabaseMethods {
 		DatabaseConnection dbConn = new DatabaseConnection("jdbc:mysql://localhost:3306/calendarDatabase", "root", "skip".toCharArray());
 		DatabaseCommunication dbComm = new DatabaseCommunication(dbConn);
 		DatabaseMethods dm = new DatabaseMethods(dbComm);
-		Alarm alarm = dm.queryAlarm(1);
-		System.out.println(alarm);
+		Event event = dm.queryEvent(2);
+		System.out.println(event);
 	}
 }
