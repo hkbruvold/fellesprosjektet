@@ -20,6 +20,7 @@ import javax.swing.Box;
 import temp.TestObjects;
 import javax.swing.ImageIcon;
 import java.awt.Dimension;
+import javax.swing.SwingConstants;
 
 public class MainWindow extends JFrame {
 
@@ -79,6 +80,28 @@ public class MainWindow extends JFrame {
 		gbc_chooseWeekLabel.gridy = 1;
 		getContentPane().add(chooseWeekLabel, gbc_chooseWeekLabel);
 		
+		JButton btnDecrease = new JButton("");
+		btnDecrease.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				weekNumberBox.setSelectedIndex(weekNumberBox.getSelectedIndex()-1);
+			}
+		});
+		btnDecrease.setMinimumSize(new Dimension(16, 16));
+		btnDecrease.setIcon(new ImageIcon(MainWindow.class.getResource("/client/GUI/gtk-remove.png")));
+		GridBagConstraints gbc_btnDecrease = new GridBagConstraints();
+		gbc_btnDecrease.anchor = GridBagConstraints.EAST;
+		gbc_btnDecrease.insets = new Insets(0, 0, 5, 5);
+		gbc_btnDecrease.gridx = 3;
+		gbc_btnDecrease.gridy = 1;
+		getContentPane().add(btnDecrease, gbc_btnDecrease);
+		weekNumberBox.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53"}));
+		GridBagConstraints gbc_weekNumberBox = new GridBagConstraints();
+		gbc_weekNumberBox.fill = GridBagConstraints.HORIZONTAL;
+		gbc_weekNumberBox.insets = new Insets(0, 0, 5, 5);
+		gbc_weekNumberBox.gridx = 4;
+		gbc_weekNumberBox.gridy = 1;
+		getContentPane().add(weekNumberBox, gbc_weekNumberBox);
+		
 		JButton weekIncrease = new JButton("");
 		weekIncrease.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -90,30 +113,9 @@ public class MainWindow extends JFrame {
 		GridBagConstraints gbc_weekIncrease = new GridBagConstraints();
 		gbc_weekIncrease.anchor = GridBagConstraints.EAST;
 		gbc_weekIncrease.insets = new Insets(0, 0, 5, 5);
-		gbc_weekIncrease.gridx = 3;
+		gbc_weekIncrease.gridx = 5;
 		gbc_weekIncrease.gridy = 1;
 		getContentPane().add(weekIncrease, gbc_weekIncrease);
-		weekNumberBox.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53"}));
-		GridBagConstraints gbc_weekNumberBox = new GridBagConstraints();
-		gbc_weekNumberBox.fill = GridBagConstraints.HORIZONTAL;
-		gbc_weekNumberBox.insets = new Insets(0, 0, 5, 5);
-		gbc_weekNumberBox.gridx = 4;
-		gbc_weekNumberBox.gridy = 1;
-		getContentPane().add(weekNumberBox, gbc_weekNumberBox);
-		
-		JButton btnDecrease = new JButton("");
-		btnDecrease.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				weekNumberBox.setSelectedIndex(weekNumberBox.getSelectedIndex()-1);
-			}
-		});
-		btnDecrease.setMinimumSize(new Dimension(16, 16));
-		btnDecrease.setIcon(new ImageIcon(MainWindow.class.getResource("/client/GUI/gtk-remove.png")));
-		GridBagConstraints gbc_btnDecrease = new GridBagConstraints();
-		gbc_btnDecrease.insets = new Insets(0, 0, 5, 5);
-		gbc_btnDecrease.gridx = 5;
-		gbc_btnDecrease.gridy = 1;
-		getContentPane().add(btnDecrease, gbc_btnDecrease);
 		
 		JLabel lblYear = new JLabel("Year:");
 		GridBagConstraints gbc_lblYear = new GridBagConstraints();
