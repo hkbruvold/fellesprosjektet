@@ -22,7 +22,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class NewUserWindow extends JFrame {
-
+	private JFrame jFrame;
 	private JPanel contentPane;
 	private JTextField usernameField;
 	private JTextField passwordField;
@@ -49,6 +49,7 @@ public class NewUserWindow extends JFrame {
 	 * Create the frame.
 	 */
 	public NewUserWindow() {
+		this.jFrame = this;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 300, 250);
 		contentPane = new JPanel();
@@ -136,11 +137,17 @@ public class NewUserWindow extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				//TODO send to database
 				user = new User(usernameField.getText(),nameField.getText(),userType.getSelectedItem().toString());
+				jFrame.dispose();
 			}
 		});
 		horizontalBox.add(btnNewButton);
 		
 		JButton btnNewButton_1 = new JButton("Exit");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				jFrame.dispose();
+			}
+		});
 		horizontalBox.add(btnNewButton_1);
 	}
 
