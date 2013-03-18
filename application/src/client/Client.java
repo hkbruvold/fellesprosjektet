@@ -4,6 +4,7 @@ import java.io.*;
 import java.net.*;
 
 public class Client {
+	/*/
     public static void main(String[] args) throws IOException, ClassNotFoundException {
     	String hostadress = "127.0.0.1";
     	int port = 4444;
@@ -38,5 +39,32 @@ public class Client {
             System.exit(1);
         }
     }
+    /*/
+    public static void sendObject(OutputStream objectstream){
+    	String hostadress = "127.0.0.1";
+    	int port = 4444;
+        Socket socket = null;
+        ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
+        OutputStream in = objectstream;
+        try {
+            socket = new Socket(hostadress, port);
+            Object input;
+			while (input == null) {
+               input = in;
+            }
+			out.writeObject(input);
+			out.flush();
+			out.close();
+			in.close();
+			socket.close();
+        } catch (UnknownHostException e) {
+            System.err.println("Could not find host");
+            System.exit(1);
+        } catch (IOException e) {
+            System.err.println("Could not get IO for host");
+            System.exit(1);
+        }
 
-}
+        }
+    }
+
