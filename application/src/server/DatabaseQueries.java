@@ -3,6 +3,8 @@ package server;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import temp.TestObjects;
+
 import data.*;
 
 public class DatabaseQueries {
@@ -10,8 +12,10 @@ public class DatabaseQueries {
 	private static final String FIELDS_EVENT = TableFields.EVENT.getFieldsString();
 	private static final String FIELDS_GROUPS = TableFields.GROUPS.getFieldsString();
 	private static final String FIELDS_IS_MEMBER_OF = TableFields.IS_MEMBER_OF.getFieldsString();
+	private static final String FIELDS_IS_OWNER = TableFields.IS_OWNER.getFieldsString();
 	private static final String FIELDS_IS_PARTICIPANT = TableFields.IS_PARTICIPANT.getFieldsString();
 	private static final String FIELDS_NOTIFICATION = TableFields.NOTIFICATION.getFieldsString();
+	private static final String FIELDS_NOTIFICATION_FOR_EVENT = TableFields.NOTIFICATION_FOR_EVENT.getFieldsString();
 	private static final String FIELDS_NOTIFICATION_TO = TableFields.NOTIFICATION_TO.getFieldsString();
 	private static final String FIELDS_RESERVED_ROOM = TableFields.RESERVED_ROOM.getFieldsString();
 	private static final String FIELDS_ROOM = TableFields.ROOM.getFieldsString();
@@ -21,8 +25,10 @@ public class DatabaseQueries {
 	private static final String TABLE_EVENT = TableFields.EVENT.getTableName();
 	private static final String TABLE_GROUPS = TableFields.GROUPS.getTableName();
 	private static final String TABLE_IS_MEMBER_OF = TableFields.IS_MEMBER_OF.getTableName();
+	private static final String TABLE_IS_OWNER = TableFields.IS_OWNER.getTableName();
 	private static final String TABLE_IS_PARTICIPANT = TableFields.IS_PARTICIPANT.getTableName();
 	private static final String TABLE_NOTIFICATION = TableFields.NOTIFICATION.getTableName();
+	private static final String TABLE_NOTIFICATION_FOR_EVENT = TableFields.NOTIFICATION_FOR_EVENT.getTableName();
 	private static final String TABLE_NOTIFICATION_TO = TableFields.NOTIFICATION_TO.getTableName();
 	private static final String TABLE_RESERVED_ROOM = TableFields.RESERVED_ROOM.getTableName();
 	private static final String TABLE_ROOM = TableFields.ROOM.getTableName();
@@ -34,10 +40,11 @@ public class DatabaseQueries {
 	private static final String SELECT_FROM = "SELECT %s FROM %s";
 	private static final String SELECT_FROM_WHERE = "SELECT %s FROM %s WHERE %s";
 
-	private DatabaseCommunication dbComm;
 	private User currentUser;
+	private DatabaseCommunication dbComm;
 
-	public DatabaseQueries(DatabaseCommunication dbComm) {
+	public DatabaseQueries(User currentUser, DatabaseCommunication dbComm) {
+		this.currentUser = currentUser;
 		this.dbComm = dbComm;
 	}
 
@@ -92,7 +99,6 @@ public class DatabaseQueries {
 		String end = p.getProperty("endDateTime");
 		String location = p.getProperty("location");
 		String description = p.getProperty("description");
-//		String owner = p.getProperty("owner");
 		String isMeeting = p.getProperty("isMeeting");
 		
 		if (isMeeting.equals(BIT_FALSE)) {
@@ -105,13 +111,12 @@ public class DatabaseQueries {
 		event.setEndDateTime(end);
 		event.setLocation(location);
 		event.setDescription(description);
+		event.setAlarm(queryAlarm(currentUser, Integer.parseInt(id)));
 		// remember room reservation?
 		if (event instanceof Appointment) {
-//			((Appointment)event).setOwner(queryUser(owner));
-			// get alarm
+			((Appointment)event).setOwner(queryOwner(Integer.parseInt(id)));
 		} else if (event instanceof Meeting) {
-//			((Meeting)event).setLeader(queryUser(owner));
-			// get alarm
+			((Meeting)event).setLeader(queryOwner(Integer.parseInt(id)));
 			// remember to add participants!
 		}
 		return event; 
@@ -206,7 +211,7 @@ public class DatabaseQueries {
 		return users;
 	}
 	public User queryUser(String username) {
-		ArrayList<Properties> pl = dbComm.query(String.format(SELECT_FROM_WHERE, FIELDS_USER, TABLE_USER, "username=" + username));
+		ArrayList<Properties> pl = dbComm.query(String.format(SELECT_FROM_WHERE, FIELDS_USER, TABLE_USER, "username='" + username + "'"));
 		Properties p = pl.get(0);
 		return makeUser(p);
 	}
@@ -224,19 +229,31 @@ public class DatabaseQueries {
 		return user;
 	}
 
-	// TODO notification_to
-	// TODO reserved_room
-	// TODO is_member_of
-	// TODO is_owner
-	// TODO is_participant
-	// TODO notification_for_event
+	private User queryOwner(int eventID) {
+		ArrayList<Properties> pl = dbComm.query(String.format(SELECT_FROM_WHERE, FIELDS_IS_OWNER, TABLE_IS_OWNER, "eventID=" + eventID));
+		Properties p = pl.get(0);
+		return queryUser(p.getProperty("username"));
+	}
+	
+	private Alarm queryAlarm(User user, int eventID) {
+		ArrayList<Properties> pl = dbComm.query(String.format(SELECT_FROM_WHERE, FIELDS_ALARM, TABLE_ALARM, "username='" + user.getUsername() + "', eventID=" + eventID));
+		Properties p = pl.get(0);
+		return makeAlarm(p);
+	}
+	
+	// notification_to
+	// reserved_room
+	// is_member_of
+	// is_owner
+	// is_participant
+	// notification_for_event
 
 
 
 	public static void main(String[] args) {
 		DatabaseConnection dbConn = new DatabaseConnection("jdbc:mysql://localhost:3306/calendarDatabase", "root", "skip".toCharArray());
 		DatabaseCommunication dbComm = new DatabaseCommunication(dbConn);
-		DatabaseQueries dm = new DatabaseQueries(dbComm);
+		DatabaseQueries dm = new DatabaseQueries(TestObjects.getUser00(), dbComm);
 		Event event = dm.queryEvent(2);
 		System.out.println(event);
 	}
