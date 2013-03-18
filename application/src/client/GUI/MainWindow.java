@@ -80,6 +80,11 @@ public class MainWindow extends JFrame {
 		getContentPane().add(chooseWeekLabel, gbc_chooseWeekLabel);
 		
 		JButton weekIncrease = new JButton("");
+		weekIncrease.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				weekNumberBox.setSelectedIndex(weekNumberBox.getSelectedIndex()+1);
+			}
+		});
 		weekIncrease.setMinimumSize(new Dimension(16, 16));
 		weekIncrease.setIcon(new ImageIcon(MainWindow.class.getResource("/client/GUI/gtk-add.png")));
 		GridBagConstraints gbc_weekIncrease = new GridBagConstraints();
@@ -97,6 +102,11 @@ public class MainWindow extends JFrame {
 		getContentPane().add(weekNumberBox, gbc_weekNumberBox);
 		
 		JButton btnDecrease = new JButton("");
+		btnDecrease.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				weekNumberBox.setSelectedIndex(weekNumberBox.getSelectedIndex()-1);
+			}
+		});
 		btnDecrease.setMinimumSize(new Dimension(16, 16));
 		btnDecrease.setIcon(new ImageIcon(MainWindow.class.getResource("/client/GUI/gtk-remove.png")));
 		GridBagConstraints gbc_btnDecrease = new GridBagConstraints();
