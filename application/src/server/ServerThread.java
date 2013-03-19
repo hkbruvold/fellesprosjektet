@@ -27,13 +27,13 @@ public class ServerThread extends Thread {
 	private String port = "3306";
 	private String databaseName = "calendarDatabase";
 	private String serverUrl = "jdbc:mysql://" + URI + ":" + port + "/" + databaseName;
-	private String username = "root";
-	private char[] password = "skip".toCharArray();
+	private String dbUsername = "root";
+	private char[] dbPassword = "skip".toCharArray();
 
 	public ServerThread (Socket socket) {
 		super();
 		this.socket = socket;
-		dbConn = new DatabaseConnection(serverUrl, username, password);
+		dbConn = new DatabaseConnection(serverUrl, dbUsername, dbPassword);
 		dbComm = new DatabaseCommunication(dbConn);
 	}
 
@@ -62,7 +62,7 @@ public class ServerThread extends Thread {
 		switch (action) {
 		case "login":
 			User clientUser = (User) req.getData();
-			User fetchedUser = query.queryUser(username);
+			User fetchedUser = query.queryUser(clientUser.getUsername());
 			boolean correctUsername = fetchedUser.getUsername().equals(clientUser.getUsername());
 			boolean correctPassword = fetchedUser.getPassword().equals(clientUser.getPassword());
 			if (correctUsername && correctPassword) {
