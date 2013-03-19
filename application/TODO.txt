@@ -19,6 +19,7 @@ parseRequest i ServerThread
 
 
 __Kjell__
+Login from client, via database
 Database queries (mostly done)
 Database update
 Database delete
