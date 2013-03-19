@@ -1,5 +1,7 @@
 package client;
 
+import data.Request;
+import data.Response;
 import java.io.*;
 import java.net.*;
 
@@ -29,7 +31,7 @@ public class Client {
         }
     }
     
-    public Object send (Object req) throws IOException, ClassNotFoundException {
+    public Response send (Request req) throws IOException, ClassNotFoundException {
         Object input = null;
             
         out.writeObject(req);
@@ -40,11 +42,11 @@ public class Client {
             input = in.readObject();
         }
         
-        return input;
+        return (Response) input;
     }
     
     public void closeConnection () throws IOException {
-        out.write(new String("end"));
+        out.writeObject(new Request("end", null));
         out.close();
         in.close();
         socket.close();
