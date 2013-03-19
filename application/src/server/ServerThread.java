@@ -40,7 +40,12 @@ public class ServerThread extends Thread {
                 case "login":
                 default:
                     System.out.println(action);
-                    send(new Response(Response.Status.FAILED, null));
+                    String username = req.getData().get("username").toString();
+                    String password = req.getData().get("password").toString();
+                    //TODO poll database to check if username and data is correct
+                    send(new Response(Response.Status.OK, null));
+                case "addEvent":
+                	System.out.println(action);
             }
         }
         
