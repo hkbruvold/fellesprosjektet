@@ -93,10 +93,10 @@ public class TestObjects {
 	}
 	
 	public static Notification getNotification00() {
-		return new Notification(DEFAULT_ID, DESCRIPTION);
+		return new Notification(DEFAULT_ID, DESCRIPTION, getUser02());
 	}
 	public static Notification getNotification01() {
-		return new Notification(DEFAULT_ID, DESCRIPTION + " : " + LOCATION);
+		return new Notification(DEFAULT_ID, DESCRIPTION + " : " + LOCATION, getUser02());
 	}
 	
 	public static User getUser00() {

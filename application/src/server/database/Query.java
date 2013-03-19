@@ -170,7 +170,7 @@ public class Query {
 		Properties p = pl.get(0);
 		return makeNotification(p);
 	}
-	private Notification makeNotification(Properties p) {
+	private Notification makeNotification(Properties p) { // TODO get recipient
 		Notification notification = new Notification();
 		String id = p.getProperty("notificationID");
 		String description = p.getProperty("description");

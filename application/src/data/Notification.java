@@ -4,6 +4,7 @@ public class Notification implements Serializeable {
 	private int id;
 	private String message;
 	private Event event;
+	private User recipient;
 	// TODO private 'something' options;
 	
 	public Notification(){
@@ -11,13 +12,14 @@ public class Notification implements Serializeable {
 	/**
 	 * Use id = 0 when creating new objects. Actual ID should come from database
 	 */
-	public Notification(int id, String message) {
-		this(id, message, null);
+	public Notification(int id, String message, User recipient) {
+		this(id, message, null, recipient);
 	}
-	public Notification(int id, String message, Event event) {
+	public Notification(int id, String message, Event event, User recipient) {
 		this.id = id;
 		this.message = message;
 		this.event = event;
+		this.recipient = recipient;
 		// TODO options
 	}
 	
@@ -42,6 +44,12 @@ public class Notification implements Serializeable {
 	}
 	public void setEvent(Event event) {
 		this.event = event;
+	}
+	public User getRecipient() {
+		return recipient;
+	}
+	public void setRecipient(User recipient) {
+		this.recipient = recipient;
 	}
 	// TODO getter and setter for options
 }

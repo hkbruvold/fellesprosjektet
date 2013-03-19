@@ -121,7 +121,8 @@ public class Update {
 		String updateString = String.format(INSERT_INTO_VALUES, TABLE_NOTIFICATION, FIELDS_NOTIFICATION, values.toString());
 		System.out.println(updateString);
 //		dbComm.update(updateString);
-		// TODO relations
+		// TODO notification.setId( get id from database );
+		insertNotificationTo(notification.getRecipient(), notification);
 	}
 	
 	public void insertRoom(Room room) {
@@ -172,6 +173,18 @@ public class Update {
 		System.out.println(updateString);
 //		dbComm.update(updateString);
 	}
+	
+	public void insertNotificationTo(User user, Notification notification) {
+		StringBuilder values = new StringBuilder();
+		values.append("'").append(user.getUsername()).append("'").append(", ");
+		values.append(notification.getId()).append(" ");
+		String updateString = String.format(INSERT_INTO_VALUES, TABLE_NOTIFICATION_TO, FIELDS_NOTIFICATION_TO, values.toString());
+		System.out.println(updateString);
+//		dbComm.update(updateString);
+	}
+	
+	// TODO notification_for_event
+	// TODO reserved_room
 	
 	// TODO Add insert, update and delete methods
 	// NB! Remember relations!
