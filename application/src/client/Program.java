@@ -20,6 +20,9 @@ public class Program {
 	}
 	
 	public void showLogin() {
+		if (loggedIn == null) {
+			// TODO can't show main window
+		}
 		new LoginWindow(this);
 	}
 	
