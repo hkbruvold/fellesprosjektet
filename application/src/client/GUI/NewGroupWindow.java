@@ -20,6 +20,8 @@ import javax.swing.JList;
 import javax.swing.AbstractListModel;
 import javax.swing.ListModel;
 
+import client.Program;
+
 import data.Group;
 import data.User;
 
@@ -32,6 +34,7 @@ public class NewGroupWindow extends JFrame {
 	private JButton btnSave;
 	private Box horizontalBox;
 	private JList memberList;
+	private Program program;
 
 	/**
 	 * Launch the application.
@@ -40,7 +43,7 @@ public class NewGroupWindow extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					NewGroupWindow frame = new NewGroupWindow();
+					NewGroupWindow frame = new NewGroupWindow(new Program());
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -52,7 +55,8 @@ public class NewGroupWindow extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public NewGroupWindow() {
+	public NewGroupWindow(Program program) {
+		this.program = program;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();

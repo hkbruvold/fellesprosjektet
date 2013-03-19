@@ -17,6 +17,8 @@ import javax.swing.JViewport;
 import javax.swing.SwingConstants;
 import javax.swing.border.MatteBorder;
 
+import client.Program;
+
 import data.Event;
 
 
@@ -40,13 +42,15 @@ public class CalendarPane extends JPanel {
 	
 	private Date currentDate;
 	private int year;
+	private Program program;
 	private static int week;
 
 	/**
 	 * Create the application.
 	 */
-	public CalendarPane() {
-
+	public CalendarPane(Program program) {
+		this.program = program;
+		
 		setSize(800, 400);
 		setLayout(null);
 		
@@ -177,7 +181,7 @@ public class CalendarPane extends JPanel {
 		int day = Integer.parseInt(start.substring(9, 10));
 		int hour = Integer.parseInt(start.substring(3, 5));
 		int duration = Integer.parseInt(end.substring(3, 5)) - Integer.parseInt(start.substring(3, 5));
-		EventComponent comp = new EventComponent(event);
+		EventComponent comp = new EventComponent(new Program(), event);
 		addToCalendar(comp, day, hour, 1, duration);
 	}
 	

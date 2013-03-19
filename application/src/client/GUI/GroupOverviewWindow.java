@@ -17,12 +17,15 @@ import java.util.ArrayList;
 import javax.swing.Box;
 import javax.swing.JButton;
 
+import client.Program;
+
 import data.Group;
 import data.Room;
 
 public class GroupOverviewWindow extends JFrame {
 
 	private JPanel contentPane;
+	private Program program;
 
 	/**
 	 * Launch the application.
@@ -32,7 +35,7 @@ public class GroupOverviewWindow extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					GroupOverviewWindow frame = new GroupOverviewWindow();
+					GroupOverviewWindow frame = new GroupOverviewWindow(new Program());
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -44,7 +47,8 @@ public class GroupOverviewWindow extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public GroupOverviewWindow() {
+	public GroupOverviewWindow(Program program) {
+		this.program = program;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();

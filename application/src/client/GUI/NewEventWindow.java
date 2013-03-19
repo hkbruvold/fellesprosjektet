@@ -10,6 +10,8 @@ import java.util.Arrays;
 
 import javax.swing.*;
 
+import client.Program;
+
 import temp.TestObjects;
 
 
@@ -24,18 +26,18 @@ import data.XMLTranslator;
 
 @SuppressWarnings("serial")
 public class NewEventWindow extends JPanel implements ActionListener, ItemListener {
-	private static final String FRAME_NAME = "Avtale / Møte";
+	private static final String FRAME_NAME = "Avtale / Mï¿½te";
 	
 	private static final String LABEL_DESCRIPTION = "Beskrivelse";
 	private static final String LABEL_FROM = "Fra";
 	private static final String LABEL_TO = "Til";
 	private static final String LABEL_LOCATION = "Sted";
 	private static final String LABEL_ALARM = "Alarm";
-	private static final String LABEL_ALARM_TIME_BEFORE = "Tid før:";
-	private static final String LABEL_MEETING = "Møte";
+	private static final String LABEL_ALARM_TIME_BEFORE = "Tid fï¿½r:";
+	private static final String LABEL_MEETING = "Mï¿½te";
 	private static final String LABEL_PARTICIPANTS = "Deltakere:";
 	
-	private static final String FIELD_DATE = "ÅÅÅÅ-MM-DD";
+	private static final String FIELD_DATE = "ï¿½ï¿½ï¿½ï¿½-MM-DD";
 	private static final String FIELD_TIME = "TT:MM";
 
 	private static final String BUTTON_LOCATION_SET_TEXT = "Bruk: Tekst";
@@ -44,7 +46,7 @@ public class NewEventWindow extends JPanel implements ActionListener, ItemListen
 	private static final String BUTTON_CLOSE = "Lukk";
 	private static final String BUTTON_SAVE = "Lagre";
 	
-	private static final String TOOLTIP_NOT_SAVED = "Avtalen/Møtet er ikke lagret. Trykk \"" + BUTTON_CLOSE + "\" for å avbryte";
+	private static final String TOOLTIP_NOT_SAVED = "Avtalen/Mï¿½tet er ikke lagret. Trykk \"" + BUTTON_CLOSE + "\" for ï¿½ avbryte";
 	
 	private static final int SIZE_FIELD = 12;
 	
@@ -66,8 +68,11 @@ public class NewEventWindow extends JPanel implements ActionListener, ItemListen
 	private User[] userArray;
 	
 	private CalendarPane calendarPane;
+
+	private Program program;
 	
-	public NewEventWindow(CalendarPane calendarPane, Calendar calendar, User user, User[] userArray) {
+	public NewEventWindow(Program program, CalendarPane calendarPane, Calendar calendar, User user, User[] userArray) {
+		this.program = program;
 		this.calendarPane = calendarPane;
 		this.calendar = calendar;
 		this.user = user;
@@ -82,7 +87,8 @@ public class NewEventWindow extends JPanel implements ActionListener, ItemListen
 		frame.setVisible(true);
 	}
 	
-	public NewEventWindow(CalendarPane calendarPane, Event event, User[] userArray) {
+	public NewEventWindow(Program program, CalendarPane calendarPane, Event event, User[] userArray) {
+		this.program = program;
 		this.calendarPane = calendarPane;
 		this.calendarEvent = event;
 		this.calendar = event.getCalendar();
@@ -297,7 +303,7 @@ public class NewEventWindow extends JPanel implements ActionListener, ItemListen
 	
 	public static void main(String[] args) {
 //		new NewEventWindow(TestObjects.getCalendar00(), TestObjects.getUser02(), TestObjects.getUserArray01());
-		new NewEventWindow(new CalendarPane(), TestObjects.getMeeting01(), TestObjects.getUserArray01());
+		new NewEventWindow(new Program(), new CalendarPane(new Program()), TestObjects.getMeeting01(), TestObjects.getUserArray01());
 	}
 
 

@@ -6,6 +6,8 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
+import client.Program;
+
 import temp.TestObjects;
 
 import data.Notification;
@@ -23,8 +25,10 @@ public class NotificationWindow extends JPanel implements ActionListener { // TO
 	private JTextArea notificationTextArea; // TODO?
 	private JButton closeButton;
 	private GridBagConstraints c;
+	private Program program;
 	
-	public NotificationWindow(Notification notification) {
+	public NotificationWindow(Program program, Notification notification) {
+		this.program = program;
 		this.notification = notification;
 		
 		initFrame();
@@ -75,7 +79,7 @@ public class NotificationWindow extends JPanel implements ActionListener { // TO
 	}
 
 	public static void main(String[] args) {
-		new NotificationWindow(TestObjects.getNotification01());
+		new NotificationWindow(new Program(), TestObjects.getNotification01());
 	}
 	
 }

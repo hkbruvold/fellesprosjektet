@@ -12,6 +12,7 @@ import javax.swing.*;
 import client.GUI.*;
 import data.Alarm;
 import server.*;
+import client.Program;
 
 @SuppressWarnings("serial")
 public class ProgramHub extends JPanel implements ActionListener {
@@ -32,8 +33,10 @@ public class ProgramHub extends JPanel implements ActionListener {
 	private JFrame frame;
 	private JButton loginButton, meetingInvitationButton, newEventButton, oldEventButton, notificationButton, testDatabaseButton, alarmButton, newGroupButton, closeButton;
 	private GridBagConstraints c;
+	private Program program;
 
 	public ProgramHub() {
+		this.program = new Program();
 		initFrame();
 		initPanel();
 
@@ -103,21 +106,21 @@ public class ProgramHub extends JPanel implements ActionListener {
 		if (e.getSource().equals(closeButton)) {
 			frame.dispose();
 		} else if (e.getSource().equals(loginButton)) {
-			new LoginWindow();
+			new LoginWindow(program);
 		} else if (e.getSource().equals(meetingInvitationButton)) {
-			new MeetingInvitationWindow(TestObjects.getMeeting00(),TestObjects.getUser00());
+			new MeetingInvitationWindow(program, TestObjects.getMeeting00(),TestObjects.getUser00());
 		} else if (e.getSource().equals(newEventButton)) {
-			new NewEventWindow(new CalendarPane(), TestObjects.getCalendar00(), TestObjects.getUser00(), TestObjects.getUserArray01());
+			new NewEventWindow(program, new CalendarPane(program), TestObjects.getCalendar00(), TestObjects.getUser00(), TestObjects.getUserArray01());
 		} else if (e.getSource().equals(notificationButton)) {
-			new NotificationWindow(TestObjects.getNotification00());
+			new NotificationWindow(program, TestObjects.getNotification00());
 		} else if (e.getSource().equals(testDatabaseButton)) {
 			new TempTestDatabase();
 		} else if (e.getSource().equals(oldEventButton)) {
-			new NewEventWindow(new CalendarPane(), TestObjects.getMeeting01(), TestObjects.getUserArray01());
+			new NewEventWindow(program, new CalendarPane(program), TestObjects.getMeeting01(), TestObjects.getUserArray01());
 		} else if (e.getSource().equals(alarmButton)) {
-			new AlarmWindow(TestObjects.getAlarm01());
+			new AlarmWindow(program, TestObjects.getAlarm01());
 		} else if (e.getSource().equals(newGroupButton)) {
-			new NewGroupWindow();
+			new NewGroupWindow(program);
 		}
 		
 		

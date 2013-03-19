@@ -18,6 +18,8 @@ import javax.swing.JTextArea;
 import javax.swing.ListModel;
 import javax.swing.ListSelectionModel;
 
+import client.Program;
+
 import temp.TestObjects;
 
 import data.Notification;
@@ -41,8 +43,10 @@ public class RoomSelectionWindow extends JPanel implements ActionListener {
 	private GridBagConstraints c;
 
 	private NewEventWindow newEventWindow;
+	private Program program;
 	
-	public RoomSelectionWindow() { // Temporary; For testing
+	public RoomSelectionWindow(Program program) { // Temporary; For testing
+		this.program = program;
 		initFrame();
 		initPanel();
 		frame.pack();
@@ -122,7 +126,7 @@ public class RoomSelectionWindow extends JPanel implements ActionListener {
 	}
 	
 	public static void main(String[] args) {
-		new RoomSelectionWindow();
+		new RoomSelectionWindow(new Program());
 	}
 	
 }

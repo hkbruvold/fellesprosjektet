@@ -45,8 +45,11 @@ public class MeetingInvitationWindow extends JPanel implements ActionListener, I
 	private JButton closeButton, declineButton, acceptButton;
 	private GridBagConstraints c;
 	private JCheckBox alarmCheckBox;
+
+	private Object program;
 	
-	public MeetingInvitationWindow(Meeting meeting, User user) {
+	public MeetingInvitationWindow(Program program, Meeting meeting, User user) {
+		this.program = program;
 		this.meeting = meeting;
 		this.user = user;
 		initFrame();
@@ -167,7 +170,7 @@ public class MeetingInvitationWindow extends JPanel implements ActionListener, I
 	}
 
 	public static void main(String[] args) {
-		new MeetingInvitationWindow(TestObjects.getMeeting00(),TestObjects.getUser00());
+		new MeetingInvitationWindow(new Program(), TestObjects.getMeeting00(),TestObjects.getUser00());
 	}
 	
 }

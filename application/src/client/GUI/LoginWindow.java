@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 import javax.xml.XMLConstants;
 
+import client.Program;
 import client.ServerCommunication;
 
 import data.Authentication;
@@ -33,7 +34,10 @@ public class LoginWindow extends JPanel implements ActionListener {
 	private JButton closeButton, logInButton;
 	private GridBagConstraints c;
 
-	public LoginWindow(){
+	private Program program;
+
+	public LoginWindow(Program program){
+		this.program = program;
 		initFrame();
 		initPanel();
 
@@ -100,6 +104,6 @@ public class LoginWindow extends JPanel implements ActionListener {
 	}
 
 	public static void main(String[] args){
-		new LoginWindow();
+		new LoginWindow(new Program());
 	}
 }

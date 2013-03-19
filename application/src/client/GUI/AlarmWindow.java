@@ -7,6 +7,8 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
+import client.Program;
+
 import temp.TestObjects;
 
 import data.Alarm;
@@ -24,8 +26,10 @@ public class AlarmWindow extends JPanel implements ActionListener { // TODO This
 	private JTextArea notificationTextArea; // TODO?
 	private JButton closeButton;
 	private GridBagConstraints c;
+	private Program program;
 	
-	public AlarmWindow(Alarm alarm) {
+	public AlarmWindow(Program program, Alarm alarm) {
+		this.program = program;
 		this.alarm = alarm;
 		
 		initFrame();
@@ -76,7 +80,7 @@ public class AlarmWindow extends JPanel implements ActionListener { // TODO This
 	}
 
 	public static void main(String[] args) {
-		new AlarmWindow(TestObjects.getAlarm00());
+		new AlarmWindow(new Program(), TestObjects.getAlarm00());
 	}
 	
 }

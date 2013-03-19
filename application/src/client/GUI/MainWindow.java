@@ -22,9 +22,12 @@ import javax.swing.ImageIcon;
 import java.awt.Dimension;
 import javax.swing.SwingConstants;
 
+import client.Program;
+
 public class MainWindow extends JFrame {
 
 	private CalendarPane calendarPane;
+	private Program program;
 
 	/**
 	 * Launch the application.
@@ -33,7 +36,7 @@ public class MainWindow extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					MainWindow window = new MainWindow();
+					MainWindow window = new MainWindow(new Program());
 					window.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -45,7 +48,8 @@ public class MainWindow extends JFrame {
 	/**
 	 * Create the application.
 	 */
-	public MainWindow() {
+	public MainWindow(Program program) {
+		this.program = program;
 		initialize();
 	}
 
@@ -152,7 +156,7 @@ public class MainWindow extends JFrame {
 		JButton btnnewEvent = new JButton("Ny Avtale");
 		btnnewEvent.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				new NewEventWindow(calendarPane, TestObjects.getCalendar00(), TestObjects.getUser00(), TestObjects.getUserArray01());
+				new NewEventWindow(program, calendarPane, TestObjects.getCalendar00(), TestObjects.getUser00(), TestObjects.getUserArray01());
 			}
 		});
 		verticalBox.add(btnnewEvent);
@@ -163,7 +167,7 @@ public class MainWindow extends JFrame {
 		JButton btnViewCalendars = new JButton("Se kalendre");
 		verticalBox.add(btnViewCalendars);
 		
-		calendarPane = new CalendarPane();
+		calendarPane = new CalendarPane(this.program);
 		GridBagConstraints gbc_calendarPane = new GridBagConstraints();
 		gbc_calendarPane.fill = GridBagConstraints.BOTH;
 		gbc_calendarPane.insets = new Insets(0, 0, 5, 0);

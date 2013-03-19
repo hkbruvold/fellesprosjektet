@@ -15,6 +15,8 @@ import javax.swing.JComboBox;
 import javax.swing.JButton;
 import javax.swing.Box;
 
+import client.Program;
+
 import data.User;
 import data.UserTypes;
 
@@ -28,6 +30,7 @@ public class NewUserWindow extends JFrame {
 	private JTextField passwordField;
 	private JTextField nameField;
 	private User user;
+	private Program program;
 
 	/**
 	 * Launch the application.
@@ -36,7 +39,7 @@ public class NewUserWindow extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					NewUserWindow frame = new NewUserWindow();
+					NewUserWindow frame = new NewUserWindow(new Program());
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -48,7 +51,8 @@ public class NewUserWindow extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public NewUserWindow() {
+	public NewUserWindow(Program program) {
+		this.program = program;
 		this.jFrame = this;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 300, 250);
