@@ -42,10 +42,10 @@ public class TestObjects {
 	}
 	
 	public static Appointment getAppointment00() {
-		return new Appointment(2, getCalendar00(), DATE_TIME_0, DATE_TIME_1, DESCRIPTION, LOCATION, getUser00());
+		return new Appointment(DEFAULT_ID, getCalendar00(), DATE_TIME_0, DATE_TIME_1, DESCRIPTION, LOCATION, getUser00());
 	}
 	public static Appointment getAppointment01() {
-		return new Appointment(2, getCalendar01(), DATE_TIME_0, DATE_TIME_1, DESCRIPTION, LOCATION, getUser01());
+		return new Appointment(DEFAULT_ID, getCalendar01(), DATE_TIME_0, DATE_TIME_1, DESCRIPTION, LOCATION, getUser01());
 	}
 	
 	public static Calendar getCalendar00() {
@@ -116,14 +116,14 @@ public class TestObjects {
 	}
 	
 	public static Room getRoom00() {
-		return new Room(1, 6, "R1");
+		return new Room(DEFAULT_ID, 6, "R1");
 	}
 	
 	public static Room getRoom01() {
-		return new Room(2, 7, "R2");
+		return new Room(DEFAULT_ID, 7, "R2");
 	}
 	
 	public static Room getRoom02() {
-		return new Room(3, 100, "R3");
+		return new Room(DEFAULT_ID, 100, "R3");
 	}
 }

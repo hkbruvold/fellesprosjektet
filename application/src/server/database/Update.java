@@ -44,16 +44,17 @@ public class Update {
 	private static final String PARTICIPANT_STATUS_ACCEPTED = "1";
 	private static final String PARTICIPANT_STATUS_DECLINED = "2";
 	
-// 	Please ignore! I'm using this as a shortcut to open classes. Query TableFields Event
+// 	Please ignore! I'm using this as a shortcut to open classes. Query TableFields Event TestObjects
 	
 	private User currentUser;
 	private DatabaseCommunication dbComm;
+	private boolean debugging = false;
 
 	public Update(User currentUser, DatabaseCommunication dbComm) {
 		this.currentUser = currentUser;
 		this.dbComm = dbComm;
 	}
-
+	
 	public void insertAlarm(Alarm alarm) {
 		StringBuilder values = new StringBuilder();
 		values.append("'").append(alarm.getTimeBefore()).append("'").append(", ");
@@ -61,8 +62,11 @@ public class Update {
 		values.append("'").append(alarm.getOwner().getUsername()).append("'").append(", ");
 		values.append(alarm.getEvent().getId()).append(" ");
 		String updateString = String.format(INSERT_INTO_VALUES, TABLE_ALARM, FIELDS_ALARM, values.toString());
-		System.out.println(updateString);
-//		dbComm.update(updateString);
+		if (debugging) {
+			System.out.println(updateString);
+		} else {
+			dbComm.update(updateString);
+		}
 	}
 	public void updateAlarm(Alarm alarm) {
 		StringBuilder values = new StringBuilder();
@@ -70,16 +74,22 @@ public class Update {
 		StringBuilder condition = new StringBuilder();
 		// TODO
 		String updateString = String.format(UPDATE_SET_WHERE, TABLE_ALARM, values.toString(), condition.toString());
-		System.out.println(updateString);
-//		dbComm.update(updateString);
+		if (debugging) {
+			System.out.println(updateString);
+		} else {
+			dbComm.update(updateString);
+		}
 	}
 	public void deleteAlarm(Alarm alarm) {
 		StringBuilder condition = new StringBuilder();
 		condition.append("username=").append("'").append(alarm.getOwner()).append("'").append(", ");
 		// TODO
 		String updateString = String.format(DELETE_FROM_WHERE, TABLE_ALARM, condition.toString());
-		System.out.println(updateString);
-//		dbComm.update(updateString);
+		if (debugging) {
+			System.out.println(updateString);
+		} else {
+			dbComm.update(updateString);
+		}
 	}
 	
 	
@@ -96,9 +106,13 @@ public class Update {
 			values.append(BIT_TRUE).append(" ");
 		}
 		String updateString = String.format(INSERT_INTO_VALUES, TABLE_EVENT, FIELDS_EVENT, values.toString());
-		System.out.println(updateString);
-//		dbComm.update(updateString);
-		// TODO event.setId( get id from database );
+		int id = 0;
+		if (debugging) {
+			System.out.println(updateString);
+		} else {
+			id = dbComm.update(updateString);
+		}
+		event.setId(id);
 		if (event.getRoom() != null) {
 			insertReservedRoom(event, event.getRoom());
 		}
@@ -125,9 +139,14 @@ public class Update {
 		values.append("'").append(group.getName()).append("'").append(", ");
 		values.append("'").append(group.getDescription()).append("'").append(" ");
 		String updateString = String.format(INSERT_INTO_VALUES, TABLE_GROUPS, FIELDS_GROUPS, values.toString());
-		System.out.println(updateString);
-//		dbComm.update(updateString);
-		// TODO group.setID( get id from database );
+		int id = 0;
+		if (debugging) {
+			System.out.println(updateString);
+		} else {
+			id = dbComm.update(updateString);
+		}
+		group.setId(id);
+		System.out.println(group.getId());
 		for (User user : group.getMembers()) {
 			insertIsMemberOf(user, group);
 		}
@@ -138,9 +157,13 @@ public class Update {
 		values.append(notification.getId()).append(", ");
 		values.append("'").append(notification.getMessage()).append("'").append(" ");
 		String updateString = String.format(INSERT_INTO_VALUES, TABLE_NOTIFICATION, FIELDS_NOTIFICATION, values.toString());
-		System.out.println(updateString);
-//		dbComm.update(updateString);
-		// TODO notification.setId( get id from database );
+		int id = 0;
+		if (debugging) {
+			System.out.println(updateString);
+		} else {
+			id = dbComm.update(updateString);
+		}
+		notification.setId(id);
 		insertNotificationTo(notification.getRecipient(), notification);
 		if (notification.getEvent() != null) {
 			insertNotificationForEvent(notification, notification.getEvent());
@@ -153,8 +176,11 @@ public class Update {
 		values.append(room.getSize()).append(", ");
 		values.append("'").append(room.getDescription()).append("'").append(" ");
 		String updateString = String.format(INSERT_INTO_VALUES, TABLE_ROOM, FIELDS_ROOM, values.toString());
-		System.out.println(updateString);
-//		dbComm.update(updateString);
+		if (debugging) {
+			System.out.println(updateString);
+		} else {
+			dbComm.update(updateString);
+		}
 	}
 	
 	public void insertUser(User user) {
@@ -164,8 +190,11 @@ public class Update {
 		values.append("'").append(user.getName()).append("'").append(", ");
 		values.append("'").append(user.getType()).append("'").append(" ");
 		String updateString = String.format(INSERT_INTO_VALUES, TABLE_USER, FIELDS_USER, values.toString());
-		System.out.println(updateString);
-//		dbComm.update(updateString);
+		if (debugging) {
+			System.out.println(updateString);
+		} else {
+			dbComm.update(updateString);
+		}
 	}
 	
 	public void insertIsMemberOf(User user, Group group) {
@@ -173,8 +202,11 @@ public class Update {
 		values.append("'").append(user.getUsername()).append("'").append(", ");
 		values.append(group.getId()).append(" ");
 		String updateString = String.format(INSERT_INTO_VALUES, TABLE_IS_MEMBER_OF, FIELDS_IS_MEMBER_OF, values.toString());
-		System.out.println(updateString);
-//		dbComm.update(updateString);
+		if (debugging) {
+			System.out.println(updateString);
+		} else {
+			dbComm.update(updateString);
+		}
 	}
 	
 	public void insertIsOwner(User user, Event event) {
@@ -182,8 +214,11 @@ public class Update {
 		values.append("'").append(user.getUsername()).append("'").append(", ");
 		values.append(event.getId()).append(" ");
 		String updateString = String.format(INSERT_INTO_VALUES, TABLE_IS_OWNER, FIELDS_IS_OWNER, values.toString());
-		System.out.println(updateString);
-//		dbComm.update(updateString);
+		if (debugging) {
+			System.out.println(updateString);
+		} else {
+			dbComm.update(updateString);
+		}
 	}
 	
 	public void insertIsParticipant(User user, Event event, String status) {
@@ -192,8 +227,11 @@ public class Update {
 		values.append(event.getId()).append(", ");
 		values.append("'").append(status).append("'").append(" ");
 		String updateString = String.format(INSERT_INTO_VALUES, TABLE_IS_PARTICIPANT, FIELDS_IS_PARTICIPANT, values.toString());
-		System.out.println(updateString);
-//		dbComm.update(updateString);
+		if (debugging) {
+			System.out.println(updateString);
+		} else {
+			dbComm.update(updateString);
+		}
 	}
 	
 	public void insertNotificationTo(User user, Notification notification) {
@@ -201,8 +239,11 @@ public class Update {
 		values.append("'").append(user.getUsername()).append("'").append(", ");
 		values.append(notification.getId()).append(" ");
 		String updateString = String.format(INSERT_INTO_VALUES, TABLE_NOTIFICATION_TO, FIELDS_NOTIFICATION_TO, values.toString());
-		System.out.println(updateString);
-//		dbComm.update(updateString);
+		if (debugging) {
+			System.out.println(updateString);
+		} else {
+			dbComm.update(updateString);
+		}
 	}
 	
 	public void insertNotificationForEvent(Notification notification, Event event) {
@@ -210,8 +251,11 @@ public class Update {
 		values.append(notification.getId()).append(", ");
 		values.append(event.getId()).append(" ");
 		String updateString = String.format(INSERT_INTO_VALUES, TABLE_NOTIFICATION_FOR_EVENT, FIELDS_NOTIFICATION_FOR_EVENT, values.toString());
-		System.out.println(updateString);
-//		dbComm.update(updateString);
+		if (debugging) {
+			System.out.println(updateString);
+		} else {
+			dbComm.update(updateString);
+		}
 	}
 	
 	public void insertReservedRoom(Event event, Room room) {
@@ -219,8 +263,11 @@ public class Update {
 		values.append(event.getId()).append(", ");
 		values.append(room.getId()).append(" ");
 		String updateString = String.format(INSERT_INTO_VALUES, TABLE_RESERVED_ROOM, FIELDS_RESERVED_ROOM, values.toString());
-		System.out.println(updateString);
-//		dbComm.update(updateString);
+		if (debugging) {
+			System.out.println(updateString);
+		} else {
+			dbComm.update(updateString);
+		}
 	}
 
 	
@@ -232,6 +279,7 @@ public class Update {
 		DatabaseConnection dbConn = new DatabaseConnection("jdbc:mysql://localhost:3306/calendarDatabase", "root", "skip".toCharArray());
 		DatabaseCommunication dbComm = new DatabaseCommunication(dbConn);
 		Update update = new Update(TestObjects.getUser00(), dbComm);
+		update.debugging = true;
 		
 		System.out.println();
 		update.insertAlarm(TestObjects.getAlarm00());
