@@ -17,11 +17,14 @@ public class Program {
 	public Program() {
 		sc = new ServerCommunication(SERVER_ADDRESS);
 		showLogin();
-		
 	}
 	
-	private void showLogin() {
+	public void showLogin() {
 		new LoginWindow(this);
+	}
+	
+	public void showMainWindow() {
+		new MainWindow(this);
 	}
 	
 	public void quit() {

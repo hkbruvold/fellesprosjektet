@@ -117,11 +117,12 @@ public class LoginWindow extends JPanel implements ActionListener {
 				showWrongLoginLabel();
 			} else {
 				frame.dispose();
+				program.showMainWindow();
 			}
 		}
 	}
-
+	/*
 	public static void main(String[] args){
 		new LoginWindow(new Program());
-	}
+	} */
 }

@@ -32,6 +32,7 @@ public class MainWindow extends JFrame {
 	/**
 	 * Launch the application.
 	 */
+	/*
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -43,18 +44,19 @@ public class MainWindow extends JFrame {
 				}
 			}
 		});
-	}
+	}*/
 
 	/**
 	 * Create the application.
 	 */
 	public MainWindow(Program program) {
 		this.program = program;
+		this.setVisible(true);
 		initialize();
 	}
 
 	/**
-	 * Initialize the contents of the frame.
+	 * Initialise the contents of the frame.
 	 */
 	private void initialize() {
 		Date currentDate = new Date();
