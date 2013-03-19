@@ -16,7 +16,7 @@ public class Response implements Serializable {
         return data;
     }
     
-    public Status getAction () {
+    public Status getStatus () {
         return status;
     }
 
