@@ -1,5 +1,6 @@
 package server;
 
+import data.Event;
 import data.Request;
 import data.Response;
 import data.User;
@@ -12,6 +13,7 @@ import javax.xml.ws.soap.AddressingFeature.Responses;
 import server.database.DatabaseCommunication;
 import server.database.DatabaseConnection;
 import server.database.Query;
+import server.database.Update;
 
 public class ServerThread extends Thread {
 	private Socket socket = null;
@@ -29,7 +31,8 @@ public class ServerThread extends Thread {
 	public ServerThread (Socket socket) {
 		super();
 		this.socket = socket;
-		dbConn = new DatabaseConnection(serverUrl, username, password);
+		//dbConn = new DatabaseConnection(serverUrl, username, password);
+		dbConn = new DatabaseConnection("jdbc:mysql://localhost:3306/calendarDatabase", "root", "skip".toCharArray());
 		dbComm = new DatabaseCommunication(dbConn);
 	}
 
@@ -60,6 +63,7 @@ public class ServerThread extends Thread {
 			System.out.println(action);
 			String username = req.getData().get("username").toString();
 			String password = req.getData().get("password").toString();
+			System.out.println("Username: " + username + " " + "Password: " + password);
 			Query query = new Query(null, dbComm);
 			User fethcedUser = query.queryUser(username);
 			if(fethcedUser.getName().equals(username) && fethcedUser.getPassword().equals(password)){
@@ -69,6 +73,9 @@ public class ServerThread extends Thread {
 			}
 		case "addEvent":
 			System.out.println(action);
+			Update update = new Update(null, dbComm);
+			Event event = (Event) req.getData().get("event");
+			update.insertEvent(event); 
 		}
 	}
 
