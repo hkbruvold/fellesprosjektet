@@ -2,6 +2,8 @@ package client;
 
 import client.GUI.*;
 import data.*;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Program {
@@ -54,8 +56,10 @@ public class Program {
 		values.put("alarm", alarm);
 		Response res = client.send(new Request("addAlarm", values));
 	}
-	public ArrayList<User> getAllUsers(){
+	public User[] getAllUsers(){
+		System.out.println("Fetching users");
 		Response res = client.send(new Request("listUsers", null));
+		return (User[]) res.getData();
 	}
 
 	public static void main(String[] args) {
