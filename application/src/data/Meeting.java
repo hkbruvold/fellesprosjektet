@@ -39,9 +39,8 @@ public class Meeting extends Event implements Serializeable {
 	}
 	
 	public void inviteParticipant(User user) {
+		removeParticipant(user);
 		usersInvited.add(user);
-		usersAccepted.remove(user);
-		usersDeclined.remove(user);
 	}
 	public void removeParticipant(User user) {
 		usersInvited.remove(user);
@@ -49,13 +48,11 @@ public class Meeting extends Event implements Serializeable {
 		usersDeclined.remove(user);
 	}
 	public void acceptInvite(User user) {
-		usersInvited.remove(user);
+		removeParticipant(user);
 		usersAccepted.add(user);
-		usersDeclined.remove(user);
 	}
 	public void declineInvite(User user) {
-		usersInvited.remove(user);
-		usersAccepted.remove(user);
+		removeParticipant(user);
 		usersDeclined.add(user);
 	}
 	

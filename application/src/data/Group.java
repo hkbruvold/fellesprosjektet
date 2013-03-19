@@ -46,10 +46,14 @@ public class Group implements Serializeable {
 		return members;
 	}
 	public void addMember(User newMember) {
-		members.add(newMember);
+		if (!members.contains(newMember)) {
+			members.add(newMember);
+		}
 	}
 	public void addMembers(List<User> users) {
-		members.addAll(users);
+		for (User user : users) {
+			addMember(user);
+		}
 	}
 	public int getSize() {
 		return members.size();

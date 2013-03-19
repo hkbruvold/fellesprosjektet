@@ -18,8 +18,10 @@ public class TestDatabaseCode {
 		insertUsers();
 		insertGroups();
 		insertRooms();
-//		insertEvents();
+		insertEvents();
+		insertAlarms();
 	}
+
 	private void insertUsers() {
 		update.insertUser(TestObjects.getUser00());
 		update.insertUser(TestObjects.getUser01());
@@ -40,6 +42,10 @@ public class TestDatabaseCode {
 		update.insertEvent(TestObjects.getAppointment01());
 		update.insertEvent(TestObjects.getMeeting00());
 		update.insertEvent(TestObjects.getMeeting01());
+	}
+	private void insertAlarms() {
+		update.insertAlarm(TestObjects.getAlarm00());
+		update.insertAlarm(TestObjects.getAlarm01());
 	}
 
 
