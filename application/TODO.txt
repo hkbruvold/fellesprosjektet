@@ -10,7 +10,7 @@ __Eivind__???
 Server-client communication (sending/receiving objects), High priority
 
 __Hans-Kristian__
-Add option to add alarm to meeting (when invited)
+
 
 __Kaare__
 Add window for making/editing groups
@@ -26,3 +26,4 @@ Add option for selecting room in NewEventWindow
 
 __Done__
 Add window for new user
+Add option to add alarm to meeting (when invited)
