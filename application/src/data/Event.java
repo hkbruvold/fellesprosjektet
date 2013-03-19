@@ -1,6 +1,7 @@
 package data;
 
 import java.io.Serializable;
+import java.util.Calendar;
 
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Root;
@@ -95,5 +96,33 @@ public abstract class Event implements Serializable {
 	}
 	public void setAlarm(Alarm alarm) {
 		this.alarm = alarm;
+	}
+	
+	public Calendar getStartDate() {
+		String date = this.startDateTime.split(" ")[0];
+		String time = this.startDateTime.split(" ")[1];
+		
+		Calendar cal = Calendar.getInstance();
+		cal.set(Integer.parseInt(date.split("-")[0]),
+				Integer.parseInt(date.split("-")[1]),
+				Integer.parseInt(date.split("-")[2]), 
+				Integer.parseInt(time.split(":")[0]),
+				Integer.parseInt(time.split(":")[1]));
+		
+		return cal;
+	}
+	
+	public Calendar getEndDate() {
+		String date = this.endDateTime.split(" ")[0];
+		String time = this.endDateTime.split(" ")[1];
+		
+		Calendar cal = Calendar.getInstance();
+		cal.set(Integer.parseInt(date.split("-")[0]),
+				Integer.parseInt(date.split("-")[1]),
+				Integer.parseInt(date.split("-")[2]), 
+				Integer.parseInt(time.split(":")[0]),
+				Integer.parseInt(time.split(":")[1]));
+		
+		return cal;
 	}
 }
