@@ -10,6 +10,7 @@ import java.util.Arrays;
 
 import javax.swing.*;
 
+import client.Client;
 import client.Program;
 
 import temp.TestObjects;
@@ -311,6 +312,7 @@ public class NewEventWindow extends JPanel implements ActionListener, ItemListen
 	public static void main(String[] args) {
 		//		new NewEventWindow(TestObjects.getCalendar00(), TestObjects.getUser02(), TestObjects.getUserArray01());
 		new NewEventWindow(new Program(), new CalendarPane(new Program()), TestObjects.getMeeting01(), TestObjects.getUserArray01());
+		//new NewEventWindow(new Program(), new CalendarPane(new Program()), TestObjects.getMeeting01(), program.getAllUsers());
 	}
 
 

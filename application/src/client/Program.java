@@ -27,12 +27,13 @@ public class Program {
 		System.exit(0);
 	}
 
+	@SuppressWarnings("unchecked")
 	public boolean login (String username, String password) {
 		HashMap<String, String> values = new HashMap<String, String>();
 		values.put("username", username);
 		values.put("password", password);
 		Response res = client.send(new Request("login", values));
-		currentUser = (User) res.getData().get(0);
+		currentUser = (User) ((HashMap<Integer, User>)res.getData()).get(0);
 		return res.status == Response.Status.OK;
 	}
 	// TODO
@@ -55,6 +56,11 @@ public class Program {
 		HashMap<String, Alarm> values = new HashMap<String, Alarm>();
 		values.put("alarm", alarm);
 		Response res = client.send(new Request("addAlarm", values));
+	}
+	public User[] getAllUsers(){
+		System.out.println("Fetching users");
+		Response res = client.send(new Request("listUsers", null));
+		return (User[]) res.getData();
 	}
 
 	public static void main(String[] args) {

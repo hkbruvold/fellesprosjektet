@@ -38,10 +38,11 @@ public class Client {
 		}
 	}
 
-	private void connect () throws UnknownHostException, IOException {
+	private ObjectInputStream connect () throws UnknownHostException, IOException {
 		socket = new Socket(HOST, PORT);
 		out = new ObjectOutputStream(socket.getOutputStream());
 		in = new ObjectInputStream(socket.getInputStream());
+		return in;
 	}
 
 	private void closeConnection () throws IOException {

@@ -2,23 +2,24 @@ TODO:
 
 __Unassigned__
 
-??? Add interface for adding users, adding users to groups
-Make TODO list
-Main/calendar window (framework in place)
-Fix calendarPane.addEvent(event) so that it acutally works - High priority
-Add window for making/editing groups - Kind of done
-
+Group managment:
+	Edit existing groups
+		Fetch all groups from server
+	Add new groups
+		Fetch all users from server
+		
 __Eivind__
 
-
 __Hans-Kristian__
-
+Main/calendar window (framework in place)
+Fix calendarPane.addEvent(event) so that it acutally works - High priority
 
 __Kaare__
 parseRequest i ServerThread
-
+fix newUserWindow, and push new user to server
 
 __Kjell__
+Login from client, via database
 Database queries (mostly done)
 Database update
 Database delete
