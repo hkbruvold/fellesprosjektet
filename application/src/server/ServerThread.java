@@ -9,14 +9,28 @@ import java.io.*;
 
 import javax.xml.ws.soap.AddressingFeature.Responses;
 
+import server.database.DatabaseCommunication;
+import server.database.DatabaseConnection;
+import server.database.Query;
+
 public class ServerThread extends Thread {
 	private Socket socket = null;
         private ObjectOutputStream out;
         private ObjectInputStream in;
+        private DatabaseConnection dbConn;
+        private DatabaseCommunication dbComm;
+		private String URI;
+		private String port;
+		private String databaseName;
+		private String serverUrl = "jdbc:mysql://" + URI + ":" + port + "/" + databaseName;
+		private String username;
+		private char[] password;
 
 	public ServerThread (Socket socket) {
             super();
             this.socket = socket;
+            dbConn = new DatabaseConnection(serverUrl, username, password);
+            dbComm = new DatabaseCommunication(dbConn);
 	}
 
 	@Override
@@ -46,7 +60,8 @@ public class ServerThread extends Thread {
                     System.out.println(action);
                     String username = req.getData().get("username").toString();
                     String password = req.getData().get("password").toString();
-                    User fethcedUser = server.database.Query.queryUser(username);
+                    Query query = new Query(null, dbComm);
+                    User fethcedUser = query.queryUser(username);
                     if(fethcedUser.getName().equals(username) && fethcedUser.getPassword().equals(password)){
                     	send(new Response(Response.Status.OK, null));
                     }
