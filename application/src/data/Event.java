@@ -17,7 +17,9 @@ public abstract class Event implements Serializeable {
 	@Element
 	protected String description;
 	@Element
-	protected String location; //Room? Both?
+	protected String location;
+	@Element
+	protected Room room;
 	@Element(required=false)
 	protected Alarm alarm;
 	
@@ -33,6 +35,16 @@ public abstract class Event implements Serializeable {
 		this.endDateTime = endDateTime;
 		this.description = description;
 		this.location = location;
+		this.room = null;
+	}
+	public Event(int id, Calendar calendar, String startDateTime, String endDateTime, String description, Room room) {
+		this.id = id;
+		this.calendar = calendar;
+		this.startDateTime = startDateTime;
+		this.endDateTime = endDateTime;
+		this.description = description;
+		this.location = null;
+		this.room = room;
 	}
 	
 	public int getId() {
@@ -71,11 +83,16 @@ public abstract class Event implements Serializeable {
 	public void setLocation(String location) {
 		this.location = location;
 	}
+	public Room getRoom() {
+		return room;
+	}
+	public void setRoom(Room room) {
+		this.room = room;
+	}
 	public Alarm getAlarm() {
 		return alarm;
 	}
 	public void setAlarm(Alarm alarm) {
 		this.alarm = alarm;
 	}
-	
 }

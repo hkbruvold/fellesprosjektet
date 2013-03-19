@@ -66,10 +66,12 @@ public class NewEventWindow extends JPanel implements ActionListener, ItemListen
 	private Calendar calendar;
 	private User user;
 	private User[] userArray;
+	private Room room;
 	
 	private CalendarPane calendarPane;
 
 	private Program program;
+
 	
 	public NewEventWindow(Program program, CalendarPane calendarPane, Calendar calendar, User user, User[] userArray) {
 		this.program = program;
@@ -243,8 +245,7 @@ public class NewEventWindow extends JPanel implements ActionListener, ItemListen
 	}
 	
 	public void setRoom(Room room) {
-		// TODO add room to event? add room to this?
-		// NB! Need to update database!!
+		this.room = room;
 		locationField.setText(room.toString());
 	}
 
@@ -261,7 +262,7 @@ public class NewEventWindow extends JPanel implements ActionListener, ItemListen
 				locationField.setEnabled(false);
 				locationButton.setText(BUTTON_LOCATION_SET_TEXT);
 			} else if (locationButton.getText().equals(BUTTON_LOCATION_SET_TEXT)) {
-				// TODO
+				room = null;
 				locationField.setEnabled(true);
 				locationField.setText("");
 				locationButton.setText(BUTTON_LOCATION_SET_ROOM);
@@ -273,12 +274,20 @@ public class NewEventWindow extends JPanel implements ActionListener, ItemListen
 			String description = descriptionField.getText();
 			String location = locationField.getText();
 			if (meetingCheckBox.isSelected()) {
-				calendarEvent = new Meeting(0, calendar, startDateTime, endDateTime, description, location, user);
+				if (room != null) {
+					calendarEvent = new Meeting(0, calendar, startDateTime, endDateTime, description, room, user);
+				} else {
+					calendarEvent = new Meeting(0, calendar, startDateTime, endDateTime, description, location, user);
+				}
 				for (User participant : participantsList.getSelectedValuesList()) {
 					((Meeting)calendarEvent).inviteParticipant(participant);
 				}
 			} else {
-				calendarEvent = new Appointment(0, calendar, startDateTime, endDateTime, description, location, user);
+				if (room != null) {
+					calendarEvent = new Appointment(0, calendar, startDateTime, endDateTime, description, room, user);
+				} else {
+					calendarEvent = new Appointment(0, calendar, startDateTime, endDateTime, description, location, user);
+				}
 			}
 			Alarm alarm = null;
 			if(alarmCheckBox.isSelected()){
