@@ -42,17 +42,23 @@ public class Program {
     // TODO
 
     public void registerEvent(Event event) {
-        // TODO (remember database!)
+    	HashMap values = new HashMap();
+    	values.put("event", event);
+    	Response res = client.send(new Request("addEvent", values));
     }
     public void editEvent(Event event/*, TODO */) {
         // TODO (remember database!)
     }
     public void removeEvent(Event event) { 
-        // TODO (remember database!)
+        HashMap values = new HashMap();
+        values.put("event", event);
+        Response res = client.send(new Request("removeEvent", values));
     }
 
     public void registerAlarm(Alarm alarm) { 
-        // TODO send alarm to server
+    	HashMap values = new HashMap();
+    	values.put("alarm", alarm);
+    	Response res = client.send(new Request("addAlarm", values));
     }
 
     public static void main(String[] args) {
