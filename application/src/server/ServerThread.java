@@ -2,8 +2,12 @@ package server;
 
 import data.Request;
 import data.Response;
+import data.User;
+
 import java.net.*;
 import java.io.*;
+
+import javax.xml.ws.soap.AddressingFeature.Responses;
 
 public class ServerThread extends Thread {
 	private Socket socket = null;
@@ -42,8 +46,13 @@ public class ServerThread extends Thread {
                     System.out.println(action);
                     String username = req.getData().get("username").toString();
                     String password = req.getData().get("password").toString();
-                    //TODO poll database to check if username and data is correct
-                    send(new Response(Response.Status.OK, null));
+                    User fethcedUser = server.database.Query.queryUser(username);
+                    if(fethcedUser.getName().equals(username) && fethcedUser.getPassword().equals(password)){
+                    	send(new Response(Response.Status.OK, null));
+                    }
+                    else{
+                        send(new Response(Response.Status.FAILED, null));
+                    }
                 case "addEvent":
                 	System.out.println(action);
             }
