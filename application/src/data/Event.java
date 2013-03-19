@@ -115,4 +115,13 @@ public abstract class Event implements Serializable {
 		
 		return cal;
 	}
+	
+	/**
+	 * Will return day of week where Monday = 0
+	 */
+	public int getDayOfWeek() {
+		Calendar cal = this.getStartDate();
+		
+		return (cal.DAY_OF_WEEK - 2) % 7;
+	}
 }
