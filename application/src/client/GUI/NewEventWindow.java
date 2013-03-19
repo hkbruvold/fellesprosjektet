@@ -267,27 +267,28 @@ public class NewEventWindow extends JPanel implements ActionListener, ItemListen
 				locationButton.setText(BUTTON_LOCATION_SET_ROOM);
 			}
 		} else if (e.getSource().equals(saveButton)) {
-			Event calendarEvent;
+			Event event;
 			String startDateTime = fromDateField.getText() + " " + fromTimeField.getText();
 			String endDateTime = toDateField.getText() + " " + toTimeField.getText();
 			String description = descriptionField.getText();
 			String location = locationField.getText();
 			if (meetingCheckBox.isSelected()) {
-				calendarEvent = new Meeting(0, calendar, startDateTime, endDateTime, description, location, user);
+				event = new Meeting(0, calendar, startDateTime, endDateTime, description, location, user);
 				for (User participant : participantsList.getSelectedValuesList()) {
-					((Meeting)calendarEvent).inviteParticipant(participant);
+					((Meeting)event).inviteParticipant(participant);
 				}
 			} else {
-				calendarEvent = new Appointment(0, calendar, startDateTime, endDateTime, description, location, user);
+				event = new Appointment(0, calendar, startDateTime, endDateTime, description, location, user);
 			}
 			Alarm alarm = null;
 			if(alarmCheckBox.isSelected()){
-				alarm = new Alarm(alarmTimeBeforeField.getText(), "", user, calendarEvent);
-				// TODO send the alarm to the database
+				alarm = new Alarm(alarmTimeBeforeField.getText(), "", user, event);
+				program.registerAlarm(alarm);
 			}
-			calendarPane.addEvent(calendarEvent);
+			calendarPane.addEvent(event);
 			// TODO save new event, set the message string for alarm
-			XMLTranslator.toXML(calendarEvent);
+			program.registerEvent(event);
+			XMLTranslator.toXML(event);
 			frame.dispose(); // Close if successful; show error message if not?
 		}
 	}

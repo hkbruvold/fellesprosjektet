@@ -157,7 +157,7 @@ public class MeetingInvitationWindow extends JPanel implements ActionListener, I
 			frame.dispose();
 			if(alarmCheckBox.isSelected()){
 				Alarm alarm = new Alarm(alarmTimeBeforeField.getText(), "", user, meeting);
-				// TODO send the alarm to the database
+				program.registerAlarm(alarm);
 			}
 		}
 	}
