@@ -1,7 +1,7 @@
 TODO:
 
 __Unassigned__
-
+Write a background thread that listens for changes such as NewMeetings, Invites, Alarms and such
 Group managment:
 	Edit existing groups
 		Fetch all groups from server
