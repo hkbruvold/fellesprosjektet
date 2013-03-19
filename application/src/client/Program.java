@@ -54,6 +54,9 @@ public class Program {
 		values.put("alarm", alarm);
 		Response res = client.send(new Request("addAlarm", values));
 	}
+	public ArrayList<User> getAllUsers(){
+		Response res = client.send(new Request("listUsers", null));
+	}
 
 	public static void main(String[] args) {
 		new Program();

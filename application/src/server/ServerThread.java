@@ -7,7 +7,11 @@ import data.Response;
 import data.User;
 
 import java.net.*;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.io.*;
+
+import javax.xml.ws.soap.AddressingFeature.Responses;
 
 import server.database.DatabaseCommunication;
 import server.database.DatabaseConnection;
@@ -55,6 +59,7 @@ public class ServerThread extends Thread {
 	public void parseRequest (Request req) {
 		String action = req.getAction();
 		Update update = new Update(null, dbComm);
+		Query query = new Query(null, dbComm);
 
 		switch (action) {
 		case "login":
@@ -63,7 +68,6 @@ public class ServerThread extends Thread {
 			String username = req.getData().get("username").toString();
 			String password = req.getData().get("password").toString();
 			System.out.println("Username: " + username + " " + "Password: " + password);
-			Query query = new Query(null, dbComm);
 			User fethcedUser = query.queryUser(username);
 			if(fethcedUser.getName().equals(username) && fethcedUser.getPassword().equals(password)){
 				send(new Response(Response.Status.OK, null));
@@ -77,9 +81,13 @@ public class ServerThread extends Thread {
 		case "addAlarm":
 			Alarm alarm = (Alarm) req.getData().get("alarm");
 			update.insertAlarm(alarm);
+		case "listUsers":
+			HashMap userHashMap = new HashMap();
+			ArrayList<User> userList = query.queryUsers();
+			userHashMap.put("users", userList);
+			new Response(Response.Status.OK, userHashMap);
 		}
-	}
-
+		}
 	public void send (Response res) {
 		try {
 			out.writeObject(res);
