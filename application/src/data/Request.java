@@ -20,6 +20,10 @@ public class Request implements Serializable {
 		this.action = action;
 		this.data = data;
 	}
+	
+	public String toString() {
+		return action + " : " + data;
+	}
 
 	public Serializable getData () {
 		return data;

@@ -22,7 +22,7 @@ public class Client {
 			XMLTranslator.send(req, out);
 			out.flush();
 			while (res == null) { // wait for response
-				res = (Response) XMLTranslator.receive(in);
+				res = (Response) XMLTranslator.receiveResponse(in);
 			}
 			closeConnection();
 			return res;

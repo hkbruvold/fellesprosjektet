@@ -1,5 +1,6 @@
 package data;
 
+import java.io.DataInputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.Serializable;
@@ -18,53 +19,23 @@ public class XMLTranslator {
 		}
 	}
 
-	public static Serializable receive(InputStream source) {
+	public static Serializable receiveRequest(InputStream source) {
 		Serializer serializer = new Persister();
 		Serializable object = null;
 		try {
 			object = serializer.read(Request.class, source);
 		} catch (Exception e) {
-			//			e.printStackTrace();
+			e.printStackTrace();
 		}
+		return object;
+	}
+	public static Serializable receiveResponse(InputStream source) {
+		Serializer serializer = new Persister();
+		Serializable object = null;
 		try {
 			object = serializer.read(Response.class, source);
 		} catch (Exception e) {
-			//			e.printStackTrace();
-		}
-		try {
-			object = serializer.read(Alarm.class, source);
-		} catch (Exception e) {
-			//			e.printStackTrace();
-		}
-		try {
-			object = serializer.read(Appointment.class, source);
-		} catch (Exception e) {
-			//			e.printStackTrace();
-		}
-		try {
-			object = serializer.read(Group.class, source);
-		} catch (Exception e) {
-			//			e.printStackTrace();
-		}
-		try {
-			object = serializer.read(Meeting.class, source);
-		} catch (Exception e) {
-			//			e.printStackTrace();
-		}
-		try {
-			object = serializer.read(Notification.class, source);
-		} catch (Exception e) {
-			//			e.printStackTrace();
-		}
-		try {
-			object = serializer.read(User.class, source);
-		} catch (Exception e) {
-			//			e.printStackTrace();
-		}
-		try {
-			object = serializer.read(Authentication.class, source);
-		} catch (Exception e) {
-			//			e.printStackTrace();
+			e.printStackTrace();
 		}
 		return object;
 	}

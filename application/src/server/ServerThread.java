@@ -44,7 +44,7 @@ public class ServerThread extends Thread {
 			in = socket.getInputStream();
 			Request req = null;
 			while (req == null) {
-				req = (Request) XMLTranslator.receive(in);
+				req = (Request) XMLTranslator.receiveRequest(in);
 			}
 			parseRequest(req);
 			closeSocket();
