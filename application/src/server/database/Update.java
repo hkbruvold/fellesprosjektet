@@ -1,7 +1,5 @@
 package server.database;
 
-import java.util.ArrayList;
-
 import data.*;
 
 import temp.TestObjects;
@@ -34,8 +32,8 @@ public class Update {
 	private static final String FIELDS_USER = TableFields.USER.getFieldsString();
 	
 	private static final String INSERT_INTO_VALUES = "INSERT INTO %s (%s) VALUES (%s)"; // "tableName", "fields", "values"
-	private static final String DELETE_FROM_WHERE = "DELETE FROM %s WHERE %s"; // "tableName", "condition"
 	private static final String UPDATE_SET_WHERE = "UPDATE %s SET %s WHERE %s"; // "tableName", "field1=value1, field2=value2 ...", "condition"
+	private static final String DELETE_FROM_WHERE = "DELETE FROM %s WHERE %s"; // "tableName", "condition"
 	
 	private static final String BIT_FALSE = "0";
 	private static final String BIT_TRUE = "1";
@@ -66,14 +64,32 @@ public class Update {
 		System.out.println(updateString);
 //		dbComm.update(updateString);
 	}
+	public void updateAlarm(Alarm alarm) {
+		StringBuilder values = new StringBuilder();
+		// TODO
+		StringBuilder condition = new StringBuilder();
+		// TODO
+		String updateString = String.format(UPDATE_SET_WHERE, TABLE_ALARM, values.toString(), condition.toString());
+		System.out.println(updateString);
+//		dbComm.update(updateString);
+	}
+	public void deleteAlarm(Alarm alarm) {
+		StringBuilder condition = new StringBuilder();
+		condition.append("username=").append("'").append(alarm.getOwner()).append("'").append(", ");
+		// TODO
+		String updateString = String.format(DELETE_FROM_WHERE, TABLE_ALARM, condition.toString());
+		System.out.println(updateString);
+//		dbComm.update(updateString);
+	}
+	
 	
 	public void insertEvent(Event event) {
 		StringBuilder values = new StringBuilder();
 		values.append(DEFAULT_NEW_ID).append(", ");
-		values.append(event.getStartDateTime()).append(", ");
-		values.append(event.getEndDateTime()).append(", ");
-		values.append(event.getLocation()).append(", ");
-		values.append(event.getDescription()).append(", ");
+		values.append("'").append(event.getStartDateTime()).append("'").append(", ");
+		values.append("'").append(event.getEndDateTime()).append("'").append(", ");
+		values.append("'").append(event.getLocation()).append("'").append(", ");
+		values.append("'").append(event.getDescription()).append("'").append(", ");
 		if (event instanceof Appointment) {
 			values.append(BIT_FALSE).append(" ");
 		} else if (event instanceof Meeting) {
