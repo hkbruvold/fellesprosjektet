@@ -1,7 +1,5 @@
 package client.GUI;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
@@ -20,10 +18,10 @@ import javax.swing.Box;
 import temp.TestObjects;
 import javax.swing.ImageIcon;
 import java.awt.Dimension;
-import javax.swing.SwingConstants;
 
 import client.Program;
 
+@SuppressWarnings("serial")
 public class MainWindow extends JFrame {
 
 	private CalendarPane calendarPane;
@@ -70,22 +68,22 @@ public class MainWindow extends JFrame {
 		gridBagLayout.columnWeights = new double[]{1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		getContentPane().setLayout(gridBagLayout);
-		
-		final JComboBox weekNumberBox = new JComboBox();
+
+		final JComboBox<String> weekNumberBox = new JComboBox<String>();
 		weekNumberBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				calendarPane.setWeek(weekNumberBox.getSelectedIndex()+1);
 				calendarPane.updateDates();
 			}
 		});
-		
+
 		JLabel chooseWeekLabel = new JLabel("Uke:");
 		GridBagConstraints gbc_chooseWeekLabel = new GridBagConstraints();
 		gbc_chooseWeekLabel.insets = new Insets(0, 0, 5, 5);
 		gbc_chooseWeekLabel.gridx = 2;
 		gbc_chooseWeekLabel.gridy = 1;
 		getContentPane().add(chooseWeekLabel, gbc_chooseWeekLabel);
-		
+
 		JButton btnDecrease = new JButton("");
 		btnDecrease.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -100,14 +98,14 @@ public class MainWindow extends JFrame {
 		gbc_btnDecrease.gridx = 3;
 		gbc_btnDecrease.gridy = 1;
 		getContentPane().add(btnDecrease, gbc_btnDecrease);
-		weekNumberBox.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53"}));
+		weekNumberBox.setModel(new DefaultComboBoxModel<String>(new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53"}));
 		GridBagConstraints gbc_weekNumberBox = new GridBagConstraints();
 		gbc_weekNumberBox.fill = GridBagConstraints.HORIZONTAL;
 		gbc_weekNumberBox.insets = new Insets(0, 0, 5, 5);
 		gbc_weekNumberBox.gridx = 4;
 		gbc_weekNumberBox.gridy = 1;
 		getContentPane().add(weekNumberBox, gbc_weekNumberBox);
-		
+
 		JButton weekIncrease = new JButton("");
 		weekIncrease.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -122,31 +120,31 @@ public class MainWindow extends JFrame {
 		gbc_weekIncrease.gridx = 5;
 		gbc_weekIncrease.gridy = 1;
 		getContentPane().add(weekIncrease, gbc_weekIncrease);
-		
+
 		JLabel lblYear = new JLabel("\u00C5r:");
 		GridBagConstraints gbc_lblYear = new GridBagConstraints();
 		gbc_lblYear.insets = new Insets(0, 0, 5, 5);
 		gbc_lblYear.gridx = 7;
 		gbc_lblYear.gridy = 1;
 		getContentPane().add(lblYear, gbc_lblYear);
-		
-		final JComboBox yearNumberBox = new JComboBox();
+
+		final JComboBox<String> yearNumberBox = new JComboBox<String>();
 		yearNumberBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				calendarPane.setYear(yearNumberBox.getSelectedIndex()+2013);
 				calendarPane.updateDates();
 			}
 		});
-		yearNumberBox.setModel(new DefaultComboBoxModel(new String[] {"2013","2014","2015","2016","2017"}));
+		yearNumberBox.setModel(new DefaultComboBoxModel<String>(new String[] {"2013","2014","2015","2016","2017"}));
 
-		
+
 		GridBagConstraints gbc_comboBox = new GridBagConstraints();
 		gbc_comboBox.insets = new Insets(0, 0, 5, 5);
 		gbc_comboBox.fill = GridBagConstraints.HORIZONTAL;
 		gbc_comboBox.gridx = 8;
 		gbc_comboBox.gridy = 1;
 		getContentPane().add(yearNumberBox, gbc_comboBox);
-		
+
 		Box verticalBox = Box.createVerticalBox();
 		GridBagConstraints gbc_verticalBox = new GridBagConstraints();
 		gbc_verticalBox.anchor = GridBagConstraints.NORTH;
@@ -154,7 +152,7 @@ public class MainWindow extends JFrame {
 		gbc_verticalBox.gridx = 0;
 		gbc_verticalBox.gridy = 2;
 		getContentPane().add(verticalBox, gbc_verticalBox);
-		
+
 		JButton btnnewEvent = new JButton("Ny Avtale");
 		btnnewEvent.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -162,13 +160,13 @@ public class MainWindow extends JFrame {
 			}
 		});
 		verticalBox.add(btnnewEvent);
-		
+
 		JButton btnMessages = new JButton("Meldinger");
 		verticalBox.add(btnMessages);
-		
+
 		JButton btnViewCalendars = new JButton("Se kalendre");
 		verticalBox.add(btnViewCalendars);
-		
+
 		calendarPane = new CalendarPane(this.program);
 		GridBagConstraints gbc_calendarPane = new GridBagConstraints();
 		gbc_calendarPane.fill = GridBagConstraints.BOTH;
@@ -177,7 +175,7 @@ public class MainWindow extends JFrame {
 		gbc_calendarPane.gridx = 1;
 		gbc_calendarPane.gridy = 2;
 		getContentPane().add(calendarPane, gbc_calendarPane);
-		
+
 		JButton logOutButton = new JButton("Logg av");
 		logOutButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {

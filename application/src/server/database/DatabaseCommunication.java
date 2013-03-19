@@ -7,7 +7,7 @@ import java.util.Properties;
 
 public class DatabaseCommunication {
 	private DatabaseConnection dbConn;
-	
+
 	public DatabaseCommunication(DatabaseConnection dbConn) {
 		this.dbConn = dbConn;
 	}

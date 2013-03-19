@@ -1,6 +1,5 @@
 package client.GUI;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -23,6 +22,7 @@ import data.UserTypes;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+@SuppressWarnings("serial")
 public class NewUserWindow extends JFrame {
 	private JFrame jFrame;
 	private JPanel contentPane;
@@ -65,14 +65,14 @@ public class NewUserWindow extends JFrame {
 		gbl_contentPane.columnWeights = new double[]{0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
 		gbl_contentPane.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		contentPane.setLayout(gbl_contentPane);
-		
+
 		JLabel lblNewLabel = new JLabel("Brukernavn");
 		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
 		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
 		gbc_lblNewLabel.gridx = 1;
 		gbc_lblNewLabel.gridy = 0;
 		contentPane.add(lblNewLabel, gbc_lblNewLabel);
-		
+
 		usernameField = new JTextField();
 		GridBagConstraints gbc_usernameField = new GridBagConstraints();
 		gbc_usernameField.insets = new Insets(0, 0, 5, 0);
@@ -81,14 +81,14 @@ public class NewUserWindow extends JFrame {
 		gbc_usernameField.gridy = 0;
 		contentPane.add(usernameField, gbc_usernameField);
 		usernameField.setColumns(10);
-		
+
 		JLabel lblNewLabel_1 = new JLabel("Passord");
 		GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
 		gbc_lblNewLabel_1.insets = new Insets(0, 0, 5, 5);
 		gbc_lblNewLabel_1.gridx = 1;
 		gbc_lblNewLabel_1.gridy = 1;
 		contentPane.add(lblNewLabel_1, gbc_lblNewLabel_1);
-		
+
 		passwordField = new JTextField();
 		GridBagConstraints gbc_passwordField = new GridBagConstraints();
 		gbc_passwordField.insets = new Insets(0, 0, 5, 0);
@@ -97,14 +97,14 @@ public class NewUserWindow extends JFrame {
 		gbc_passwordField.gridy = 1;
 		contentPane.add(passwordField, gbc_passwordField);
 		passwordField.setColumns(10);
-		
+
 		JLabel lblNewLabel_2 = new JLabel("Navn");
 		GridBagConstraints gbc_lblNewLabel_2 = new GridBagConstraints();
 		gbc_lblNewLabel_2.insets = new Insets(0, 0, 5, 5);
 		gbc_lblNewLabel_2.gridx = 1;
 		gbc_lblNewLabel_2.gridy = 2;
 		contentPane.add(lblNewLabel_2, gbc_lblNewLabel_2);
-		
+
 		nameField = new JTextField();
 		GridBagConstraints gbc_nameField = new GridBagConstraints();
 		gbc_nameField.insets = new Insets(0, 0, 5, 0);
@@ -113,29 +113,29 @@ public class NewUserWindow extends JFrame {
 		gbc_nameField.gridy = 2;
 		contentPane.add(nameField, gbc_nameField);
 		nameField.setColumns(10);
-		
+
 		JLabel lblNewLabel_3 = new JLabel("Type");
 		GridBagConstraints gbc_lblNewLabel_3 = new GridBagConstraints();
 		gbc_lblNewLabel_3.insets = new Insets(0, 0, 5, 5);
 		gbc_lblNewLabel_3.gridx = 1;
 		gbc_lblNewLabel_3.gridy = 3;
 		contentPane.add(lblNewLabel_3, gbc_lblNewLabel_3);
-		
-		final JComboBox userType = new JComboBox(UserTypes.values());
+
+		final JComboBox<UserTypes> userType = new JComboBox<UserTypes>(UserTypes.values());
 		GridBagConstraints gbc_userType = new GridBagConstraints();
 		gbc_userType.insets = new Insets(0, 0, 5, 0);
 		gbc_userType.fill = GridBagConstraints.HORIZONTAL;
 		gbc_userType.gridx = 3;
 		gbc_userType.gridy = 3;
 		contentPane.add(userType, gbc_userType);
-		
+
 		Box horizontalBox = Box.createHorizontalBox();
 		GridBagConstraints gbc_horizontalBox = new GridBagConstraints();
 		gbc_horizontalBox.insets = new Insets(0, 0, 5, 0);
 		gbc_horizontalBox.gridx = 3;
 		gbc_horizontalBox.gridy = 5;
 		contentPane.add(horizontalBox, gbc_horizontalBox);
-		
+
 		JButton btnNewButton = new JButton("Lagre");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -145,7 +145,7 @@ public class NewUserWindow extends JFrame {
 			}
 		});
 		horizontalBox.add(btnNewButton);
-		
+
 		JButton btnNewButton_1 = new JButton("Lukk");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {

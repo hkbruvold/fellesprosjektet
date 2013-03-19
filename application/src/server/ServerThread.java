@@ -9,8 +9,6 @@ import data.User;
 import java.net.*;
 import java.io.*;
 
-import javax.xml.ws.soap.AddressingFeature.Responses;
-
 import server.database.DatabaseCommunication;
 import server.database.DatabaseConnection;
 import server.database.Query;

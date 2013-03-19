@@ -6,7 +6,7 @@ import server.database.Update;
 
 public class TestDatabaseCode {
 	private Update update;
-	
+
 	public TestDatabaseCode() {
 		DatabaseConnection dbConn = new DatabaseConnection("jdbc:mysql://localhost:3306/calendarDatabase", "root", "skip".toCharArray());
 		DatabaseCommunication dbComm = new DatabaseCommunication(dbConn);

@@ -18,7 +18,7 @@ import data.User;
 @SuppressWarnings("serial")
 public class MeetingInvitationWindow extends JPanel implements ActionListener, ItemListener {
 	private static final String FRAME_NAME = "Invitasjon til m�te"; 
-	
+
 	private static final String LABEL_DESCRIPTION = "Beskrivelse";
 	private static final String LABEL_START_TIME = "Starttidspunkt";
 	private static final String LABEL_END_TIME = "Sluttidspunkt";
@@ -26,9 +26,9 @@ public class MeetingInvitationWindow extends JPanel implements ActionListener, I
 	private static final String LABEL_LEADER = "Leder";
 	private static final String LABEL_ALARM = "Legg til alarm:";
 	private static final String LABEL_ALARM_TIME_BEFORE = "Tid før:";
-	
+
 	private static final String FIELD_TIME = "HH:MM";
-	
+
 	private static final String BUTTON_CLOSE = "Svar senere";
 	private static final String BUTTON_DECLINE = "Avsl�";
 	private static final String BUTTON_ACCEPT = "Godta";
@@ -47,21 +47,21 @@ public class MeetingInvitationWindow extends JPanel implements ActionListener, I
 	private JCheckBox alarmCheckBox;
 
 	private Program program;
-	
+
 	public MeetingInvitationWindow(Program program, Meeting meeting, User user) {
 		this.program = program;
 		this.meeting = meeting;
 		this.user = user;
 		initFrame();
 		initPanel();
-		
+
 		frame.pack();
 		frame.setVisible(true);
 	}
 	public Event getModel() {
 		return model;
 	}
-	
+
 	private void initFrame() {
 		frame = new JFrame(FRAME_NAME);
 		frame.setPreferredSize(new Dimension(300, 220));
@@ -73,7 +73,7 @@ public class MeetingInvitationWindow extends JPanel implements ActionListener, I
 	private void initPanel() {
 		c = new GridBagConstraints();
 		setLayout(new GridBagLayout());
-		
+
 		descriptionLabel = new JLabel(LABEL_DESCRIPTION);
 		startTimeLabel = new JLabel(LABEL_START_TIME);
 		endTimeLabel = new JLabel(LABEL_END_TIME);
@@ -89,16 +89,16 @@ public class MeetingInvitationWindow extends JPanel implements ActionListener, I
 		leaderField = createField(leaderField, meeting.getLeader().getName());
 		alarmTimeBeforeField = new JTextField(FIELD_TIME);
 		alarmTimeBeforeField.setEnabled(false);
-		
+
 		closeButton = new JButton(BUTTON_CLOSE);
 		declineButton = new JButton(BUTTON_DECLINE);
 		acceptButton = new JButton(BUTTON_ACCEPT);
-		
+
 		alarmCheckBox = new JCheckBox();
-		
+
 		c.insets = new Insets(0,0,6,0);
 		c.ipadx = 10;
-		
+
 		addComponent(descriptionLabel, 0, 0, 1, LINE_END);
 		addComponent(startTimeLabel, 0, 1, 1, LINE_END);
 		addComponent(endTimeLabel, 0, 2, 1, LINE_END);
@@ -111,17 +111,17 @@ public class MeetingInvitationWindow extends JPanel implements ActionListener, I
 		addComponent(endTimeField, 1, 2, 3, LINE_START);
 		addComponent(locationField, 1, 3, 3, LINE_START);
 		addComponent(leaderField, 1, 4, 3, LINE_START);
-		
+
 		addComponent(alarmLabel, 0, 5, 1, LINE_START);
 		addComponent(alarmCheckBox, 1, 5, 1, LINE_START);
 		addComponent(alarmTimeBeforeLabel, 2, 5, 1, LINE_START);
 		addComponent(alarmTimeBeforeField, 3, 5, 1, LINE_START);
 		c.fill = GridBagConstraints.NONE;
-		
+
 		addComponent(closeButton, 0, 6, 1, LINE_END);
 		addComponent(declineButton, 2, 6, 1, LINE_END);
 		addComponent(acceptButton, 3, 6, 1, LINE_END);
-		
+
 		closeButton.addActionListener(this);
 		declineButton.addActionListener(this);
 		acceptButton.addActionListener(this);
@@ -140,12 +140,12 @@ public class MeetingInvitationWindow extends JPanel implements ActionListener, I
 		c.anchor = anchor;
 		add(component, c);
 	}
-	
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource().equals(closeButton)) {
 			// TODO ?
-			frame.dispose();
+					frame.dispose();
 		} else if (e.getSource().equals(declineButton)) {
 			// TODO Set user based on the user of the program
 			meeting.declineInvite(user);
@@ -172,5 +172,5 @@ public class MeetingInvitationWindow extends JPanel implements ActionListener, I
 	public static void main(String[] args) {
 		new MeetingInvitationWindow(new Program(), TestObjects.getMeeting00(),TestObjects.getUser00());
 	}
-	
+
 }

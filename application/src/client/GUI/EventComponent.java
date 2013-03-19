@@ -14,5 +14,5 @@ public class EventComponent extends JComponent { //TODO find proper component
 		this.program = program;
 		this.event = event;
 	}
-	
+
 }

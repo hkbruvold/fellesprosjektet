@@ -23,11 +23,11 @@ public class TempTestDatabase extends JPanel implements ActionListener {
 	private static final String LABEL_PASSWORD = "Passord";
 	private static final String LABEL_QUERY = "Query";
 	private static final String LABEL_UPDATE = "Update";
-	
+
 	private static final String BUTTON_CLOSE = "Lukk";
 	private static final String BUTTON_QUERY = "Send query";
 	private static final String BUTTON_UPDATE = "Send update";
-	
+
 	private static final int LINE_START = GridBagConstraints.LINE_START;
 	private static final int LINE_END = GridBagConstraints.LINE_END;
 	private JFrame frame;
@@ -63,13 +63,13 @@ public class TempTestDatabase extends JPanel implements ActionListener {
 		passwordLabel = new JLabel(LABEL_PASSWORD);
 		queryLabel = new JLabel(LABEL_QUERY);
 		updateLabel = new JLabel(LABEL_UPDATE);
-		
+
 		serverUrlField = new JTextField("localhost:port/databaseName", SIZE_FIELD);
 		usernameField = new JTextField(SIZE_FIELD);
 		passwordField = new JPasswordField(SIZE_FIELD);
 		queryField = new JTextField(SIZE_FIELD);
 		updateField = new JTextField(SIZE_FIELD);
-		
+
 		queryButton = new JButton(BUTTON_QUERY);
 		updateButton = new JButton(BUTTON_UPDATE);
 		closeButton = new JButton(BUTTON_CLOSE);
@@ -95,7 +95,7 @@ public class TempTestDatabase extends JPanel implements ActionListener {
 		c.fill = GridBagConstraints.HORIZONTAL;
 		addComponent(updateButton, 3, 4, 1, LINE_END);
 		c.fill = GridBagConstraints.NONE;
-		
+
 		c.fill = GridBagConstraints.HORIZONTAL;
 		addComponent(closeButton, 3, 5, 1, LINE_START);
 		c.fill = GridBagConstraints.NONE;

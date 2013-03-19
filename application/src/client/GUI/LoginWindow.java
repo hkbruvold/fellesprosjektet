@@ -6,27 +6,23 @@ import java.awt.event.ActionListener;
 import java.util.Arrays;
 
 import javax.swing.*;
-import javax.xml.XMLConstants;
 
 import client.Program;
-
-import data.Authentication;
-import data.XMLTranslator;
 
 @SuppressWarnings("serial")
 public class LoginWindow extends JPanel implements ActionListener {
 	private static final int SIZE_FIELD = 15;
 
 	private static final String FRAME_NAME = "Logg inn";
-	
+
 	private static final String LABEL_WRONG_USERNAME_PASSWORD = "Feil brukernavn eller passord";
 	private static final String LABEL_ERROR_CONNECTION = "Feil i oppkbling til server";
 	private static final String LABEL_USERNAME = "Brukernavn";
 	private static final String LABEL_PASSWORD = "Passord";
-	
+
 	private static final String BUTTON_CLOSE = "Lukk";
 	private static final String BUTTON_LOG_IN = "Logg inn";
-	
+
 	private static final int LINE_START = GridBagConstraints.LINE_START;
 	private static final int LINE_END = GridBagConstraints.LINE_END;
 	private JFrame frame;
@@ -67,7 +63,7 @@ public class LoginWindow extends JPanel implements ActionListener {
 		passwordField = new JPasswordField(SIZE_FIELD);
 		closeButton = new JButton(BUTTON_CLOSE);
 		logInButton = new JButton(BUTTON_LOG_IN);
-		
+
 		statusLabel.setForeground(Color.red);
 
 		c.insets = new Insets(0,0,5,0);
@@ -94,11 +90,11 @@ public class LoginWindow extends JPanel implements ActionListener {
 		c.anchor = anchor;
 		add(component, c);
 	}
-	
+
 	public void showWrongLoginLabel() {
 		statusLabel.setText(LABEL_WRONG_USERNAME_PASSWORD);
 	}
-	
+
 	public void showErrorConnecting() {
 		statusLabel.setText(LABEL_ERROR_CONNECTION);
 	}

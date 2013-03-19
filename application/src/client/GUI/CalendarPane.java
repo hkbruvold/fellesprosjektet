@@ -21,7 +21,7 @@ import client.Program;
 
 import data.Event;
 
-
+@SuppressWarnings("serial")
 public class CalendarPane extends JPanel {
 
 	private static final int ROWS = 24;
@@ -31,15 +31,15 @@ public class CalendarPane extends JPanel {
 	private final String[] hours = {"00:00", "01:00", "02:00", "03:00", "04:00", "05:00", "06:00", "07:00", 
 			"08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", 
 			"17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00"};
-	
-	
+
+
 	private int gridSizeX;
 	private int gridSizeY;
-	
+
 	private JPanel dayLine;
 	private JPanel panel;
 	private JScrollPane calendarScroller;
-	
+
 	private Date currentDate;
 	private int year;
 	private Program program;
@@ -50,10 +50,10 @@ public class CalendarPane extends JPanel {
 	 */
 	public CalendarPane(Program program) {
 		this.program = program;
-		
+
 		setSize(800, 400);
 		setLayout(null);
-		
+
 		currentDate = new Date();
 		year = Integer.parseInt((new SimpleDateFormat("yyyy")).format(currentDate));
 		week = Integer.parseInt((new SimpleDateFormat("w")).format(currentDate));
@@ -64,7 +64,7 @@ public class CalendarPane extends JPanel {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		
+
 		panel = new JPanel() {
 			@Override
 			public void paint(Graphics g) {
@@ -89,11 +89,11 @@ public class CalendarPane extends JPanel {
 
 		gridSizeX = panel.getWidth() / COLLUMNS;
 		gridSizeY = panel.getHeight() / ROWS;
-		
+
 		JViewport viewPort = new JViewport();
 		viewPort.setView(panel);
 		viewPort.setViewPosition(new Point(0, 8 * gridSizeY));
-		
+
 		calendarScroller = new JScrollPane();
 		calendarScroller.setSize(panel.getWidth() + 20, 350);
 		calendarScroller.setLocation(getWidth() / 2 - calendarScroller.getWidth() / 2, getHeight() - calendarScroller.getHeight());
@@ -115,9 +115,9 @@ public class CalendarPane extends JPanel {
 		dayLine.setPreferredSize(new Dimension(panel.getWidth(), (int)(1.3 * gridSizeY)));
 		dayLine.setSize(dayLine.getPreferredSize());
 		dayLine.setLayout(null);
-		
+
 		updateDates();
-		
+
 		for(int i = 0; i < hours.length; i++) {
 			JLabel label = new JLabel(hours[i]);
 			label.setHorizontalAlignment(SwingConstants.CENTER);
@@ -125,9 +125,9 @@ public class CalendarPane extends JPanel {
 			addToCalendar(label, 0, i, 1, 1);
 		}
 
-		
+
 		Date test = new Date();
-		
+
 	}
 	public void updateDates() {
 
@@ -136,7 +136,7 @@ public class CalendarPane extends JPanel {
 		DateFormat df = new SimpleDateFormat("yyyy w u");
 		//int date = 0;
 		//int month = 0;
-		
+
 		for(int i = 0; i < days.length; i++) {
 			JLabel weekDay = new JLabel(days[i]);
 			weekDay.setBounds(i * gridSizeX, 0, gridSizeX, gridSizeY);
@@ -166,15 +166,15 @@ public class CalendarPane extends JPanel {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-		
+
 		calendarScroller.setColumnHeaderView(dayLine);
 	}
-	
+
 	public void addToCalendar(Component comp, double posX, double posY, double width, double height) {
 		comp.setBounds((int)(posX * gridSizeX), (int)(posY * gridSizeY), (int)(gridSizeX * width), (int)(gridSizeY * height));
 		panel.add(comp);
 	}
-	
+
 	public void addEvent(Event event) {
 		String start = (new SimpleDateFormat("MM HH mm u")).format(event.getStartDateTime());
 		String end = (new SimpleDateFormat("MM HH mm u")).format(event.getEndDateTime());
@@ -184,8 +184,8 @@ public class CalendarPane extends JPanel {
 		EventComponent comp = new EventComponent(new Program(), event);
 		addToCalendar(comp, day, hour, 1, duration);
 	}
-	
-	public static void setWeek(int newweek){
+
+	public void setWeek(int newweek){
 		week = newweek;
 		//TODO update calendar view
 	}
@@ -193,5 +193,5 @@ public class CalendarPane extends JPanel {
 		year = newyear;
 		//TODO update calendar view
 	}
-	
-	}
+
+}

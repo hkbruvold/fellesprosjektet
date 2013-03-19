@@ -30,22 +30,22 @@ public class Update {
 	private static final String FIELDS_RESERVED_ROOM = TableFields.RESERVED_ROOM.getFieldsString();
 	private static final String FIELDS_ROOM = TableFields.ROOM.getFieldsString();
 	private static final String FIELDS_USER = TableFields.USER.getFieldsString();
-	
+
 	private static final String INSERT_INTO_VALUES = "INSERT INTO %s (%s) VALUES (%s)"; // "tableName", "fields", "values"
 	private static final String UPDATE_SET_WHERE = "UPDATE %s SET %s WHERE %s"; // "tableName", "field1=value1, field2=value2 ...", "condition"
 	private static final String DELETE_FROM_WHERE = "DELETE FROM %s WHERE %s"; // "tableName", "condition"
-	
+
 	private static final String BIT_FALSE = "0";
 	private static final String BIT_TRUE = "1";
-	
+
 	private static final String DEFAULT_NEW_ID = "0";
-	
+
 	private static final String PARTICIPANT_STATUS_INVITED = "0";
 	private static final String PARTICIPANT_STATUS_ACCEPTED = "1";
 	private static final String PARTICIPANT_STATUS_DECLINED = "2";
-	
-// 	Please ignore! I'm using this as a shortcut to open classes. Query TableFields Event TestObjects
-	
+
+	// 	Please ignore! I'm using this as a shortcut to open classes. Query TableFields Event TestObjects
+
 	private User currentUser;
 	private DatabaseCommunication dbComm;
 	private boolean debugging = false;
@@ -54,7 +54,7 @@ public class Update {
 		this.currentUser = currentUser;
 		this.dbComm = dbComm;
 	}
-	
+
 	public void insertAlarm(Alarm alarm) {
 		StringBuilder values = new StringBuilder();
 		values.append("'").append(alarm.getTimeBefore()).append("'").append(", ");
@@ -91,8 +91,8 @@ public class Update {
 			dbComm.update(updateString);
 		}
 	}
-	
-	
+
+
 	public void insertEvent(Event event) {
 		StringBuilder values = new StringBuilder();
 		values.append(DEFAULT_NEW_ID).append(", ");
@@ -132,7 +132,7 @@ public class Update {
 			}
 		}
 	}
-	
+
 	public void insertGroup(Group group) {
 		StringBuilder values = new StringBuilder();
 		values.append(group.getId()).append(", ");
@@ -150,7 +150,7 @@ public class Update {
 			insertIsMemberOf(user, group);
 		}
 	}
-	
+
 	public void insertNotification(Notification notification) {
 		StringBuilder values = new StringBuilder();
 		values.append(notification.getId()).append(", ");
@@ -168,7 +168,7 @@ public class Update {
 			insertNotificationForEvent(notification, notification.getEvent());
 		}
 	}
-	
+
 	public void insertRoom(Room room) {
 		StringBuilder values = new StringBuilder();
 		values.append(room.getId()).append(", ");
@@ -181,7 +181,7 @@ public class Update {
 			dbComm.update(updateString);
 		}
 	}
-	
+
 	public void insertUser(User user) {
 		StringBuilder values = new StringBuilder();
 		values.append("'").append(user.getUsername()).append("'").append(", ");
@@ -195,7 +195,7 @@ public class Update {
 			dbComm.update(updateString);
 		}
 	}
-	
+
 	public void insertIsMemberOf(User user, Group group) {
 		StringBuilder values = new StringBuilder();
 		values.append("'").append(user.getUsername()).append("'").append(", ");
@@ -207,7 +207,7 @@ public class Update {
 			dbComm.update(updateString);
 		}
 	}
-	
+
 	public void insertIsOwner(User user, Event event) {
 		StringBuilder values = new StringBuilder();
 		values.append("'").append(user.getUsername()).append("'").append(", ");
@@ -219,7 +219,7 @@ public class Update {
 			dbComm.update(updateString);
 		}
 	}
-	
+
 	public void insertIsParticipant(User user, Event event, String status) {
 		StringBuilder values = new StringBuilder();
 		values.append("'").append(user.getUsername()).append("'").append(", ");
@@ -232,7 +232,7 @@ public class Update {
 			dbComm.update(updateString);
 		}
 	}
-	
+
 	public void insertNotificationTo(User user, Notification notification) {
 		StringBuilder values = new StringBuilder();
 		values.append("'").append(user.getUsername()).append("'").append(", ");
@@ -244,7 +244,7 @@ public class Update {
 			dbComm.update(updateString);
 		}
 	}
-	
+
 	public void insertNotificationForEvent(Notification notification, Event event) {
 		StringBuilder values = new StringBuilder();
 		values.append(notification.getId()).append(", ");
@@ -256,7 +256,7 @@ public class Update {
 			dbComm.update(updateString);
 		}
 	}
-	
+
 	public void insertReservedRoom(Event event, Room room) {
 		StringBuilder values = new StringBuilder();
 		values.append(event.getId()).append(", ");
@@ -269,17 +269,17 @@ public class Update {
 		}
 	}
 
-	
+
 	// TODO Add update and delete methods
 	// NB! Remember relations!
-	
-	
+
+
 	public static void main(String[] args) {
 		DatabaseConnection dbConn = new DatabaseConnection("jdbc:mysql://localhost:3306/calendarDatabase", "root", "skip".toCharArray());
 		DatabaseCommunication dbComm = new DatabaseCommunication(dbConn);
 		Update update = new Update(TestObjects.getUser00(), dbComm);
 		update.debugging = true;
-		
+
 		System.out.println();
 		update.insertAlarm(TestObjects.getAlarm00());
 		System.out.println();

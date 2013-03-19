@@ -29,7 +29,7 @@ public class DatabaseConnection {
 		info.setProperty("password", password);
 		connection = DriverManager.getConnection(serverUrl, info);
 	}
-	
+
 	public void close() throws SQLException {
 		connection.close();
 	}
@@ -38,7 +38,7 @@ public class DatabaseConnection {
 		Statement st = connection.createStatement();
 		return st.executeQuery(sql);
 	}
-	
+
 	public int update(String sql) throws SQLException {
 		Statement st = connection.createStatement();
 		ResultSet rs = null;
@@ -54,7 +54,7 @@ public class DatabaseConnection {
 		}
 		return id;
 	}
-	
+
 	public PreparedStatement preparedStatement(String sql) throws SQLException {
 		return connection.prepareStatement(sql);
 	}

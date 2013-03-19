@@ -1,8 +1,10 @@
 package data;
 
-public class Appointment extends Event implements java.io.Serializable {
+import java.io.Serializable;
+
+public class Appointment extends Event implements Serializable {
 	private User owner;
-	
+
 	public Appointment(){
 	}
 	/**
@@ -16,16 +18,16 @@ public class Appointment extends Event implements java.io.Serializable {
 		super(id, calendar, startDateTime, endDateTime, description, room);
 		this.owner = owner;
 	}
-	
+
 	public String toString() {
 		return String.format("Appointment; ID: %s, Description: %s, Start: %s, End: %s, Location: %s, Owner: %s", id, description, startDateTime, endDateTime, location, owner.getUsername());
 	}
-	
+
 	public User getOwner() {
 		return owner;
 	}
 	public void setOwner(User owner) {
 		this.owner = owner;
 	}
-	
+
 }

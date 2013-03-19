@@ -1,11 +1,13 @@
 package data;
 
-public class User implements java.io.Serializable {
+import java.io.Serializable;
+
+public class User implements Serializable {
 	private String username;
 	private String password;
 	private String name;
 	private String type;
-	
+
 	public User(){
 	}
 	public User(String username, String name, String type) {
@@ -13,13 +15,13 @@ public class User implements java.io.Serializable {
 		this.name = name;
 		this.type = type;
 	}
-	
+
 	// TODO
-	
+
 	public String toString() {
 		return String.format("User; Username: %s, Name: %s, Type: %s", username, name, type);
 	}
-	
+
 	public String getUsername() {
 		return username;
 	}
@@ -44,5 +46,5 @@ public class User implements java.io.Serializable {
 	public void setType(String type) {
 		this.type = type;
 	}
-	
+
 }

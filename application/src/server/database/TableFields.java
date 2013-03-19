@@ -74,16 +74,16 @@ public enum TableFields {
 			"eventID", //p
 			"roomID" //p
 	});
-	
-	
+
+
 	private final String tableName;
 	private final String[] fields;
-	
+
 	TableFields(String tableName, String[] fields) {
 		this.tableName = tableName;
 		this.fields = fields;
 	}
-	
+
 	public String getTableName() {
 		return tableName;
 	}

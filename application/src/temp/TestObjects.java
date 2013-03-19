@@ -2,20 +2,10 @@ package temp;
 
 import java.util.Arrays;
 
-import client.*;
-import data.Alarm;
-import data.Appointment;
-import data.Authentication;
-import data.Calendar;
-import data.Group;
-import data.Meeting;
-import data.Notification;
-import data.Room;
-import data.User;
+import data.*;
 
 public class TestObjects {
 	private static final String LOGIN = "login";
-	private static final String LOGOUT = "logout";
 	private static final String DATE_0 = "2013-10-10";
 	private static final String DATE_1 = "2013-10-12";
 	private static final String TIME_0 = "20:00";
@@ -24,7 +14,7 @@ public class TestObjects {
 	private static final String DATE_TIME_1 = DATE_1 + " " + TIME_1;
 	private static final String DESCRIPTION = "Description";
 	private static final String LOCATION = "Location";
-	
+
 	private static final int DEFAULT_ID = 0;
 
 	private static final User ALICE = new User("alice", "Alice", "Employer");
@@ -49,7 +39,7 @@ public class TestObjects {
 	private static final Alarm ALARM_00 = new Alarm(TIME_0, "", getUser00(), getAppointment00());
 	private static final Calendar CALENDAR_00 = new Calendar(getUser00().getName() + "'s calendar", getUser00());
 	private static final Calendar CALENDAR_01 = new Calendar(getUser01().getName() + "'s calendar", getUser01());
-	
+
 	public static Authentication getAuthentication00(){
 		return AUTHENTICATION;
 	}
@@ -59,21 +49,21 @@ public class TestObjects {
 	public static Alarm getAlarm01() {
 		return ALARM_01;
 	}
-	
+
 	public static Appointment getAppointment00() {
 		return APPOINTMENT_00;
 	}
 	public static Appointment getAppointment01() {
 		return APPOINTMENT_01;
 	}
-	
+
 	public static Calendar getCalendar00() {
 		return CALENDAR_00;
 	}
 	public static Calendar getCalendar01() {
 		return CALENDAR_01;
 	}
-	
+
 	public static Group getGroup00() {
 		Group group = GROUP_00;
 		group.addMember(getUser00());
@@ -90,14 +80,14 @@ public class TestObjects {
 		group.addMembers(Arrays.asList(USER_ARRAY_01));
 		return group;
 	}
-	
+
 	public static User[] getUserArray00() {
 		return USER_ARRAY_00;
 	}
 	public static User[] getUserArray01() {
 		return USER_ARRAY_01;
 	}
-	
+
 	public static Meeting getMeeting00() {
 		Meeting meeting = MEETING_00;
 		meeting.acceptInvite(getUser01());
@@ -110,7 +100,7 @@ public class TestObjects {
 		meeting.inviteParticipant(getUser02());
 		return meeting;
 	}
-	
+
 	public static Notification getNotification00() {
 		Notification notification = NOTIFICATION_00;
 		notification.setEvent(getMeeting00());
@@ -120,7 +110,7 @@ public class TestObjects {
 		Notification notification = NOTIFICATION_01;
 		return notification;
 	}
-	
+
 	public static User getUser00() {
 		ALICE.setPassword("123");
 		return ALICE;
@@ -133,15 +123,15 @@ public class TestObjects {
 		CHARLIE.setPassword("123");
 		return CHARLIE;
 	}
-	
+
 	public static Room getRoom00() {
 		return ROOM_00;
 	}
-	
+
 	public static Room getRoom01() {
 		return ROOM_01;
 	}
-	
+
 	public static Room getRoom02() {
 		return ROOM_02;
 	}

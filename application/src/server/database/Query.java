@@ -20,7 +20,7 @@ public class Query {
 	private static final String TABLE_RESERVED_ROOM = TableFields.RESERVED_ROOM.getTableName();
 	private static final String TABLE_ROOM = TableFields.ROOM.getTableName();
 	private static final String TABLE_USER = TableFields.USER.getTableName();
-	
+
 	private static final String FIELDS_ALARM = TableFields.ALARM.getFieldsString();
 	private static final String FIELDS_EVENT = TableFields.EVENT.getFieldsString();
 	private static final String FIELDS_GROUPS = TableFields.GROUPS.getFieldsString();
@@ -43,7 +43,7 @@ public class Query {
 	private static final String PARTICIPANT_STATUS_INVITED = "0";
 	private static final String PARTICIPANT_STATUS_ACCEPTED = "1";
 	private static final String PARTICIPANT_STATUS_DECLINED = "2";
-	
+
 	private User currentUser;
 	private DatabaseCommunication dbComm;
 
@@ -101,7 +101,7 @@ public class Query {
 		String location = p.getProperty("location");
 		String description = p.getProperty("description");
 		String isMeeting = p.getProperty("isMeeting");
-		
+
 		if (isMeeting.equals(BIT_FALSE)) {
 			event = new Appointment();
 		} else if (isMeeting.equals(BIT_TRUE)) {
@@ -147,7 +147,7 @@ public class Query {
 		String id = p.getProperty("groupID");
 		String groupname = p.getProperty("groupname");
 		String description = p.getProperty("description");
-		
+
 		group.setId(Integer.parseInt(id));
 		group.setName(groupname);
 		group.setDescription(description);
@@ -174,7 +174,7 @@ public class Query {
 		Notification notification = new Notification();
 		String id = p.getProperty("notificationID");
 		String description = p.getProperty("description");
-		
+
 		notification.setId(Integer.parseInt(id));
 		notification.setMessage(description);
 		Event event = queryNotificationEvent(Integer.parseInt(id));
@@ -201,7 +201,7 @@ public class Query {
 		String roomId = p.getProperty("roomID");
 		String size = p.getProperty("size");
 		String description = p.getProperty("description");
-		
+
 		room.setId(Integer.parseInt(roomId));
 		room.setSize(Integer.parseInt(size));
 		room.setDescription(description);
@@ -228,7 +228,7 @@ public class Query {
 		String password = p.getProperty("password");
 		String name = p.getProperty("name");
 		String type = p.getProperty("type");
-		
+
 		user.setUsername(username);
 		user.setPassword(password);
 		user.setName(name);
@@ -241,7 +241,7 @@ public class Query {
 		Properties p = pl.get(0);
 		return queryUser(p.getProperty("username"));
 	}
-	
+
 	private ArrayList<User> queryParticipants(int eventID, String status) {
 		ArrayList<Properties> pl = dbComm.query(String.format(SELECT_FROM_WHERE, FIELDS_IS_PARTICIPANT, TABLE_IS_PARTICIPANT, "eventID=" + eventID + ", status=" + status));
 		ArrayList<User> users = new ArrayList<User>();
@@ -250,7 +250,7 @@ public class Query {
 		}
 		return users;
 	}
-	
+
 	private ArrayList<User> queryMembers(int groupID) {
 		ArrayList<Properties> pl = dbComm.query(String.format(SELECT_FROM_WHERE, FIELDS_IS_MEMBER_OF, TABLE_IS_MEMBER_OF, "groupID=" + groupID));
 		ArrayList<User> members = new ArrayList<User>();
@@ -259,7 +259,7 @@ public class Query {
 		}
 		return members;
 	}
-	
+
 	private Event queryNotificationEvent(int notificationID) {
 		ArrayList<Properties> pl = dbComm.query(String.format(SELECT_FROM_WHERE, FIELDS_NOTIFICATION_FOR_EVENT, TABLE_NOTIFICATION_FOR_EVENT, "notificationID=" + notificationID));
 		Properties p = pl.get(0);
@@ -269,8 +269,8 @@ public class Query {
 
 
 	// TODO notification_to
-	
-	
+
+
 	public static void main(String[] args) {
 		DatabaseConnection dbConn = new DatabaseConnection("jdbc:mysql://localhost:3306/calendarDatabase", "root", "skip".toCharArray());
 		DatabaseCommunication dbComm = new DatabaseCommunication(dbConn);
@@ -278,5 +278,5 @@ public class Query {
 		Event event = query.queryEvent(2);
 		System.out.println(event);
 	}
-	
+
 }

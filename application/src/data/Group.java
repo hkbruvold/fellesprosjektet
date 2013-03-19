@@ -1,14 +1,15 @@
 package data;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.ArrayList;
 
-public class Group implements java.io.Serializable {
+public class Group implements Serializable {
 	private int id;
 	private String name;
 	private String description;
 	private ArrayList<User> members;
-	
+
 	public Group(){
 	}
 	/**
@@ -19,7 +20,7 @@ public class Group implements java.io.Serializable {
 		members = new ArrayList<User>();
 		this.description = description;
 	}
-	
+
 	public String tosString() {
 		return String.format("Group; ID: %s, Group name: %s, Description: %s, Number of members: %s", id, name, description, members.size());
 	}
@@ -58,5 +59,5 @@ public class Group implements java.io.Serializable {
 	public int getSize() {
 		return members.size();
 	}
-	
+
 }

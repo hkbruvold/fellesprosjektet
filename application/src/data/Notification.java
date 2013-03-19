@@ -1,12 +1,14 @@
 package data;
 
-public class Notification implements java.io.Serializable {
+import java.io.Serializable;
+
+public class Notification implements Serializable {
 	private int id;
 	private String message;
 	private Event event;
 	private User recipient;
 	// TODO private 'something' options;
-	
+
 	public Notification(){
 	}
 	/**
@@ -22,11 +24,11 @@ public class Notification implements java.io.Serializable {
 		this.recipient = recipient;
 		// TODO options
 	}
-	
+
 	public String toString() {
 		return String.format("Notification; ID: %s, Message: %s", id, message);
 	}
-	
+
 	public int getId() {
 		return id;
 	}

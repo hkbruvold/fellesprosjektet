@@ -1,10 +1,11 @@
 package data;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import org.simpleframework.xml.ElementList;
 
-public class Meeting extends Event implements java.io.Serializable{
+public class Meeting extends Event implements Serializable{
 	private User leader;
 	@ElementList
 	private ArrayList<User> usersInvited;
@@ -12,7 +13,7 @@ public class Meeting extends Event implements java.io.Serializable{
 	private ArrayList<User> usersAccepted;
 	@ElementList
 	private ArrayList<User> usersDeclined;
-	
+
 	public Meeting(){
 	}
 	/**
@@ -32,12 +33,12 @@ public class Meeting extends Event implements java.io.Serializable{
 		usersDeclined = new ArrayList<User>();
 		this.leader = leader;
 	}
-	
+
 	public String toString() {
 		return String.format("Meeting; ID: %s, Description: %s, Start: %s, End: %s, Location: %s, Leader: %s, Invited: %s, Accepted: %s, Declined: %s", 
 				id, description, startDateTime, endDateTime, location, leader.getUsername(), usersInvited, usersAccepted, usersDeclined);
 	}
-	
+
 	public void inviteParticipant(User user) {
 		removeParticipant(user);
 		usersInvited.add(user);
@@ -55,7 +56,7 @@ public class Meeting extends Event implements java.io.Serializable{
 		removeParticipant(user);
 		usersDeclined.add(user);
 	}
-	
+
 	public User getLeader() {
 		return leader;
 	}
@@ -83,5 +84,5 @@ public class Meeting extends Event implements java.io.Serializable{
 		usersDeclined.clear();
 		usersDeclined.addAll(declined);
 	}
-	
+
 }

@@ -10,8 +10,6 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 import client.GUI.*;
-import data.Alarm;
-import server.*;
 import client.Program;
 
 @SuppressWarnings("serial")
@@ -27,7 +25,7 @@ public class ProgramHub extends JPanel implements ActionListener {
 	private static final String BUTTON_ALARM = "AlarmTest";
 	private static final String BUTTON_CLOSE = "Close";
 	private static final String BUTTON_NEW_GROUP = "New Group";
-	
+
 	private static final String TOOLTIP_BUTTON_OLD_EVENT = "NewEventWindow with a previously made event. Not yet fully implemented";
 
 	private JFrame frame;
@@ -65,7 +63,7 @@ public class ProgramHub extends JPanel implements ActionListener {
 		newGroupButton = new JButton(BUTTON_NEW_GROUP);
 		alarmButton = new JButton(BUTTON_ALARM);
 		closeButton = new JButton(BUTTON_CLOSE);
-		
+
 		oldEventButton.setToolTipText(TOOLTIP_BUTTON_OLD_EVENT);
 
 		c.anchor = GridBagConstraints.CENTER;
@@ -122,8 +120,8 @@ public class ProgramHub extends JPanel implements ActionListener {
 		} else if (e.getSource().equals(newGroupButton)) {
 			new NewGroupWindow(program);
 		}
-		
-		
+
+
 	}
 
 	public static void main(String[] args) {

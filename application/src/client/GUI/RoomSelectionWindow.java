@@ -7,24 +7,19 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Collections;
 
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
-import javax.swing.ListModel;
 import javax.swing.ListSelectionModel;
 
 import client.Program;
 
 import temp.TestObjects;
 
-import data.Notification;
 import data.Room;
-import data.User;
 
 @SuppressWarnings("serial")
 public class RoomSelectionWindow extends JPanel implements ActionListener {
@@ -44,7 +39,7 @@ public class RoomSelectionWindow extends JPanel implements ActionListener {
 
 	private NewEventWindow newEventWindow;
 	private Program program;
-	
+
 	public RoomSelectionWindow(Program program) { // Temporary; For testing
 		this.program = program;
 		initFrame();
@@ -56,11 +51,11 @@ public class RoomSelectionWindow extends JPanel implements ActionListener {
 		this.newEventWindow = newEventWindow;
 		initFrame();
 		initPanel();
-		
+
 		frame.pack();
 		frame.setVisible(true);
 	}
-	
+
 	private void initFrame() {
 		frame = new JFrame(FRAME_NAME);
 		frame.setPreferredSize(new Dimension(250, 150)); // TODO?
@@ -72,19 +67,19 @@ public class RoomSelectionWindow extends JPanel implements ActionListener {
 	private void initPanel() {
 		c = new GridBagConstraints();
 		setLayout(new GridBagLayout());
-		
+
 		saveButton = new JButton(BUTTON_SAVE);
 		closeButton = new JButton(BUTTON_CLOSE);
 		roomList = new JList<Room>(getRoomArray());
 		roomList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		
+
 		c.insets = new Insets(0,0,5,0);
 		c.ipadx = 10;
-		
+
 		addComponent(roomList, 0, 0, 1, LINE_END);
 		addComponent(closeButton, 0, 1, 1, LINE_START);
 		addComponent(saveButton, 1, 1, 1, LINE_END);
-		
+
 		closeButton.addActionListener(this);
 		saveButton.addActionListener(this);
 	}
@@ -104,7 +99,7 @@ public class RoomSelectionWindow extends JPanel implements ActionListener {
 			frame.dispose();
 		}
 	}
-	
+
 	private Room[] getRoomArray() {
 		getAvailableRooms();
 		return makeRoomArray();
@@ -124,9 +119,9 @@ public class RoomSelectionWindow extends JPanel implements ActionListener {
 		}
 		return rooms;
 	}
-	
+
 	public static void main(String[] args) {
 		new RoomSelectionWindow(new Program());
 	}
-	
+
 }

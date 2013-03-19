@@ -10,7 +10,7 @@ public class Server {
 
 	public static void main(String[] args) throws IOException {
 		listening = true;
-		
+
 		try {
 			serverSocket = new ServerSocket(PORT);
 		} catch (IOException e) {

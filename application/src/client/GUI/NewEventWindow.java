@@ -14,7 +14,6 @@ import client.Program;
 
 import temp.TestObjects;
 
-
 import data.Event;
 import data.Alarm;
 import data.Appointment;
@@ -22,12 +21,11 @@ import data.Calendar;
 import data.Meeting;
 import data.Room;
 import data.User;
-import data.XMLTranslator;
 
 @SuppressWarnings("serial")
 public class NewEventWindow extends JPanel implements ActionListener, ItemListener {
 	private static final String FRAME_NAME = "Avtale / M�te";
-	
+
 	private static final String LABEL_DESCRIPTION = "Beskrivelse";
 	private static final String LABEL_FROM = "Fra";
 	private static final String LABEL_TO = "Til";
@@ -36,7 +34,7 @@ public class NewEventWindow extends JPanel implements ActionListener, ItemListen
 	private static final String LABEL_ALARM_TIME_BEFORE = "Tid f�r:";
 	private static final String LABEL_MEETING = "M�te";
 	private static final String LABEL_PARTICIPANTS = "Deltakere:";
-	
+
 	private static final String FIELD_DATE = "����-MM-DD";
 	private static final String FIELD_TIME = "TT:MM";
 
@@ -45,15 +43,15 @@ public class NewEventWindow extends JPanel implements ActionListener, ItemListen
 	private static final String BUTTON_DELETE = "Slett";
 	private static final String BUTTON_CLOSE = "Lukk";
 	private static final String BUTTON_SAVE = "Lagre";
-	
+
 	private static final String TOOLTIP_NOT_SAVED = "Avtalen/M�tet er ikke lagret. Trykk \"" + BUTTON_CLOSE + "\" for � avbryte";
-	
+
 	private static final int SIZE_FIELD = 12;
-	
+
 	private static final int LINE_START = GridBagConstraints.LINE_START;
 	private static final int LINE_END = GridBagConstraints.LINE_END;
 
-	
+
 	private JFrame frame;
 	private JLabel descriptionLabel, fromLabel, toLabel, locationLabel, alarmLabel, alarmTimeBeforeLabel, meetingLabel, participantsLabel;
 	private JTextField descriptionField, fromDateField, fromTimeField, toDateField, toTimeField, locationField, alarmTimeBeforeField;
@@ -67,12 +65,12 @@ public class NewEventWindow extends JPanel implements ActionListener, ItemListen
 	private User user;
 	private User[] userArray;
 	private Room room;
-	
+
 	private CalendarPane calendarPane;
 
 	private Program program;
 
-	
+
 	public NewEventWindow(Program program, CalendarPane calendarPane, Calendar calendar, User user, User[] userArray) {
 		this.program = program;
 		this.calendarPane = calendarPane;
@@ -81,14 +79,14 @@ public class NewEventWindow extends JPanel implements ActionListener, ItemListen
 		this.userArray = userArray;
 		initFrame();
 		initPanel();
-		
+
 		deleteButton.setEnabled(false);
 		deleteButton.setToolTipText(TOOLTIP_NOT_SAVED);
-		
+
 		frame.pack();
 		frame.setVisible(true);
 	}
-	
+
 	public NewEventWindow(Program program, CalendarPane calendarPane, Event event, User[] userArray) {
 		this.program = program;
 		this.calendarPane = calendarPane;
@@ -102,7 +100,7 @@ public class NewEventWindow extends JPanel implements ActionListener, ItemListen
 		} else if (event instanceof Meeting) {
 			this.user = ((Meeting) event).getLeader();
 		}
-		
+
 		descriptionField.setText(event.getDescription());
 		fromDateField.setText(event.getStartDateTime().split(" ")[0]);
 		fromTimeField.setText(event.getStartDateTime().split(" ")[1]);
@@ -126,13 +124,13 @@ public class NewEventWindow extends JPanel implements ActionListener, ItemListen
 			}
 			participantsList.setSelectedIndices(indecies);
 		}
-		
+
 		// TODO
-		
+
 		frame.pack();
 		frame.setVisible(true);
 	}
-	
+
 	private void initFrame() {
 		frame = new JFrame(FRAME_NAME);
 		frame.setPreferredSize(new Dimension(300, 300)); // TODO temp
@@ -141,7 +139,7 @@ public class NewEventWindow extends JPanel implements ActionListener, ItemListen
 		frame.getContentPane().add(this);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
-	
+
 	private void initPanel() {
 		c = new GridBagConstraints();
 		setLayout(new GridBagLayout());
@@ -172,14 +170,14 @@ public class NewEventWindow extends JPanel implements ActionListener, ItemListen
 		locationField = new JTextField(SIZE_FIELD);
 		alarmTimeBeforeField = new JTextField(FIELD_TIME);
 		alarmTimeBeforeField.setEnabled(false);
-		
+
 		alarmCheckBox = new JCheckBox();
 		meetingCheckBox = new JCheckBox();
 		participantsList = new JList<User>(userArray);
 		participantsList.setBackground(Color.WHITE);
 		participantsList.setEnabled(false);
 		participantsList.setCellRenderer(new UserRenderer());
-		
+
 		locationButton = new JButton(BUTTON_LOCATION_SET_ROOM);
 		deleteButton = new JButton(BUTTON_DELETE);
 		closeButton = new JButton(BUTTON_CLOSE);
@@ -190,40 +188,40 @@ public class NewEventWindow extends JPanel implements ActionListener, ItemListen
 		c.fill = GridBagConstraints.HORIZONTAL;
 		addComponent(descriptionField, 1, 0, 3, LINE_START);
 		c.fill = GridBagConstraints.NONE;
-	
+
 		addComponent(fromLabel, 0, 1, 1, LINE_END);
 		c.fill = GridBagConstraints.HORIZONTAL;
 		addComponent(fromDateField, 1, 1, 2, LINE_START);
 		addComponent(fromTimeField, 3, 1, 1, LINE_START);
 		c.fill = GridBagConstraints.NONE;
-		
+
 		addComponent(toLabel, 0, 2, 1, LINE_END);
 		c.fill = GridBagConstraints.HORIZONTAL;
 		addComponent(toDateField, 1, 2, 2, LINE_START);
 		addComponent(toTimeField, 3, 2, 1, LINE_START);
 		c.fill = GridBagConstraints.NONE;
-		
+
 		addComponent(locationLabel, 0, 3, 1, LINE_END);
 		c.fill = GridBagConstraints.HORIZONTAL;
 		addComponent(locationField, 1, 3, 2, LINE_START);
 		c.fill = GridBagConstraints.NONE;
 		addComponent(locationButton, 3, 3, 1, LINE_START);
-		
+
 		addComponent(alarmLabel, 0, 4, 1, LINE_END);
 		addComponent(alarmCheckBox, 1, 4, 1, LINE_START);
 		addComponent(alarmTimeBeforeLabel, 2, 4, 1, LINE_END);
 		c.fill = GridBagConstraints.HORIZONTAL;
 		addComponent(alarmTimeBeforeField, 3, 4, 1, LINE_START);
 		c.fill = GridBagConstraints.NONE;
-		
+
 		addComponent(meetingLabel, 0, 5, 1, LINE_END);
 		addComponent(meetingCheckBox, 1, 5, 1, LINE_START);
-		
+
 		addComponent(participantsLabel, 0, 6, 1, GridBagConstraints.FIRST_LINE_END);
 		c.fill = GridBagConstraints.HORIZONTAL;
 		addComponent(participantsList, 1, 6, 3, LINE_START);
 		c.fill = GridBagConstraints.NONE;
-		
+
 		addComponent(deleteButton, 0, 7, 1, LINE_START);
 		addComponent(closeButton, 2, 7, 1, LINE_START);
 		addComponent(saveButton, 3, 7, 1, LINE_END);
@@ -243,7 +241,7 @@ public class NewEventWindow extends JPanel implements ActionListener, ItemListen
 		closeButton.addActionListener(this);
 		saveButton.addActionListener(this);
 	}
-	
+
 	public void setRoom(Room room) {
 		this.room = room;
 		locationField.setText(room.toString());
@@ -309,9 +307,9 @@ public class NewEventWindow extends JPanel implements ActionListener, ItemListen
 			alarmTimeBeforeField.setEnabled(alarmCheckBox.isSelected());
 		}
 	}
-	
+
 	public static void main(String[] args) {
-//		new NewEventWindow(TestObjects.getCalendar00(), TestObjects.getUser02(), TestObjects.getUserArray01());
+		//		new NewEventWindow(TestObjects.getCalendar00(), TestObjects.getUser02(), TestObjects.getUserArray01());
 		new NewEventWindow(new Program(), new CalendarPane(new Program()), TestObjects.getMeeting01(), TestObjects.getUserArray01());
 	}
 

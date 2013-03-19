@@ -1,11 +1,13 @@
 package data;
 
-public class Alarm implements java.io.Serializable {
+import java.io.Serializable;
+
+public class Alarm implements Serializable {
 	private String timeBefore;
 	private String message;
 	private User owner;
 	private Event event;
-	
+
 	public Alarm(){
 	}
 	public Alarm(String timeBefore, String message, User owner, Event event) {
@@ -14,11 +16,11 @@ public class Alarm implements java.io.Serializable {
 		this.owner = owner;
 		this.event = event;
 	}
-	
+
 	public String toString() {
 		return String.format("Alarm; Time: %s, Message: %s, Owner: %s, Event: %s", timeBefore, message, owner.getUsername(), event.getId());
 	}
-	
+
 	public String getTimeBefore() {
 		return timeBefore;
 	}
@@ -43,5 +45,5 @@ public class Alarm implements java.io.Serializable {
 	public void setEvent(Event event) {
 		this.event = event;
 	}
-	
+
 }

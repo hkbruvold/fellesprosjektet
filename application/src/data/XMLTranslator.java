@@ -1,9 +1,8 @@
 package data;
 
 import java.io.File;
-import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.OutputStream;
+import java.io.Serializable;
 
 import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.core.Persister;
@@ -13,7 +12,7 @@ public class XMLTranslator {
 
 	// TODO
 
-	public static void toXML(Serializeable object) {
+	public static void toXML(Serializable object) {
 		Serializer serializer = new Persister();
 		File result = new File("example.xml");
 		try {
@@ -22,8 +21,8 @@ public class XMLTranslator {
 			e.printStackTrace();
 		}
 	}
-	
-	public static ObjectOutputStream toXMLStream(Serializeable object){
+
+	public static ObjectOutputStream toXMLStream(Serializable object){
 		Serializer serializer = new Persister();
 		ObjectOutputStream ostream = null;
 		try {
@@ -35,49 +34,49 @@ public class XMLTranslator {
 		return ostream;
 	}
 
-	public static Serializeable toModel() {
+	public static Serializable toModel() {
 		Serializer serializer = new Persister();
 		File source = new File("example.xml");
-		Serializeable object = null;
+		Serializable object = null;
 		try {
 			object = serializer.read(Alarm.class, source);
 		} catch (Exception e) {
-//			e.printStackTrace();
+			//			e.printStackTrace();
 		}
 		try {
 			object = serializer.read(Appointment.class, source);
 		} catch (Exception e) {
-//			e.printStackTrace();
+			//			e.printStackTrace();
 		}
 		try {
 			object = serializer.read(Calendar.class, source);
 		} catch (Exception e) {
-//			e.printStackTrace();
+			//			e.printStackTrace();
 		}
 		try {
 			object = serializer.read(Group.class, source);
 		} catch (Exception e) {
-//			e.printStackTrace();
+			//			e.printStackTrace();
 		}
 		try {
 			object = serializer.read(Meeting.class, source);
 		} catch (Exception e) {
-//			e.printStackTrace();
+			//			e.printStackTrace();
 		}
 		try {
 			object = serializer.read(Notification.class, source);
 		} catch (Exception e) {
-//			e.printStackTrace();
+			//			e.printStackTrace();
 		}
 		try {
 			object = serializer.read(User.class, source);
 		} catch (Exception e) {
-//			e.printStackTrace();
+			//			e.printStackTrace();
 		}
 		try {
 			object = serializer.read(Authentication.class, source);
 		} catch (Exception e) {
-//			e.printStackTrace();
+			//			e.printStackTrace();
 		}
 		return object;
 

@@ -1,11 +1,12 @@
 package data;
 
-import org.simpleframework.xml.Attribute;
+import java.io.Serializable;
+
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Root;
 
 @Root
-public abstract class Event implements java.io.Serializable {
+public abstract class Event implements Serializable {
 	@Element
 	protected int id;
 	@Element
@@ -22,7 +23,7 @@ public abstract class Event implements java.io.Serializable {
 	protected Room room;
 	@Element(required=false)
 	protected Alarm alarm;
-	
+
 	public Event(){
 	}
 	/**
@@ -46,7 +47,7 @@ public abstract class Event implements java.io.Serializable {
 		this.location = null;
 		this.room = room;
 	}
-	
+
 	public int getId() {
 		return id;
 	}

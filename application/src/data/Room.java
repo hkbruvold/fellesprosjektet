@@ -1,10 +1,12 @@
 package data;
 
-public class Room implements java.io.Serializable {
+import java.io.Serializable;
+
+public class Room implements Serializable {
 	private int id;
 	private int size;
 	private String description;
-	
+
 	/**
 	 * Use id = 0 when creating new objects. Actual ID should come from database
 	 */
@@ -15,11 +17,11 @@ public class Room implements java.io.Serializable {
 		this.size = size;
 		this.description = description;
 	}
-	
+
 	public String toString() {
 		return description + " (" + id + ")";
 	}
-	
+
 	public int getId() {
 		return id;
 	}
@@ -38,5 +40,5 @@ public class Room implements java.io.Serializable {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
+
 }

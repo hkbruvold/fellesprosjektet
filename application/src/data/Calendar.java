@@ -1,23 +1,24 @@
 package data;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Calendar implements java.io.Serializable {
+public class Calendar implements Serializable {
 	private String name;
 	private User owner;
 	private ArrayList<Event> events;
-	
+
 	public Calendar(){
 	}
 	public Calendar(String name, User owner) {
 		this.name = name;
 		this.owner = owner;
 	}
-	
+
 	public String toString() {
 		return String.format("Calendar; Name: %s, User: %s, Number of events: %s", name, owner.getUsername(), events.size());
 	}
-	
+
 	public String getName() {
 		return name;
 	}
@@ -33,4 +34,5 @@ public class Calendar implements java.io.Serializable {
 	public void addEvents(ArrayList<Event> events) {
 		events.addAll(events);
 	}
+
 }
