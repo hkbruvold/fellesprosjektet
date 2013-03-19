@@ -1,6 +1,6 @@
 package data;
 
-public class Room {
+public class Room implements java.io.Serializable {
 	private int id;
 	private int size;
 	private String description;

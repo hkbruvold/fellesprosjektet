@@ -5,7 +5,7 @@ import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Root;
 
 @Root
-public abstract class Event implements Serializeable {
+public abstract class Event implements java.io.Serializable {
 	@Element
 	protected int id;
 	@Element

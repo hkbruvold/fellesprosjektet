@@ -1,6 +1,6 @@
 package data;
 
-public class Appointment extends Event implements Serializeable {
+public class Appointment extends Event implements java.io.Serializable {
 	private User owner;
 	
 	public Appointment(){

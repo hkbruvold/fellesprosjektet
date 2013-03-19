@@ -3,7 +3,7 @@ package data;
 import java.util.List;
 import java.util.ArrayList;
 
-public class Group implements Serializeable {
+public class Group implements java.io.Serializable {
 	private int id;
 	private String name;
 	private String description;

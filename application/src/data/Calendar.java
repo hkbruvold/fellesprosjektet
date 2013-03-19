@@ -2,7 +2,7 @@ package data;
 
 import java.util.ArrayList;
 
-public class Calendar implements Serializeable {
+public class Calendar implements java.io.Serializable {
 	private String name;
 	private User owner;
 	private ArrayList<Event> events;

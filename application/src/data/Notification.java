@@ -1,6 +1,6 @@
 package data;
 
-public class Notification implements Serializeable {
+public class Notification implements java.io.Serializable {
 	private int id;
 	private String message;
 	private Event event;

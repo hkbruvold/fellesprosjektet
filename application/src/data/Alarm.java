@@ -1,6 +1,6 @@
 package data;
 
-public class Alarm implements Serializeable {
+public class Alarm implements java.io.Serializable {
 	private String timeBefore;
 	private String message;
 	private User owner;

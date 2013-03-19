@@ -3,7 +3,7 @@ package data;
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Root;
 
-public class Authentication implements Serializeable {
+public class Authentication implements java.io.Serializable {
 	private String user;
 	private String password;
 	private String action;

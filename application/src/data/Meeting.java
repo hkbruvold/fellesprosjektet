@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import org.simpleframework.xml.ElementList;
 
-public class Meeting extends Event implements Serializeable {
+public class Meeting extends Event implements java.io.Serializable{
 	private User leader;
 	@ElementList
 	private ArrayList<User> usersInvited;
