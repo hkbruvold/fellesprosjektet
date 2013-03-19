@@ -21,18 +21,17 @@ public class ServerThread extends Thread {
 	private ObjectInputStream in;
 	private DatabaseConnection dbConn;
 	private DatabaseCommunication dbComm;
-	private String URI;
-	private String port;
-	private String databaseName;
+	private String URI = "localhost";
+	private String port = "3306";
+	private String databaseName = "calendarDatabase";
 	private String serverUrl = "jdbc:mysql://" + URI + ":" + port + "/" + databaseName;
-	private String username;
-	private char[] password;
+	private String username = "root";
+	private char[] password = "skip".toCharArray();
 
 	public ServerThread (Socket socket) {
 		super();
 		this.socket = socket;
-		//dbConn = new DatabaseConnection(serverUrl, username, password);
-		dbConn = new DatabaseConnection("jdbc:mysql://localhost:3306/calendarDatabase", "root", "skip".toCharArray());
+		dbConn = new DatabaseConnection(serverUrl, username, password);
 		dbComm = new DatabaseCommunication(dbConn);
 	}
 
