@@ -8,7 +8,6 @@ import javax.swing.*;
 import javax.xml.XMLConstants;
 
 import client.Program;
-import client.ServerCommunication;
 
 import data.Authentication;
 import data.XMLTranslator;
