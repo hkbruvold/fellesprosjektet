@@ -2,6 +2,7 @@ package client;
 
 import client.GUI.*;
 import data.*;
+
 import java.util.HashMap;
 
 public class Program {
@@ -31,6 +32,7 @@ public class Program {
 		values.put("username", username);
 		values.put("password", password);
 		Response res = client.send(new Request("login", values));
+		currentUser = (User) res.getData().get(0);
 		return res.status == Response.Status.OK;
 	}
 	// TODO

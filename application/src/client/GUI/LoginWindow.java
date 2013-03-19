@@ -16,7 +16,7 @@ public class LoginWindow extends JPanel implements ActionListener {
 	private static final String FRAME_NAME = "Logg inn";
 
 	private static final String LABEL_WRONG_USERNAME_PASSWORD = "Feil brukernavn eller passord";
-	private static final String LABEL_ERROR_CONNECTION = "Feil i oppkbling til server";
+	private static final String LABEL_ERROR_CONNECTION = "Feil i oppkobling til server";
 	private static final String LABEL_USERNAME = "Brukernavn";
 	private static final String LABEL_PASSWORD = "Passord";
 
@@ -45,7 +45,7 @@ public class LoginWindow extends JPanel implements ActionListener {
 
 	private void initFrame() {
 		frame = new JFrame(FRAME_NAME);
-		frame.setPreferredSize(new Dimension(300, 130));
+		frame.setPreferredSize(new Dimension(300, 150));
 		frame.setResizable(false);
 		frame.setLocationRelativeTo(null);
 		frame.getContentPane().add(this);
@@ -111,8 +111,12 @@ public class LoginWindow extends JPanel implements ActionListener {
 	}
 	private void tryLogin() {
 		String username = usernameField.getText();
-		String password = Arrays.toString(passwordField.getPassword());
-		if (program.login(username, password)) {
+		char[] password = passwordField.getPassword();
+		StringBuilder sb = new StringBuilder();
+		for (char c : password) {
+			sb.append(c);
+		}
+		if (program.login(username, sb.toString())) {
 			frame.dispose();
 			program.showMainWindow();
 		} else {

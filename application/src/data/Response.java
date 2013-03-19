@@ -5,14 +5,14 @@ import java.util.HashMap;
 
 public class Response implements Serializable {
 	public Status status;
-	private Object data;
+	private HashMap data;
 
 	public Response (Status status, HashMap data) {
 		this.status = status;
 		this.data = data;
 	}
 
-	public Object getData () {
+	public HashMap getData () {
 		return data;
 	}
 

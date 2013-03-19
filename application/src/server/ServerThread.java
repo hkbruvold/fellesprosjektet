@@ -7,6 +7,7 @@ import data.Response;
 import data.User;
 
 import java.net.*;
+import java.util.HashMap;
 import java.io.*;
 
 import server.database.DatabaseCommunication;
@@ -55,28 +56,33 @@ public class ServerThread extends Thread {
 	public void parseRequest (Request req) {
 		String action = req.getAction();
 		Update update = new Update(null, dbComm);
+		System.out.println(action);
 
 		switch (action) {
 		case "login":
-		default:
-			System.out.println(action);
 			String username = req.getData().get("username").toString();
 			String password = req.getData().get("password").toString();
-			System.out.println("Username: " + username + " " + "Password: " + password);
 			Query query = new Query(null, dbComm);
-			User fethcedUser = query.queryUser(username);
-			if(fethcedUser.getName().equals(username) && fethcedUser.getPassword().equals(password)){
-				send(new Response(Response.Status.OK, null));
+			User fetchedUser = query.queryUser(username);
+			if(fetchedUser.getUsername().equals(username) && fetchedUser.getPassword().equals(password)){
+				HashMap<Integer, User> tempSendUser = new HashMap<Integer, User>();
+				tempSendUser.put(0, fetchedUser);
+				send(new Response(Response.Status.OK, tempSendUser));
 			} else{
 				send(new Response(Response.Status.FAILED, null));
 			}
+			break;
 		case "addEvent":
 			System.out.println(action);
 			Event event = (Event) req.getData().get("event");
 			update.insertEvent(event); 
+			break;
 		case "addAlarm":
 			Alarm alarm = (Alarm) req.getData().get("alarm");
 			update.insertAlarm(alarm);
+			break;
+		default:
+			break;
 		}
 	}
 
