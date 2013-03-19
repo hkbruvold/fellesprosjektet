@@ -62,6 +62,13 @@ public class Program {
 		Response res = client.send(new Request("listUsers", null));
 		return (User[]) res.getData();
 	}
+	
+	public void addUser(User user){
+		HashMap<String,User> values = new HashMap<String, User>();
+		values.put("user", user);
+		Response res = client.send(new Request("newUser", values));
+		//return res.status == Response.Status.OK;
+	}
 
 	public static void main(String[] args) {
 		new Program();
