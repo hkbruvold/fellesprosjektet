@@ -64,8 +64,7 @@ public class ServerThread extends Thread {
 			User fethcedUser = query.queryUser(username);
 			if(fethcedUser.getName().equals(username) && fethcedUser.getPassword().equals(password)){
 				send(new Response(Response.Status.OK, null));
-			}
-			else{
+			} else{
 				send(new Response(Response.Status.FAILED, null));
 			}
 		case "addEvent":

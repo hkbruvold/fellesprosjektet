@@ -3,6 +3,7 @@ package client.GUI;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Arrays;
 
 import javax.swing.*;
 import javax.xml.XMLConstants;
@@ -112,7 +113,7 @@ public class LoginWindow extends JPanel implements ActionListener {
 			program.quit();
 		} else if (e.getSource().equals(logInButton)) {
 			//ServerCommunication sc = new ServerCommunication("TODO"); // TODO
-			if (program.login(usernameField.getText(), passwordField.getPassword().toString()) == false) {
+			if (program.login(usernameField.getText(), Arrays.toString(passwordField.getPassword())) == false) {
 				showWrongLoginLabel();
 			} else {
 				frame.dispose();
