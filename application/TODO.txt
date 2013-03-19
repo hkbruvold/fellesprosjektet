@@ -5,6 +5,7 @@ __Unassigned__
 ??? Add interface for adding users, adding users to groups
 Make TODO list
 Main/calendar window (framework in place)
+parseRequest i ServerThread
 
 __Eivind__???
 Server-client communication (sending/receiving objects), High priority
