@@ -39,9 +39,17 @@ public class DatabaseConnection {
 		return st.executeQuery(sql);
 	}
 	
-	public void update(String sql) throws SQLException {
+	public int update(String sql) throws SQLException {
 		Statement st = connection.createStatement();
-		st.executeUpdate(sql);
+		ResultSet rs = null;
+		st.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
+		rs = st.getResultSet();
+		int id = 0;
+		if (rs != null) {
+			id = rs.getInt(1);
+			rs.close();
+		}
+		return id;
 	}
 	
 	public PreparedStatement preparedStatement(String sql) throws SQLException {

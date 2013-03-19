@@ -23,8 +23,8 @@ public class DatabaseCommunication {
 	}
 	public int update(String update) {
 		try {
-			makeUpdate(update);
-			return 0;
+			int id = makeUpdate(update);
+			return id;
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 			return -1;
@@ -54,9 +54,10 @@ public class DatabaseCommunication {
 		dbConn.close();
 		return result;
 	}
-	private void makeUpdate(String update) throws ClassNotFoundException, SQLException {
+	private int makeUpdate(String update) throws ClassNotFoundException, SQLException {
 		dbConn.init();
-		dbConn.update(update);
+		int id = dbConn.update(update);
 		dbConn.close();
+		return id;
 	}
 }
