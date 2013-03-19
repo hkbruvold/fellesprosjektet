@@ -46,7 +46,7 @@ public class MeetingInvitationWindow extends JPanel implements ActionListener, I
 	private GridBagConstraints c;
 	private JCheckBox alarmCheckBox;
 
-	private Object program;
+	private Program program;
 	
 	public MeetingInvitationWindow(Program program, Meeting meeting, User user) {
 		this.program = program;
