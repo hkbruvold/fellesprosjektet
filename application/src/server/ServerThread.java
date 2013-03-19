@@ -37,9 +37,10 @@ public class ServerThread extends Thread {
             String action = req.getAction();
             
             switch (action) {
+                case "login":
                 default:
                     System.out.println(action);
-                    send(new Response(Response.Status.OK, null));
+                    send(new Response(Response.Status.FAILED, null));
             }
         }
         
