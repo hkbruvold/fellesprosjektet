@@ -15,38 +15,31 @@ public class Client {
 
     public Client () {}
     
-    public Boolean connect () {
-        try {
-            socket = new Socket(HOST, PORT);
-            out = new ObjectOutputStream(socket.getOutputStream());
-            in = new ObjectInputStream(socket.getInputStream());
-            
-            return true;
-        } catch (UnknownHostException e) {
-            System.err.println("Could not find host");
-            return false;
-        } catch (IOException ex) {
-            System.err.println(ex);
-            return false;
-        }
-    }
-    
     public Response send (Request req) throws IOException, ClassNotFoundException {
-        Object input = null;
-            
+        Response res = null;
+        
+        connect();
+        
         out.writeObject(req);
         out.flush();
         
         // Wait for response
-        while (input == null) {
-            input = in.readObject();
+        while (res == null) {
+            res = (Response) in.readObject();
         }
         
-        return (Response) input;
+        closeConnection();
+        
+        return res;
     }
     
-    public void closeConnection () throws IOException {
-        out.writeObject(new Request("end", null));
+    private void connect () throws UnknownHostException, IOException {
+        socket = new Socket(HOST, PORT);
+        out = new ObjectOutputStream(socket.getOutputStream());
+        in = new ObjectInputStream(socket.getInputStream());
+    }
+    
+    private void closeConnection () throws IOException {
         out.close();
         in.close();
         socket.close();
