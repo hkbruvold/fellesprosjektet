@@ -100,25 +100,24 @@ public class LoginWindow extends JPanel implements ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource().equals(usernameField)) {
-			// TODO
-		} else if (e.getSource().equals(passwordField)) {
-			// TODO
+		if (e.getSource().equals(passwordField)) {
+			tryLogin();
 		} else if (e.getSource().equals(closeButton)) {
 			frame.dispose();
 			program.quit();
 		} else if (e.getSource().equals(logInButton)) {
-			//ServerCommunication sc = new ServerCommunication("TODO"); // TODO
-			if (program.login(usernameField.getText(), Arrays.toString(passwordField.getPassword())) == false) {
-				showWrongLoginLabel();
-			} else {
-				frame.dispose();
-				program.showMainWindow();
-			}
+			tryLogin();
 		}
 	}
-	/*
-	public static void main(String[] args){
-		new LoginWindow(new Program());
-	} */
+	private void tryLogin() {
+		String username = usernameField.getText();
+		String password = Arrays.toString(passwordField.getPassword());
+		if (program.login(username, password)) {
+			frame.dispose();
+			program.showMainWindow();
+		} else {
+			showWrongLoginLabel();
+		}
+	}
+
 }

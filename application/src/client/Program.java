@@ -2,31 +2,30 @@ package client;
 
 import client.GUI.*;
 import data.*;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Program {
 	private Client client;
-	private User loggedIn;
+	private User currentUser;
 
 	public Program() {
 		client = new Client();
 		showLogin();
 	}
-
 	public void showLogin() {
-		if (loggedIn == null) {
-			// TODO can't show main window
-		}
 		new LoginWindow(this);
 	}
-
 	public void showMainWindow() {
-		new MainWindow(this);
+		if (currentUser != null) {
+			new MainWindow(this);
+		} else {
+			new LoginWindow(this);
+		}
 	}
-
 	public void quit() {
-		System.out.println("Ouit");
-		// TODO quit
+		System.exit(0);
 	}
 
 	public boolean login (String username, String password) {
@@ -34,7 +33,6 @@ public class Program {
 		values.put("username", username);
 		values.put("password", password);
 		Response res = client.send(new Request("login", values));
-
 		return res.status == Response.Status.OK;
 	}
 	// TODO
@@ -57,6 +55,11 @@ public class Program {
 		HashMap<String, Alarm> values = new HashMap<String, Alarm>();
 		values.put("alarm", alarm);
 		Response res = client.send(new Request("addAlarm", values));
+	}
+	public User[] getAllUsers(){
+		System.out.println("Fetching users");
+		Response res = client.send(new Request("listUsers", null));
+		return (User[]) res.getData();
 	}
 
 	public static void main(String[] args) {
