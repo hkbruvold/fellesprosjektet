@@ -51,7 +51,7 @@ public class NewUserWindow extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public NewUserWindow(Program program) {
+	public NewUserWindow(final Program program) {
 		this.program = program;
 		this.jFrame = this;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -141,6 +141,8 @@ public class NewUserWindow extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				//TODO send to database
 				user = new User(usernameField.getText(),nameField.getText(),userType.getSelectedItem().toString());
+				user.setPassword(passwordField.getText());
+				program.addUser(user);
 				jFrame.dispose();
 			}
 		});

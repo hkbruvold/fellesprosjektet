@@ -86,6 +86,10 @@ public class ServerThread extends Thread {
 			ArrayList<User> userList = query.queryUsers();
 			userHashMap.put("users", userList);
 			new Response(Response.Status.OK, userHashMap);
+		case "newUser":
+			User user = (User) req.getData().get("user");
+			update.insertUser(user);
+			new Response(Response.Status.OK, null);
 		}
 		}
 	public void send (Response res) {
