@@ -1,5 +1,6 @@
 package server;
 
+import data.Alarm;
 import data.Event;
 import data.Request;
 import data.Response;
@@ -55,6 +56,7 @@ public class ServerThread extends Thread {
 
 	public void parseRequest (Request req) {
 		String action = req.getAction();
+		Update update = new Update(null, dbComm);
 
 		switch (action) {
 		case "login":
@@ -72,9 +74,11 @@ public class ServerThread extends Thread {
 			}
 		case "addEvent":
 			System.out.println(action);
-			Update update = new Update(null, dbComm);
 			Event event = (Event) req.getData().get("event");
 			update.insertEvent(event); 
+		case "addAlarm":
+			Alarm alarm = (Alarm) req.getData().get("alarm");
+			update.insertAlarm(alarm);
 		}
 	}
 
