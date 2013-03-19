@@ -146,7 +146,6 @@ public class Update {
 			id = dbComm.update(updateString);
 		}
 		group.setId(id);
-		System.out.println(group.getId());
 		for (User user : group.getMembers()) {
 			insertIsMemberOf(user, group);
 		}

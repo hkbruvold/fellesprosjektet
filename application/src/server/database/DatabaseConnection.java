@@ -43,10 +43,13 @@ public class DatabaseConnection {
 		Statement st = connection.createStatement();
 		ResultSet rs = null;
 		st.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
-		rs = st.getResultSet();
+		rs = st.getGeneratedKeys();
 		int id = 0;
 		if (rs != null) {
-			id = rs.getInt(1);
+			rs.beforeFirst();
+			if (rs.next()) {
+				id = rs.getInt(1);
+			}
 			rs.close();
 		}
 		return id;
