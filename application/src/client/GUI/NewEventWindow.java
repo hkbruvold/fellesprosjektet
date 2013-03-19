@@ -294,10 +294,9 @@ public class NewEventWindow extends JPanel implements ActionListener, ItemListen
 				alarm = new Alarm(alarmTimeBeforeField.getText(), "", user, event);
 				program.registerAlarm(alarm);
 			}
-			calendarPane.addEvent(event);
-			// TODO save new event, set the message string for alarm
 			program.registerEvent(event);
-			XMLTranslator.toXML(event);
+			//Someone, plz fix calendarpane.addEvent. This is very critical!
+			//calendarPane.addEvent(event);
 			frame.dispose(); // Close if successful; show error message if not?
 		}
 	}
