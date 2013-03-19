@@ -1,18 +1,54 @@
 package client;
 
+import java.io.IOException;
+
+import client.GUI.*;
+import client.ServerCommunication;
 import data.Alarm;
 import data.Event;
+import data.User;
 
 public class Program {
-	// TODO Fields?
+	ServerCommunication sc;
+	User loggedIn;
 	
-	public static void main(String[] args) {
-		// TODO
+	private static final String SERVER_ADDRESS = "";
+	
+	public Program() {
+		sc = new ServerCommunication(SERVER_ADDRESS);
+		showLogin();
+		
 	}
-
+	
+	private void showLogin() {
+		new LoginWindow(this);
+	}
+	
+	public void quit() {
+		System.out.println("Ouit");
+		// TODO quit
+	}
+	
+	public boolean login(String username, String password) {
+		User loginUser;
+		try {
+			loginUser = sc.login(username, password);
+		} catch (IOException e) {
+			System.out.println("Error connecting to server");
+			e.printStackTrace();
+			return false;
+		}
+		
+		if (loginUser != null) {
+			this.loggedIn = loginUser;
+			return true;
+		} else {
+			return false;
+		}
+	}
 	// TODO
 	
-	public void newEvent(/* TODO */) {
+	public void registerEvent(Event event) {
 		// TODO (remember database!)
 	}
 	public void editEvent(Event event/*, TODO */) {
@@ -24,6 +60,10 @@ public class Program {
 	
 	public void registerAlarm(Alarm alarm) {
 		// TODO send alarm to server
+	}
+	
+	public static void main(String[] args) {
+		new Program();
 	}
 	
 }

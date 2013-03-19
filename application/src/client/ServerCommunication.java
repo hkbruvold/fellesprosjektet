@@ -1,9 +1,11 @@
 package client;
 
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
 import data.Authentication;
+import data.User;
 import data.XMLTranslator;
 
 public class ServerCommunication {
@@ -23,9 +25,15 @@ public class ServerCommunication {
 	
 	// TODO
 	
-	public void login (String username, String password ) {
+	public User login (String username, String password ) throws IOException {
 		Authentication auth = new Authentication(username, password, "LOGIN");
 		Client.sendObject(data.XMLTranslator.toXMLStream(auth));
+		if (true) {
+			return new User();// TODO return user from server
+		} else {
+			return null;
+		}
+		 // TODO return user from server
 	}
 	public void /*status*/ logOut (/* TODO */) {
 		// TODO

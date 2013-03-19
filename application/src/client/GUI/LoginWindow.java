@@ -18,7 +18,9 @@ public class LoginWindow extends JPanel implements ActionListener {
 	private static final int SIZE_FIELD = 15;
 
 	private static final String FRAME_NAME = "Logg inn";
-
+	
+	private static final String LABEL_WRONG_USERNAME_PASSWORD = "Feil brukernavn eller passord";
+	private static final String LABEL_ERROR_CONNECTION = "Feil i oppkbling til server";
 	private static final String LABEL_USERNAME = "Brukernavn";
 	private static final String LABEL_PASSWORD = "Passord";
 	
@@ -28,7 +30,7 @@ public class LoginWindow extends JPanel implements ActionListener {
 	private static final int LINE_START = GridBagConstraints.LINE_START;
 	private static final int LINE_END = GridBagConstraints.LINE_END;
 	private JFrame frame;
-	private JLabel usernameLabel, passwordLabel;
+	private JLabel usernameLabel, passwordLabel, statusLabel;
 	private JTextField usernameField;
 	private JPasswordField passwordField;
 	private JButton closeButton, logInButton;
@@ -58,22 +60,26 @@ public class LoginWindow extends JPanel implements ActionListener {
 		c = new GridBagConstraints();
 		setLayout(new GridBagLayout());
 
+		statusLabel = new JLabel();
 		usernameLabel = new JLabel(LABEL_USERNAME);
 		passwordLabel = new JLabel(LABEL_PASSWORD);
 		usernameField = new JTextField(SIZE_FIELD);
 		passwordField = new JPasswordField(SIZE_FIELD);
 		closeButton = new JButton(BUTTON_CLOSE);
 		logInButton = new JButton(BUTTON_LOG_IN);
+		
+		statusLabel.setForeground(Color.red);
 
 		c.insets = new Insets(0,0,5,0);
 		c.ipadx = 10;
 
-		addComponent(usernameLabel, 0, 0, 1, LINE_END);
-		addComponent(usernameField, 1, 0, 2, LINE_START);
-		addComponent(passwordLabel, 0, 1, 1, LINE_END);
-		addComponent(passwordField, 1, 1, 2, LINE_START);
-		addComponent(closeButton, 1, 2, 1, LINE_START); // Hmmm...
-		addComponent(logInButton, 2, 2, 1, LINE_END);   // Hmmm...
+		addComponent(statusLabel, 0, 0, 3, LINE_END);
+		addComponent(usernameLabel, 0, 1, 1, LINE_END);
+		addComponent(usernameField, 1, 1, 2, LINE_START);
+		addComponent(passwordLabel, 0, 2, 1, LINE_END);
+		addComponent(passwordField, 1, 2, 2, LINE_START);
+		addComponent(closeButton, 1, 3, 1, LINE_START); // Hmmm...
+		addComponent(logInButton, 2, 3, 1, LINE_END);   // Hmmm...
 
 		usernameField.addActionListener(this);
 		passwordField.addActionListener(this);
@@ -88,6 +94,14 @@ public class LoginWindow extends JPanel implements ActionListener {
 		c.anchor = anchor;
 		add(component, c);
 	}
+	
+	public void showWrongLoginLabel() {
+		statusLabel.setText(LABEL_WRONG_USERNAME_PASSWORD);
+	}
+	
+	public void showErrorConnecting() {
+		statusLabel.setText(LABEL_ERROR_CONNECTION);
+	}
 
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource().equals(usernameField)) {
@@ -96,10 +110,14 @@ public class LoginWindow extends JPanel implements ActionListener {
 			// TODO
 		} else if (e.getSource().equals(closeButton)) {
 			frame.dispose();
+			program.quit();
 		} else if (e.getSource().equals(logInButton)) {
-			ServerCommunication sc = new ServerCommunication("TODO"); // TODO
-			sc.login(usernameField.getText(),passwordField.getPassword().toString());
-			frame.dispose(); // Close if successful; show error message if not?
+			//ServerCommunication sc = new ServerCommunication("TODO"); // TODO
+			if (program.login(usernameField.getText(), passwordField.getPassword().toString()) == false) {
+				showWrongLoginLabel();
+			} else {
+				frame.dispose();
+			}
 		}
 	}
 
