@@ -6,27 +6,24 @@ import java.util.HashMap;
 
 public class Program {
 	private Client client;
-	private User loggedIn;
+	private User currentUser;
 
 	public Program() {
 		client = new Client();
 		showLogin();
 	}
-
 	public void showLogin() {
-		if (loggedIn == null) {
-			// TODO can't show main window
-		}
 		new LoginWindow(this);
 	}
-
 	public void showMainWindow() {
-		new MainWindow(this);
+		if (currentUser != null) {
+			new MainWindow(this);
+		} else {
+			new LoginWindow(this);
+		}
 	}
-
 	public void quit() {
-		System.out.println("Ouit");
-		// TODO quit
+		System.exit(0);
 	}
 
 	public boolean login (String username, String password) {
@@ -34,7 +31,6 @@ public class Program {
 		values.put("username", username);
 		values.put("password", password);
 		Response res = client.send(new Request("login", values));
-
 		return res.status == Response.Status.OK;
 	}
 	// TODO
