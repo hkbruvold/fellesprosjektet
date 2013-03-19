@@ -7,8 +7,8 @@ Make TODO list
 Main/calendar window (framework in place)
 parseRequest i ServerThread
 
-__Eivind__???
-Server-client communication (sending/receiving objects), High priority
+__Eivind__
+
 
 __Hans-Kristian__
 
@@ -28,3 +28,4 @@ Add option for selecting room in NewEventWindow
 __Done__
 Add window for new user
 Add option to add alarm to meeting (when invited)
+Server-client communication (sending/receiving objects), High priority
