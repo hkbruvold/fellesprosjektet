@@ -27,10 +27,9 @@ public class Program {
 		System.exit(0);
 	}
 
-	@SuppressWarnings("unchecked")
 	public boolean login (User user) {
 		Response res = client.send(new Request("login", user));
-		currentUser = (User) ((HashMap<Integer, User>)res.getData()).get(0);
+		currentUser = (User) res.getData();
 		return res.status == Response.Status.OK;
 	}
 	// TODO
