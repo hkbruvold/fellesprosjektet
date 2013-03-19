@@ -26,6 +26,8 @@ public class ServerCommunication {
 	// TODO
 	
 	public User login (String username, String password ) throws IOException {
+		return new User(); //temporary until server communication is supported
+		/*
 		Authentication auth = new Authentication(username, password, "LOGIN");
 		Client.sendObject(data.XMLTranslator.toXMLStream(auth));
 		if (true) {
@@ -33,7 +35,7 @@ public class ServerCommunication {
 		} else {
 			return null;
 		}
-		 // TODO return user from server
+		 // TODO return user from server*/
 	}
 	public void /*status*/ logOut (/* TODO */) {
 		// TODO
