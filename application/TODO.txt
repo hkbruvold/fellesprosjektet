@@ -5,7 +5,8 @@ __Unassigned__
 ??? Add interface for adding users, adding users to groups
 Make TODO list
 Main/calendar window (framework in place)
-parseRequest i ServerThread
+Fix calendarPane.addEvent(event) so that it acutally works - High priority
+Add window for making/editing groups - Kind of done
 
 __Eivind__
 
@@ -14,7 +15,8 @@ __Hans-Kristian__
 
 
 __Kaare__
-Add window for making/editing groups
+parseRequest i ServerThread
+
 
 __Kjell__
 Database queries (mostly done)
