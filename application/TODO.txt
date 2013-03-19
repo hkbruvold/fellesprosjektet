@@ -17,7 +17,7 @@ Add window for making/editing groups
 
 __Kjell__
 Database queries (mostly done)
-Database insert
+Database insert (mostly done)
 Database update
 Database delete
 
