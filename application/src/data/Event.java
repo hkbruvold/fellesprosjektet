@@ -11,8 +11,6 @@ public abstract class Event implements Serializable {
 	@Element
 	protected int id;
 	@Element
-	protected Calendar calendar;
-	@Element
 	protected String startDateTime;
 	@Element
 	protected String endDateTime;
@@ -30,18 +28,16 @@ public abstract class Event implements Serializable {
 	/**
 	 * Use id = 0 when creating new objects. Actual ID should come from database
 	 */
-	public Event(int id, Calendar calendar, String startDateTime, String endDateTime, String description, String location) {
+	public Event(int id, String startDateTime, String endDateTime, String description, String location) {
 		this.id = id;
-		this.calendar = calendar;
 		this.startDateTime = startDateTime;
 		this.endDateTime = endDateTime;
 		this.description = description;
 		this.location = location;
 		this.room = null;
 	}
-	public Event(int id, Calendar calendar, String startDateTime, String endDateTime, String description, Room room) {
+	public Event(int id, String startDateTime, String endDateTime, String description, Room room) {
 		this.id = id;
-		this.calendar = calendar;
 		this.startDateTime = startDateTime;
 		this.endDateTime = endDateTime;
 		this.description = description;
@@ -54,12 +50,6 @@ public abstract class Event implements Serializable {
 	}
 	public void setId(int id) {
 		this.id = id;
-	}
-	public Calendar getCalendar() {
-		return calendar;
-	}
-	public void setCalendar(Calendar calendar) {
-		this.calendar = calendar;
 	}
 	public String getStartDateTime() {
 		return startDateTime;

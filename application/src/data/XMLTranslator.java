@@ -49,11 +49,6 @@ public class XMLTranslator {
 			//			e.printStackTrace();
 		}
 		try {
-			object = serializer.read(Calendar.class, source);
-		} catch (Exception e) {
-			//			e.printStackTrace();
-		}
-		try {
 			object = serializer.read(Group.class, source);
 		} catch (Exception e) {
 			//			e.printStackTrace();

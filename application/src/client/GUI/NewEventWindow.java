@@ -15,13 +15,8 @@ import client.Program;
 
 import temp.TestObjects;
 
+import data.*;
 import data.Event;
-import data.Alarm;
-import data.Appointment;
-import data.Calendar;
-import data.Meeting;
-import data.Room;
-import data.User;
 
 @SuppressWarnings("serial")
 public class NewEventWindow extends JPanel implements ActionListener, ItemListener {
@@ -62,20 +57,17 @@ public class NewEventWindow extends JPanel implements ActionListener, ItemListen
 	private GridBagConstraints c;
 
 	private Event calendarEvent;
-	private Calendar calendar;
 	private User user;
 	private User[] userArray;
 	private Room room;
 
 	private CalendarPane calendarPane;
-
 	private Program program;
 
 
-	public NewEventWindow(Program program, CalendarPane calendarPane, Calendar calendar, User user, User[] userArray) {
+	public NewEventWindow(Program program, CalendarPane calendarPane, User user, User[] userArray) {
 		this.program = program;
 		this.calendarPane = calendarPane;
-		this.calendar = calendar;
 		this.user = user;
 		this.userArray = userArray;
 		initFrame();
@@ -92,7 +84,6 @@ public class NewEventWindow extends JPanel implements ActionListener, ItemListen
 		this.program = program;
 		this.calendarPane = calendarPane;
 		this.calendarEvent = event;
-		this.calendar = event.getCalendar();
 		this.userArray = userArray;
 		initFrame();
 		initPanel();
@@ -274,18 +265,18 @@ public class NewEventWindow extends JPanel implements ActionListener, ItemListen
 			String location = locationField.getText();
 			if (meetingCheckBox.isSelected()) {
 				if (room != null) {
-					event = new Meeting(0, calendar, startDateTime, endDateTime, description, room, user);
+					event = new Meeting(0, startDateTime, endDateTime, description, room, user);
 				} else {
-					event = new Meeting(0, calendar, startDateTime, endDateTime, description, location, user);
+					event = new Meeting(0, startDateTime, endDateTime, description, location, user);
 				}
 				for (User participant : participantsList.getSelectedValuesList()) {
 					((Meeting)event).inviteParticipant(participant);
 				}
 			} else {
 				if (room != null) {
-					event = new Appointment(0, calendar, startDateTime, endDateTime, description, room, user);
+					event = new Appointment(0, startDateTime, endDateTime, description, room, user);
 				} else {
-					event = new Appointment(0, calendar, startDateTime, endDateTime, description, location, user);
+					event = new Appointment(0, startDateTime, endDateTime, description, location, user);
 				}
 			}
 			Alarm alarm = null;

@@ -10,12 +10,12 @@ public class Appointment extends Event implements Serializable {
 	/**
 	 * Use id = 0 when creating new objects. Actual ID should come from database
 	 */
-	public Appointment(int id, Calendar calendar, String startDateTime, String endDateTime, String description, String location, User owner) { // TODO temp
-		super(id, calendar, startDateTime, endDateTime, description, location);
+	public Appointment(int id, String startDateTime, String endDateTime, String description, String location, User owner) {
+		super(id, startDateTime, endDateTime, description, location);
 		this.owner = owner;
 	}
-	public Appointment(int id, Calendar calendar, String startDateTime, String endDateTime, String description, Room room, User owner) { // TODO temp
-		super(id, calendar, startDateTime, endDateTime, description, room);
+	public Appointment(int id, String startDateTime, String endDateTime, String description, Room room, User owner) {
+		super(id, startDateTime, endDateTime, description, room);
 		this.owner = owner;
 	}
 

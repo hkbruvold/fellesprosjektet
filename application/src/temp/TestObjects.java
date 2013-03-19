@@ -29,16 +29,14 @@ public class TestObjects {
 	private static final Room ROOM_02 = new Room(DEFAULT_ID, 100, "R3");
 	private static final Room ROOM_01 = new Room(DEFAULT_ID, 7, "R2");
 	private static final Room ROOM_00 = new Room(DEFAULT_ID, 6, "R1");
-	private static final Appointment APPOINTMENT_00 = new Appointment(DEFAULT_ID, getCalendar00(), DATE_TIME_0, DATE_TIME_1, DESCRIPTION, LOCATION, getUser00());
-	private static final Appointment APPOINTMENT_01 = new Appointment(DEFAULT_ID, getCalendar01(), DATE_TIME_0, DATE_TIME_1, DESCRIPTION, LOCATION, getUser01());
-	private static final Meeting MEETING_00 = new Meeting(DEFAULT_ID, getCalendar00(), DATE_TIME_0, DATE_TIME_1, DESCRIPTION, LOCATION, getUser00());
-	private static final Meeting MEETING_01 = new Meeting(DEFAULT_ID, getCalendar01(), DATE_TIME_0, DATE_TIME_1, DESCRIPTION, LOCATION, getUser01());
+	private static final Appointment APPOINTMENT_00 = new Appointment(DEFAULT_ID, DATE_TIME_0, DATE_TIME_1, DESCRIPTION, LOCATION, getUser00());
+	private static final Appointment APPOINTMENT_01 = new Appointment(DEFAULT_ID, DATE_TIME_0, DATE_TIME_1, DESCRIPTION, LOCATION, getUser01());
+	private static final Meeting MEETING_00 = new Meeting(DEFAULT_ID, DATE_TIME_0, DATE_TIME_1, DESCRIPTION, LOCATION, getUser00());
+	private static final Meeting MEETING_01 = new Meeting(DEFAULT_ID, DATE_TIME_0, DATE_TIME_1, DESCRIPTION, LOCATION, getUser01());
 	private static final Notification NOTIFICATION_00 = new Notification(DEFAULT_ID, DESCRIPTION, getUser02());
 	private static final Notification NOTIFICATION_01 = new Notification(DEFAULT_ID, DESCRIPTION + " : " + LOCATION, getUser02());
 	private static final Alarm ALARM_01 = new Alarm(TIME_1, DESCRIPTION, getUser01(), getMeeting01());
 	private static final Alarm ALARM_00 = new Alarm(TIME_0, "", getUser00(), getAppointment00());
-	private static final Calendar CALENDAR_00 = new Calendar(getUser00().getName() + "'s calendar", getUser00());
-	private static final Calendar CALENDAR_01 = new Calendar(getUser01().getName() + "'s calendar", getUser01());
 
 	public static Authentication getAuthentication00(){
 		return AUTHENTICATION;
@@ -55,13 +53,6 @@ public class TestObjects {
 	}
 	public static Appointment getAppointment01() {
 		return APPOINTMENT_01;
-	}
-
-	public static Calendar getCalendar00() {
-		return CALENDAR_00;
-	}
-	public static Calendar getCalendar01() {
-		return CALENDAR_01;
 	}
 
 	public static Group getGroup00() {

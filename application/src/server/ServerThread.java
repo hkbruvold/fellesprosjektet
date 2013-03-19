@@ -42,11 +42,9 @@ public class ServerThread extends Thread {
 			out = new ObjectOutputStream(socket.getOutputStream());
 			in = new ObjectInputStream(socket.getInputStream());
 			Request req = null;
-
 			while (req == null) {
 				req = (Request) in.readObject();
 			}
-
 			parseRequest(req);
 			closeSocket();
 		} catch (IOException | ClassNotFoundException e) {
@@ -81,11 +79,13 @@ public class ServerThread extends Thread {
 		case "addAlarm":
 			Alarm alarm = (Alarm) req.getData().get("alarm");
 			update.insertAlarm(alarm);
+			break;
 		case "listUsers":
 			HashMap<String, ArrayList<User>> userHashMap = new HashMap<String, ArrayList<User>>();
 			ArrayList<User> userList = query.queryUsers();
 			userHashMap.put("users", userList);
 			new Response(Response.Status.OK, userHashMap);
+			break;
 		case "newUser":
 			User user = (User) req.getData().get("user");
 			update.insertUser(user);
@@ -94,8 +94,8 @@ public class ServerThread extends Thread {
 		default:
 			break;
 		}
-		}
-	public void send (Response res) {
+	}
+	public void send(Response res) {
 		try {
 			out.writeObject(res);
 		} catch (IOException e) {
