@@ -266,7 +266,6 @@ public class NewEventWindow extends JPanel implements ActionListener, ItemListen
 			String endDateTime = toDateField.getText() + " " + toTimeField.getText();
 			String description = descriptionField.getText();
 			String location = locationField.getText();
-			Alarm alarm = null;
 			if (meetingCheckBox.isSelected()) {
 				calendarEvent = new Meeting(0, calendar, startDateTime, endDateTime, description, location, user);
 				for (User participant : participantsList.getSelectedValuesList()) {
@@ -275,8 +274,10 @@ public class NewEventWindow extends JPanel implements ActionListener, ItemListen
 			} else {
 				calendarEvent = new Appointment(0, calendar, startDateTime, endDateTime, description, location, user);
 			}
+			Alarm alarm = null;
 			if(alarmCheckBox.isSelected()){
 				alarm = new Alarm(alarmTimeBeforeField.getText(), "", user, calendarEvent);
+				// TODO send the alarm to the database
 			}
 			calendarPane.addEvent(calendarEvent);
 			// TODO save new event, set the message string for alarm
