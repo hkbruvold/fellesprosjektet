@@ -61,47 +61,42 @@ public class ServerThread extends Thread {
 
 		switch (action) {
 		case "login":
-			String username = req.getData().get("username").toString();
-			String password = req.getData().get("password").toString();
+			User clientUser = (User) req.getData();
 			User fetchedUser = query.queryUser(username);
-			if(fetchedUser.getUsername().equals(username) && fetchedUser.getPassword().equals(password)){
-				HashMap<Integer, User> tempSendUser = new HashMap<Integer, User>();
-				tempSendUser.put(0, fetchedUser);
-				send(new Response(Response.Status.OK, tempSendUser));
+			boolean correctUsername = fetchedUser.getUsername().equals(clientUser.getUsername());
+			boolean correctPassword = fetchedUser.getPassword().equals(clientUser.getPassword());
+			if (correctUsername && correctPassword) {
+				send(new Response(Response.Status.OK, fetchedUser));
 			} else{
 				send(new Response(Response.Status.FAILED, null));
 			}
 			break;
-		case "addEvent":
-			System.out.println(action);
-			Event event = (Event) req.getData().get("event");
-			update.insertEvent(event); 
-			break;
-		case "addAlarm":
-			Alarm alarm = (Alarm) req.getData().get("alarm");
-			update.insertAlarm(alarm);
-			break;
-		case "listUsers":
-			HashMap<String, ArrayList<User>> userHashMap = new HashMap<String, ArrayList<User>>();
-			ArrayList<User> userList = query.queryUsers();
-			userHashMap.put("users", userList);
-			new Response(Response.Status.OK, userHashMap);
-			break;
-		case "newUser":
-			User user = (User) req.getData().get("user");
-			update.insertUser(user);
-			new Response(Response.Status.OK, null);
-			break;
+//		case "addEvent":
+//			System.out.println(action);
+//			Event event = (Event) req.getData().get("event");
+//			update.insertEvent(event); 
+//			break;
+//		case "addAlarm":
+//			Alarm alarm = (Alarm) req.getData().get("alarm");
+//			update.insertAlarm(alarm);
+//			break;
+//		case "listUsers":
+//			HashMap<String, ArrayList<User>> userHashMap = new HashMap<String, ArrayList<User>>();
+//			ArrayList<User> userList = query.queryUsers();
+//			userHashMap.put("users", userList);
+//			new Response(Response.Status.OK, userHashMap);
+//			break;
+//		case "newUser":
+//			User user = (User) req.getData().get("user");
+//			update.insertUser(user);
+//			new Response(Response.Status.OK, null);
+//			break;
 		default:
 			break;
 		}
 	}
 	public void send(Response res) {
-		try {
-			out.writeObject(res);
-		} catch (IOException e) {
-			System.err.println(e);
-		}
+		XMLTranslator.send(res, out);
 	}
 
 	public void closeSocket () {
