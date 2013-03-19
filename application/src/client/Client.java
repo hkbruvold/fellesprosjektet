@@ -4,79 +4,49 @@ import java.io.*;
 import java.net.*;
 
 public class Client {
+    private static final String HOST = "127.0.0.1";
+    private static final int PORT = 4444;
+    
+    private Socket socket;
+    private ObjectInputStream in;
+    private ObjectOutputStream out;
 
-    public static void main(String[] args) throws IOException, ClassNotFoundException {
-    	/*/
-    	String hostadress = "127.0.0.1";
-    	int port = 4444;
-        Socket socket = null;
-        ObjectOutputStream out = null;
-        ObjectInputStream in = null;
- 
+    public Client () {}
+    
+    public Boolean connect () {
         try {
-            socket = new Socket(hostadress, port);
+            socket = new Socket(HOST, PORT);
             out = new ObjectOutputStream(socket.getOutputStream());
             in = new ObjectInputStream(socket.getInputStream());
             
-            Object input = null;
-            while (input == null) {
-                input = in.readObject();
-            }
-            
-            System.out.println(input);
-            
-            out.writeObject(new String("Client says: Hello with object"));
-            out.flush();
-            
-            System.out.println("Client: closing");
-            out.close();
-            in.close();
-            socket.close();
+            return true;
         } catch (UnknownHostException e) {
             System.err.println("Could not find host");
-            System.exit(1);
-        } catch (IOException e) {
-            System.err.println("Could not get IO for host");
-            System.exit(1);
+            return false;
+        } catch (IOException ex) {
+            System.err.println(ex);
+            return false;
         }
     }
-    /*/
+    
+    public Object send (Object req) throws IOException, ClassNotFoundException {
+        Object input = null;
+            
+        out.writeObject(req);
+        out.flush();
+        
+        // Wait for response
+        while (input == null) {
+            input = in.readObject();
+        }
+        
+        return input;
+    }
+    
+    public void closeConnection () throws IOException {
+        out.write(new String("end"));
+        out.close();
+        in.close();
+        socket.close();
+    }
 }
-
-
-    public static void sendObject(ObjectOutputStream objectstream) throws IOException{
-    	String hostadress = "127.0.0.1";
-    	int port = 4444;
-        Socket socket = null;
-        ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
-        ObjectInputStream in = objectstream;
-        try {
-            socket = new Socket(hostadress, port);
-            out = new ObjectOutputStream(socket.getOutputStream());
-            in = new ObjectInputStream();
-            
-            Object input = null;
-            while (input == null) {
-                input = in.readObject();
-            }
-            
-            System.out.println(input);
-            
-            out.writeObject(new String("Client says: Hello with object"));
-            out.flush();
-            
-            System.out.println("Client: closing");
-            out.close();
-            in.close();
-            socket.close();
-        } catch (UnknownHostException e) {
-            System.err.println("Could not find host");
-            System.exit(1);
-        } catch (IOException e) {
-            System.err.println("Could not get IO for host");
-            System.exit(1);
-        }
-    }
-    }
-
-
