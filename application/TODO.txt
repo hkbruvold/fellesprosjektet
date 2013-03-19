@@ -18,7 +18,6 @@ Add window for making/editing groups
 
 __Kjell__
 Database queries (mostly done)
-Database insert (mostly done)
 Database update
 Database delete
 
@@ -29,3 +28,4 @@ __Done__
 Add window for new user
 Add option to add alarm to meeting (when invited)
 Server-client communication (sending/receiving objects), High priority
+Database insert
