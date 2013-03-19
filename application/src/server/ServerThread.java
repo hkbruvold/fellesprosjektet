@@ -1,17 +1,16 @@
 package server;
 
 import data.Request;
+import data.Response;
 import java.net.*;
 import java.io.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class ServerThread extends Thread {
 	private Socket socket = null;
         private ObjectOutputStream out;
         private ObjectInputStream in;
 
-	public ServerThread(Socket socket) {
+	public ServerThread (Socket socket) {
             super();
             this.socket = socket;
 	}
@@ -28,24 +27,37 @@ public class ServerThread extends Thread {
                 }
                 
                 parseRequest(req);
+                closeSocket();
             } catch (IOException | ClassNotFoundException e) {
                 System.err.println(e);
             }
         }
         
         public void parseRequest (Request req) {
-            // TODO
+            String action = req.getAction();
+            
+            switch (action) {
+                default:
+                    System.out.println(action);
+                    send(new Response(Response.Status.OK, null));
+            }
         }
         
-        public boolean closeSocket () {
+        public void send (Response res) {
+            try {
+                out.writeObject(res);
+            } catch (IOException e) {
+                System.err.println(e);
+            }
+        }
+        
+        public void closeSocket () {
             try {
                 in.close();
                 out.close();
                 socket.close();
-                return true;
             } catch (IOException e) {
                 System.err.println(e);
-                return false;
             }
         }
 }

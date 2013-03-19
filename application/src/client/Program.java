@@ -6,6 +6,8 @@ import client.GUI.*;
 import client.ServerCommunication;
 import data.Alarm;
 import data.Event;
+import data.Request;
+import data.Response;
 import data.User;
 
 public class Program {
@@ -68,8 +70,11 @@ public class Program {
 		// TODO send alarm to server
 	}
 	
-	public static void main(String[] args) {
-		new Program();
+	public static void main(String[] args) throws IOException, ClassNotFoundException {
+		//new Program();
+            Client client = new Client();
+            Response res = client.send(new Request("test", null));
+            System.out.println(res.status);
 	}
 	
 }
