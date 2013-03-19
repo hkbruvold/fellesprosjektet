@@ -1,5 +1,6 @@
 package server;
 
+import data.Request;
 import java.net.*;
 import java.io.*;
 import java.util.logging.Level;
@@ -7,6 +8,8 @@ import java.util.logging.Logger;
 
 public class ServerThread extends Thread {
 	private Socket socket = null;
+        private ObjectOutputStream out;
+        private ObjectInputStream in;
 
 	public ServerThread(Socket socket) {
             super();
@@ -16,27 +19,33 @@ public class ServerThread extends Thread {
 	@Override
 	public void run() {
             try {
-                ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
-                ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
-			
-                out.writeObject(new String("Server says: Hello with object"));
-                out.flush();
+                out = new ObjectOutputStream(socket.getOutputStream());
+                in = new ObjectInputStream(socket.getInputStream());
+                Request req = null;
                 
-                Object input = null;
-                while (input == null) {
-                    input = in.readObject();
+                while (req == null) {
+                    req = (Request) in.readObject();
                 }
-                        
-                System.out.println(input);
-                        
-                System.out.println("Server: closing (thread)");
-                out.close();
+                
+                parseRequest(req);
+            } catch (IOException | ClassNotFoundException e) {
+                System.err.println(e);
+            }
+        }
+        
+        public void parseRequest (Request req) {
+            // TODO
+        }
+        
+        public boolean closeSocket () {
+            try {
                 in.close();
+                out.close();
                 socket.close();
+                return true;
             } catch (IOException e) {
-                e.printStackTrace();
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
+                System.err.println(e);
+                return false;
             }
         }
 }
