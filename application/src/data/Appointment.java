@@ -12,6 +12,10 @@ public class Appointment extends Event implements Serializeable {
 		super(id, calendar, startDateTime, endDateTime, description, location);
 		this.owner = owner;
 	}
+	public Appointment(int id, Calendar calendar, String startDateTime, String endDateTime, String description, Room room, User owner) { // TODO temp
+		super(id, calendar, startDateTime, endDateTime, description, room);
+		this.owner = owner;
+	}
 	
 	public String toString() {
 		return String.format("Appointment; ID: %s, Description: %s, Start: %s, End: %s, Location: %s, Owner: %s", id, description, startDateTime, endDateTime, location, owner.getUsername());

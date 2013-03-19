@@ -18,8 +18,15 @@ public class Meeting extends Event implements Serializeable {
 	/**
 	 * Use id = 0 when creating new objects. Actual ID should come from database
 	 */
-	public Meeting(int id, Calendar calendar, String startDateTime, String endDateTime, String description, String location, User leader) { // TODO temp
+	public Meeting(int id, Calendar calendar, String startDateTime, String endDateTime, String description, String location, User leader) {
 		super(id, calendar, startDateTime, endDateTime, description, location);
+		usersInvited = new ArrayList<User>();
+		usersAccepted = new ArrayList<User>();
+		usersDeclined = new ArrayList<User>();
+		this.leader = leader;
+	}
+	public Meeting(int id, Calendar calendar, String startDateTime, String endDateTime, String description, Room room, User leader) {
+		super(id, calendar, startDateTime, endDateTime, description, room);
 		usersInvited = new ArrayList<User>();
 		usersAccepted = new ArrayList<User>();
 		usersDeclined = new ArrayList<User>();

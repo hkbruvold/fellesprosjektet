@@ -83,6 +83,9 @@ public class Update {
 		System.out.println(updateString);
 //		dbComm.update(updateString);
 		// TODO event.setId( get id from database );
+		if (event.getRoom() != null) {
+			insertReservedRoom(event, event.getRoom());
+		}
 		if (event instanceof Appointment) {
 			insertIsOwner(((Appointment)event).getOwner(), event);
 		} else if (event instanceof Meeting) {
@@ -123,6 +126,7 @@ public class Update {
 //		dbComm.update(updateString);
 		// TODO notification.setId( get id from database );
 		insertNotificationTo(notification.getRecipient(), notification);
+		insertNotificationForEvent(notification, notification.getEvent());
 	}
 	
 	public void insertRoom(Room room) {
@@ -183,8 +187,24 @@ public class Update {
 //		dbComm.update(updateString);
 	}
 	
-	// TODO notification_for_event
-	// TODO reserved_room
+	public void insertNotificationForEvent(Notification notification, Event event) {
+		StringBuilder values = new StringBuilder();
+		values.append(notification.getId()).append(", ");
+		values.append(event.getId()).append(" ");
+		String updateString = String.format(INSERT_INTO_VALUES, TABLE_NOTIFICATION_FOR_EVENT, FIELDS_NOTIFICATION_FOR_EVENT, values.toString());
+		System.out.println(updateString);
+//		dbComm.update(updateString);
+	}
+	
+	public void insertReservedRoom(Event event, Room room) {
+		StringBuilder values = new StringBuilder();
+		values.append(event.getId()).append(", ");
+		values.append(room.getId()).append(" ");
+		String updateString = String.format(INSERT_INTO_VALUES, TABLE_RESERVED_ROOM, FIELDS_RESERVED_ROOM, values.toString());
+		System.out.println(updateString);
+//		dbComm.update(updateString);
+	}
+
 	
 	// TODO Add insert, update and delete methods
 	// NB! Remember relations!
