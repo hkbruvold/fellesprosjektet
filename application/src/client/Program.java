@@ -28,11 +28,8 @@ public class Program {
 	}
 
 	@SuppressWarnings("unchecked")
-	public boolean login (String username, String password) {
-		HashMap<String, String> values = new HashMap<String, String>();
-		values.put("username", username);
-		values.put("password", password);
-		Response res = client.send(new Request("login", values));
+	public boolean login (User user) {
+		Response res = client.send(new Request("login", user));
 		currentUser = (User) ((HashMap<Integer, User>)res.getData()).get(0);
 		return res.status == Response.Status.OK;
 	}

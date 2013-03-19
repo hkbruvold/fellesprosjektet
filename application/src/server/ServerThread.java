@@ -5,6 +5,7 @@ import data.Event;
 import data.Request;
 import data.Response;
 import data.User;
+import data.XMLTranslator;
 
 import java.net.*;
 import java.util.ArrayList;
@@ -18,8 +19,8 @@ import server.database.Update;
 
 public class ServerThread extends Thread {
 	private Socket socket = null;
-	private ObjectOutputStream out;
-	private ObjectInputStream in;
+	private OutputStream out;
+	private InputStream in;
 	private DatabaseConnection dbConn;
 	private DatabaseCommunication dbComm;
 	private String URI = "localhost";
@@ -39,15 +40,15 @@ public class ServerThread extends Thread {
 	@Override
 	public void run() {
 		try {
-			out = new ObjectOutputStream(socket.getOutputStream());
-			in = new ObjectInputStream(socket.getInputStream());
+			out = socket.getOutputStream();
+			in = socket.getInputStream();
 			Request req = null;
 			while (req == null) {
-				req = (Request) in.readObject();
+				req = (Request) XMLTranslator.receive(in);
 			}
 			parseRequest(req);
 			closeSocket();
-		} catch (IOException | ClassNotFoundException e) {
+		} catch (IOException e) {
 			System.err.println(e);
 		}
 	}

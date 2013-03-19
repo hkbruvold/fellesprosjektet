@@ -3,24 +3,38 @@ package data;
 import java.io.Serializable;
 import java.util.HashMap;
 
-public class Response implements Serializable {
-	public Status status;
-	private Object data;
+import org.simpleframework.xml.Element;
+import org.simpleframework.xml.Root;
 
-	public Response (Status status, Object data) {
+@Root
+public class Response implements Serializable {
+	@Element
+	public Status status;
+	@Element
+	private Serializable data;
+
+	public Response() {
+	}
+	public Response (Status status, Serializable data) {
 		this.status = status;
 		this.data = data;
 	}
 
-	public Object getData () {
+	public Serializable getData () {
 		return data;
 	}
-
+	public void setData(Serializable data) {
+		this.data = data;
+	}
 	public Status getStatus () {
 		return status;
 	}
+	public void setStatus(Status status) {
+		this.status = status;
+	}
 
 	public enum Status {
-		OK, FAILED
+		OK, 
+		FAILED;
 	}
 }
