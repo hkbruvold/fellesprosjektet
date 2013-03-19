@@ -15,22 +15,27 @@ public class Client {
 
     public Client () {}
     
-    public Response send (Request req) throws IOException, ClassNotFoundException {
-        Response res = null;
-        
-        connect();
-        
-        out.writeObject(req);
-        out.flush();
-        
-        // Wait for response
-        while (res == null) {
-            res = (Response) in.readObject();
+    public Response send (Request req) {
+        try {
+            Response res = null;
+            
+            connect();
+            
+            out.writeObject(req);
+            out.flush();
+            
+            // Wait for response
+            while (res == null) {
+                res = (Response) in.readObject();
+            }
+            
+            closeConnection();
+            
+            return res;
+        } catch (IOException | ClassNotFoundException e) {
+            System.err.println(e);
+            return null;
         }
-        
-        closeConnection();
-        
-        return res;
     }
     
     private void connect () throws UnknownHostException, IOException {
