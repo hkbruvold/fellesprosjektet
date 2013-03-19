@@ -11,8 +11,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.io.*;
 
-import javax.xml.ws.soap.AddressingFeature.Responses;
-
 import server.database.DatabaseCommunication;
 import server.database.DatabaseConnection;
 import server.database.Query;
@@ -84,7 +82,7 @@ public class ServerThread extends Thread {
 			Alarm alarm = (Alarm) req.getData().get("alarm");
 			update.insertAlarm(alarm);
 		case "listUsers":
-			HashMap userHashMap = new HashMap();
+			HashMap<String, ArrayList<User>> userHashMap = new HashMap<String, ArrayList<User>>();
 			ArrayList<User> userList = query.queryUsers();
 			userHashMap.put("users", userList);
 			new Response(Response.Status.OK, userHashMap);
