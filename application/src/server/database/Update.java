@@ -126,7 +126,9 @@ public class Update {
 //		dbComm.update(updateString);
 		// TODO notification.setId( get id from database );
 		insertNotificationTo(notification.getRecipient(), notification);
-		insertNotificationForEvent(notification, notification.getEvent());
+		if (notification.getEvent() != null) {
+			insertNotificationForEvent(notification, notification.getEvent());
+		}
 	}
 	
 	public void insertRoom(Room room) {
@@ -206,7 +208,7 @@ public class Update {
 	}
 
 	
-	// TODO Add insert, update and delete methods
+	// TODO Add update and delete methods
 	// NB! Remember relations!
 	
 	

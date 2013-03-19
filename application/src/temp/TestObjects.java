@@ -93,10 +93,13 @@ public class TestObjects {
 	}
 	
 	public static Notification getNotification00() {
-		return new Notification(DEFAULT_ID, DESCRIPTION, getUser02());
+		Notification notification = new Notification(DEFAULT_ID, DESCRIPTION, getUser02());
+		notification.setEvent(getMeeting00());
+		return notification;
 	}
 	public static Notification getNotification01() {
-		return new Notification(DEFAULT_ID, DESCRIPTION + " : " + LOCATION, getUser02());
+		Notification notification = new Notification(DEFAULT_ID, DESCRIPTION + " : " + LOCATION, getUser02());
+		return notification;
 	}
 	
 	public static User getUser00() {
