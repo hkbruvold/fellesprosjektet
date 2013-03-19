@@ -20,8 +20,8 @@ public class TestDatabaseCode {
 		insertRooms();
 		insertEvents();
 		insertAlarms();
+		insertNotifications();
 	}
-
 	private void insertUsers() {
 		update.insertUser(TestObjects.getUser00());
 		update.insertUser(TestObjects.getUser01());
@@ -46,6 +46,10 @@ public class TestDatabaseCode {
 	private void insertAlarms() {
 		update.insertAlarm(TestObjects.getAlarm00());
 		update.insertAlarm(TestObjects.getAlarm01());
+	}
+	private void insertNotifications() {
+		update.insertNotification(TestObjects.getNotification00());
+		update.insertNotification(TestObjects.getNotification01());
 	}
 
 
