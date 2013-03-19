@@ -50,7 +50,9 @@ public class Program {
         // TODO (remember database!)
     }
     public void removeEvent(Event event) { 
-        // TODO (remember database!)
+        HashMap values = new HashMap();
+        values.put("event", event);
+        Response res = client.send(new Request("removeEvent", values));
     }
 
     public void registerAlarm(Alarm alarm) { 
