@@ -6,14 +6,14 @@ import java.util.HashMap;
 
 public class Request implements Serializable {
 	public String action;
-	private HashMap data;
+	private Serializable data;
 
-	public Request (String action, HashMap data) {
+	public Request (String action, Serializable data) {
 		this.action = action;
 		this.data = data;
 	}
 
-	public HashMap getData () {
+	public Serializable getData () {
 		return data;
 	}
 

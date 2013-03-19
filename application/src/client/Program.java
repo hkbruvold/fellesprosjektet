@@ -3,8 +3,6 @@ package client;
 import client.GUI.*;
 import data.*;
 
-import java.util.HashMap;
-
 public class Program {
 	private Client client;
 	private User currentUser;
@@ -27,35 +25,26 @@ public class Program {
 		System.exit(0);
 	}
 
-	@SuppressWarnings("unchecked")
 	public boolean login (String username, String password) {
-		HashMap<String, String> values = new HashMap<String, String>();
-		values.put("username", username);
-		values.put("password", password);
-		Response res = client.send(new Request("login", values));
-		currentUser = (User) ((HashMap<Integer, User>)res.getData()).get(0);
+		Authentication data = new Authentication(username, password);
+		Response res = client.send(new Request("login", data));
+		currentUser = (User) res.getData();
 		return res.status == Response.Status.OK;
 	}
 	// TODO
 
 	public void registerEvent(Event event) {
-		HashMap<String, Event> values = new HashMap<String, Event>();
-		values.put("event", event);
-		Response res = client.send(new Request("addEvent", values));
+		Response res = client.send(new Request("addEvent", event));
 	}
 	public void editEvent(Event event/*, TODO */) {
 		// TODO (remember database!)
 	}
 	public void removeEvent(Event event) { 
-		HashMap<String, Event> values = new HashMap<String, Event>();
-		values.put("event", event);
-		Response res = client.send(new Request("removeEvent", values));
+		Response res = client.send(new Request("removeEvent", event));
 	}
 
 	public void registerAlarm(Alarm alarm) { 
-		HashMap<String, Alarm> values = new HashMap<String, Alarm>();
-		values.put("alarm", alarm);
-		Response res = client.send(new Request("addAlarm", values));
+		Response res = client.send(new Request("addAlarm", alarm));
 	}
 	public User[] getAllUsers(){
 		System.out.println("Fetching users");
@@ -64,9 +53,7 @@ public class Program {
 	}
 	
 	public void addUser(User user){
-		HashMap<String,User> values = new HashMap<String, User>();
-		values.put("user", user);
-		Response res = client.send(new Request("newUser", values));
+		Response res = client.send(new Request("newUser", user));
 		//return res.status == Response.Status.OK;
 	}
 
