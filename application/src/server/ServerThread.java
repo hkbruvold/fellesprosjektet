@@ -170,7 +170,7 @@ public class ServerThread extends Thread {
 			break;
 		case "updateStatus":
 			MeetingReply meetingReply = (MeetingReply) data;
-			update.insertIsParticipant(meetingReply.getUser(), meetingReply.getEvent(), meetingReply.getStatus());
+			update.insertIsParticipant(meetingReply.getUser(), meetingReply.getMeeting(), meetingReply.getStatus());
 		default:
 			System.out.println("case default");
 			send(new Response(Response.Status.FAILED, null));
