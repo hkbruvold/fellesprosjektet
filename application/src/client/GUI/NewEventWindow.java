@@ -287,7 +287,6 @@ public class NewEventWindow extends JPanel implements ActionListener, ItemListen
 				alarm = new Alarm(alarmTimeBeforeField.getText(), "", user, event);
 				program.registerAlarm(alarm);
 			}
-			//Someone, plz fix calendarpane.addEvent. This is very critical!
 			calendarPane.addEvent(event);
 			calendarPane.updateCalendar();
 			frame.dispose(); // Close if successful; show error message if not?
