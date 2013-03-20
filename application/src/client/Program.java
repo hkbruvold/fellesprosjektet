@@ -3,7 +3,7 @@ package client;
 import client.GUI.*;
 import data.*;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 
 public class Program {
 	private Client client;
@@ -35,35 +35,30 @@ public class Program {
 	// TODO
 
 	public void registerEvent(Event event) {
-		HashMap<String, Event> values = new HashMap<String, Event>();
-		values.put("event", event);
-		Response res = client.send(new Request("addEvent", values));
+		Response res = client.send(new Request("addEvent", event));
 	}
 	public void editEvent(Event event/*, TODO */) {
 		// TODO (remember database!)
 	}
 	public void removeEvent(Event event) { 
-		HashMap<String, Event> values = new HashMap<String, Event>();
-		values.put("event", event);
-		Response res = client.send(new Request("removeEvent", values));
+		Response res = client.send(new Request("removeEvent", event));
 	}
 
 	public void registerAlarm(Alarm alarm) { 
-		HashMap<String, Alarm> values = new HashMap<String, Alarm>();
-		values.put("alarm", alarm);
-		Response res = client.send(new Request("addAlarm", values));
+		Response res = client.send(new Request("addAlarm", alarm));
 	}
-	public User[] getAllUsers(){
+	public ArrayList<User> getAllUsers(){
 		System.out.println("Fetching users");
 		Response res = client.send(new Request("listUsers", null));
-		return (User[]) res.getData();
+		ArrayList<User> users = null;
+		if (res.status == Response.Status.OK) {
+			users = ((Group)res.getData()).getMembers();
+		}
+		return users;
 	}
 	
 	public void addUser(User user){
-		HashMap<String,User> values = new HashMap<String, User>();
-		values.put("user", user);
-		Response res = client.send(new Request("newUser", values));
-		//return res.status == Response.Status.OK;
+		Response res = client.send(new Request("newUser", user));
 	}
 
 	public static void main(String[] args) {

@@ -1,6 +1,5 @@
 package data;
 
-import java.io.DataInputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.Serializable;

@@ -2,6 +2,7 @@ package server;
 
 import data.Alarm;
 import data.Event;
+import data.Group;
 import data.Request;
 import data.Response;
 import data.User;
@@ -55,13 +56,14 @@ public class ServerThread extends Thread {
 
 	public void parseRequest (Request req) {
 		String action = req.getAction();
+		Serializable data = req.getData();
 		Update update = new Update(null, dbComm);
 		Query query = new Query(null, dbComm);
 		System.out.println(action);
 
 		switch (action) {
 		case "login":
-			User clientUser = (User) req.getData();
+			User clientUser = (User) data;
 			User fetchedUser = query.queryUser(clientUser.getUsername());
 			boolean correctUsername = fetchedUser.getUsername().equals(clientUser.getUsername());
 			boolean correctPassword = fetchedUser.getPassword().equals(clientUser.getPassword());
@@ -71,26 +73,27 @@ public class ServerThread extends Thread {
 				send(new Response(Response.Status.FAILED, null));
 			}
 			break;
-//		case "addEvent":
-//			System.out.println(action);
-//			Event event = (Event) req.getData().get("event");
-//			update.insertEvent(event); 
-//			break;
-//		case "addAlarm":
-//			Alarm alarm = (Alarm) req.getData().get("alarm");
-//			update.insertAlarm(alarm);
-//			break;
-//		case "listUsers":
-//			HashMap<String, ArrayList<User>> userHashMap = new HashMap<String, ArrayList<User>>();
-//			ArrayList<User> userList = query.queryUsers();
-//			userHashMap.put("users", userList);
-//			new Response(Response.Status.OK, userHashMap);
-//			break;
-//		case "newUser":
-//			User user = (User) req.getData().get("user");
-//			update.insertUser(user);
-//			new Response(Response.Status.OK, null);
-//			break;
+		case "addEvent":
+			Event event = (Event) data;
+			update.insertEvent(event);
+			send(new Response(Response.Status.OK, null)); 
+			break;
+		case "addAlarm":
+			Alarm alarm = (Alarm) data;
+			update.insertAlarm(alarm);
+			send(new Response(Response.Status.OK, null)); 
+			break;
+		case "listUsers":
+			ArrayList<User> userList = query.queryUsers();
+			Group group = new Group(-1, "resutl", "dummy");
+			group.addMembers(userList);
+			new Response(Response.Status.OK, group);
+			break;
+		case "newUser":
+			User user = (User) data;
+			update.insertUser(user);
+			new Response(Response.Status.OK, null);
+			break;
 		default:
 			break;
 		}
