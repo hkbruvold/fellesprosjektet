@@ -20,4 +20,9 @@ public class MeetingReply implements Serializable {
 	public String getStatus() {
 		return status;
 	}
+	@Override
+	public String toString() {
+		return "MeetingReply [user=" + user + ", meeting=" + meeting
+				+ ", status=" + status + "]";
+	}
 }
