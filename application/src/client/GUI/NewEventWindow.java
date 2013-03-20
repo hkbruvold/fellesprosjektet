@@ -244,6 +244,7 @@ public class NewEventWindow extends JPanel implements ActionListener, ItemListen
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource().equals(deleteButton)) {
 			// TODO delete the event, update database // use *calendarEvent*
+			program.removeEvent(calendarEvent);
 			frame.dispose();
 		} else if (e.getSource().equals(closeButton)) {
 			frame.dispose();
