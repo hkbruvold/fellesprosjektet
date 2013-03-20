@@ -35,7 +35,7 @@ public class Update {
 	private static final String UPDATE_SET_WHERE = "UPDATE %s SET %s WHERE %s"; // "tableName", "field1=value1, field2=value2 ...", "condition"
 	private static final String DELETE_FROM_WHERE = "DELETE FROM %s WHERE %s"; // "tableName", "condition"
 	
-	private static final String AND = " and ";
+	private static final String AND = " AND ";
 
 	private static final String BIT_FALSE = "0";
 	private static final String BIT_TRUE = "1";
@@ -133,6 +133,14 @@ public class Update {
 			insertIsMemberOf(user, group);
 		}
 	}
+	public void updateGroup(Group group) {
+		// TODO
+	}
+	public void deleteGroup(Group group) {
+		StringBuilder condition = new StringBuilder();
+		condition.append("groupID=").append(group.getId());
+		deleteObject(TABLE_GROUPS, condition.toString());
+	}
 
 	public void insertNotification(Notification notification) {
 		StringBuilder values = new StringBuilder();
@@ -150,7 +158,7 @@ public class Update {
 	}
 	public void deleteNotification(Notification notification) {
 		StringBuilder condition = new StringBuilder();
-		// TODO
+		condition.append("notificationID=").append(notification.getId());
 		deleteObject(TABLE_NOTIFICATION, condition.toString());
 	}
 
@@ -161,9 +169,12 @@ public class Update {
 		values.append("'").append(room.getDescription()).append("'").append(" ");
 		insertObject(TABLE_ROOM, FIELDS_ROOM, values.toString());
 	}
+	public void updateRoom(Room room) {
+		// TODO
+	}
 	public void deleteRoom(Room room) {
 		StringBuilder condition = new StringBuilder();
-		// TODO
+		condition.append("roomID=").append(room.getId());
 		deleteObject(TABLE_ROOM, condition.toString());
 	}
 
@@ -175,12 +186,27 @@ public class Update {
 		values.append("'").append(user.getType()).append("'").append(" ");
 		insertObject(TABLE_USER, FIELDS_USER, values.toString());
 	}
+	public void updateUser(User user) {
+		// TODO
+	}
+	public void deleteUser(User user) {
+		StringBuilder condition = new StringBuilder();
+		condition.append("username='").append(user.getUsername()).append("'");
+		deleteObject(TABLE_USER, condition.toString());
+	}
 
 	public void insertIsMemberOf(User user, Group group) {
 		StringBuilder values = new StringBuilder();
 		values.append("'").append(user.getUsername()).append("'").append(", ");
 		values.append(group.getId()).append(" ");
 		insertObject(TABLE_IS_MEMBER_OF, FIELDS_IS_MEMBER_OF, values.toString());
+	}
+	// Should not have update
+	public void deleteIsMemberOf(User user, Group group) {
+		StringBuilder condition = new StringBuilder();
+		condition.append("username='").append(user.getUsername()).append("'").append(AND);
+		condition.append("groupID=").append(group.getId());
+		deleteObject(TABLE_IS_MEMBER_OF, condition.toString());
 	}
 
 	public void insertIsOwner(User user, Event event) {
@@ -189,6 +215,8 @@ public class Update {
 		values.append(event.getId()).append(" ");
 		insertObject(TABLE_IS_OWNER, FIELDS_IS_OWNER, values.toString());
 	}
+	// Do we want update?
+	// Should not have delete (delete the event)
 
 	public void insertIsParticipant(User user, Event event, String status) {
 		StringBuilder values = new StringBuilder();
@@ -201,7 +229,10 @@ public class Update {
 		// TODO
 	}
 	public void deleteIsParticipant(User user, Event event) {
-		// TODO
+		StringBuilder condition = new StringBuilder();
+		condition.append("username='").append(user.getUsername()).append("'").append(AND);
+		condition.append("eventID=").append(event.getId());
+		deleteObject(TABLE_IS_PARTICIPANT, condition.toString());
 	}
 
 	public void insertNotificationTo(User user, Notification notification) {
@@ -210,6 +241,8 @@ public class Update {
 		values.append(notification.getId()).append(" ");
 		insertObject(TABLE_NOTIFICATION_TO, FIELDS_NOTIFICATION_TO, values.toString());
 	}
+	// Should not have update
+	// Should not have delete (delete the notification)
 
 	public void insertNotificationForEvent(Notification notification, Event event) {
 		StringBuilder values = new StringBuilder();
@@ -217,12 +250,21 @@ public class Update {
 		values.append(event.getId()).append(" ");
 		insertObject(TABLE_NOTIFICATION_FOR_EVENT, FIELDS_NOTIFICATION_FOR_EVENT, values.toString());
 	}
+	// Should not have update
+	// Should not have delete (delete the notification)
 
 	public void insertReservedRoom(Event event, Room room) {
 		StringBuilder values = new StringBuilder();
 		values.append(event.getId()).append(", ");
 		values.append(room.getId()).append(" ");
 		insertObject(TABLE_RESERVED_ROOM, FIELDS_RESERVED_ROOM, values.toString());
+	}
+	// Should not have update
+	public void deleteReservedRoom(Event event, Room room) {
+		StringBuilder condition = new StringBuilder();
+		condition.append("eventID=").append(event.getId()).append(AND);
+		condition.append("roomID=").append(room.getId());
+		deleteObject(TABLE_RESERVED_ROOM, condition.toString());
 	}
 
 
