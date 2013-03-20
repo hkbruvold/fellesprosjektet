@@ -1,6 +1,7 @@
 TODO:
 
 __Unassigned__
+Get all unread notifications and invites when a user logs in
 Write a background thread that listens for changes such as NewMeetings, Invites, Alarms and such
 Group managment:
 	Edit existing groups
@@ -36,3 +37,4 @@ Database insert
 Login from client, via database
 XML communication between client and server
 Fetch all users from server
+Method for getting notifications.
