@@ -223,7 +223,10 @@ public class Update {
 	public void updateUser(User user) {
 		StringBuilder values = new StringBuilder();
 		String[] fields = TableFields.USER.getFields();
-		// TODO
+		values.append(fields[0]).append("='").append(user.getUsername()).append("', ");
+		values.append(fields[1]).append("='").append(user.getPassword()).append("', ");
+		values.append(fields[2]).append("='").append(user.getName()).append("', ");
+		values.append(fields[3]).append("='").append(user.getType()).append("' ");
 		StringBuilder condition = new StringBuilder();
 		condition.append("username='").append(user.getUsername()).append("'");
 		updateObject(TABLE_USER, values.toString(), condition.toString());
