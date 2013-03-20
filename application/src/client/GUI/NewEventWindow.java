@@ -248,7 +248,7 @@ public class NewEventWindow extends JPanel implements ActionListener, ItemListen
 			frame.dispose();
 		} else if (e.getSource().equals(locationButton)) {
 			if (locationButton.getText().equals(BUTTON_LOCATION_SET_ROOM)) {
-				new RoomSelectionWindow(this, program);
+				new RoomSelectionWindow(this, program,participantsList.getSelectedValuesList().size());
 				locationField.setEnabled(false);
 				locationButton.setText(BUTTON_LOCATION_SET_TEXT);
 			} else if (locationButton.getText().equals(BUTTON_LOCATION_SET_TEXT)) {

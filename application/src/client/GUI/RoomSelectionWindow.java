@@ -19,6 +19,7 @@ import client.Program;
 
 import temp.TestObjects;
 
+import data.Event;
 import data.Room;
 
 @SuppressWarnings("serial")
@@ -39,6 +40,7 @@ public class RoomSelectionWindow extends JPanel implements ActionListener {
 
 	private NewEventWindow newEventWindow;
 	private Program program;
+	private int numOfParticipants;
 
 	public RoomSelectionWindow(Program program) { // Temporary; For testing
 		this.program = program;
@@ -47,9 +49,10 @@ public class RoomSelectionWindow extends JPanel implements ActionListener {
 		frame.pack();
 		frame.setVisible(true);
 	}
-	public RoomSelectionWindow(NewEventWindow newEventWindow, Program program) {
+	public RoomSelectionWindow(NewEventWindow newEventWindow, Program program, int numOfParticipants) {
 		this.newEventWindow = newEventWindow;
 		this.program = program;
+		this.numOfParticipants = numOfParticipants;
 		initFrame();
 		initPanel();
 
@@ -107,8 +110,11 @@ public class RoomSelectionWindow extends JPanel implements ActionListener {
 	}
 	private void getAvailableRooms() {
 		ArrayList<Room> allRooms = program.getAllRooms();
-		// Need to find rooms that are available!
-		availRoomList = allRooms;
+		for(Room room : allRooms){
+			if(room.getSize()>= numOfParticipants){
+				availRoomList.add(room);
+			}
+		}
 	}
 	private Room[] makeRoomArray() {
 		Room[] rooms = new Room[availRoomList.size()];
