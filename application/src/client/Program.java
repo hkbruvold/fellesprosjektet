@@ -27,8 +27,8 @@ public class Program {
 		System.exit(0);
 	}
 
-	public boolean login (User user) {
-		Response res = client.send(new Request("login", user));
+	public boolean login (Authentication auth) {
+		Response res = client.send(new Request("login", auth));
 		currentUser = (User) res.getData();
 		return res.status == Response.Status.OK;
 	}

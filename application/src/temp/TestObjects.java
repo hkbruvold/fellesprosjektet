@@ -20,7 +20,7 @@ public class TestObjects {
 	private static final User ALICE = new User("alice", "Alice", "Employer");
 	private static final User BOB = new User("bob", "Bob", "Employer");
 	private static final User CHARLIE = new User("charlie", "Charlie", "Employer");
-	private static final Authentication AUTHENTICATION = new Authentication("ALICE", "123", LOGIN );
+	private static final Authentication AUTHENTICATION = new Authentication("ALICE", "123");
 	private static final User[] USER_ARRAY_00 = new User[]{getUser00(), getUser02()};
 	private static final User[] USER_ARRAY_01 = new User[]{getUser00(), getUser01(), getUser02()};
 	private static final Group GROUP_00 = new Group(DEFAULT_ID, "Group00", "");

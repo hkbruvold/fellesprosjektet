@@ -3,25 +3,26 @@ package data;
 import java.io.Serializable;
 
 public class Authentication implements Serializable {
-	private String user;
+	private String username;
 	private String password;
-	private String action;
 
-	public Authentication(String user, String password) {
-		this.user = user;
+	public Authentication() {
+	}
+	public Authentication(String username, String password) {
+		this.username = username;
 		this.password = password;
 	}
 
-	public String getUser() {
-		return user;
+	public String getUsername() {
+		return username;
 	}
-	public void setUser(String user) {
-		this.user = user;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 	public String getPassword() {
 		return password;
 	}
 	public void setPassword(String password) {
 		this.password = password;
-        }
+	}
 }

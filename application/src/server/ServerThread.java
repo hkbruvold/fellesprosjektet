@@ -1,5 +1,6 @@
 package server;
 
+import data.Authentication;
 import data.Alarm;
 import data.Event;
 import data.Group;
@@ -63,10 +64,10 @@ public class ServerThread extends Thread {
 
 		switch (action) {
 		case "login":
-			User clientUser = (User) data;
-			User fetchedUser = query.queryUser(clientUser.getUsername());
-			boolean correctUsername = fetchedUser.getUsername().equals(clientUser.getUsername());
-			boolean correctPassword = fetchedUser.getPassword().equals(clientUser.getPassword());
+			Authentication auth = (Authentication) data;
+			User fetchedUser = query.queryUser(auth.getUsername());
+			boolean correctUsername = fetchedUser.getUsername().equals(auth.getUsername());
+			boolean correctPassword = fetchedUser.getPassword().equals(auth.getPassword());
 			if (correctUsername && correctPassword) {
 				send(new Response(Response.Status.OK, fetchedUser));
 			} else{
@@ -77,22 +78,26 @@ public class ServerThread extends Thread {
 			Event event = (Event) data;
 			update.insertEvent(event);
 			send(new Response(Response.Status.OK, null)); 
+			// TODO what if it fails?
 			break;
 		case "addAlarm":
 			Alarm alarm = (Alarm) data;
 			update.insertAlarm(alarm);
 			send(new Response(Response.Status.OK, null)); 
+			// TODO what if it fails?
 			break;
 		case "listUsers":
 			ArrayList<User> userList = query.queryUsers();
 			Group group = new Group(-1, "resutl", "dummy");
 			group.addMembers(userList);
 			send(new Response(Response.Status.OK, group));
+			// TODO what if it fails?
 			break;
 		case "newUser":
 			User user = (User) data;
 			update.insertUser(user);
 			send(new Response(Response.Status.OK, null));
+			// TODO what if it fails?
 			break;
 		default:
 			break;
