@@ -70,7 +70,8 @@ public class Update {
 		StringBuilder values = new StringBuilder();
 		// TODO
 		StringBuilder condition = new StringBuilder();
-		// TODO
+		condition.append("username=").append("'").append(alarm.getOwner()).append("'").append(AND);
+		condition.append("eventID=").append(alarm.getEvent().getId()).append(" ");
 		updateObject(TABLE_ALARM, values.toString(), condition.toString());
 	}
 	public void deleteAlarm(Alarm alarm) {
@@ -112,11 +113,11 @@ public class Update {
 		}
 		return id;
 	}
-	public void updateEvent(Event even) {
+	public void updateEvent(Event event) {
 		StringBuilder values = new StringBuilder();
 		// TODO
 		StringBuilder condition = new StringBuilder();
-		// TODO
+		condition.append("eventID=").append(event.getId());
 		updateObject(TABLE_EVENT, values.toString(), condition.toString());
 	}
 	public void deleteEvent(Event event) {
@@ -140,7 +141,7 @@ public class Update {
 		StringBuilder values = new StringBuilder();
 		// TODO
 		StringBuilder condition = new StringBuilder();
-		// TODO
+		condition.append("groupID=").append(group.getId());
 		updateObject(TABLE_GROUPS, values.toString(), condition.toString());
 	}
 	public void deleteGroup(Group group) {
@@ -164,7 +165,7 @@ public class Update {
 		StringBuilder values = new StringBuilder();
 		// TODO
 		StringBuilder condition = new StringBuilder();
-		// TODO
+		condition.append("notificationID=").append(notification.getId());
 		updateObject(TABLE_NOTIFICATION, values.toString(), condition.toString());
 	}
 	public void deleteNotification(Notification notification) {
@@ -184,7 +185,7 @@ public class Update {
 		StringBuilder values = new StringBuilder();
 		// TODO
 		StringBuilder condition = new StringBuilder();
-		// TODO
+		condition.append("roomID=").append(room.getId());
 		updateObject(TABLE_ROOM, values.toString(), condition.toString());
 	}
 	public void deleteRoom(Room room) {
@@ -205,7 +206,7 @@ public class Update {
 		StringBuilder values = new StringBuilder();
 		// TODO
 		StringBuilder condition = new StringBuilder();
-		// TODO
+		condition.append("username='").append(user.getUsername()).append("'");
 		updateObject(TABLE_USER, values.toString(), condition.toString());
 	}
 	public void deleteUser(User user) {
@@ -248,7 +249,8 @@ public class Update {
 		StringBuilder values = new StringBuilder();
 		// TODO
 		StringBuilder condition = new StringBuilder();
-		// TODO
+		condition.append("username='").append(user.getUsername()).append("'").append(AND);
+		condition.append("eventID=").append(event.getId());
 		updateObject(TABLE_IS_PARTICIPANT, values.toString(), condition.toString());
 	}
 	public void deleteIsParticipant(User user, Event event) {
