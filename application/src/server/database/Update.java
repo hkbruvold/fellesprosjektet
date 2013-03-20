@@ -34,6 +34,8 @@ public class Update {
 	private static final String INSERT_INTO_VALUES = "INSERT INTO %s (%s) VALUES (%s)"; // "tableName", "fields", "values"
 	private static final String UPDATE_SET_WHERE = "UPDATE %s SET %s WHERE %s"; // "tableName", "field1=value1, field2=value2 ...", "condition"
 	private static final String DELETE_FROM_WHERE = "DELETE FROM %s WHERE %s"; // "tableName", "condition"
+	
+	private static final String AND = " and ";
 
 	private static final String BIT_FALSE = "0";
 	private static final String BIT_TRUE = "1";
@@ -73,8 +75,8 @@ public class Update {
 	}
 	public void deleteAlarm(Alarm alarm) {
 		StringBuilder condition = new StringBuilder();
-		condition.append("username=").append("'").append(alarm.getOwner()).append("'").append(", ");
-		// TODO
+		condition.append("username=").append("'").append(alarm.getOwner()).append("'").append(AND);
+		condition.append("eventID=").append(alarm.getEvent().getId()).append(" ");
 		deleteObject(TABLE_ALARM, condition.toString());
 	}
 
@@ -110,6 +112,14 @@ public class Update {
 			}
 		}
 		return id;
+	}
+	public void updateEvent(Event even) {
+		// TODO
+	}
+	public void deleteEvent(Event event) {
+		StringBuilder condition = new StringBuilder();
+		condition.append("eventID=").append(event.getId());
+		deleteObject(TABLE_EVENT, condition.toString());
 	}
 
 	public void insertGroup(Group group) {
@@ -247,19 +257,6 @@ public class Update {
 		Update update = new Update(TestObjects.getUser00(), dbComm);
 		update.debugging = true;
 
-		System.out.println();
-		update.insertAlarm(TestObjects.getAlarm00());
-		System.out.println();
-		update.insertEvent(TestObjects.getMeeting00());
-		System.out.println();
-		update.insertGroup(TestObjects.getGroup02());
-		System.out.println();
-		update.insertNotification(TestObjects.getNotification01());
-		System.out.println();
-		update.insertRoom(TestObjects.getRoom01());
-		System.out.println();
-		update.insertUser(TestObjects.getUser01());
-		System.out.println();
 	}
 
 }
