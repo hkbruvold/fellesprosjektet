@@ -58,7 +58,8 @@ public class CalendarPane extends JPanel {
 	private ArrayList<ArrayList<Event>> eventDayList;
 	private int[] laneSizes = new int[7];
 	private HashMap<Event, Set<Event>> overlapList;
-	private HashMap<Event, Integer> eventPosition;
+	private HashMap<Event, Integer> eventPosition; 
+	private ArrayList<EventComponent> displayedEvents; //List to store all EventComponents
 
 	/**
 	 * Create the application.
@@ -210,6 +211,7 @@ public class CalendarPane extends JPanel {
 		
 		EventComponent eventComponent = new EventComponent(event);
 		eventComponent.setBounds(x, y, width, height);
+		displayedEvents.add(eventComponent);
 		panel.add(eventComponent);
 		eventComponent.addMouseListener(new MouseListener() {
 			@Override
@@ -265,9 +267,13 @@ public class CalendarPane extends JPanel {
 		}
 		overlapList = new HashMap<Event, Set<Event>>();
 		eventPosition = new HashMap<Event, Integer>();
+		displayedEvents = new ArrayList<EventComponent>();
 	}
 	
 	public void updateCalendar() {
+		for (EventComponent ec: displayedEvents) {
+			panel.remove(ec);
+		}
 		generateLaneSizes();
 		
 		for (int i = 0; i<7; i++) {
