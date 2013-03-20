@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 public class Program {
 	private Client client;
-	private User currentUser;
+	public User currentUser;
 	private CurrentVersion version = new CurrentVersion(1L);
 
 	public Program() {
@@ -59,6 +59,10 @@ public class Program {
 	}
 	public void removeEvent(Event event) { 
 		Response res = client.send(new Request("removeEvent", event));
+	}
+	public void updateStatus(MeetingReply meetingReply){
+		Response res = client.send(new Request("updateStatus", meetingReply));
+		
 	}
 	public ArrayList<Event> getAllEvents(){
 		System.out.println("Fetching events");
