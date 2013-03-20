@@ -158,6 +158,8 @@ public class ServerThread extends Thread {
 			// TODO what if it fails?
 			break;
 		default:
+			System.out.println("case default");
+			send(new Response(Response.Status.FAILED, null));
 			break;
 		}
 	}

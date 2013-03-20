@@ -9,6 +9,7 @@ import java.util.ArrayList;
 public class Program {
 	private Client client;
 	private User currentUser;
+	private CurrentVersion version = new CurrentVersion(1L);
 
 	public Program() {
 		client = new Client();
@@ -26,6 +27,10 @@ public class Program {
 	}
 	public void quit() {
 		System.exit(0);
+	}
+	
+	public void requestChanges() {
+		Response res = client.send(new Request("requestChanges", version));
 	}
 
 	public boolean login (Authentication auth) {

@@ -14,21 +14,22 @@ public class ChangePoller extends Thread {
 	public ChangePoller(User currentUser, Program program){
 		this.currentUser = currentUser;
 		this.program = program;
-		
-		
-		}
+	}
+
+	@Override
 	public void run(){
 		while(True){
-			ArrayList<Notification> notificationArray = program.getAllNotifications();
-			for(Notification notification : notificationArray){
-				new NotificationWindow(program, notification);
-				}
+			program.requestChanges();
+//			ArrayList<Notification> notificationArray = program.getAllNotifications();
+//			for(Notification notification : notificationArray){
+//				new NotificationWindow(program, notification);
+//			}
 			try {
-				sleep(1000);
+				sleep(5000);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			}
+		}
 	}
+
 }
