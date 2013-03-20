@@ -1,10 +1,9 @@
-Info:
+__Info__
 Server (and client) has a version number (for data)
 When something changes in the database this number is increased by one and the old number is stored in the database together with data about the changes
 The client sends (at set intervals) update requests to the server. If the version number has changed, the server looks up what changes were made since the client were last updated. The changes are then sent to the client together with the new version number.
 
-In database:
-
+__Database__
 CREATE TABLE changes (
     versionNumber INT NOT NULL,
     tableName VARCHAR(32) NOT NULL,
@@ -12,8 +11,16 @@ CREATE TABLE changes (
     PRIMARY KEY (versionNumber, tableName)
 );
 
-Example entry:
+__Example entries__
+versionNumber = 6
+tableName = "User"
+identifiers = "charlie"
+
 versionNumber = 28
 tableName = "User"
 identifiers = "alice, bob"
+
+versionNumber = 28
+tableName = "Event"
+identifiers = "6, 496"
 
