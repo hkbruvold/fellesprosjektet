@@ -17,7 +17,11 @@ public class Appointment extends Event implements Serializable {
 	}
 
 	public String toString() {
-		return String.format("Appointment; ID: %s, Description: %s, Start: %s, End: %s, Location: %s, Owner: %s", id, description, startDateTime, endDateTime, location, user.getUsername());
+		if (room != null) {
+			return String.format("Appointment; ID: %s, Description: %s, Start: %s, End: %s, Room: %s, Owner: %s", id, description, startDateTime, endDateTime, room, user.getUsername());
+		} else {
+			return String.format("Appointment; ID: %s, Description: %s, Start: %s, End: %s, Location: %s, Owner: %s", id, description, startDateTime, endDateTime, location, user.getUsername());
+		}
 	}
 
 	public User getOwner() {
