@@ -16,11 +16,12 @@ versionNumber = 6
 tableName = "User"
 identifiers = "charlie"
 
-versionNumber = 28
+versionNumber = 6
+tableName = "Event"
+identifiers = "28"
+
+// this requires batchupdate, or some clever(?) programming
+versionNumber = 496
 tableName = "User"
 identifiers = "alice, bob"
-
-versionNumber = 28
-tableName = "Event"
-identifiers = "6, 496"
 
