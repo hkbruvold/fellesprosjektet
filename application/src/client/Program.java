@@ -9,19 +9,30 @@ import data.communication.Response;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Set;
 
 public class Program {
 	private Client client;
 	private User currentUser;
 	private CurrentVersion version = new CurrentVersion(1L);
+	private HashMap<User, Set<Event>> eventList;
+	private Set<User> userList;
 
 	public Program() {
 		client = new Client();
 		showLogin();
 	}
+	
+	private void initEventList() {
+		eventList = new HashMap<User, Set<Event>>();
+		// TODO get events for each user
+	}
+	
 	public void showLogin() {
 		new LoginWindow(this);
 	}
+	
 	public void showMainWindow() {
 		if (currentUser != null) {
 			new MainWindow(this, currentUser);
@@ -145,6 +156,10 @@ public class Program {
 
 	public static void main(String[] args) {
 		new Program();
+	}
+	
+	public HashMap<User, Set<Event>> getEventList() {
+		return eventList;
 	}
 
 }
