@@ -268,9 +268,6 @@ public class Update {
 	}
 
 
-	// TODO Add update and delete methods
-	// NB! Remember relations!
-
 	private int insertObject(String tableName, String fields, String values) {
 		String updateString = String.format(INSERT_INTO_VALUES, tableName, fields, values);
 		int id = 0;
