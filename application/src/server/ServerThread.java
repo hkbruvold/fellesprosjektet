@@ -162,7 +162,9 @@ public class ServerThread extends Thread {
 		case "requestChanges":
 			CurrentVersion version = (CurrentVersion) data;
 			System.out.println(version);
-			send(new Response(Response.Status.OK, new ChangeData(2L, 1)));
+			String[] tableNames = new String[]{"User", "Event"}; // TODO request database
+			String[] identifiers = new String[]{"alice, bob", "6, 496"}; // TODO request database
+			send(new Response(Response.Status.OK, new ChangeData(2L, tableNames, identifiers)));
 			// TODO what if it fails?
 			break;
 		default:
