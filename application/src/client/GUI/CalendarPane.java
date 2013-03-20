@@ -151,7 +151,7 @@ public class CalendarPane extends JPanel {
 		DateFormat df = new SimpleDateFormat("yyyy w u");
 		//int date = 0;
 		//int month = 0;
-
+		//TODO Fetch events from database, and add them all to the calendarPane!
 		for(int i = 0; i < days.length; i++) {
 			JLabel weekDay = new JLabel(days[i]);
 			weekDay.setBounds(i * gridSizeX, 0, gridSizeX, gridSizeY);
