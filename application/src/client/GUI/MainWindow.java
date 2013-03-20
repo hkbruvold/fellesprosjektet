@@ -57,8 +57,8 @@ public class MainWindow extends JFrame {
 		this.currentUser = currentUser;
 		this.setVisible(true);
 		initialize();
-		ChangePoller poller = new ChangePoller(currentUser, program);
-		poller.run();
+		//ChangePoller poller = new ChangePoller(currentUser, program);
+		//poller.run();
 		//new ChangePoller(currentUser, program).run();
 		ArrayList<Notification> notificationArray = program.getAllNotifications();
 		for(Notification notification : notificationArray){
