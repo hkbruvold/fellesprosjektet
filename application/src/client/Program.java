@@ -110,6 +110,20 @@ public class Program {
 			return null;
 		}
 	}
+	public ArrayList<Notification> getAllNotifications(){
+		System.out.println("Fetching notifications");
+		Response res = client.send(new Request("listNotification", null));
+		if (res.getData() != null && res.getData() instanceof DataList) {
+			ArrayList<Notification> result = new ArrayList<Notification>();
+			DataList dl = (DataList) res.getData();
+			for (Serializable data : dl.getData()) {
+				result.add((Notification) data);
+			}
+			return result;
+		} else {
+			return null;
+		}
+	}
 	
 	public void addUser(User user){
 		// TODO remember to make sure username is available!

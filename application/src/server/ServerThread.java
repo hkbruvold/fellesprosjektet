@@ -4,6 +4,7 @@ import data.Authentication;
 import data.Alarm;
 import data.Event;
 import data.Group;
+import data.Notification;
 import data.Request;
 import data.Response;
 import data.Room;
@@ -127,6 +128,13 @@ public class ServerThread extends Thread {
 				eventDL.add(event2);
 			}
 			send(new Response(Response.Status.OK, eventDL));
+		case "listNotifications":
+			ArrayList<Notification> notificationList = query.queryNotifications();
+			DataList notificationDL = new DataList();
+			for (Notification notification: notificationList) {
+				notificationDL.add(notification);
+			}
+			send(new Response(Response.Status.OK, notificationDL));
 		case "listGroups":
 			ArrayList<Group> groupList = query.queryGroups();
 			DataList groupDL = new DataList();
