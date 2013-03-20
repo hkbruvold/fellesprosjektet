@@ -22,7 +22,8 @@ public class Request implements Serializable {
 	}
 	
 	public String toString() {
-		return action.name() + " : " + data;
+//		return action.name() + " : " + data;
+		return action + " : " + data;
 	}
 
 	public Serializable getData () {
@@ -37,19 +38,5 @@ public class Request implements Serializable {
 	public void setAction(Action action) {
 		this.action = action;
 	}
-	
-	public enum Action {
-		LOGIN,
-		ADD_EVENT,
-		ADD_ALARM,
-		LIST_USERS,
-		LIST_ROOMS,
-		GET_ALL_EVENTS,
-		LIST_NOTIFICATIONS,
-		LIST_GROUPS,
-		NEW_USER,
-		UPDATE_STATUS,
-		REMOVE_EVENT,
-		REQUEST_CHANGES;
-	}
+
 }

@@ -6,7 +6,7 @@ import java.io.*;
 
 import data.*;
 import data.communication.*;
-import data.communication.Request.Action;
+import data.communication.Action.*;
 import client.GUI.DataList;
 import server.database.*;
 
@@ -19,7 +19,7 @@ public class ServerThread extends Thread {
 	private static final String PASSWORD = "skip";
 
 	private static final int FAILED_INSERT = -1;
-	
+
 	private Socket socket = null;
 	private OutputStream out;
 	private InputStream in;
@@ -62,7 +62,24 @@ public class ServerThread extends Thread {
 		Query query = new Query(currentUser, dbComm);
 		System.out.println(action);
 
-		switch (action) {
+		if (action instanceof MiscAction) {
+			MiscAction miscAction = (MiscAction) action;
+			performMisc(data, update, query, miscAction); 
+		} else if (action instanceof InsertAction) {
+			InsertAction insertAction = (InsertAction) action;
+			performInsert(data, update, insertAction);
+		} else if (action instanceof UpdateAction) {
+			UpdateAction updateAction = (UpdateAction) action;
+			performUpdate(data, currentUser, updateAction);
+		} else if (action instanceof QueryAction) {
+			QueryAction queryAction = (QueryAction) action;
+			performQuery(data, query, queryAction);
+		}
+	}
+
+	private void performMisc(Serializable data, Update update, Query query,
+			MiscAction miscAction) {
+		switch (miscAction) {
 		case LOGIN:
 			Authentication auth = (Authentication) data;
 			User fetchedUser = query.queryUser(auth.getUsername());
@@ -78,6 +95,28 @@ public class ServerThread extends Thread {
 				send(new Response(Response.Status.FAILED, null));
 			}
 			break;
+		case UPDATE_STATUS:
+			MeetingReply meetingReply = (MeetingReply) data;
+			update.updateIsParticipant(meetingReply.getUser(), meetingReply.getMeeting(), meetingReply.getStatus());
+			break;
+		case REQUEST_CHANGES:
+			CurrentVersion version = (CurrentVersion) data;
+			System.out.println(version);
+			String[] tableNames = new String[]{"User", "Event"}; // TODO request database
+			String[] identifiers = new String[]{"alice, bob", "6, 496"}; // TODO request database
+			send(new Response(Response.Status.OK, new ChangeData(2L, tableNames, identifiers)));
+			// TODO what if it fails?
+			break;
+		default:
+			System.out.println("case default");
+			send(new Response(Response.Status.FAILED, null));
+			break;
+		}
+	}
+
+	private void performInsert(Serializable data, Update update,
+			InsertAction insertAction) {
+		switch (insertAction) {
 		case ADD_EVENT:
 			Event event = (Event) data;
 			int eventId = update.insertEvent(event);
@@ -98,6 +137,37 @@ public class ServerThread extends Thread {
 			}
 			// TODO what if relations fails?
 			break;
+		case ADD_USER:
+			User user = (User) data;
+			update.insertUser(user);
+			send(new Response(Response.Status.OK, null));
+			// TODO what if it fails?
+			break;
+		default:
+			System.out.println("case default");
+			send(new Response(Response.Status.FAILED, null));
+			break;
+		}
+	}
+
+	private void performUpdate(Serializable data, User currentUser,
+			UpdateAction updateAction) {
+		Update update;
+		switch (updateAction) {
+		case REMOVE_EVENT:
+			Event eventToRemove = (Event) data;
+			update = new Update(currentUser, dbComm);
+			update.deleteEvent(eventToRemove);
+		default:
+			System.out.println("case default");
+			send(new Response(Response.Status.FAILED, null));
+			break;
+		}
+	}
+
+	private void performQuery(Serializable data, Query query,
+			QueryAction queryAction) {
+		switch (queryAction) {
 		case LIST_USERS:
 			ArrayList<User> userList = query.queryUsers();
 			Group group = new Group(0, "result", "dummy");
@@ -114,7 +184,7 @@ public class ServerThread extends Thread {
 			send(new Response(Response.Status.OK, roomDL));
 			// TODO what if it fails?
 			break;
-		case GET_ALL_EVENTS:
+		case LIST_ALL_EVENTS:
 			query = new Query((User)data, dbComm); // Needed to get fetch alarms to the user
 			ArrayList<Event> eventList = query.queryEvents();
 			DataList eventDL = new DataList();
@@ -139,34 +209,13 @@ public class ServerThread extends Thread {
 			}
 			send(new Response(Response.Status.OK, groupDL));
 			break;
-		case NEW_USER:
-			User user = (User) data;
-			update.insertUser(user);
-			send(new Response(Response.Status.OK, null));
-			// TODO what if it fails?
-			break;
-		case UPDATE_STATUS:
-			MeetingReply meetingReply = (MeetingReply) data;
-			update.updateIsParticipant(meetingReply.getUser(), meetingReply.getMeeting(), meetingReply.getStatus());
-			break;
-		case REQUEST_CHANGES:
-			CurrentVersion version = (CurrentVersion) data;
-			System.out.println(version);
-			String[] tableNames = new String[]{"User", "Event"}; // TODO request database
-			String[] identifiers = new String[]{"alice, bob", "6, 496"}; // TODO request database
-			send(new Response(Response.Status.OK, new ChangeData(2L, tableNames, identifiers)));
-			// TODO what if it fails?
-			break;
-		case REMOVE_EVENT:
-			Event eventToRemove = (Event) data;
-			update = new Update(currentUser, dbComm);
-			update.deleteEvent(eventToRemove);
 		default:
 			System.out.println("case default");
 			send(new Response(Response.Status.FAILED, null));
 			break;
 		}
 	}
+
 	public void send(Response res) {
 		XMLTranslator.send(res, out);
 	}
