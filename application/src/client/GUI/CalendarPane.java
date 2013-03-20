@@ -13,6 +13,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -29,6 +30,7 @@ import javax.swing.border.MatteBorder;
 import client.Program;
 
 import data.Event;
+import data.User;
 import client.GUI.EventComponent;
 
 @SuppressWarnings("serial")
@@ -54,12 +56,14 @@ public class CalendarPane extends JPanel {
 	private int year;
 	private Program program;
 	private static int week;
+	private String[] daysOfWeek;
 	
-	private ArrayList<ArrayList<Event>> eventDayList;
+	private ArrayList<ArrayList<EventComponent>> eventDayList;
 	private int[] laneSizes = new int[7];
-	private HashMap<Event, Set<Event>> overlapList;
-	private HashMap<Event, Integer> eventPosition; 
-	private ArrayList<EventComponent> displayedEvents; //List to store all EventComponents
+	private HashMap<EventComponent, Set<EventComponent>> overlapList;
+	private HashMap<EventComponent, Integer> eventPosition; 
+	private HashMap<User, Set<EventComponent>> displayedEvents; // List to store all EventComponents
+	private Set<User> showUserCalendars; // List of users to show event from
 
 	/**
 	 * Create the application.
@@ -152,9 +156,13 @@ public class CalendarPane extends JPanel {
 		dayLine.removeAll();
 		Date dates = null;
 		DateFormat df = new SimpleDateFormat("yyyy w u");
+		DateFormat ISOdf = new SimpleDateFormat("yyyy-MM-dd");
 		//int date = 0;
 		//int month = 0;
 		//TODO Fetch events from database, and add them all to the calendarPane!
+		
+		daysOfWeek = new String[7];
+		
 		for(int i = 0; i < days.length; i++) {
 			JLabel weekDay = new JLabel(days[i]);
 			weekDay.setBounds(i * gridSizeX, 0, gridSizeX, gridSizeY);
@@ -168,7 +176,7 @@ public class CalendarPane extends JPanel {
 					else {
 						dates = df.parse(year + " " + (week + 0) + " " + (-6));
 					}
-					System.out.println(dates);
+					daysOfWeek[i-1] = ISOdf.format(dates);
 				} catch (ParseException e) {
 					e.printStackTrace();
 				}
@@ -192,8 +200,63 @@ public class CalendarPane extends JPanel {
 		comp.setBounds((int)(posX * gridSizeX), (int)(posY * gridSizeY), (int)(gridSizeX * width), (int)(gridSizeY * height));
 		panel.add(comp);
 	}
+	
+	public void initEventData() {
+		eventDayList = new ArrayList<ArrayList<EventComponent>>();
+		for (int i = 0; i < 7; i++) {
+			eventDayList.add(new ArrayList<EventComponent>());
+		}
+		overlapList = new HashMap<EventComponent, Set<EventComponent>>();
+		eventPosition = new HashMap<EventComponent, Integer>();
+		displayedEvents = new HashMap<User, Set<EventComponent>>();
+	}
+	
+	public void showCalendar() {
+		// Remove previously shown events
+		hideAllEvents();
+		
+		addRelevantEvents();
+		
+		// Generate data for display logic
+		generateLaneSizes();
+		
+		
+		for (int i = 0; i<7; i++) {
+			for (EventComponent event: eventDayList.get(i)) {
+				addEventToCalendar(event);
+			}
+		}
+	}
+	
+	private void hideAllEvents() {
+		for (User user: showUserCalendars) {
+			for (EventComponent ec: displayedEvents.get(user)) {
+				panel.remove(ec);
+			}
+		}
+	}
+	
+	/**
+	 * Adds events to list if it is to be shown
+	 */
+	private void addRelevantEvents() {
+		for (User user: showUserCalendars) {
+			HashMap<Integer, Event> eventHash = program.getEventList().get(user.getName());
+			for (Integer key: eventHash.keySet()) {
+				Event event = eventHash.get(key);
+				if (event.getStartDateTime().split(" ")[0].equalsIgnoreCase(daysOfWeek[event.getDayOfWeek()])) {
+					EventComponent eventComp = new EventComponent(event);
+					eventDayList.get(event.getDayOfWeek()).add(eventComp);
+					if (! overlapList.containsKey(event)) {
+						overlapList.put(eventComp, new HashSet<EventComponent>());
+					}
+				}
+			}
+		}
+	}
 
-	private void addEventToCalendar(Event event) {
+	private void addEventToCalendar(EventComponent eventComp) {
+		Event event = eventComp.getEvent();
 		Calendar start = event.getStartDate();
 		Calendar end = event.getEndDate();
 		
@@ -201,19 +264,28 @@ public class CalendarPane extends JPanel {
 		double startTime = start.get(Calendar.HOUR_OF_DAY) + (double) (start.get(Calendar.MINUTE)) * 100 / 60 / 100;
 		double duration = (double) (end.getTimeInMillis() - start.getTimeInMillis()) / (1000*60*60);
 		
-		int position = getFreeLane(event);
-		eventPosition.put(event, position);
+		int position = getFreeLane(eventComp);
+		eventPosition.put(eventComp, position);
 		
 		int height = (int) (duration*gridSizeY);
 		int width = (int) (gridSizeX/laneSizes[dayOfWeek]);
 		int x = dayOfWeek*gridSizeX + (int) (position*(gridSizeX/laneSizes[dayOfWeek]) - 2*gridSizeX);
 		int y = (int) startTime*gridSizeY;
 		
-		EventComponent eventComponent = new EventComponent(event);
-		eventComponent.setBounds(x, y, width, height);
-		displayedEvents.add(eventComponent);
-		panel.add(eventComponent);
-		eventComponent.addMouseListener(new MouseListener() {
+		// Set another colour for other users
+		if (program.getCurrentUser() != event.getUser()) {
+			eventComp.setColor(new int[] {126, 126, 126});
+		}
+		
+		// Initialise event into displayedEvents if needed
+		if (! displayedEvents.containsKey(event.getUser())) {
+			displayedEvents.put(event.getUser(), new HashSet<EventComponent>());
+		}
+		displayedEvents.get(event.getUser()).add(eventComp);
+
+		eventComp.setBounds(x, y, width, height);
+		panel.add(eventComp);
+		eventComp.addMouseListener(new MouseListener() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				new NewEventWindow(program, CalendarPane.this, ((EventComponent) e.getComponent()).getEvent(), program.getAllUsers());
@@ -230,57 +302,27 @@ public class CalendarPane extends JPanel {
 			@Override
 			public void mouseExited(MouseEvent e) {}
 		});
-		eventComponent.setVisible(true);
+		eventComp.setVisible(true);
 	}
 	
-	private int getFreeLane(Event event) {
-		boolean[] takenLane = new boolean[laneSizes[event.getDayOfWeek()]];
+	private int getFreeLane(EventComponent eventComp) {
+		boolean[] takenLane = new boolean[laneSizes[eventComp.getEvent().getDayOfWeek()]];
 		
-		if (overlapList.containsKey(event)) {
-			Set<Event> eventOverlaps = overlapList.get(event);
-			for (Event event0: eventOverlaps) {
+		if (overlapList.containsKey(eventComp)) {
+			Set<EventComponent> eventOverlaps = overlapList.get(eventComp);
+			for (EventComponent event0: eventOverlaps) {
 				if (eventPosition.containsKey(event0)) {
 					takenLane[(int)eventPosition.get(event0)] = true;
 				}
 			}
 		}
 		
-		for (int i = 0; i < laneSizes[event.getDayOfWeek()]; i++) {
+		for (int i = 0; i < laneSizes[eventComp.getEvent().getDayOfWeek()]; i++) {
 			if (takenLane[i] == false) {
 				return i;
 			}
 		}
 		return -1;
-	}
-	
-	public void addEvent(Event event) {
-		eventDayList.get(event.getDayOfWeek()).add(event);
-		if (! overlapList.containsKey(event)) {
-			overlapList.put(event, new HashSet<Event>());
-		}
-	}
-	
-	public void initEventData() {
-		eventDayList = new ArrayList<ArrayList<Event>>();
-		for (int i = 0; i < 7; i++) {
-			eventDayList.add(new ArrayList<Event>());
-		}
-		overlapList = new HashMap<Event, Set<Event>>();
-		eventPosition = new HashMap<Event, Integer>();
-		displayedEvents = new ArrayList<EventComponent>();
-	}
-	
-	public void updateCalendar() {
-		for (EventComponent ec: displayedEvents) {
-			panel.remove(ec);
-		}
-		generateLaneSizes();
-		
-		for (int i = 0; i<7; i++) {
-			for (Event event: eventDayList.get(i)) {
-				addEventToCalendar(event);
-			}
-		}
 	}
 	
 	private void generateLaneSizes() {
@@ -292,8 +334,8 @@ public class CalendarPane extends JPanel {
 	private int getLaneSize(int day) {		
 		int curMax = 1;
 		int curSize;
-		for (Event event: this.eventDayList.get(day)) {
-			curSize = amountOfOverlappingEvents(event);
+		for (EventComponent eventComp: this.eventDayList.get(day)) {
+			curSize = amountOfOverlappingEvents(eventComp);
 			if (curSize > curMax) {
 				curMax = curSize;
 			}
@@ -301,23 +343,23 @@ public class CalendarPane extends JPanel {
 		return curMax;
 	}
 	
-	private int amountOfOverlappingEvents(Event event) {
+	private int amountOfOverlappingEvents(EventComponent eventComp) {
 		int result = 1;
 		
-		for (Event event0: this.eventDayList.get(event.getDayOfWeek())) {
-			if (isOverlapping(event, event0) && event != event0) {
+		for (EventComponent event0: this.eventDayList.get(eventComp.getEvent().getDayOfWeek())) {
+			if (isOverlapping(eventComp, event0) && eventComp != event0) {
 				result++;
-				overlapList.get(event).add(event0);
+				overlapList.get(eventComp).add(event0);
 			}
 		}
 		return result;
 	}
 	
-	private boolean isOverlapping(Event event0, Event event1) {
-		long start0 = event0.getStartDate().getTimeInMillis();
-		long end0 = event0.getEndDate().getTimeInMillis(); 
-		long start1 = event1.getStartDate().getTimeInMillis();
-		long end1 = event1.getEndDate().getTimeInMillis();
+	private boolean isOverlapping(EventComponent event0, EventComponent event1) {
+		long start0 = event0.getEvent().getStartDate().getTimeInMillis();
+		long end0 = event0.getEvent().getEndDate().getTimeInMillis(); 
+		long start1 = event1.getEvent().getStartDate().getTimeInMillis();
+		long end1 = event1.getEvent().getEndDate().getTimeInMillis();
 		
 		if ((start0 < start1 && start1 < end0) || // start1 in event0
 				(start0 < end1 && end1 < end0) || // end1 in event0
