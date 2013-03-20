@@ -289,8 +289,7 @@ public class NewEventWindow extends JPanel implements ActionListener, ItemListen
 				alarm = new Alarm(alarmTimeBeforeField.getText(), "", user, event);
 				program.registerAlarm(alarm);
 			}
-			calendarPane.addEvent(event);
-			calendarPane.updateCalendar();
+			program.registerEvent(event);
 			frame.dispose(); // Close if successful; show error message if not?
 		}
 	}
