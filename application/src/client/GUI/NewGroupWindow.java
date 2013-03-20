@@ -114,8 +114,8 @@ public class NewGroupWindow extends JFrame {
 		users.add(temp.TestObjects.getUser00());
 		users.add(temp.TestObjects.getUser01());
 		users.add(temp.TestObjects.getUser02());
-
-		memberList = new JList<User>((User[]) users.toArray());
+		User[] allusers = program.getAllUsers();
+		memberList = new JList<User>(allusers);
 		GridBagConstraints gbc_memberList = new GridBagConstraints();
 		gbc_memberList.insets = new Insets(0, 0, 5, 5);
 		gbc_memberList.fill = GridBagConstraints.BOTH;
