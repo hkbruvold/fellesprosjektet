@@ -92,7 +92,7 @@ public class ServerThread extends Thread {
 		case "newUser":
 			User user = (User) data;
 			update.insertUser(user);
-			new Response(Response.Status.OK, null);
+			send(new Response(Response.Status.OK, null));
 			break;
 		default:
 			break;
