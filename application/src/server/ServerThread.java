@@ -19,12 +19,14 @@ import server.database.Query;
 import server.database.Update;
 
 public class ServerThread extends Thread {
-    public static final String HOST = "localhost";
-	public static final String PORT = "3306";
-	public static final String DATABASE = "calendarDatabase";
-	public static final String URI = "jdbc:mysql://" + HOST + ":" + PORT + "/" + DATABASE;
-	public static final String USERNAME = "root";
-	public static final String PASSWORD = "skip";
+	private static final String HOST = "localhost";
+	private static final String PORT = "3306";
+	private static final String DATABASE = "calendarDatabase";
+	private static final String URI = "jdbc:mysql://" + HOST + ":" + PORT + "/" + DATABASE;
+	private static final String USERNAME = "root";
+	private static final String PASSWORD = "skip";
+
+	private static final int FAILED_INSERT = -1;
 	
 	private Socket socket = null;
 	private OutputStream out;
@@ -66,6 +68,10 @@ public class ServerThread extends Thread {
 		case "login":
 			Authentication auth = (Authentication) data;
 			User fetchedUser = query.queryUser(auth.getUsername());
+			if (fetchedUser == null) {
+				send(new Response(Response.Status.FAILED, null));
+				break;
+			}
 			boolean correctUsername = fetchedUser.getUsername().equals(auth.getUsername());
 			boolean correctPassword = fetchedUser.getPassword().equals(auth.getPassword());
 			if (correctUsername && correctPassword) {
@@ -76,19 +82,28 @@ public class ServerThread extends Thread {
 			break;
 		case "addEvent":
 			Event event = (Event) data;
-			update.insertEvent(event);
-			send(new Response(Response.Status.OK, null)); 
-			// TODO what if it fails?
+			int eventId = update.insertEvent(event);
+			if (eventId == FAILED_INSERT) {
+				send(new Response(Response.Status.FAILED, null));
+			} else {
+				send(new Response(Response.Status.OK, eventId)); 
+			}
+			send(new Response(Response.Status.OK, eventId)); 
+			// TODO what if relations fails?
 			break;
 		case "addAlarm":
 			Alarm alarm = (Alarm) data;
-			update.insertAlarm(alarm);
-			send(new Response(Response.Status.OK, null)); 
-			// TODO what if it fails?
+			int alarmResult = update.insertAlarm(alarm);
+			if (alarmResult == FAILED_INSERT) {
+				send(new Response(Response.Status.FAILED, alarmResult));
+			} else {
+				send(new Response(Response.Status.OK, alarmResult)); 
+			}
+			// TODO what if relations fails?
 			break;
 		case "listUsers":
 			ArrayList<User> userList = query.queryUsers();
-			Group group = new Group(-1, "resutl", "dummy");
+			Group group = new Group(0, "resutl", "dummy");
 			group.addMembers(userList);
 			send(new Response(Response.Status.OK, group));
 			// TODO what if it fails?

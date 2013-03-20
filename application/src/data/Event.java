@@ -16,19 +16,21 @@ public abstract class Event implements Serializable {
 	protected String endDateTime;
 	@Element
 	protected String description;
-	@Element
+	@Element(required=false)
 	protected String location;
-	@Element
+	@Element(required=false)
 	protected Room room;
 	@Element(required=false)
 	protected Alarm alarm;
+	@Element
+	protected User user;
 
 	public Event(){
 	}
 	/**
 	 * Use id = 0 when creating new objects. Actual ID should come from database
 	 */
-	public Event(int id, String startDateTime, String endDateTime, String description, String location) {
+	public Event(int id, String startDateTime, String endDateTime, String description, String location, User user) {
 		this.id = id;
 		this.startDateTime = startDateTime;
 		this.endDateTime = endDateTime;
@@ -36,7 +38,7 @@ public abstract class Event implements Serializable {
 		this.location = location;
 		this.room = null;
 	}
-	public Event(int id, String startDateTime, String endDateTime, String description, Room room) {
+	public Event(int id, String startDateTime, String endDateTime, String description, Room room, User user) {
 		this.id = id;
 		this.startDateTime = startDateTime;
 		this.endDateTime = endDateTime;
@@ -45,6 +47,10 @@ public abstract class Event implements Serializable {
 		this.room = room;
 	}
 
+	public void setUser(User user) {
+		this.user = user;
+	}
+	
 	public int getId() {
 		return id;
 	}

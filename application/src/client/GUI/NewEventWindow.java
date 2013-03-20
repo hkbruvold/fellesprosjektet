@@ -20,19 +20,19 @@ import data.Event;
 
 @SuppressWarnings("serial")
 public class NewEventWindow extends JPanel implements ActionListener, ItemListener {
-	private static final String FRAME_NAME = "Avtale / M�te";
+	private static final String FRAME_NAME = "Avtale / Moete";
 
 	private static final String LABEL_DESCRIPTION = "Beskrivelse";
 	private static final String LABEL_FROM = "Fra";
 	private static final String LABEL_TO = "Til";
 	private static final String LABEL_LOCATION = "Sted";
 	private static final String LABEL_ALARM = "Alarm";
-	private static final String LABEL_ALARM_TIME_BEFORE = "Tid f�r:";
-	private static final String LABEL_MEETING = "M�te";
+	private static final String LABEL_ALARM_TIME_BEFORE = "Tid i forkant:";
+	private static final String LABEL_MEETING = "Moete";
 	private static final String LABEL_PARTICIPANTS = "Deltakere:";
 
-	private static final String FIELD_DATE = "����-MM-DD";
-	private static final String FIELD_TIME = "TT:MM";
+	private static final String FIELD_DATE = "2028-06-28";
+	private static final String FIELD_TIME = "06:28";
 
 	private static final String BUTTON_LOCATION_SET_TEXT = "Bruk: Tekst";
 	private static final String BUTTON_LOCATION_SET_ROOM = "Bruk: Rom";
@@ -40,7 +40,7 @@ public class NewEventWindow extends JPanel implements ActionListener, ItemListen
 	private static final String BUTTON_CLOSE = "Lukk";
 	private static final String BUTTON_SAVE = "Lagre";
 
-	private static final String TOOLTIP_NOT_SAVED = "Avtalen/M�tet er ikke lagret. Trykk \"" + BUTTON_CLOSE + "\" for � avbryte";
+	private static final String TOOLTIP_NOT_SAVED = "Avtalen/Moetet er ikke lagret. Trykk \"" + BUTTON_CLOSE + "\" for aa avbryte";
 
 	private static final int SIZE_FIELD = 12;
 
@@ -279,12 +279,14 @@ public class NewEventWindow extends JPanel implements ActionListener, ItemListen
 					event = new Appointment(0, startDateTime, endDateTime, description, location, user);
 				}
 			}
+			event.setUser(user);
+			int id = program.registerEvent(event);
+			event.setId(id);
 			Alarm alarm = null;
 			if(alarmCheckBox.isSelected()){
 				alarm = new Alarm(alarmTimeBeforeField.getText(), "", user, event);
 				program.registerAlarm(alarm);
 			}
-			program.registerEvent(event);
 			//Someone, plz fix calendarpane.addEvent. This is very critical!
 			//calendarPane.addEvent(event);
 			frame.dispose(); // Close if successful; show error message if not?

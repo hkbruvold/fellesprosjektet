@@ -11,7 +11,7 @@ import org.simpleframework.xml.Root;
 public class Request implements Serializable {
 	@Element
 	public String action;
-	@Element
+	@Element(required=false)
 	private Serializable data;
 
 	public Request() {
