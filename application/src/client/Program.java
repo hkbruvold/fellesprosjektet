@@ -18,7 +18,7 @@ public class Program {
 	}
 	public void showMainWindow() {
 		if (currentUser != null) {
-			new MainWindow(this);
+			new MainWindow(this, currentUser);
 		} else {
 			new LoginWindow(this);
 		}
@@ -47,14 +47,19 @@ public class Program {
 	public void registerAlarm(Alarm alarm) { 
 		Response res = client.send(new Request("addAlarm", alarm));
 	}
-	public ArrayList<User> getAllUsers(){
+	public User[] getAllUsers(){
 		System.out.println("Fetching users");
 		Response res = client.send(new Request("listUsers", null));
 		ArrayList<User> users = null;
 		if (res.status == Response.Status.OK) {
 			users = ((Group)res.getData()).getMembers();
 		}
-		return users;
+		User[] userArray = new User[users.size()];
+		int i = 0;
+		for (User user : users) {
+			userArray[i++] = user;
+		}
+		return userArray;
 	}
 	
 	public void addUser(User user){

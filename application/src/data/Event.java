@@ -16,9 +16,9 @@ public abstract class Event implements Serializable {
 	protected String endDateTime;
 	@Element
 	protected String description;
-	@Element
+	@Element(required=false)
 	protected String location;
-	@Element
+	@Element(required=false)
 	protected Room room;
 	@Element(required=false)
 	protected Alarm alarm;

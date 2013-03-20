@@ -20,12 +20,14 @@ import javax.swing.ImageIcon;
 import java.awt.Dimension;
 
 import client.Program;
+import data.User;
 
 @SuppressWarnings("serial")
 public class MainWindow extends JFrame {
 
 	private CalendarPane calendarPane;
 	private Program program;
+	private User currentUser;
 
 	/**
 	 * Launch the application.
@@ -47,8 +49,9 @@ public class MainWindow extends JFrame {
 	/**
 	 * Create the application.
 	 */
-	public MainWindow(Program program) {
+	public MainWindow(Program program, User currentUser) {
 		this.program = program;
+		this.currentUser = currentUser;
 		this.setVisible(true);
 		initialize();
 	}
@@ -156,7 +159,7 @@ public class MainWindow extends JFrame {
 		JButton btnnewEvent = new JButton("Ny Avtale");
 		btnnewEvent.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				new NewEventWindow(program, calendarPane, TestObjects.getUser00(), TestObjects.getUserArray01());
+				new NewEventWindow(program, calendarPane, currentUser, program.getAllUsers());
 			}
 		});
 		verticalBox.add(btnnewEvent);
