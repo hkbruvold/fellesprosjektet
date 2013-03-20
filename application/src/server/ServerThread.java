@@ -127,6 +127,7 @@ public class ServerThread extends Thread {
 				eventDL.add(event2);
 			}
 			send(new Response(Response.Status.OK, eventDL));
+			break;
 		case "listGroups":
 			ArrayList<Group> groupList = query.queryGroups();
 			DataList groupDL = new DataList();

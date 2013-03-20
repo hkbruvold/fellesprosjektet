@@ -102,7 +102,7 @@ public class Query {
 	private Event makeEvent(Properties p, boolean fetchAlarm) {
 		Event event = null;
 		String id = p.getProperty("eventID");
-		String start = p.getProperty("startDataTime");
+		String start = p.getProperty("startDateTime");
 		String end = p.getProperty("endDateTime");
 		String location = p.getProperty("location");
 		String description = p.getProperty("description");

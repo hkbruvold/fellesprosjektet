@@ -20,7 +20,6 @@ public class Program {
 	public void showMainWindow() {
 		if (currentUser != null) {
 			new MainWindow(this, currentUser);
-//			getAllEvents();
 		} else {
 			new LoginWindow(this);
 		}
