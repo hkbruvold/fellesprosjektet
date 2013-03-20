@@ -20,6 +20,7 @@ public class Program {
 	public void showMainWindow() {
 		if (currentUser != null) {
 			new MainWindow(this, currentUser);
+//			getAllEvents();
 		} else {
 			new LoginWindow(this);
 		}
@@ -48,10 +49,15 @@ public class Program {
 	}
 	public ArrayList<Event> getAllEvents(){
 		System.out.println("Fetching events");
-		Response res = client.send(new Request("getAllEvents", null));
-		ArrayList<Event> events = null;
-		events = (ArrayList<Event>) res.getData();
-		return events;
+		Response res = client.send(new Request("getAllEvents", currentUser));
+		ArrayList<Event> result = new ArrayList<Event>();
+		if (res.getData() != null && res.getData() instanceof DataList) {
+			DataList dl = (DataList) res.getData();
+			for (Serializable data : dl.getData()) {
+				result.add((Event) data);
+			}
+		}
+		return result;
 	}
 
 	public int registerAlarm(Alarm alarm) { 
@@ -91,6 +97,7 @@ public class Program {
 		return groupArray;
 	}
 	public ArrayList<Room> getAllRooms() {
+		System.out.println("Fetching rooms");
 		Response res = client.send(new Request("listRooms", null));
 		if (res.getData() != null && res.getData() instanceof DataList) {
 			ArrayList<Room> result = new ArrayList<Room>();

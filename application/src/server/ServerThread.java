@@ -120,8 +120,13 @@ public class ServerThread extends Thread {
 			// TODO what if it fails?
 			break;
 		case "getAllEvents":
-			ArrayList<Event> eventlist = query.queryEvents();
-			send(new Response(Response.Status.OK,eventlist));
+			query = new Query((User)data, dbComm); // Needed to get fetch alarms to the user
+			ArrayList<Event> eventList = query.queryEvents();
+			DataList eventDL = new DataList();
+			for (Event event2 : eventList) {
+				eventDL.add(event2);
+			}
+			send(new Response(Response.Status.OK, eventDL));
 		case "listGroups":
 			ArrayList<Group> groupList = query.queryGroups();
 			DataList groupDL = new DataList();

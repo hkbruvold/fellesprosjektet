@@ -56,16 +56,20 @@ public class Query {
 		ArrayList<Alarm> alarms = new ArrayList<Alarm>();
 		ArrayList<Properties> pl = dbComm.query(String.format(SELECT_FROM, FIELDS_ALARM, TABLE_ALARM));
 		for (Properties p : pl) {
-			alarms.add(makeAlarm(p));
+			alarms.add(makeAlarm(p, true));
 		}
 		return alarms;
 	}
 	private Alarm queryAlarm(User user, int eventID) {
-		ArrayList<Properties> pl = dbComm.query(String.format(SELECT_FROM_WHERE, FIELDS_ALARM, TABLE_ALARM, "username='" + user.getUsername() + "', eventID=" + eventID));
-		Properties p = pl.get(0);
-		return makeAlarm(p);
+		ArrayList<Properties> pl = dbComm.query(String.format(SELECT_FROM_WHERE, FIELDS_ALARM, TABLE_ALARM, "username='" + user.getUsername() + "' and eventID=" + eventID));
+		if (pl.size() > 0) {
+			Properties p = pl.get(0);
+			return makeAlarm(p, false);
+		} else {
+			return null;
+		}
 	}
-	private Alarm makeAlarm(Properties p) {
+	private Alarm makeAlarm(Properties p, boolean fetchEvent) {
 		Alarm alarm = new Alarm();
 		String time = p.getProperty("time");
 		String message = p.getProperty("message");
@@ -75,7 +79,9 @@ public class Query {
 		alarm.setTimeBefore(time);
 		alarm.setMessage(message);
 		alarm.setOwner(queryUser(username));
-		alarm.setEvent(queryEvent(Integer.parseInt(eventID)));
+		if (fetchEvent) {
+			alarm.setEvent(queryEvent(Integer.parseInt(eventID), false));
+		}
 		return alarm;
 	}
 
@@ -84,16 +90,16 @@ public class Query {
 		ArrayList<Event> events = new ArrayList<Event>();
 		ArrayList<Properties> pl = dbComm.query(String.format(SELECT_FROM, FIELDS_EVENT, TABLE_EVENT));
 		for (Properties p : pl) {
-			events.add(makeEvent(p));
+			events.add(makeEvent(p, true));
 		}
 		return events;
 	}
-	public Event queryEvent(int eventID) {
+	public Event queryEvent(int eventID, boolean fetchAlarm) {
 		ArrayList<Properties> pl = dbComm.query(String.format(SELECT_FROM_WHERE, FIELDS_EVENT, TABLE_EVENT, "eventID=" + eventID));
 		Properties p = pl.get(0);
-		return makeEvent(p);
+		return makeEvent(p, fetchAlarm);
 	}
-	private Event makeEvent(Properties p) {
+	private Event makeEvent(Properties p, boolean fetchAlarm) {
 		Event event = null;
 		String id = p.getProperty("eventID");
 		String start = p.getProperty("startDataTime");
@@ -112,7 +118,9 @@ public class Query {
 		event.setEndDateTime(end);
 		event.setLocation(location);
 		event.setDescription(description);
-		event.setAlarm(queryAlarm(currentUser, Integer.parseInt(id)));
+		if (fetchAlarm) {
+			event.setAlarm(queryAlarm(currentUser, Integer.parseInt(id)));
+		}
 		// TODO remember room reservation?
 		if (event instanceof Appointment) {
 			((Appointment)event).setOwner(queryOwner(Integer.parseInt(id)));
@@ -242,12 +250,16 @@ public class Query {
 
 	private User queryOwner(int eventID) {
 		ArrayList<Properties> pl = dbComm.query(String.format(SELECT_FROM_WHERE, FIELDS_IS_OWNER, TABLE_IS_OWNER, "eventID=" + eventID));
-		Properties p = pl.get(0);
-		return queryUser(p.getProperty("username"));
+		if (pl.size() != 0) {
+			Properties p = pl.get(0);
+			return queryUser(p.getProperty("username"));
+		} else {
+			return null;
+		}
 	}
 
 	private ArrayList<User> queryParticipants(int eventID, String status) {
-		ArrayList<Properties> pl = dbComm.query(String.format(SELECT_FROM_WHERE, FIELDS_IS_PARTICIPANT, TABLE_IS_PARTICIPANT, "eventID=" + eventID + ", status=" + status));
+		ArrayList<Properties> pl = dbComm.query(String.format(SELECT_FROM_WHERE, FIELDS_IS_PARTICIPANT, TABLE_IS_PARTICIPANT, "eventID=" + eventID + " and status=" + status));
 		ArrayList<User> users = new ArrayList<User>();
 		for (Properties p : pl) {
 			users.add(queryUser(p.getProperty("username")));
@@ -267,7 +279,7 @@ public class Query {
 	private Event queryNotificationEvent(int notificationID) {
 		ArrayList<Properties> pl = dbComm.query(String.format(SELECT_FROM_WHERE, FIELDS_NOTIFICATION_FOR_EVENT, TABLE_NOTIFICATION_FOR_EVENT, "notificationID=" + notificationID));
 		Properties p = pl.get(0);
-		Event event = queryEvent(Integer.parseInt(p.getProperty("eventID")));
+		Event event = queryEvent(Integer.parseInt(p.getProperty("eventID")), true);
 		return event;
 	}
 
@@ -279,7 +291,7 @@ public class Query {
 		DatabaseConnection dbConn = new DatabaseConnection("jdbc:mysql://localhost:3306/calendarDatabase", "root", "skip".toCharArray());
 		DatabaseCommunication dbComm = new DatabaseCommunication(dbConn);
 		Query query = new Query(TestObjects.getUser00(), dbComm);
-		Event event = query.queryEvent(2);
+		Event event = query.queryEvent(2, true);
 		System.out.println(event);
 	}
 

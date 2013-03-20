@@ -14,6 +14,9 @@ public class Meeting extends Event implements Serializable{
 	private ArrayList<User> usersDeclined;
 
 	public Meeting(){
+		usersInvited = new ArrayList<User>();
+		usersAccepted = new ArrayList<User>();
+		usersDeclined = new ArrayList<User>();
 	}
 	/**
 	 * Use id = 0 when creating new objects. Actual ID should come from database
