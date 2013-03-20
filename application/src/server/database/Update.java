@@ -61,13 +61,7 @@ public class Update {
 		values.append("'").append(alarm.getMessage()).append("'").append(", ");
 		values.append("'").append(alarm.getOwner().getUsername()).append("'").append(", ");
 		values.append(alarm.getEvent().getId()).append(" ");
-		String updateString = String.format(INSERT_INTO_VALUES, TABLE_ALARM, FIELDS_ALARM, values.toString());
-		int id = 0;
-		if (debugging) {
-			System.out.println(updateString);
-		} else {
-			id = dbComm.update(updateString);
-		}
+		int id = insertObject(TABLE_ALARM, FIELDS_ALARM, values.toString());
 		return id;
 	}
 	public void updateAlarm(Alarm alarm) {
@@ -75,23 +69,13 @@ public class Update {
 		// TODO
 		StringBuilder condition = new StringBuilder();
 		// TODO
-		String updateString = String.format(UPDATE_SET_WHERE, TABLE_ALARM, values.toString(), condition.toString());
-		if (debugging) {
-			System.out.println(updateString);
-		} else {
-			dbComm.update(updateString);
-		}
+		updateObject(TABLE_ALARM, values.toString(), condition.toString());
 	}
 	public void deleteAlarm(Alarm alarm) {
 		StringBuilder condition = new StringBuilder();
 		condition.append("username=").append("'").append(alarm.getOwner()).append("'").append(", ");
 		// TODO
-		String updateString = String.format(DELETE_FROM_WHERE, TABLE_ALARM, condition.toString());
-		if (debugging) {
-			System.out.println(updateString);
-		} else {
-			dbComm.update(updateString);
-		}
+		deleteObject(TABLE_ALARM, condition.toString());
 	}
 
 
@@ -107,13 +91,7 @@ public class Update {
 		} else if (event instanceof Meeting) {
 			values.append(BIT_TRUE).append(" ");
 		}
-		String updateString = String.format(INSERT_INTO_VALUES, TABLE_EVENT, FIELDS_EVENT, values.toString());
-		int id = 0;
-		if (debugging) {
-			System.out.println(updateString);
-		} else {
-			id = dbComm.update(updateString);
-		}
+		int id = insertObject(TABLE_EVENT, FIELDS_EVENT, values.toString());
 		event.setId(id);
 		if (event.getRoom() != null) {
 			insertReservedRoom(event, event.getRoom());
@@ -139,13 +117,7 @@ public class Update {
 		values.append(group.getId()).append(", ");
 		values.append("'").append(group.getName()).append("'").append(", ");
 		values.append("'").append(group.getDescription()).append("'").append(" ");
-		String updateString = String.format(INSERT_INTO_VALUES, TABLE_GROUPS, FIELDS_GROUPS, values.toString());
-		int id = 0;
-		if (debugging) {
-			System.out.println(updateString);
-		} else {
-			id = dbComm.update(updateString);
-		}
+		int id = insertObject(TABLE_GROUPS, FIELDS_GROUPS, values.toString());
 		group.setId(id);
 		for (User user : group.getMembers()) {
 			insertIsMemberOf(user, group);
@@ -156,18 +128,20 @@ public class Update {
 		StringBuilder values = new StringBuilder();
 		values.append(notification.getId()).append(", ");
 		values.append("'").append(notification.getMessage()).append("'").append(" ");
-		String updateString = String.format(INSERT_INTO_VALUES, TABLE_NOTIFICATION, FIELDS_NOTIFICATION, values.toString());
-		int id = 0;
-		if (debugging) {
-			System.out.println(updateString);
-		} else {
-			id = dbComm.update(updateString);
-		}
+		int id = insertObject(TABLE_NOTIFICATION, FIELDS_NOTIFICATION, values.toString());
 		notification.setId(id);
 		insertNotificationTo(notification.getRecipient(), notification);
 		if (notification.getEvent() != null) {
 			insertNotificationForEvent(notification, notification.getEvent());
 		}
+	}
+	public void updateNotification(Notification notification) {
+		// TODO
+	}
+	public void deleteNotification(Notification notification) {
+		StringBuilder condition = new StringBuilder();
+		// TODO
+		deleteObject(TABLE_NOTIFICATION, condition.toString());
 	}
 
 	public void insertRoom(Room room) {
@@ -175,12 +149,12 @@ public class Update {
 		values.append(room.getId()).append(", ");
 		values.append(room.getSize()).append(", ");
 		values.append("'").append(room.getDescription()).append("'").append(" ");
-		String updateString = String.format(INSERT_INTO_VALUES, TABLE_ROOM, FIELDS_ROOM, values.toString());
-		if (debugging) {
-			System.out.println(updateString);
-		} else {
-			dbComm.update(updateString);
-		}
+		insertObject(TABLE_ROOM, FIELDS_ROOM, values.toString());
+	}
+	public void deleteRoom(Room room) {
+		StringBuilder condition = new StringBuilder();
+		// TODO
+		deleteObject(TABLE_ROOM, condition.toString());
 	}
 
 	public void insertUser(User user) {
@@ -189,36 +163,21 @@ public class Update {
 		values.append("'").append(user.getPassword()).append("'").append(", ");
 		values.append("'").append(user.getName()).append("'").append(", ");
 		values.append("'").append(user.getType()).append("'").append(" ");
-		String updateString = String.format(INSERT_INTO_VALUES, TABLE_USER, FIELDS_USER, values.toString());
-		if (debugging) {
-			System.out.println(updateString);
-		} else {
-			dbComm.update(updateString);
-		}
+		insertObject(TABLE_USER, FIELDS_USER, values.toString());
 	}
 
 	public void insertIsMemberOf(User user, Group group) {
 		StringBuilder values = new StringBuilder();
 		values.append("'").append(user.getUsername()).append("'").append(", ");
 		values.append(group.getId()).append(" ");
-		String updateString = String.format(INSERT_INTO_VALUES, TABLE_IS_MEMBER_OF, FIELDS_IS_MEMBER_OF, values.toString());
-		if (debugging) {
-			System.out.println(updateString);
-		} else {
-			dbComm.update(updateString);
-		}
+		insertObject(TABLE_IS_MEMBER_OF, FIELDS_IS_MEMBER_OF, values.toString());
 	}
 
 	public void insertIsOwner(User user, Event event) {
 		StringBuilder values = new StringBuilder();
 		values.append("'").append(user.getUsername()).append("'").append(", ");
 		values.append(event.getId()).append(" ");
-		String updateString = String.format(INSERT_INTO_VALUES, TABLE_IS_OWNER, FIELDS_IS_OWNER, values.toString());
-		if (debugging) {
-			System.out.println(updateString);
-		} else {
-			dbComm.update(updateString);
-		}
+		insertObject(TABLE_IS_OWNER, FIELDS_IS_OWNER, values.toString());
 	}
 
 	public void insertIsParticipant(User user, Event event, String status) {
@@ -226,54 +185,61 @@ public class Update {
 		values.append("'").append(user.getUsername()).append("'").append(", ");
 		values.append(event.getId()).append(", ");
 		values.append("'").append(status).append("'").append(" ");
-		String updateString = String.format(INSERT_INTO_VALUES, TABLE_IS_PARTICIPANT, FIELDS_IS_PARTICIPANT, values.toString());
-		if (debugging) {
-			System.out.println(updateString);
-		} else {
-			dbComm.update(updateString);
-		}
+		insertObject(TABLE_IS_PARTICIPANT, FIELDS_IS_PARTICIPANT, values.toString());
 	}
 
 	public void insertNotificationTo(User user, Notification notification) {
 		StringBuilder values = new StringBuilder();
 		values.append("'").append(user.getUsername()).append("'").append(", ");
 		values.append(notification.getId()).append(" ");
-		String updateString = String.format(INSERT_INTO_VALUES, TABLE_NOTIFICATION_TO, FIELDS_NOTIFICATION_TO, values.toString());
-		if (debugging) {
-			System.out.println(updateString);
-		} else {
-			dbComm.update(updateString);
-		}
+		insertObject(TABLE_NOTIFICATION_TO, FIELDS_NOTIFICATION_TO, values.toString());
 	}
 
 	public void insertNotificationForEvent(Notification notification, Event event) {
 		StringBuilder values = new StringBuilder();
 		values.append(notification.getId()).append(", ");
 		values.append(event.getId()).append(" ");
-		String updateString = String.format(INSERT_INTO_VALUES, TABLE_NOTIFICATION_FOR_EVENT, FIELDS_NOTIFICATION_FOR_EVENT, values.toString());
-		if (debugging) {
-			System.out.println(updateString);
-		} else {
-			dbComm.update(updateString);
-		}
+		insertObject(TABLE_NOTIFICATION_FOR_EVENT, FIELDS_NOTIFICATION_FOR_EVENT, values.toString());
 	}
 
 	public void insertReservedRoom(Event event, Room room) {
 		StringBuilder values = new StringBuilder();
 		values.append(event.getId()).append(", ");
 		values.append(room.getId()).append(" ");
-		String updateString = String.format(INSERT_INTO_VALUES, TABLE_RESERVED_ROOM, FIELDS_RESERVED_ROOM, values.toString());
-		if (debugging) {
-			System.out.println(updateString);
-		} else {
-			dbComm.update(updateString);
-		}
+		insertObject(TABLE_RESERVED_ROOM, FIELDS_RESERVED_ROOM, values.toString());
 	}
 
 
 	// TODO Add update and delete methods
 	// NB! Remember relations!
 
+	private int insertObject(String tableName, String fields, String values) {
+		String updateString = String.format(INSERT_INTO_VALUES, tableName, fields, values);
+		int id = 0;
+		if (debugging) {
+			System.out.println(updateString);
+		} else {
+			id = dbComm.update(updateString);
+		}
+		return id;
+	}
+	private void updateObject(String tableName, String values, String condition) {
+		String updateString = String.format(UPDATE_SET_WHERE, tableName, values, condition);
+		if (debugging) {
+			System.out.println(updateString);
+		} else {
+			dbComm.update(updateString);
+		}
+	}
+	private void deleteObject(String tableName, String condition) {
+		String updateString = String.format(DELETE_FROM_WHERE, tableName, condition);
+		if (debugging) {
+			System.out.println(updateString);
+		} else {
+			dbComm.update(updateString);
+		}
+	}
+	
 
 	public static void main(String[] args) {
 		DatabaseConnection dbConn = new DatabaseConnection("jdbc:mysql://localhost:3306/calendarDatabase", "root", "skip".toCharArray());
