@@ -5,6 +5,8 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Point;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -142,7 +144,7 @@ public class CalendarPane extends JPanel {
 		Date test = new Date();
 		
 		initEventData();
-
+		
 	}
 	public void updateDates() {
 
@@ -209,6 +211,23 @@ public class CalendarPane extends JPanel {
 		EventComponent eventComponent = new EventComponent(event);
 		eventComponent.setBounds(x, y, width, height);
 		panel.add(eventComponent);
+		eventComponent.addMouseListener(new MouseListener() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				new NewEventWindow(program, CalendarPane.this, ((EventComponent) e.getComponent()).getEvent(), program.getAllUsers());
+			}
+			@Override
+			public void mousePressed(MouseEvent e) {}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {}
+
+			@Override
+			public void mouseExited(MouseEvent e) {}
+		});
 		eventComponent.setVisible(true);
 	}
 	
