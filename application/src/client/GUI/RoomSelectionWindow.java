@@ -106,7 +106,9 @@ public class RoomSelectionWindow extends JPanel implements ActionListener {
 		return makeRoomArray();
 	}
 	private void getAvailableRooms() {
-		availRoomList = program.getAllRooms();
+		ArrayList<Room> allRooms = program.getAllRooms();
+		// Need to find rooms that are available!
+		availRoomList = allRooms;
 	}
 	private Room[] makeRoomArray() {
 		Room[] rooms = new Room[availRoomList.size()];
