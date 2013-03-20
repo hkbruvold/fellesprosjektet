@@ -160,6 +160,10 @@ public class ServerThread extends Thread {
 			send(new Response(Response.Status.OK, null));
 			// TODO what if it fails?
 			break;
+		case "updateStatus":
+			MeetingReply meetingReply = (MeetingReply) data;
+			update.updateIsParticipant(meetingReply.getUser(), meetingReply.getMeeting(), meetingReply.getStatus());
+			break;
 		case "requestChanges":
 			CurrentVersion version = (CurrentVersion) data;
 			System.out.println(version);
@@ -168,9 +172,6 @@ public class ServerThread extends Thread {
 			send(new Response(Response.Status.OK, new ChangeData(2L, tableNames, identifiers)));
 			// TODO what if it fails?
 			break;
-		case "updateStatus":
-			MeetingReply meetingReply = (MeetingReply) data;
-			update.insertIsParticipant(meetingReply.getUser(), meetingReply.getMeeting(), meetingReply.getStatus());
 		default:
 			System.out.println("case default");
 			send(new Response(Response.Status.FAILED, null));

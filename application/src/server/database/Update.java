@@ -197,6 +197,12 @@ public class Update {
 		values.append("'").append(status).append("'").append(" ");
 		insertObject(TABLE_IS_PARTICIPANT, FIELDS_IS_PARTICIPANT, values.toString());
 	}
+	public void updateIsParticipant(User user, Event event, String status) {
+		// TODO
+	}
+	public void deleteIsParticipant(User user, Event event) {
+		// TODO
+	}
 
 	public void insertNotificationTo(User user, Notification notification) {
 		StringBuilder values = new StringBuilder();
