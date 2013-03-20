@@ -12,3 +12,8 @@ CREATE TABLE changes (
     PRIMARY KEY (versionNumber, tableName)
 );
 
+Example entry:
+versionNumber = 28
+tableName = "User"
+identifiers = "alice, bob"
+
