@@ -31,8 +31,8 @@ public class NewEventWindow extends JPanel implements ActionListener, ItemListen
 	private static final String LABEL_MEETING = "Moete";
 	private static final String LABEL_PARTICIPANTS = "Deltakere:";
 
-	private static final String FIELD_DATE = "2028-06-28";
-	private static final String FIELD_TIME = "06:28";
+	private static final String FIELD_DATE = "2013-03-20";
+	private static final String FIELD_TIME = "10:00";
 
 	private static final String BUTTON_LOCATION_SET_TEXT = "Bruk: Tekst";
 	private static final String BUTTON_LOCATION_SET_ROOM = "Bruk: Rom";
@@ -288,7 +288,8 @@ public class NewEventWindow extends JPanel implements ActionListener, ItemListen
 				program.registerAlarm(alarm);
 			}
 			//Someone, plz fix calendarpane.addEvent. This is very critical!
-			//calendarPane.addEvent(event);
+			calendarPane.addEvent(event);
+			calendarPane.updateCalendar();
 			frame.dispose(); // Close if successful; show error message if not?
 		}
 	}
