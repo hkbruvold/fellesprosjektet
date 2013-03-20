@@ -2,6 +2,8 @@ package client;
 
 import data.Request;
 import data.Response;
+import data.XMLTranslator;
+
 import java.io.*;
 import java.net.*;
 
@@ -10,42 +12,33 @@ public class Client {
 	private static final int PORT = 4444;
 
 	private Socket socket;
-	private ObjectInputStream in;
-	private ObjectOutputStream out;
+	private InputStream in;
+	private OutputStream out;
 
-	public Client () {}
-
-	public Response send (Request req) {
+	public Response send(Request req) {
 		try {
 			Response res = null;
-
 			connect();
-
-			out.writeObject(req);
+			XMLTranslator.send(req, out);
 			out.flush();
-
-			// Wait for response
-			while (res == null) {
-				res = (Response) in.readObject();
+			while (res == null) { // wait for response
+				res = (Response) XMLTranslator.receiveResponse(in);
 			}
-
 			closeConnection();
-
 			return res;
-		} catch (IOException | ClassNotFoundException e) {
+		} catch (IOException e) {
 			System.err.println(e);
 			return null;
 		}
 	}
 
-	private ObjectInputStream connect () throws UnknownHostException, IOException {
+	private void connect() throws UnknownHostException, IOException {
 		socket = new Socket(HOST, PORT);
-		out = new ObjectOutputStream(socket.getOutputStream());
-		in = new ObjectInputStream(socket.getInputStream());
-		return in;
+		out = socket.getOutputStream();
+		in = socket.getInputStream();
 	}
 
-	private void closeConnection () throws IOException {
+	private void closeConnection() throws IOException {
 		out.close();
 		in.close();
 		socket.close();

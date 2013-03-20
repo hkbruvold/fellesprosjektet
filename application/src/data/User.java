@@ -2,10 +2,18 @@ package data;
 
 import java.io.Serializable;
 
+import org.simpleframework.xml.Element;
+import org.simpleframework.xml.Root;
+
+@Root
 public class User implements Serializable {
+	@Element
 	private String username;
+	@Element (required=false)
 	private String password;
+	@Element (required=false)
 	private String name;
+	@Element (required=false)
 	private String type;
 
 	public User(){

@@ -3,6 +3,8 @@ package client;
 import client.GUI.*;
 import data.*;
 
+import java.util.ArrayList;
+
 public class Program {
 	private Client client;
 	private User currentUser;
@@ -25,9 +27,8 @@ public class Program {
 		System.exit(0);
 	}
 
-	public boolean login (String username, String password) {
-		Authentication data = new Authentication(username, password);
-		Response res = client.send(new Request("login", data));
+	public boolean login (User user) {
+		Response res = client.send(new Request("login", user));
 		currentUser = (User) res.getData();
 		return res.status == Response.Status.OK;
 	}
@@ -46,15 +47,18 @@ public class Program {
 	public void registerAlarm(Alarm alarm) { 
 		Response res = client.send(new Request("addAlarm", alarm));
 	}
-	public User[] getAllUsers(){
+	public ArrayList<User> getAllUsers(){
 		System.out.println("Fetching users");
 		Response res = client.send(new Request("listUsers", null));
-		return (User[]) res.getData();
+		ArrayList<User> users = null;
+		if (res.status == Response.Status.OK) {
+			users = ((Group)res.getData()).getMembers();
+		}
+		return users;
 	}
 	
 	public void addUser(User user){
 		Response res = client.send(new Request("newUser", user));
-		//return res.status == Response.Status.OK;
 	}
 
 	public static void main(String[] args) {

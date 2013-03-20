@@ -1,6 +1,12 @@
 package server;
 
-import data.*;
+import data.Alarm;
+import data.Event;
+import data.Group;
+import data.Request;
+import data.Response;
+import data.User;
+import data.XMLTranslator;
 
 import java.net.*;
 import java.util.ArrayList;
@@ -20,8 +26,8 @@ public class ServerThread extends Thread {
 	public static final String PASSWORD = "skip";
 	
 	private Socket socket = null;
-	private ObjectOutputStream out;
-	private ObjectInputStream in;
+	private OutputStream out;
+	private InputStream in;
 	private DatabaseConnection dbConn;
 	private DatabaseCommunication dbComm;
 
@@ -35,58 +41,57 @@ public class ServerThread extends Thread {
 	@Override
 	public void run() {
 		try {
-			out = new ObjectOutputStream(socket.getOutputStream());
-			in = new ObjectInputStream(socket.getInputStream());
+			out = socket.getOutputStream();
+			in = socket.getInputStream();
 			Request req = null;
 			while (req == null) {
-				req = (Request) in.readObject();
+				req = (Request) XMLTranslator.receiveRequest(in);
 			}
 			parseRequest(req);
 			closeSocket();
-		} catch (IOException | ClassNotFoundException e) {
+		} catch (IOException e) {
 			System.err.println(e);
 		}
 	}
 
 	public void parseRequest (Request req) {
 		String action = req.getAction();
+		Serializable data = req.getData();
 		Update update = new Update(null, dbComm);
 		Query query = new Query(null, dbComm);
 		System.out.println(action);
 
 		switch (action) {
 		case "login":
-			Authentication auth = (Authentication) req.getData();
-			String username = auth.getUser();
-			String password = auth.getPassword();
-			User fetchedUser = query.queryUser(username);
-			
-			if(fetchedUser.getUsername().equals(username) && fetchedUser.getPassword().equals(password)){
+			User clientUser = (User) data;
+			User fetchedUser = query.queryUser(clientUser.getUsername());
+			boolean correctUsername = fetchedUser.getUsername().equals(clientUser.getUsername());
+			boolean correctPassword = fetchedUser.getPassword().equals(clientUser.getPassword());
+			if (correctUsername && correctPassword) {
 				send(new Response(Response.Status.OK, fetchedUser));
 			} else{
 				send(new Response(Response.Status.FAILED, null));
 			}
 			break;
 		case "addEvent":
-			Event event = (Event) req.getData();
+			Event event = (Event) data;
 			update.insertEvent(event);
-			// TODO: what if insert fails?
-			send(new Response(Response.Status.OK, null));
+			send(new Response(Response.Status.OK, null)); 
 			break;
 		case "addAlarm":
-			Alarm alarm = (Alarm) req.getData();
+			Alarm alarm = (Alarm) data;
 			update.insertAlarm(alarm);
-			// TODO: what if insert fails?
-			send(new Response(Response.Status.OK, null));
+			send(new Response(Response.Status.OK, null)); 
 			break;
 		case "listUsers":
 			ArrayList<User> userList = query.queryUsers();
-			send(new Response(Response.Status.OK, userList));
+			Group group = new Group(-1, "resutl", "dummy");
+			group.addMembers(userList);
+			send(new Response(Response.Status.OK, group));
 			break;
 		case "newUser":
-			User user = (User) req.getData();
+			User user = (User) data;
 			update.insertUser(user);
-			// TODO: what if insert fails?
 			send(new Response(Response.Status.OK, null));
 			break;
 		default:
@@ -94,11 +99,7 @@ public class ServerThread extends Thread {
 		}
 	}
 	public void send(Response res) {
-		try {
-			out.writeObject(res);
-		} catch (IOException e) {
-			System.err.println(e);
-		}
+		XMLTranslator.send(res, out);
 	}
 
 	public void closeSocket () {

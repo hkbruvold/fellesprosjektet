@@ -8,6 +8,7 @@ import java.util.Arrays;
 import javax.swing.*;
 
 import client.Program;
+import data.User;
 
 @SuppressWarnings("serial")
 public class LoginWindow extends JPanel implements ActionListener {
@@ -116,7 +117,10 @@ public class LoginWindow extends JPanel implements ActionListener {
 		for (char c : password) {
 			sb.append(c);
 		}
-		if (program.login(username, sb.toString())) {
+		User user = new User();
+		user.setUsername(username);
+		user.setPassword(sb.toString());
+		if (program.login(user)) {
 			frame.dispose();
 			program.showMainWindow();
 		} else {
