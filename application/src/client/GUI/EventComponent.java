@@ -51,5 +51,9 @@ public class EventComponent extends JComponent { //TODO find proper component
 		
 		this.RGBColor = RGBColor;
 	}
+	
+	public Event getEvent() {
+		return this.event;
+	}
 
 }

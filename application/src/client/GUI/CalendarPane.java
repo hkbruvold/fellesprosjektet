@@ -5,6 +5,8 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Point;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -64,7 +66,7 @@ public class CalendarPane extends JPanel {
 	public CalendarPane(Program program) {
 		this.program = program;
 
-		setSize(800, 400);
+		setSize(853, 482);
 		setLayout(null);
 
 		currentDate = new Date();
@@ -108,8 +110,8 @@ public class CalendarPane extends JPanel {
 		viewPort.setViewPosition(new Point(0, 8 * gridSizeY));
 
 		calendarScroller = new JScrollPane();
-		calendarScroller.setSize(panel.getWidth() + 20, 350);
-		calendarScroller.setLocation(getWidth() / 2 - calendarScroller.getWidth() / 2, getHeight() - calendarScroller.getHeight());
+		calendarScroller.setSize(833, 445);
+		calendarScroller.setLocation(10, 11);
 		calendarScroller.setViewport(viewPort);
 		add(calendarScroller);
 
@@ -142,7 +144,7 @@ public class CalendarPane extends JPanel {
 		Date test = new Date();
 		
 		initEventData();
-
+		
 	}
 	public void updateDates() {
 
@@ -209,6 +211,23 @@ public class CalendarPane extends JPanel {
 		EventComponent eventComponent = new EventComponent(event);
 		eventComponent.setBounds(x, y, width, height);
 		panel.add(eventComponent);
+		eventComponent.addMouseListener(new MouseListener() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				new NewEventWindow(program, CalendarPane.this, ((EventComponent) e.getComponent()).getEvent(), program.getAllUsers());
+			}
+			@Override
+			public void mousePressed(MouseEvent e) {}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {}
+
+			@Override
+			public void mouseExited(MouseEvent e) {}
+		});
 		eventComponent.setVisible(true);
 	}
 	
