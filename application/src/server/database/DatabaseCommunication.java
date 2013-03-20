@@ -32,7 +32,7 @@ public class DatabaseCommunication {
 	}
 	public int batchUpdate(/* TODO */) {
 		// TODO
-		return -2;
+		return -1;
 	}
 
 	private ArrayList<Properties> makeQuery(String query) throws ClassNotFoundException, SQLException {

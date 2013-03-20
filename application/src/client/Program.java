@@ -46,8 +46,10 @@ public class Program {
 		Response res = client.send(new Request("removeEvent", event));
 	}
 
-	public void registerAlarm(Alarm alarm) { 
+	public int registerAlarm(Alarm alarm) { 
 		Response res = client.send(new Request("addAlarm", alarm));
+		int result = (Integer) res.getData();
+		return result;
 	}
 	public User[] getAllUsers(){
 		System.out.println("Fetching users");
@@ -65,6 +67,7 @@ public class Program {
 	}
 	
 	public void addUser(User user){
+		// TODO remember to make sure username is available!
 		Response res = client.send(new Request("newUser", user));
 	}
 

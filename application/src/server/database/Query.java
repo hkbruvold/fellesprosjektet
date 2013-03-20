@@ -219,8 +219,12 @@ public class Query {
 	}
 	public User queryUser(String username) {
 		ArrayList<Properties> pl = dbComm.query(String.format(SELECT_FROM_WHERE, FIELDS_USER, TABLE_USER, "username='" + username + "'"));
-		Properties p = pl.get(0);
-		return makeUser(p);
+		if (pl.size() > 0) {
+			Properties p = pl.get(0);
+			return makeUser(p);
+		} else {
+			return null;
+		}
 	}
 	private User makeUser(Properties p) {
 		User user = new User();

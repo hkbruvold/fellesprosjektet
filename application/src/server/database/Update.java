@@ -55,18 +55,20 @@ public class Update {
 		this.dbComm = dbComm;
 	}
 
-	public void insertAlarm(Alarm alarm) {
+	public int insertAlarm(Alarm alarm) {
 		StringBuilder values = new StringBuilder();
 		values.append("'").append(alarm.getTimeBefore()).append("'").append(", ");
 		values.append("'").append(alarm.getMessage()).append("'").append(", ");
 		values.append("'").append(alarm.getOwner().getUsername()).append("'").append(", ");
 		values.append(alarm.getEvent().getId()).append(" ");
 		String updateString = String.format(INSERT_INTO_VALUES, TABLE_ALARM, FIELDS_ALARM, values.toString());
+		int id = 0;
 		if (debugging) {
 			System.out.println(updateString);
 		} else {
-			dbComm.update(updateString);
+			id = dbComm.update(updateString);
 		}
+		return id;
 	}
 	public void updateAlarm(Alarm alarm) {
 		StringBuilder values = new StringBuilder();
