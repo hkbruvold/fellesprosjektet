@@ -67,10 +67,8 @@ public class GroupOverviewWindow extends JFrame {
 		gbc_lblGroups.gridy = 1;
 		contentPane.add(lblGroups, gbc_lblGroups);
 		//TODO pull grouplist from server
-		ArrayList<Group> groups = new ArrayList<Group>();
-		groups.add(temp.TestObjects.getGroup00());
-		groups.add(temp.TestObjects.getGroup01());
-		JComboBox<Group> comboBox = new JComboBox<Group>((Group[]) groups.toArray());
+		Group[] fetchedGroups = program.getAllGroups();
+		JComboBox<Group> comboBox = new JComboBox<Group>(fetchedGroups);
 		GridBagConstraints gbc_comboBox = new GridBagConstraints();
 		gbc_comboBox.insets = new Insets(0, 0, 5, 0);
 		gbc_comboBox.fill = GridBagConstraints.HORIZONTAL;

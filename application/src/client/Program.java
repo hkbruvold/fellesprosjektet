@@ -67,6 +67,20 @@ public class Program {
 		}
 		return userArray;
 	}
+	public Group[] getAllGroups(){
+		System.out.println("Fetching groups");
+		Response res = client.send(new Request("listGroups", null));
+		ArrayList<Group> groups = null;
+		if (res.status == Response.Status.OK) {
+			groups = (ArrayList<Group>) res.getData();
+		}
+		Group[] groupArray = new Group[groups.size()];
+		int i = 0;
+		for (Group group : groups){
+			groupArray[i++] = group;
+		}
+		return groupArray;
+	}
 	public ArrayList<Room> getAllRooms() {
 		Response res = client.send(new Request("listRooms", null));
 		if (res.getData() != null && res.getData() instanceof DataList) {
