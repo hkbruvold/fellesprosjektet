@@ -35,8 +35,13 @@ public class Meeting extends Event implements Serializable{
 	}
 
 	public String toString() {
-		return String.format("Meeting; ID: %s, Description: %s, Start: %s, End: %s, Location: %s, Leader: %s, Invited: %s, Accepted: %s, Declined: %s", 
-				id, description, startDateTime, endDateTime, location, user.getUsername(), usersInvited, usersAccepted, usersDeclined);
+		if (room != null) {
+			return String.format("Meeting; ID: %s, Description: %s, Start: %s, End: %s, Room: %s, Leader: %s, Invited: %s, Accepted: %s, Declined: %s", 
+					id, description, startDateTime, endDateTime, room, user.getUsername(), usersInvited, usersAccepted, usersDeclined);
+		} else {
+			return String.format("Meeting; ID: %s, Description: %s, Start: %s, End: %s, Location: %s, Leader: %s, Invited: %s, Accepted: %s, Declined: %s", 
+					id, description, startDateTime, endDateTime, location, user.getUsername(), usersInvited, usersAccepted, usersDeclined);
+		}
 	}
 
 	public void inviteParticipant(User user) {

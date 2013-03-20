@@ -121,7 +121,7 @@ public class Query {
 		if (fetchAlarm) {
 			event.setAlarm(queryAlarm(currentUser, Integer.parseInt(id)));
 		}
-		// TODO remember room reservation?
+		event.setRoom(queryReservedRoom(Integer.parseInt(id)));
 		if (event instanceof Appointment) {
 			((Appointment)event).setOwner(queryOwner(Integer.parseInt(id)));
 		} else if (event instanceof Meeting) {
@@ -283,6 +283,16 @@ public class Query {
 		return event;
 	}
 
+	
+	private Room queryReservedRoom(int eventID) {
+		ArrayList<Properties> pl = dbComm.query(String.format(SELECT_FROM_WHERE, FIELDS_RESERVED_ROOM, TABLE_RESERVED_ROOM, "eventID=" + eventID));
+		Room room = null;
+		if (pl.size() > 0) {
+			Properties p = pl.get(0);
+			room = queryRoom(Integer.parseInt(p.getProperty("roomID")));
+		}
+		return room;
+	}
 
 	// TODO notification_to
 
