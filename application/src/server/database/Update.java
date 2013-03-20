@@ -119,10 +119,17 @@ public class Update {
 	}
 	public void updateEvent(Event event) {
 		StringBuilder values = new StringBuilder();
-		// TODO
+		String[] fields = TableFields.EVENT.getFields();
+		values.append(fields[0]).append("=").append(event.getId()).append(", ");
+		values.append(fields[1]).append("='").append(event.getStartDateTime()).append("', ");
+		values.append(fields[2]).append("='").append(event.getEndDateTime()).append("', ");
+		values.append(fields[3]).append("='").append(event.getLocation()).append("', ");
+		values.append(fields[4]).append("='").append(event.getDescription()).append("', ");
+		values.append(fields[5]).append("=").append(event instanceof Meeting ? BIT_TRUE : BIT_FALSE).append(" ");
 		StringBuilder condition = new StringBuilder();
 		condition.append("eventID=").append(event.getId());
 		updateObject(TABLE_EVENT, values.toString(), condition.toString());
+		// TODO relations? (room reservation etc.)
 	}
 	public void deleteEvent(Event event) {
 		StringBuilder condition = new StringBuilder();
@@ -143,10 +150,14 @@ public class Update {
 	}
 	public void updateGroup(Group group) {
 		StringBuilder values = new StringBuilder();
-		// TODO
+		String[] fields = TableFields.GROUPS.getFields();
+		values.append(fields[0]).append("=").append(group.getId()).append(", ");
+		values.append(fields[1]).append("='").append(group.getName()).append("', ");
+		values.append(fields[2]).append("='").append(group.getDescription()).append("' ");
 		StringBuilder condition = new StringBuilder();
 		condition.append("groupID=").append(group.getId());
 		updateObject(TABLE_GROUPS, values.toString(), condition.toString());
+		// TODO relations? (members etc.)
 	}
 	public void deleteGroup(Group group) {
 		StringBuilder condition = new StringBuilder();
