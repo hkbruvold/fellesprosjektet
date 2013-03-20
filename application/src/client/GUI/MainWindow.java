@@ -11,6 +11,7 @@ import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 import javax.swing.Box;
@@ -20,6 +21,7 @@ import javax.swing.ImageIcon;
 import java.awt.Dimension;
 
 import client.Program;
+import data.Notification;
 import data.User;
 
 @SuppressWarnings("serial")
@@ -54,6 +56,10 @@ public class MainWindow extends JFrame {
 		this.currentUser = currentUser;
 		this.setVisible(true);
 		initialize();
+		ArrayList<Notification> notificationArray = program.getAllNotifications();
+		for(Notification notification : notificationArray){
+			new NotificationWindow(program, notification);
+		}
 	}
 
 	/**
