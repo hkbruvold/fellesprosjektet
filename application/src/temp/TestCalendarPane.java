@@ -24,6 +24,18 @@ public class TestCalendarPane {
 		event1.setStartDateTime("2013-03-20 13:00");
 		event1.setEndDateTime("2013-03-20 16:00");
 		calendarPane.addEvent(event1);
+
+		Event event2 = new Meeting();
+		event2.setDescription("event2");
+		event2.setStartDateTime("2013-03-20 15:00");
+		event2.setEndDateTime("2013-03-20 17:00");
+		calendarPane.addEvent(event2);
+
+		Event event3 = new Meeting();
+		event3.setDescription("event3");
+		event3.setStartDateTime("2013-03-20 13:00");
+		event3.setEndDateTime("2013-03-20 18:00");
+		calendarPane.addEvent(event3);
 		
 		
 		calendarPane.updateCalendar();

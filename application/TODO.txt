@@ -12,6 +12,7 @@ __Eivind__
 __Hans-Kristian__
 Main/calendar window (framework in place)
 Fix calendarPane.addEvent(event) so that it acutally works - High priority
+	CalendarPane need to fetch events from the server!
 
 __Kaare__
 parseRequest i ServerThread

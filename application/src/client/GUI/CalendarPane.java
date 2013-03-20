@@ -151,7 +151,7 @@ public class CalendarPane extends JPanel {
 		DateFormat df = new SimpleDateFormat("yyyy w u");
 		//int date = 0;
 		//int month = 0;
-
+		//TODO Fetch events from database, and add them all to the calendarPane!
 		for(int i = 0; i < days.length; i++) {
 			JLabel weekDay = new JLabel(days[i]);
 			weekDay.setBounds(i * gridSizeX, 0, gridSizeX, gridSizeY);
@@ -197,7 +197,6 @@ public class CalendarPane extends JPanel {
 		int dayOfWeek = event.getDayOfWeek();
 		double startTime = start.get(Calendar.HOUR_OF_DAY) + (double) (start.get(Calendar.MINUTE)) * 100 / 60 / 100;
 		double duration = (double) (end.getTimeInMillis() - start.getTimeInMillis()) / (1000*60*60);
-		System.out.println(duration);
 		
 		int position = getFreeLane(event);
 		eventPosition.put(event, position);
@@ -206,8 +205,6 @@ public class CalendarPane extends JPanel {
 		int width = (int) (gridSizeX/laneSizes[dayOfWeek]);
 		int x = dayOfWeek*gridSizeX + (int) (position*(gridSizeX/laneSizes[dayOfWeek]) - 2*gridSizeX);
 		int y = (int) startTime*gridSizeY;
-		
-		System.out.println(height);
 		
 		EventComponent eventComponent = new EventComponent(event);
 		eventComponent.setBounds(x, y, width, height);
@@ -240,7 +237,6 @@ public class CalendarPane extends JPanel {
 		if (! overlapList.containsKey(event)) {
 			overlapList.put(event, new HashSet<Event>());
 		}
-		System.out.println("Added Event");
 	}
 	
 	public void initEventData() {
@@ -250,7 +246,6 @@ public class CalendarPane extends JPanel {
 		}
 		overlapList = new HashMap<Event, Set<Event>>();
 		eventPosition = new HashMap<Event, Integer>();
-		System.out.println("Reset event data");
 	}
 	
 	public void updateCalendar() {
@@ -259,7 +254,6 @@ public class CalendarPane extends JPanel {
 		for (int i = 0; i<7; i++) {
 			for (Event event: eventDayList.get(i)) {
 				addEventToCalendar(event);
-				System.out.println("Added event to calendar");
 			}
 		}
 	}
