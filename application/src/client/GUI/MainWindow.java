@@ -177,6 +177,11 @@ public class MainWindow extends JFrame {
 		verticalBox.add(btnMessages);
 
 		JButton btnViewCalendars = new JButton("Se kalendre");
+		btnViewCalendars.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				new SelectCalendars(program, calendarPane);
+			}
+		});
 		verticalBox.add(btnViewCalendars);
 
 		calendarPane = new CalendarPane(this.program);

@@ -51,7 +51,7 @@ public class NewUserWindow extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public NewUserWindow(final Program program) {
+	public NewUserWindow(Program program) {
 		this.program = program;
 		this.jFrame = this;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

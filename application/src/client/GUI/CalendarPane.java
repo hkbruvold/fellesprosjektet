@@ -17,6 +17,7 @@ import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -144,9 +145,9 @@ public class CalendarPane extends JPanel {
 			label.setVerticalAlignment(SwingConstants.TOP);
 			addToCalendar(label, 0, i, 1, 1);
 		}
-
-
-		Date test = new Date();
+		
+		showUserCalendars = new HashSet<User>();
+		showUserCalendars.add(program.getCurrentUser());
 		
 		initEventData();
 		
@@ -199,6 +200,12 @@ public class CalendarPane extends JPanel {
 	private void addToCalendar(Component comp, double posX, double posY, double width, double height) {
 		comp.setBounds((int)(posX * gridSizeX), (int)(posY * gridSizeY), (int)(gridSizeX * width), (int)(gridSizeY * height));
 		panel.add(comp);
+	}
+	
+	public void setShowUserCalendars(List<User> users) {
+		for (User user: users) {
+			this.showUserCalendars.add(user);
+		}
 	}
 	
 	public void initEventData() {
