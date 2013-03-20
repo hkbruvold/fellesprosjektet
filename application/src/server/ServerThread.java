@@ -157,7 +157,7 @@ public class ServerThread extends Thread {
 			send(new Response(Response.Status.OK, new ChangeData(2L, tableNames, identifiers)));
 			// TODO what if it fails?
 			break;
-		case "removeEvent":
+		case REMOVE_EVENT:
 			Event eventToRemove = (Event) data;
 			update = new Update(currentUser, dbComm);
 			update.deleteEvent(eventToRemove);
