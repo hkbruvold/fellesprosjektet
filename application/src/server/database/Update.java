@@ -46,8 +46,6 @@ public class Update {
 	private static final String PARTICIPANT_STATUS_ACCEPTED = "1";
 	private static final String PARTICIPANT_STATUS_DECLINED = "2";
 
-	// 	Please ignore! I'm using this as a shortcut to open classes. Query TableFields Event TestObjects
-
 	private User currentUser;
 	private DatabaseCommunication dbComm;
 	private boolean debugging = false;
@@ -200,7 +198,10 @@ public class Update {
 	}
 	public void updateRoom(Room room) {
 		StringBuilder values = new StringBuilder();
-		// TODO
+		String[] fields = TableFields.ROOM.getFields();
+		values.append(fields[0]).append("=").append(room.getId()).append(", ");
+		values.append(fields[1]).append("=").append(room.getSize()).append(", ");
+		values.append(fields[2]).append("='").append(room.getSize()).append("' ");
 		StringBuilder condition = new StringBuilder();
 		condition.append("roomID=").append(room.getId());
 		updateObject(TABLE_ROOM, values.toString(), condition.toString());
@@ -221,6 +222,7 @@ public class Update {
 	}
 	public void updateUser(User user) {
 		StringBuilder values = new StringBuilder();
+		String[] fields = TableFields.USER.getFields();
 		// TODO
 		StringBuilder condition = new StringBuilder();
 		condition.append("username='").append(user.getUsername()).append("'");
@@ -264,6 +266,7 @@ public class Update {
 	}
 	public void updateIsParticipant(User user, Event event, String status) {
 		StringBuilder values = new StringBuilder();
+		String[] fields = TableFields.IS_PARTICIPANT.getFields();
 		// TODO
 		StringBuilder condition = new StringBuilder();
 		condition.append("username='").append(user.getUsername()).append("'").append(AND);
@@ -343,7 +346,7 @@ public class Update {
 		DatabaseCommunication dbComm = new DatabaseCommunication(dbConn);
 		Update update = new Update(TestObjects.getUser00(), dbComm);
 		update.debugging = true;
-		
+
 	}
 
 }
