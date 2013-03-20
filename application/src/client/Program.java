@@ -34,8 +34,10 @@ public class Program {
 	}
 	// TODO
 
-	public void registerEvent(Event event) {
+	public int registerEvent(Event event) {
 		Response res = client.send(new Request("addEvent", event));
+		int id = (Integer) res.getData();
+		return id;
 	}
 	public void editEvent(Event event/*, TODO */) {
 		// TODO (remember database!)

@@ -93,7 +93,7 @@ public class Update {
 	}
 
 
-	public void insertEvent(Event event) {
+	public int insertEvent(Event event) {
 		StringBuilder values = new StringBuilder();
 		values.append(DEFAULT_NEW_ID).append(", ");
 		values.append("'").append(event.getStartDateTime()).append("'").append(", ");
@@ -131,6 +131,7 @@ public class Update {
 				insertIsParticipant(user, event, PARTICIPANT_STATUS_DECLINED);
 			}
 		}
+		return id;
 	}
 
 	public void insertGroup(Group group) {

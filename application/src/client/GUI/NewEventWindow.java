@@ -279,13 +279,14 @@ public class NewEventWindow extends JPanel implements ActionListener, ItemListen
 					event = new Appointment(0, startDateTime, endDateTime, description, location, user);
 				}
 			}
+			event.setUser(user);
+			int id = program.registerEvent(event);
+			event.setId(id);
 			Alarm alarm = null;
 			if(alarmCheckBox.isSelected()){
 				alarm = new Alarm(alarmTimeBeforeField.getText(), "", user, event);
 				program.registerAlarm(alarm);
 			}
-			event.setUser(user);
-			program.registerEvent(event);
 			//Someone, plz fix calendarpane.addEvent. This is very critical!
 			//calendarPane.addEvent(event);
 			frame.dispose(); // Close if successful; show error message if not?

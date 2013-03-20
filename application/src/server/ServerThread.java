@@ -78,8 +78,8 @@ public class ServerThread extends Thread {
 			break;
 		case "addEvent":
 			Event event = (Event) data;
-			update.insertEvent(event);
-			send(new Response(Response.Status.OK, null)); 
+			int id = update.insertEvent(event);
+			send(new Response(Response.Status.OK, id)); 
 			// TODO what if it fails?
 			break;
 		case "addAlarm":
