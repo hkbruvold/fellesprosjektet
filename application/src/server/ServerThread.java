@@ -87,7 +87,7 @@ public class ServerThread extends Thread {
 			ArrayList<User> userList = query.queryUsers();
 			Group group = new Group(-1, "resutl", "dummy");
 			group.addMembers(userList);
-			new Response(Response.Status.OK, group);
+			send(new Response(Response.Status.OK, group));
 			break;
 		case "newUser":
 			User user = (User) data;
