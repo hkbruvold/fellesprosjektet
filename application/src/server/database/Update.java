@@ -178,7 +178,9 @@ public class Update {
 	}
 	public void updateNotification(Notification notification) {
 		StringBuilder values = new StringBuilder();
-		// TODO
+		String[] fields = TableFields.NOTIFICATION.getFields();
+		values.append(fields[0]).append("=").append(notification.getId()).append(", ");
+		values.append(fields[1]).append("='").append(notification.getMessage()).append("' ");
 		StringBuilder condition = new StringBuilder();
 		condition.append("notificationID=").append(notification.getId());
 		updateObject(TABLE_NOTIFICATION, values.toString(), condition.toString());
@@ -341,24 +343,6 @@ public class Update {
 		DatabaseCommunication dbComm = new DatabaseCommunication(dbConn);
 		Update update = new Update(TestObjects.getUser00(), dbComm);
 		update.debugging = true;
-
-		Alarm alarm = TestObjects.getAlarm00();
-		update.insertAlarm(alarm);
-		update.updateAlarm(alarm);
-		update.deleteAlarm(alarm);
-		System.out.println();
-		
-		Event event = TestObjects.getMeeting00();
-		update.insertEvent(event);
-		update.updateEvent(event);
-		update.deleteEvent(event);
-		System.out.println();
-		
-		Group group = TestObjects.getGroup00();
-		update.insertGroup(group);
-		update.updateGroup(group);
-		update.deleteGroup(group);
-		System.out.println();
 		
 	}
 
