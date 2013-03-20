@@ -46,8 +46,6 @@ public class Update {
 	private static final String PARTICIPANT_STATUS_ACCEPTED = "1";
 	private static final String PARTICIPANT_STATUS_DECLINED = "2";
 
-	// 	Please ignore! I'm using this as a shortcut to open classes. Query TableFields Event TestObjects
-
 	private User currentUser;
 	private DatabaseCommunication dbComm;
 	private boolean debugging = false;
@@ -178,7 +176,9 @@ public class Update {
 	}
 	public void updateNotification(Notification notification) {
 		StringBuilder values = new StringBuilder();
-		// TODO
+		String[] fields = TableFields.NOTIFICATION.getFields();
+		values.append(fields[0]).append("=").append(notification.getId()).append(", ");
+		values.append(fields[1]).append("='").append(notification.getMessage()).append("' ");
 		StringBuilder condition = new StringBuilder();
 		condition.append("notificationID=").append(notification.getId());
 		updateObject(TABLE_NOTIFICATION, values.toString(), condition.toString());
@@ -198,7 +198,10 @@ public class Update {
 	}
 	public void updateRoom(Room room) {
 		StringBuilder values = new StringBuilder();
-		// TODO
+		String[] fields = TableFields.ROOM.getFields();
+		values.append(fields[0]).append("=").append(room.getId()).append(", ");
+		values.append(fields[1]).append("=").append(room.getSize()).append(", ");
+		values.append(fields[2]).append("='").append(room.getSize()).append("' ");
 		StringBuilder condition = new StringBuilder();
 		condition.append("roomID=").append(room.getId());
 		updateObject(TABLE_ROOM, values.toString(), condition.toString());
@@ -219,7 +222,11 @@ public class Update {
 	}
 	public void updateUser(User user) {
 		StringBuilder values = new StringBuilder();
-		// TODO
+		String[] fields = TableFields.USER.getFields();
+		values.append(fields[0]).append("='").append(user.getUsername()).append("', ");
+		values.append(fields[1]).append("='").append(user.getPassword()).append("', ");
+		values.append(fields[2]).append("='").append(user.getName()).append("', ");
+		values.append(fields[3]).append("='").append(user.getType()).append("' ");
 		StringBuilder condition = new StringBuilder();
 		condition.append("username='").append(user.getUsername()).append("'");
 		updateObject(TABLE_USER, values.toString(), condition.toString());
@@ -262,7 +269,10 @@ public class Update {
 	}
 	public void updateIsParticipant(User user, Event event, String status) {
 		StringBuilder values = new StringBuilder();
-		// TODO
+		String[] fields = TableFields.IS_PARTICIPANT.getFields();
+		values.append(fields[0]).append("='").append(user.getUsername()).append("', ");
+		values.append(fields[1]).append("=").append(event.getId()).append(", ");
+		values.append(fields[2]).append("=").append(status).append(" ");
 		StringBuilder condition = new StringBuilder();
 		condition.append("username='").append(user.getUsername()).append("'").append(AND);
 		condition.append("eventID=").append(event.getId());
@@ -342,24 +352,6 @@ public class Update {
 		Update update = new Update(TestObjects.getUser00(), dbComm);
 		update.debugging = true;
 
-		Alarm alarm = TestObjects.getAlarm00();
-		update.insertAlarm(alarm);
-		update.updateAlarm(alarm);
-		update.deleteAlarm(alarm);
-		System.out.println();
-		
-		Event event = TestObjects.getMeeting00();
-		update.insertEvent(event);
-		update.updateEvent(event);
-		update.deleteEvent(event);
-		System.out.println();
-		
-		Group group = TestObjects.getGroup00();
-		update.insertGroup(group);
-		update.updateGroup(group);
-		update.deleteGroup(group);
-		System.out.println();
-		
 	}
 
 }
