@@ -279,8 +279,11 @@ public class Query {
 
 	private Event queryNotificationEvent(int notificationID) {
 		ArrayList<Properties> pl = dbComm.query(String.format(SELECT_FROM_WHERE, FIELDS_NOTIFICATION_FOR_EVENT, TABLE_NOTIFICATION_FOR_EVENT, "notificationID=" + notificationID));
-		Properties p = pl.get(0);
-		Event event = queryEvent(Integer.parseInt(p.getProperty("eventID")), true);
+		Event event = null;
+		if (pl.size() > 0) {
+			Properties p = pl.get(0);
+			event = queryEvent(Integer.parseInt(p.getProperty("eventID")), true);
+		}
 		return event;
 	}
 
@@ -304,10 +307,10 @@ public class Query {
 		return user;
 	}
 	public ArrayList<Notification> queryNotificationsTo(String username) {
-		ArrayList<Properties> pl = dbComm.query(String.format(SELECT_FROM_WHERE, FIELDS_NOTIFICATION_TO, TABLE_NOTIFICATION_TO, "username=" + username));
+		ArrayList<Properties> pl = dbComm.query(String.format(SELECT_FROM_WHERE, FIELDS_NOTIFICATION_TO, TABLE_NOTIFICATION_TO, "username='" + username + "'"));
 		ArrayList<Notification> notifications = new ArrayList<Notification>();
 		for (Properties p : pl) {
-			notifications.add(makeNotification(p));
+			notifications.add(queryNotification(Integer.parseInt(p.getProperty("notificationID"))));
 		}
 		return notifications;
 	}

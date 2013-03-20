@@ -64,8 +64,14 @@ public class ServerThread extends Thread {
 	public void parseRequest (Request req) {
 		String action = req.getAction();
 		Serializable data = req.getData();
-		Update update = new Update(null, dbComm);
-		Query query = new Query(null, dbComm);
+		User currentUser;
+		if (data instanceof User) {
+			currentUser = (User) data;
+		} else {
+			currentUser = null;
+		}
+		Update update = new Update(currentUser, dbComm);
+		Query query = new Query(currentUser, dbComm);
 		System.out.println(action);
 
 		switch (action) {
@@ -130,7 +136,7 @@ public class ServerThread extends Thread {
 			send(new Response(Response.Status.OK, eventDL));
 			break;
 		case "listNotifications":
-			ArrayList<Notification> notificationList = query.queryNotifications();
+			ArrayList<Notification> notificationList = query.queryNotificationsTo(((User) data).getUsername());
 			DataList notificationDL = new DataList();
 			for (Notification notification: notificationList) {
 				notificationDL.add(notification);

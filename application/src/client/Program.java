@@ -111,7 +111,7 @@ public class Program {
 	}
 	public ArrayList<Notification> getAllNotifications(){
 		System.out.println("Fetching notifications");
-		Response res = client.send(new Request("listNotifications", null));
+		Response res = client.send(new Request("listNotifications", currentUser));
 		if (res.getData() != null && res.getData() instanceof DataList) {
 			ArrayList<Notification> result = new ArrayList<Notification>();
 			DataList dl = (DataList) res.getData();
