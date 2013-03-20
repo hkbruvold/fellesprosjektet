@@ -1,9 +1,11 @@
 package server;
 
+import data.Appointment;
 import data.Authentication;
 import data.Alarm;
 import data.Event;
 import data.Group;
+import data.Meeting;
 import data.Request;
 import data.Response;
 import data.User;

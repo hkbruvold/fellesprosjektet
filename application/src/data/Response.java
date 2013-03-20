@@ -10,7 +10,7 @@ import org.simpleframework.xml.Root;
 public class Response implements Serializable {
 	@Element
 	public Status status;
-	@Element
+	@Element(required=false)
 	private Serializable data;
 
 	public Response() {

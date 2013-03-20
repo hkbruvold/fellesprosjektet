@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import org.simpleframework.xml.ElementList;
 
 public class Meeting extends Event implements Serializable{
-	private User leader;
 	@ElementList
 	private ArrayList<User> usersInvited;
 	@ElementList
@@ -20,23 +19,21 @@ public class Meeting extends Event implements Serializable{
 	 * Use id = 0 when creating new objects. Actual ID should come from database
 	 */
 	public Meeting(int id, String startDateTime, String endDateTime, String description, String location, User leader) {
-		super(id, startDateTime, endDateTime, description, location);
+		super(id, startDateTime, endDateTime, description, location, leader);
 		usersInvited = new ArrayList<User>();
 		usersAccepted = new ArrayList<User>();
 		usersDeclined = new ArrayList<User>();
-		this.leader = leader;
 	}
 	public Meeting(int id, String startDateTime, String endDateTime, String description, Room room, User leader) {
-		super(id, startDateTime, endDateTime, description, room);
+		super(id, startDateTime, endDateTime, description, room, leader);
 		usersInvited = new ArrayList<User>();
 		usersAccepted = new ArrayList<User>();
 		usersDeclined = new ArrayList<User>();
-		this.leader = leader;
 	}
 
 	public String toString() {
 		return String.format("Meeting; ID: %s, Description: %s, Start: %s, End: %s, Location: %s, Leader: %s, Invited: %s, Accepted: %s, Declined: %s", 
-				id, description, startDateTime, endDateTime, location, leader.getUsername(), usersInvited, usersAccepted, usersDeclined);
+				id, description, startDateTime, endDateTime, location, user.getUsername(), usersInvited, usersAccepted, usersDeclined);
 	}
 
 	public void inviteParticipant(User user) {
@@ -58,10 +55,10 @@ public class Meeting extends Event implements Serializable{
 	}
 
 	public User getLeader() {
-		return leader;
+		return user;
 	}
 	public void setLeader(User leader) {
-		this.leader = leader;
+		this.user = leader;
 	}
 	public ArrayList<User> getUsersInvited() {
 		return usersInvited;

@@ -3,7 +3,6 @@ package data;
 import java.io.Serializable;
 
 public class Appointment extends Event implements Serializable {
-	private User owner;
 
 	public Appointment(){
 	}
@@ -11,23 +10,21 @@ public class Appointment extends Event implements Serializable {
 	 * Use id = 0 when creating new objects. Actual ID should come from database
 	 */
 	public Appointment(int id, String startDateTime, String endDateTime, String description, String location, User owner) {
-		super(id, startDateTime, endDateTime, description, location);
-		this.owner = owner;
+		super(id, startDateTime, endDateTime, description, location, owner);
 	}
 	public Appointment(int id, String startDateTime, String endDateTime, String description, Room room, User owner) {
-		super(id, startDateTime, endDateTime, description, room);
-		this.owner = owner;
+		super(id, startDateTime, endDateTime, description, room, owner);
 	}
 
 	public String toString() {
-		return String.format("Appointment; ID: %s, Description: %s, Start: %s, End: %s, Location: %s, Owner: %s", id, description, startDateTime, endDateTime, location, owner.getUsername());
+		return String.format("Appointment; ID: %s, Description: %s, Start: %s, End: %s, Location: %s, Owner: %s", id, description, startDateTime, endDateTime, location, user.getUsername());
 	}
 
 	public User getOwner() {
-		return owner;
+		return user;
 	}
 	public void setOwner(User owner) {
-		this.owner = owner;
+		this.user = owner;
 	}
 
 }
