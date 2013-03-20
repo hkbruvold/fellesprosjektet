@@ -105,18 +105,18 @@ public class ServerThread extends Thread {
 			break;
 		case "listUsers":
 			ArrayList<User> userList = query.queryUsers();
-			Group group = new Group(0, "resutl", "dummy");
+			Group group = new Group(0, "result", "dummy");
 			group.addMembers(userList);
 			send(new Response(Response.Status.OK, group));
 			// TODO what if it fails?
 			break;
 		case "listRooms":
 			ArrayList<Room> roomList = query.queryRooms();
-			DataList dl = new DataList();
+			DataList roomDL = new DataList();
 			for (Room room : roomList) {
-				dl.add(room);
+				roomDL.add(room);
 			}
-			send(new Response(Response.Status.OK, dl));
+			send(new Response(Response.Status.OK, roomDL));
 			// TODO what if it fails?
 			break;
 		case "getAllEvents":
@@ -124,12 +124,11 @@ public class ServerThread extends Thread {
 			send(new Response(Response.Status.OK,eventlist));
 		case "listGroups":
 			ArrayList<Group> groupList = query.queryGroups();
-			DataList dl1 = new DataList();
+			DataList groupDL = new DataList();
 			for (Group group1 : groupList) {
-				System.out.println(group1);
-				dl1.add(group1);
+				groupDL.add(group1);
 			}
-			send(new Response(Response.Status.OK, dl1));
+			send(new Response(Response.Status.OK, groupDL));
 			break;
 		case "newUser":
 			User user = (User) data;
