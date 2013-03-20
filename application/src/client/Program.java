@@ -2,6 +2,10 @@ package client;
 
 import client.GUI.*;
 import data.*;
+import data.communication.ChangeData;
+import data.communication.CurrentVersion;
+import data.communication.Request;
+import data.communication.Response;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -29,8 +33,13 @@ public class Program {
 		System.exit(0);
 	}
 	
-	public void requestChanges() {
+	public ChangeData requestChanges() {
 		Response res = client.send(new Request("requestChanges", version));
+		ChangeData change = null;
+		if (res.getData() != null && res.getData() instanceof ChangeData) {
+			change = (ChangeData) res.getData();
+		}
+		return change;
 	}
 
 	public boolean login (Authentication auth) {

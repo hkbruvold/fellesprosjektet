@@ -1,10 +1,7 @@
 package client;
-import java.util.ArrayList;
 
-import client.*;
-import client.GUI.NotificationWindow;
-import data.Notification;
 import data.User;
+import data.communication.ChangeData;
 
 public class ChangePoller extends Thread {
 	private static final boolean True = true;
@@ -19,11 +16,8 @@ public class ChangePoller extends Thread {
 	@Override
 	public void run(){
 		while(True){
-			program.requestChanges();
-//			ArrayList<Notification> notificationArray = program.getAllNotifications();
-//			for(Notification notification : notificationArray){
-//				new NotificationWindow(program, notification);
-//			}
+			ChangeData res = program.requestChanges();
+			System.out.println(res);
 			try {
 				sleep(5000);
 			} catch (InterruptedException e) {

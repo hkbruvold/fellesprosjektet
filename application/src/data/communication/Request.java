@@ -1,5 +1,5 @@
 
-package data;
+package data.communication;
 
 import java.io.Serializable;
 import java.util.HashMap;

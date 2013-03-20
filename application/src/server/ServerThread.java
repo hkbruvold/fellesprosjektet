@@ -5,11 +5,13 @@ import data.Alarm;
 import data.Event;
 import data.Group;
 import data.Notification;
-import data.Request;
-import data.Response;
 import data.Room;
 import data.User;
 import data.XMLTranslator;
+import data.communication.ChangeData;
+import data.communication.CurrentVersion;
+import data.communication.Request;
+import data.communication.Response;
 
 import java.net.*;
 import java.util.ArrayList;
@@ -155,6 +157,12 @@ public class ServerThread extends Thread {
 			User user = (User) data;
 			update.insertUser(user);
 			send(new Response(Response.Status.OK, null));
+			// TODO what if it fails?
+			break;
+		case "requestChanges":
+			CurrentVersion version = (CurrentVersion) data;
+			System.out.println(version);
+			send(new Response(Response.Status.OK, new ChangeData(2L, 1)));
 			// TODO what if it fails?
 			break;
 		default:

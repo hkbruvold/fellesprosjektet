@@ -1,4 +1,4 @@
-package data;
+package data.communication;
 
 import java.io.Serializable;
 
@@ -9,12 +9,16 @@ import org.simpleframework.xml.Root;
 public class CurrentVersion implements Serializable {
 	@Element
 	private long versionNumber;
-	// DateTime?
 	
 	public CurrentVersion() {
 	}
 	public CurrentVersion(long versionNumber) {
 		this.versionNumber = versionNumber;
+	}
+
+	@Override
+	public String toString() {
+		return "CurrentVersion [versionNumber=" + versionNumber + "]";
 	}
 
 	public long getVersionNumber() {

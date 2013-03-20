@@ -7,6 +7,9 @@ import java.io.Serializable;
 import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.core.Persister;
 
+import data.communication.Request;
+import data.communication.Response;
+
 public class XMLTranslator {
 
 	public static void send(Serializable object, OutputStream out) {

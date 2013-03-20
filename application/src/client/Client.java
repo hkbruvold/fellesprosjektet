@@ -1,8 +1,8 @@
 package client;
 
-import data.Request;
-import data.Response;
 import data.XMLTranslator;
+import data.communication.Request;
+import data.communication.Response;
 
 import java.io.*;
 import java.net.*;
