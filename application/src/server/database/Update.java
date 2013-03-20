@@ -270,7 +270,9 @@ public class Update {
 	public void updateIsParticipant(User user, Event event, String status) {
 		StringBuilder values = new StringBuilder();
 		String[] fields = TableFields.IS_PARTICIPANT.getFields();
-		// TODO
+		values.append(fields[0]).append("='").append(user.getUsername()).append("', ");
+		values.append(fields[1]).append("=").append(event.getId()).append(", ");
+		values.append(fields[2]).append("=").append(status).append(" ");
 		StringBuilder condition = new StringBuilder();
 		condition.append("username='").append(user.getUsername()).append("'").append(AND);
 		condition.append("eventID=").append(event.getId());
