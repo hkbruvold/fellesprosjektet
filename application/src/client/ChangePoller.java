@@ -16,14 +16,18 @@ public class ChangePoller extends Thread {
 	@Override
 	public void run(){
 		while(true){
-			ChangeData res = program.requestChanges();
-			System.out.println(res);
+			request();
 			try {
 				sleep(INTERVAL);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 		}
+	}
+
+	private void request() {
+		ChangeData res = program.requestChanges();
+		System.out.println(res);
 	}
 
 }
