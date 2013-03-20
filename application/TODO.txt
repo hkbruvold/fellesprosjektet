@@ -2,7 +2,9 @@ TODO:
 
 __Unassigned__
 Get all unread notifications and invites when a user logs in
-Write a background thread that listens for changes such as NewMeetings, Invites, Alarms and such
+Write a background thread that listens for changes such as NewMeetings, Invites, Alarms and such (Started)
+Make it possible to invite Groups to event
+
 Group managment:
 	Edit existing groups
 		Fetch all groups from server
