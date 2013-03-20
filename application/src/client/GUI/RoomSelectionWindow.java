@@ -47,8 +47,9 @@ public class RoomSelectionWindow extends JPanel implements ActionListener {
 		frame.pack();
 		frame.setVisible(true);
 	}
-	public RoomSelectionWindow(NewEventWindow newEventWindow) {
+	public RoomSelectionWindow(NewEventWindow newEventWindow, Program program) {
 		this.newEventWindow = newEventWindow;
+		this.program = program;
 		initFrame();
 		initPanel();
 
@@ -105,11 +106,7 @@ public class RoomSelectionWindow extends JPanel implements ActionListener {
 		return makeRoomArray();
 	}
 	private void getAvailableRooms() {
-		availRoomList = new ArrayList<Room>();
-		// TODO get from server (and database)
-		availRoomList.add(TestObjects.getRoom00()); // Temporary!
-		availRoomList.add(TestObjects.getRoom01()); // Temporary!
-		availRoomList.add(TestObjects.getRoom02()); // Temporary!
+		availRoomList = program.getAllRooms();
 	}
 	private Room[] makeRoomArray() {
 		Room[] rooms = new Room[availRoomList.size()];

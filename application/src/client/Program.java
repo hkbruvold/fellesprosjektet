@@ -3,7 +3,9 @@ package client;
 import client.GUI.*;
 import data.*;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
 
 public class Program {
 	private Client client;
@@ -64,6 +66,19 @@ public class Program {
 			userArray[i++] = user;
 		}
 		return userArray;
+	}
+	public ArrayList<Room> getAllRooms() {
+		Response res = client.send(new Request("listRooms", null));
+		if (res.getData() != null && res.getData() instanceof DataList) {
+			ArrayList<Room> result = new ArrayList<Room>();
+			DataList dl = (DataList) res.getData();
+			for (Serializable data : dl.getData()) {
+				result.add((Room) data);
+			}
+			return result;
+		} else {
+			return null;
+		}
 	}
 	
 	public void addUser(User user){

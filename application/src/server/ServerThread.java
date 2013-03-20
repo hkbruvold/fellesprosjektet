@@ -6,12 +6,15 @@ import data.Event;
 import data.Group;
 import data.Request;
 import data.Response;
+import data.Room;
 import data.User;
 import data.XMLTranslator;
 
 import java.net.*;
 import java.util.ArrayList;
 import java.io.*;
+
+import client.GUI.DataList;
 
 import server.database.DatabaseCommunication;
 import server.database.DatabaseConnection;
@@ -88,7 +91,6 @@ public class ServerThread extends Thread {
 			} else {
 				send(new Response(Response.Status.OK, eventId)); 
 			}
-			send(new Response(Response.Status.OK, eventId)); 
 			// TODO what if relations fails?
 			break;
 		case "addAlarm":
@@ -106,6 +108,15 @@ public class ServerThread extends Thread {
 			Group group = new Group(0, "resutl", "dummy");
 			group.addMembers(userList);
 			send(new Response(Response.Status.OK, group));
+			// TODO what if it fails?
+			break;
+		case "listRooms":
+			ArrayList<Room> roomList = query.queryRooms();
+			DataList dl = new DataList();
+			for (Room room : roomList) {
+				dl.add(room);
+			}
+			send(new Response(Response.Status.OK, dl));
 			// TODO what if it fails?
 			break;
 		case "newUser":
