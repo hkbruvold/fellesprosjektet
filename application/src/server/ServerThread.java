@@ -77,8 +77,7 @@ public class ServerThread extends Thread {
 		}
 	}
 
-	private void performMisc(Serializable data, Update update, Query query,
-			MiscAction miscAction) {
+	private void performMisc(Serializable data, Update update, Query query, MiscAction miscAction) {
 		switch (miscAction) {
 		case LOGIN:
 			Authentication auth = (Authentication) data;
@@ -114,8 +113,7 @@ public class ServerThread extends Thread {
 		}
 	}
 
-	private void performInsert(Serializable data, Update update,
-			InsertAction insertAction) {
+	private void performInsert(Serializable data, Update update, InsertAction insertAction) {
 		switch (insertAction) {
 		case ADD_EVENT:
 			Event event = (Event) data;
@@ -150,8 +148,7 @@ public class ServerThread extends Thread {
 		}
 	}
 
-	private void performUpdate(Serializable data, User currentUser,
-			UpdateAction updateAction) {
+	private void performUpdate(Serializable data, User currentUser, UpdateAction updateAction) {
 		Update update;
 		switch (updateAction) {
 		case REMOVE_EVENT:
@@ -165,8 +162,7 @@ public class ServerThread extends Thread {
 		}
 	}
 
-	private void performQuery(Serializable data, Query query,
-			QueryAction queryAction) {
+	private void performQuery(Serializable data, Query query, QueryAction queryAction) {
 		switch (queryAction) {
 		case LIST_USERS:
 			ArrayList<User> userList = query.queryUsers();
