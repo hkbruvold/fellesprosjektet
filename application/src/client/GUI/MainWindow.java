@@ -189,4 +189,8 @@ public class MainWindow extends JFrame {
 		getContentPane().add(logOutButton, gbc_logOutButton);
 		weekNumberBox.setSelectedIndex(week-1);
 	}
+	
+	public CalendarPane getCalendarPane() {
+		return calendarPane;
+	}
 }
