@@ -4,6 +4,7 @@ import data.Authentication;
 import data.Alarm;
 import data.Event;
 import data.Group;
+import data.MeetingReply;
 import data.Notification;
 import data.Room;
 import data.User;
@@ -167,6 +168,9 @@ public class ServerThread extends Thread {
 			send(new Response(Response.Status.OK, new ChangeData(2L, tableNames, identifiers)));
 			// TODO what if it fails?
 			break;
+		case "updateStatus":
+			MeetingReply meetingReply = (MeetingReply) data;
+			update.insertIsParticipant(meetingReply.getUser(), meetingReply.getEvent(), meetingReply.getStatus());
 		default:
 			System.out.println("case default");
 			send(new Response(Response.Status.FAILED, null));
