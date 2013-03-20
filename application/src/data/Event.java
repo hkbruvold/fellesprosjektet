@@ -122,6 +122,6 @@ public abstract class Event implements Serializable {
 	public int getDayOfWeek() {
 		Calendar cal = this.getStartDate();
 		
-		return (cal.DAY_OF_WEEK - 2) % 7;
+		return (cal.get(Calendar.DAY_OF_WEEK) - 2) % 7;
 	}
 }
