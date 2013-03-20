@@ -20,6 +20,7 @@ import temp.TestObjects;
 import javax.swing.ImageIcon;
 import java.awt.Dimension;
 
+import client.ChangePoller;
 import client.Program;
 import data.Notification;
 import data.User;
@@ -56,6 +57,9 @@ public class MainWindow extends JFrame {
 		this.currentUser = currentUser;
 		this.setVisible(true);
 		initialize();
+		//ChangePoller poller = new ChangePoller(currentUser, program);
+		//poller.run();
+		//new ChangePoller(currentUser, program).run();
 		ArrayList<Notification> notificationArray = program.getAllNotifications();
 		for(Notification notification : notificationArray){
 			new NotificationWindow(program, notification);
