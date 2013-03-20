@@ -16,9 +16,8 @@ Fix calendarPane.addEvent(event) so that it acutally works - High priority
 __Kaare__
 parseRequest i ServerThread
 Add new groups
-		Fetch all users from server
+
 __Kjell__
-Login from client, via database
 Database queries (mostly done)
 Database update
 Database delete
@@ -30,5 +29,8 @@ __Done__
 Add window for new user
 Add option to add alarm to meeting (when invited)
 Server-client communication (sending/receiving objects), High priority
-Database insert
 fix newUserWindow, and push new user to server
+Database insert
+Login from client, via database
+XML communication between client and server
+Fetch all users from server
