@@ -68,15 +68,19 @@ public class Update {
 	}
 	public void updateAlarm(Alarm alarm) {
 		StringBuilder values = new StringBuilder();
-		// TODO
+		String[] fields = TableFields.ALARM.getFields();
+		values.append(fields[0]).append("='").append(alarm.getTimeBefore()).append("', ");
+		values.append(fields[1]).append("='").append(alarm.getMessage()).append("', ");
+		values.append(fields[2]).append("='").append(alarm.getOwner().getUsername()).append("', ");
+		values.append(fields[3]).append("=").append(alarm.getEvent().getId()).append(" ");
 		StringBuilder condition = new StringBuilder();
-		condition.append("username=").append("'").append(alarm.getOwner()).append("'").append(AND);
+		condition.append("username=").append("'").append(alarm.getOwner().getUsername()).append("'").append(AND);
 		condition.append("eventID=").append(alarm.getEvent().getId()).append(" ");
 		updateObject(TABLE_ALARM, values.toString(), condition.toString());
 	}
 	public void deleteAlarm(Alarm alarm) {
 		StringBuilder condition = new StringBuilder();
-		condition.append("username=").append("'").append(alarm.getOwner()).append("'").append(AND);
+		condition.append("username=").append("'").append(alarm.getOwner().getUsername()).append("'").append(AND);
 		condition.append("eventID=").append(alarm.getEvent().getId()).append(" ");
 		deleteObject(TABLE_ALARM, condition.toString());
 	}
@@ -327,6 +331,24 @@ public class Update {
 		Update update = new Update(TestObjects.getUser00(), dbComm);
 		update.debugging = true;
 
+		Alarm alarm = TestObjects.getAlarm00();
+		update.insertAlarm(alarm);
+		update.updateAlarm(alarm);
+		update.deleteAlarm(alarm);
+		System.out.println();
+		
+		Event event = TestObjects.getMeeting00();
+		update.insertEvent(event);
+		update.updateEvent(event);
+		update.deleteEvent(event);
+		System.out.println();
+		
+		Group group = TestObjects.getGroup00();
+		update.insertGroup(group);
+		update.updateGroup(group);
+		update.deleteGroup(group);
+		System.out.println();
+		
 	}
 
 }
