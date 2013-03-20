@@ -74,7 +74,7 @@ public class NewEventWindow extends JPanel implements ActionListener, ItemListen
 		initPanel();
 
 		deleteButton.setEnabled(false);
-		locationButton.setEnabled(false);
+		locationButton.setEnabled(true);
 		deleteButton.setToolTipText(TOOLTIP_NOT_SAVED);
 
 		frame.pack();
@@ -299,9 +299,6 @@ public class NewEventWindow extends JPanel implements ActionListener, ItemListen
 	public void itemStateChanged(ItemEvent e) {
 		if (e.getSource().equals(meetingCheckBox)) {
 			participantsList.setEnabled(meetingCheckBox.isSelected());
-			if(participantsList.getSelectedValues().length>0){
-				locationButton.setEnabled(meetingCheckBox.isSelected());
-			}
 			
 		} else if (e.getSource().equals(alarmCheckBox)) {
 			alarmTimeBeforeField.setEnabled(alarmCheckBox.isSelected());
