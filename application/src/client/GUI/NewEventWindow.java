@@ -125,7 +125,7 @@ public class NewEventWindow extends JPanel implements ActionListener, ItemListen
 
 	private void initFrame() {
 		frame = new JFrame(FRAME_NAME);
-		frame.setPreferredSize(new Dimension(300, 300)); // TODO temp
+		frame.setPreferredSize(new Dimension(400, 350)); // TODO temp
 		frame.setResizable(false);
 		frame.setLocationRelativeTo(null);
 		frame.getContentPane().add(this);
