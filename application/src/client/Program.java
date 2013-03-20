@@ -165,5 +165,9 @@ public class Program {
 	public HashMap<User, Set<Event>> getEventList() {
 		return eventList;
 	}
+	
+	public User getCurrentUser() {
+		return currentUser;
+	}
 
 }
