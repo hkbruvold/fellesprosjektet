@@ -1,29 +1,14 @@
 package server;
 
-import data.Authentication;
-import data.Alarm;
-import data.Event;
-import data.Group;
-import data.MeetingReply;
-import data.Notification;
-import data.Room;
-import data.User;
-import data.XMLTranslator;
-import data.communication.ChangeData;
-import data.communication.CurrentVersion;
-import data.communication.Request;
-import data.communication.Response;
-
 import java.net.*;
 import java.util.ArrayList;
 import java.io.*;
 
+import data.*;
+import data.communication.*;
+import data.communication.Request.Action;
 import client.GUI.DataList;
-
-import server.database.DatabaseCommunication;
-import server.database.DatabaseConnection;
-import server.database.Query;
-import server.database.Update;
+import server.database.*;
 
 public class ServerThread extends Thread {
 	private static final String HOST = "localhost";
@@ -65,7 +50,7 @@ public class ServerThread extends Thread {
 	}
 
 	public void parseRequest (Request req) {
-		String action = req.getAction();
+		Action action = req.getAction();
 		Serializable data = req.getData();
 		User currentUser;
 		if (data instanceof User) {
@@ -78,7 +63,7 @@ public class ServerThread extends Thread {
 		System.out.println(action);
 
 		switch (action) {
-		case "login":
+		case LOGIN:
 			Authentication auth = (Authentication) data;
 			User fetchedUser = query.queryUser(auth.getUsername());
 			if (fetchedUser == null) {
@@ -93,7 +78,7 @@ public class ServerThread extends Thread {
 				send(new Response(Response.Status.FAILED, null));
 			}
 			break;
-		case "addEvent":
+		case ADD_EVENT:
 			Event event = (Event) data;
 			int eventId = update.insertEvent(event);
 			if (eventId == FAILED_INSERT) {
@@ -103,7 +88,7 @@ public class ServerThread extends Thread {
 			}
 			// TODO what if relations fails?
 			break;
-		case "addAlarm":
+		case ADD_ALARM:
 			Alarm alarm = (Alarm) data;
 			int alarmResult = update.insertAlarm(alarm);
 			if (alarmResult == FAILED_INSERT) {
@@ -113,14 +98,14 @@ public class ServerThread extends Thread {
 			}
 			// TODO what if relations fails?
 			break;
-		case "listUsers":
+		case LIST_USERS:
 			ArrayList<User> userList = query.queryUsers();
 			Group group = new Group(0, "result", "dummy");
 			group.addMembers(userList);
 			send(new Response(Response.Status.OK, group));
 			// TODO what if it fails?
 			break;
-		case "listRooms":
+		case LIST_ROOMS:
 			ArrayList<Room> roomList = query.queryRooms();
 			DataList roomDL = new DataList();
 			for (Room room : roomList) {
@@ -129,7 +114,7 @@ public class ServerThread extends Thread {
 			send(new Response(Response.Status.OK, roomDL));
 			// TODO what if it fails?
 			break;
-		case "getAllEvents":
+		case GET_ALL_EVENTS:
 			query = new Query((User)data, dbComm); // Needed to get fetch alarms to the user
 			ArrayList<Event> eventList = query.queryEvents();
 			DataList eventDL = new DataList();
@@ -138,7 +123,7 @@ public class ServerThread extends Thread {
 			}
 			send(new Response(Response.Status.OK, eventDL));
 			break;
-		case "listNotifications":
+		case LIST_NOTIFICATIONS:
 			ArrayList<Notification> notificationList = query.queryNotificationsTo(((User) data).getUsername());
 			DataList notificationDL = new DataList();
 			for (Notification notification: notificationList) {
@@ -146,7 +131,7 @@ public class ServerThread extends Thread {
 			}
 			send(new Response(Response.Status.OK, notificationDL));
 			break;
-		case "listGroups":
+		case LIST_GROUPS:
 			ArrayList<Group> groupList = query.queryGroups();
 			DataList groupDL = new DataList();
 			for (Group group1 : groupList) {
@@ -154,17 +139,17 @@ public class ServerThread extends Thread {
 			}
 			send(new Response(Response.Status.OK, groupDL));
 			break;
-		case "newUser":
+		case NEW_USER:
 			User user = (User) data;
 			update.insertUser(user);
 			send(new Response(Response.Status.OK, null));
 			// TODO what if it fails?
 			break;
-		case "updateStatus":
+		case UPDATE_STATUS:
 			MeetingReply meetingReply = (MeetingReply) data;
 			update.updateIsParticipant(meetingReply.getUser(), meetingReply.getMeeting(), meetingReply.getStatus());
 			break;
-		case "requestChanges":
+		case REQUEST_CHANGES:
 			CurrentVersion version = (CurrentVersion) data;
 			System.out.println(version);
 			String[] tableNames = new String[]{"User", "Event"}; // TODO request database
