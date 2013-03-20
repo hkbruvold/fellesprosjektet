@@ -172,7 +172,7 @@ public class CalendarPane extends JPanel {
 				} catch (ParseException e) {
 					e.printStackTrace();
 				}
-				JLabel dateLabel = new JLabel(new SimpleDateFormat("d/M yy").format(dates));
+				JLabel dateLabel = new JLabel(new SimpleDateFormat("YYYY-MM-dd").format(dates));
 				dateLabel.setBounds(i * gridSizeX, dateLabel.getFont().getSize(), gridSizeX, gridSizeY);
 				dateLabel.setHorizontalAlignment(SwingConstants.CENTER);
 				dayLine.add(dateLabel);
