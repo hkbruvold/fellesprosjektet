@@ -196,8 +196,8 @@ public class CalendarPane extends JPanel {
 		
 		int dayOfWeek = event.getDayOfWeek();
 		double startTime = start.get(Calendar.HOUR_OF_DAY) + (double) (start.get(Calendar.MINUTE)) * 100 / 60 / 100;
-		double duration = (end.getTimeInMillis() - start.getTimeInMillis()) / (1000*60*60);
-		System.out.println(startTime);
+		double duration = (double) (end.getTimeInMillis() - start.getTimeInMillis()) / (1000*60*60);
+		System.out.println(duration);
 		
 		int position = getFreeLane(event);
 		eventPosition.put(event, position);
@@ -207,7 +207,7 @@ public class CalendarPane extends JPanel {
 		int x = dayOfWeek*gridSizeX + (int) (position*(gridSizeX/laneSizes[dayOfWeek]) - 2*gridSizeX);
 		int y = (int) startTime*gridSizeY;
 		
-		System.out.println(width);
+		System.out.println(height);
 		
 		EventComponent eventComponent = new EventComponent(event);
 		eventComponent.setBounds(x, y, width, height);
