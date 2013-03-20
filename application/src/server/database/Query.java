@@ -178,13 +178,14 @@ public class Query {
 		Properties p = pl.get(0);
 		return makeNotification(p);
 	}
-	private Notification makeNotification(Properties p) { // TODO get recipient
+	private Notification makeNotification(Properties p) {
 		Notification notification = new Notification();
 		String id = p.getProperty("notificationID");
 		String description = p.getProperty("description");
 
 		notification.setId(Integer.parseInt(id));
 		notification.setMessage(description);
+		notification.setRecipient(queryNotificationTo(Integer.parseInt(id)));
 		Event event = queryNotificationEvent(Integer.parseInt(id));
 		notification.setEvent(event);
 		return notification;
@@ -283,7 +284,6 @@ public class Query {
 		return event;
 	}
 
-	
 	private Room queryReservedRoom(int eventID) {
 		ArrayList<Properties> pl = dbComm.query(String.format(SELECT_FROM_WHERE, FIELDS_RESERVED_ROOM, TABLE_RESERVED_ROOM, "eventID=" + eventID));
 		Room room = null;
@@ -294,9 +294,26 @@ public class Query {
 		return room;
 	}
 
-	// TODO notification_to
+	private User queryNotificationTo(int notificationID) {
+		ArrayList<Properties> pl = dbComm.query(String.format(SELECT_FROM_WHERE, FIELDS_NOTIFICATION_TO, TABLE_NOTIFICATION_TO, "notificationID=" + notificationID));
+		User user = null;
+		if (pl.size() > 0) {
+			Properties p = pl.get(0);
+			user = queryUser(p.getProperty("username"));
+		}
+		return user;
+	}
+	public ArrayList<Notification> queryNotificationsTo(String username) {
+		ArrayList<Properties> pl = dbComm.query(String.format(SELECT_FROM_WHERE, FIELDS_NOTIFICATION_TO, TABLE_NOTIFICATION_TO, "username=" + username));
+		ArrayList<Notification> notifications = new ArrayList<Notification>();
+		for (Properties p : pl) {
+			notifications.add(makeNotification(p));
+		}
+		return notifications;
+	}
 
-
+	
+	
 	public static void main(String[] args) {
 		DatabaseConnection dbConn = new DatabaseConnection("jdbc:mysql://localhost:3306/calendarDatabase", "root", "skip".toCharArray());
 		DatabaseCommunication dbComm = new DatabaseCommunication(dbConn);
