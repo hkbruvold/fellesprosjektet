@@ -7,7 +7,6 @@ import java.io.*;
 import data.*;
 import data.communication.*;
 import data.communication.Action.*;
-import client.GUI.DataList;
 import server.database.*;
 
 public class ServerThread extends Thread {
