@@ -4,7 +4,7 @@ import data.User;
 import data.communication.ChangeData;
 
 public class ChangePoller extends Thread {
-	private static final boolean True = true;
+	private static final int INTERVAL = 5000;
 	private User currentUser;
 	private Program program;
 
@@ -15,11 +15,11 @@ public class ChangePoller extends Thread {
 
 	@Override
 	public void run(){
-		while(True){
+		while(true){
 			ChangeData res = program.requestChanges();
 			System.out.println(res);
 			try {
-				sleep(5000);
+				sleep(INTERVAL);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
