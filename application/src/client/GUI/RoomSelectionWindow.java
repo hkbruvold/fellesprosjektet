@@ -44,6 +44,7 @@ public class RoomSelectionWindow extends JPanel implements ActionListener {
 
 	public RoomSelectionWindow(Program program) { // Temporary; For testing
 		this.program = program;
+		availRoomList = new ArrayList<Room>();
 		initFrame();
 		initPanel();
 		frame.pack();
@@ -53,6 +54,7 @@ public class RoomSelectionWindow extends JPanel implements ActionListener {
 		this.newEventWindow = newEventWindow;
 		this.program = program;
 		this.numOfParticipants = numOfParticipants;
+		availRoomList = new ArrayList<Room>();
 		initFrame();
 		initPanel();
 
