@@ -98,12 +98,9 @@ public class CalendarPane extends JPanel {
 			}
 		};
 		panel.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
-		panel.setPreferredSize(new Dimension(600, 800));
+		panel.setPreferredSize(new Dimension(500, 800));
 		panel.setSize(panel.getPreferredSize());
 		panel.setLayout(null);
-
-		gridSizeX = panel.getWidth() / COLLUMNS;
-		gridSizeY = panel.getHeight() / ROWS;
 
 		JViewport viewPort = new JViewport();
 		viewPort.setView(panel);
@@ -114,6 +111,9 @@ public class CalendarPane extends JPanel {
 		calendarScroller.setLocation(10, 11);
 		calendarScroller.setViewport(viewPort);
 		add(calendarScroller);
+
+		gridSizeX = 810 / COLLUMNS;
+		gridSizeY = panel.getHeight() / ROWS;
 
 
 		dayLine = new JPanel() {
