@@ -5,7 +5,6 @@ import data.*;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collection;
 
 public class Program {
 	private Client client;
@@ -70,13 +69,16 @@ public class Program {
 	public Group[] getAllGroups(){
 		System.out.println("Fetching groups");
 		Response res = client.send(new Request("listGroups", null));
-		ArrayList<Group> groups = null;
-		if (res.status == Response.Status.OK) {
-			groups = (ArrayList<Group>) res.getData();
+		ArrayList<Group> result = new ArrayList<Group>();
+		if (res.getData() != null && res.getData() instanceof DataList) {
+			DataList dl = (DataList) res.getData();
+			for (Serializable data : dl.getData()) {
+				result.add((Group) data);
+			}
 		}
-		Group[] groupArray = new Group[groups.size()];
+		Group[] groupArray = new Group[result.size()];
 		int i = 0;
-		for (Group group : groups){
+		for (Group group : result){
 			groupArray[i++] = group;
 		}
 		return groupArray;
