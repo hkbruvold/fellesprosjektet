@@ -19,6 +19,7 @@ parseRequest i ServerThread
 Add new groups
 
 __Kjell__
+(Testing and fixing small things here and there)
 Database queries (mostly done)
 Database update
 Database delete

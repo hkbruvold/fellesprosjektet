@@ -37,6 +37,7 @@ public abstract class Event implements Serializable {
 		this.description = description;
 		this.location = location;
 		this.room = null;
+		this.user = user;
 	}
 	public Event(int id, String startDateTime, String endDateTime, String description, Room room, User user) {
 		this.id = id;
@@ -45,8 +46,12 @@ public abstract class Event implements Serializable {
 		this.description = description;
 		this.location = null;
 		this.room = room;
+		this.user = user;
 	}
 
+	public User getUser() {
+		return user;
+	}
 	public void setUser(User user) {
 		this.user = user;
 	}

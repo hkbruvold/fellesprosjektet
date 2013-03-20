@@ -118,10 +118,8 @@ public class Update {
 		if (event.getRoom() != null) {
 			insertReservedRoom(event, event.getRoom());
 		}
-		if (event instanceof Appointment) {
-			insertIsOwner(((Appointment)event).getOwner(), event);
-		} else if (event instanceof Meeting) {
-			insertIsOwner(((Meeting)event).getLeader(), event);
+		insertIsOwner(event.getUser(), event);
+		if (event instanceof Meeting) {
 			Meeting meeting = (Meeting)event;
 			for (User user : meeting.getUsersInvited()) {
 				insertIsParticipant(user, event, PARTICIPANT_STATUS_INVITED);
