@@ -10,19 +10,19 @@ import org.simpleframework.xml.Root;
 @Root
 public class Request implements Serializable {
 	@Element
-	public String action;
+	public Action action;
 	@Element(required=false)
 	private Serializable data;
 
 	public Request() {
 	}
-	public Request(String action, Serializable data) {
+	public Request(Action action, Serializable data) {
 		this.action = action;
 		this.data = data;
 	}
 	
 	public String toString() {
-		return action + " : " + data;
+		return action.name() + " : " + data;
 	}
 
 	public Serializable getData () {
@@ -31,10 +31,25 @@ public class Request implements Serializable {
 	public void setData(Serializable data) {
 		this.data = data;
 	}
-	public String getAction () {
+	public Action getAction() {
 		return action;
 	}
-	public void setAction(String action) {
+	public void setAction(Action action) {
 		this.action = action;
+	}
+	
+	public enum Action {
+		LOGIN,
+		ADD_EVENT,
+		ADD_ALARM,
+		LIST_USERS,
+		LIST_ROOMS,
+		GET_ALL_EVENTS,
+		LIST_NOTIFICATIONS,
+		LIST_GROUPS,
+		NEW_USER,
+		UPDATE_STATUS,
+		REMOVE_EVENT,
+		REQUEST_CHANGES;
 	}
 }

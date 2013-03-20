@@ -13,6 +13,7 @@ import temp.TestObjects;
 import client.*;
 import data.Alarm;
 import data.Meeting;
+import data.MeetingReply;
 import data.User;
 
 @SuppressWarnings("serial")
@@ -148,6 +149,9 @@ public class MeetingInvitationWindow extends JPanel implements ActionListener, I
 					frame.dispose();
 		} else if (e.getSource().equals(declineButton)) {
 			// TODO Set user based on the user of the program
+			MeetingReply meetingReply = new MeetingReply(user, meeting, "DECLINED");
+			System.out.println(meetingReply.toString());
+			program.updateStatus(meetingReply);
 			meeting.declineInvite(user);
 			System.out.println(meeting.toString());
 			frame.dispose();

@@ -1,6 +1,7 @@
 package data.communication;
 
 import java.io.Serializable;
+import java.util.Arrays;
 
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Root;
@@ -9,19 +10,24 @@ import org.simpleframework.xml.Root;
 public class ChangeData implements Serializable {
 	@Element
 	private long versionNumber;
-	@Element
-	private int numberOfChanges;
+	@Element(required=false) 
+	private String[] tableNames;
+	@Element(required=false)
+	private String[] identifiers;
 
 	public ChangeData() {
 	}
-	public ChangeData(long versionNumber, int numberOfChanges) {
+	public ChangeData(long versionNumber, String[] tableNames, String[] identifiers) {
 		this.versionNumber = versionNumber;
-		this.numberOfChanges = numberOfChanges;
+		this.tableNames = tableNames;
+		this.identifiers = identifiers;
 	}
 
 	@Override
 	public String toString() {
-		return "ChangeData [versionNumber=" + versionNumber + ", numberOfChanges=" + numberOfChanges + "]";
+		return "ChangeData [versionNumber=" + versionNumber + ", tableNames="
+				+ Arrays.toString(tableNames) + ", identifiers="
+				+ Arrays.toString(identifiers) + "]";
 	}
 
 	public long getVersionNumber() {
@@ -30,11 +36,17 @@ public class ChangeData implements Serializable {
 	public void setVersionNumber(long versionNumber) {
 		this.versionNumber = versionNumber;
 	}
-	public int getNumberOfChanges() {
-		return numberOfChanges;
+	public String[] getTableNames() {
+		return tableNames;
 	}
-	public void setNumberOfChanges(int numberOfChanges) {
-		this.numberOfChanges = numberOfChanges;
+	public void setTableNames(String[] tableNames) {
+		this.tableNames = tableNames;
+	}
+	public String[] getIdentifiers() {
+		return identifiers;
+	}
+	public void setIdentifiers(String[] identifiers) {
+		this.identifiers = identifiers;
 	}
 
 }

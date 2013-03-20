@@ -3,7 +3,7 @@ FERDIG : 1. Logge på. Ansatte får tilgang til kalendersystemet ved å logge seg p
 FERDIG : 2. Legge inn avtale. Ansatte skal kunne legge inn avtaler i kalenderene sine. En avtale legges inn på avtaledato med et start- og sluttidspunkt, samt en kort beskrivelse av 
 avtalen ("Bil på verksted") og eventuelt sted for avtalen ("Strandveien Auto").
 
-NESTEN FERDIG (AVTALE MÅ SLETTES FRA DATABASEN) 3. Slette avtale. Ansatte skal kunne slette en avtale som ligger i en av kalenderene sine.
+FERDIG 3. Slette avtale. Ansatte skal kunne slette en avtale som ligger i en av kalenderene sine.
 
 FERIDG? 4. Endre avtale. Ansatte skal kunne endre på en avtale som ligger i en av kalenderene sine. Alle feltene kan endres.
 
