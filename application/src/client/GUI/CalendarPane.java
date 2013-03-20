@@ -66,7 +66,7 @@ public class CalendarPane extends JPanel {
 	public CalendarPane(Program program) {
 		this.program = program;
 
-		setSize(800, 400);
+		setSize(853, 482);
 		setLayout(null);
 
 		currentDate = new Date();
@@ -110,8 +110,8 @@ public class CalendarPane extends JPanel {
 		viewPort.setViewPosition(new Point(0, 8 * gridSizeY));
 
 		calendarScroller = new JScrollPane();
-		calendarScroller.setSize(panel.getWidth() + 20, 350);
-		calendarScroller.setLocation(getWidth() / 2 - calendarScroller.getWidth() / 2, getHeight() - calendarScroller.getHeight());
+		calendarScroller.setSize(833, 445);
+		calendarScroller.setLocation(10, 11);
 		calendarScroller.setViewport(viewPort);
 		add(calendarScroller);
 

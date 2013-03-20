@@ -11,6 +11,7 @@ public class Group implements Serializable {
 	private ArrayList<User> members;
 
 	public Group(){
+		members = new ArrayList<User>();
 	}
 	/**
 	 * Use id = 0 when creating new objects. Actual id should come from database
