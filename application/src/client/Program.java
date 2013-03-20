@@ -2,10 +2,8 @@ package client;
 
 import client.GUI.*;
 import data.*;
-import data.communication.ChangeData;
-import data.communication.CurrentVersion;
-import data.communication.Request;
-import data.communication.Response;
+import data.communication.*;
+import data.communication.Request.Action;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -34,7 +32,7 @@ public class Program {
 	}
 	
 	public ChangeData requestChanges() {
-		Response res = client.send(new Request("requestChanges", version));
+		Response res = client.send(new Request(Action.REQUEST_CHANGES, version));
 		ChangeData change = null;
 		if (res.getData() != null && res.getData() instanceof ChangeData) {
 			change = (ChangeData) res.getData();
@@ -43,14 +41,14 @@ public class Program {
 	}
 
 	public boolean login (Authentication auth) {
-		Response res = client.send(new Request("login", auth));
+		Response res = client.send(new Request(Action.LOGIN, auth));
 		currentUser = (User) res.getData();
 		return res.status == Response.Status.OK;
 	}
 	// TODO
 
 	public int registerEvent(Event event) {
-		Response res = client.send(new Request("addEvent", event));
+		Response res = client.send(new Request(Action.ADD_EVENT, event));
 		int id = (Integer) res.getData();
 		return id;
 	}
@@ -58,15 +56,15 @@ public class Program {
 		// TODO (remember database!)
 	}
 	public void removeEvent(Event event) { 
-		Response res = client.send(new Request("removeEvent", event));
+		Response res = client.send(new Request(Action.REMOVE_EVENT, event));
 	}
 	public void updateStatus(MeetingReply meetingReply){
-		Response res = client.send(new Request("updateStatus", meetingReply));
+		Response res = client.send(new Request(Action.UPDATE_STATUS, meetingReply));
 		
 	}
 	public ArrayList<Event> getAllEvents(){
 		System.out.println("Fetching events");
-		Response res = client.send(new Request("getAllEvents", currentUser));
+		Response res = client.send(new Request(Action.GET_ALL_EVENTS, currentUser));
 		ArrayList<Event> result = new ArrayList<Event>();
 		if (res.getData() != null && res.getData() instanceof DataList) {
 			DataList dl = (DataList) res.getData();
@@ -78,13 +76,13 @@ public class Program {
 	}
 
 	public int registerAlarm(Alarm alarm) { 
-		Response res = client.send(new Request("addAlarm", alarm));
+		Response res = client.send(new Request(Action.ADD_ALARM, alarm));
 		int result = (Integer) res.getData();
 		return result;
 	}
 	public User[] getAllUsers(){
 		System.out.println("Fetching users");
-		Response res = client.send(new Request("listUsers", null));
+		Response res = client.send(new Request(Action.LIST_USERS, null));
 		ArrayList<User> users = null;
 		if (res.status == Response.Status.OK) {
 			users = ((Group)res.getData()).getMembers();
@@ -98,7 +96,7 @@ public class Program {
 	}
 	public Group[] getAllGroups(){
 		System.out.println("Fetching groups");
-		Response res = client.send(new Request("listGroups", null));
+		Response res = client.send(new Request(Action.LIST_GROUPS, null));
 		ArrayList<Group> result = new ArrayList<Group>();
 		if (res.getData() != null && res.getData() instanceof DataList) {
 			DataList dl = (DataList) res.getData();
@@ -115,7 +113,7 @@ public class Program {
 	}
 	public ArrayList<Room> getAllRooms() {
 		System.out.println("Fetching rooms");
-		Response res = client.send(new Request("listRooms", null));
+		Response res = client.send(new Request(Action.LIST_ROOMS, null));
 		if (res.getData() != null && res.getData() instanceof DataList) {
 			ArrayList<Room> result = new ArrayList<Room>();
 			DataList dl = (DataList) res.getData();
@@ -129,7 +127,7 @@ public class Program {
 	}
 	public ArrayList<Notification> getAllNotifications(){
 		System.out.println("Fetching notifications");
-		Response res = client.send(new Request("listNotifications", currentUser));
+		Response res = client.send(new Request(Action.LIST_NOTIFICATIONS, currentUser));
 		if (res.getData() != null && res.getData() instanceof DataList) {
 			ArrayList<Notification> result = new ArrayList<Notification>();
 			DataList dl = (DataList) res.getData();
@@ -144,7 +142,7 @@ public class Program {
 	
 	public void addUser(User user){
 		// TODO remember to make sure username is available!
-		Response res = client.send(new Request("newUser", user));
+		Response res = client.send(new Request(Action.NEW_USER, user));
 	}
 
 	public static void main(String[] args) {
