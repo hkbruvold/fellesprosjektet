@@ -37,7 +37,7 @@ public class CalendarPane extends JPanel {
 	private static final int ROWS = 24;
 	private static final int COLLUMNS = 8;
 
-	private final String[] days = {"Time", "Monday", "Tuesday", "wednesday", "Thurday", "Friday", "Saturday", "Sunday"};
+	private final String[] days = {"Time", "Monday", "Tuesday", "Wednesday", "Thurday", "Friday", "Saturday", "Sunday"};
 	private final String[] hours = {"00:00", "01:00", "02:00", "03:00", "04:00", "05:00", "06:00", "07:00", 
 			"08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", 
 			"17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00"};
@@ -103,18 +103,18 @@ public class CalendarPane extends JPanel {
 		panel.setSize(panel.getPreferredSize());
 		panel.setLayout(null);
 
+		gridSizeX = 810 / COLLUMNS;
+		gridSizeY = panel.getHeight() / ROWS;
+
 		JViewport viewPort = new JViewport();
 		viewPort.setView(panel);
 		viewPort.setViewPosition(new Point(0, 8 * gridSizeY));
 
 		calendarScroller = new JScrollPane();
-		calendarScroller.setSize(833, 445);
+		calendarScroller.setSize(833, 405);
 		calendarScroller.setLocation(10, 11);
 		calendarScroller.setViewport(viewPort);
 		add(calendarScroller);
-
-		gridSizeX = 810 / COLLUMNS;
-		gridSizeY = panel.getHeight() / ROWS;
 
 
 		dayLine = new JPanel() {
@@ -137,7 +137,7 @@ public class CalendarPane extends JPanel {
 		for(int i = 0; i < hours.length; i++) {
 			JLabel label = new JLabel(hours[i]);
 			label.setHorizontalAlignment(SwingConstants.CENTER);
-			label.setVerticalAlignment(SwingConstants.BOTTOM);
+			label.setVerticalAlignment(SwingConstants.TOP);
 			addToCalendar(label, 0, i, 1, 1);
 		}
 
