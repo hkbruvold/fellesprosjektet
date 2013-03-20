@@ -14,8 +14,8 @@ public class Program {
 	private Client client;
 	public User currentUser;
 	private CurrentVersion version = new CurrentVersion(1L);
-	private HashMap<User, Set<Event>> eventList;
-	private Set<User> userList;
+	private HashMap<String, HashMap<Integer, Event>> eventList;
+	private HashMap<String, User> userList;
 
 	public Program() {
 		client = new Client();
@@ -23,7 +23,8 @@ public class Program {
 	}
 	
 	private void initEventList() {
-		eventList = new HashMap<User, Set<Event>>();
+		eventList = new HashMap<String, HashMap<Integer, Event>>();
+		userList = new HashMap<String, User>();
 		// TODO get events for each user
 	}
 	
@@ -162,8 +163,12 @@ public class Program {
 		new Program();
 	}
 	
-	public HashMap<User, Set<Event>> getEventList() {
+	public HashMap<String, HashMap<Integer, Event>> getEventList() {
 		return eventList;
+	}
+	
+	public HashMap<String, User> getUserList() {
+		return userList;
 	}
 	
 	public User getCurrentUser() {
