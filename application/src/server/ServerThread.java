@@ -119,6 +119,9 @@ public class ServerThread extends Thread {
 			send(new Response(Response.Status.OK, dl));
 			// TODO what if it fails?
 			break;
+		case "getAllEvents":
+			ArrayList<Event> eventlist = query.queryEvents();
+			send(new Response(Response.Status.OK,eventlist));
 		case "listGroups":
 			ArrayList<Group> groupList = query.queryGroups();
 			DataList dl1 = new DataList();
@@ -127,6 +130,7 @@ public class ServerThread extends Thread {
 				dl1.add(group1);
 			}
 			send(new Response(Response.Status.OK, dl1));
+			break;
 		case "newUser":
 			User user = (User) data;
 			update.insertUser(user);

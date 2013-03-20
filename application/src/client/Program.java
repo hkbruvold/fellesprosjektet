@@ -47,6 +47,13 @@ public class Program {
 	public void removeEvent(Event event) { 
 		Response res = client.send(new Request("removeEvent", event));
 	}
+	public ArrayList<Event> getAllEvents(){
+		System.out.println("Fetching events");
+		Response res = client.send(new Request("getAllEvents", null));
+		ArrayList<Event> events = null;
+		events = (ArrayList<Event>) res.getData();
+		return events;
+	}
 
 	public int registerAlarm(Alarm alarm) { 
 		Response res = client.send(new Request("addAlarm", alarm));
