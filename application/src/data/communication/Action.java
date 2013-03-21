@@ -16,7 +16,7 @@ public interface Action {
 		REMOVE_EVENT,
 	}
 	public enum QueryAction implements Action {
-		LIST_ALL_EVENTS,
+		LIST_EVENTS_FOR_USER,
 		LIST_GROUPS,
 		LIST_NOTIFICATIONS,
 		LIST_ROOMS,

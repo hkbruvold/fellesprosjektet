@@ -179,7 +179,7 @@ public class ServerThread extends Thread {
 			send(new Response(Response.Status.OK, roomDL));
 			// TODO what if it fails?
 			break;
-		case LIST_ALL_EVENTS:
+		case LIST_EVENTS_FOR_USER:
 			query = new Query((User)data, dbComm); // Needed to get fetch alarms to the user
 			ArrayList<Event> eventList = query.queryEvents();
 			DataList eventDL = new DataList();

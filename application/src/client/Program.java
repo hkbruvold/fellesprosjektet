@@ -8,24 +8,32 @@ import data.communication.Action.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Set;
 
 public class Program {
 	private Client client;
 	public User currentUser;
 	private CurrentVersion version = new CurrentVersion(1L);
-	private HashMap<String, HashMap<Integer, Event>> eventList;
-	private HashMap<String, User> userList;
+	private HashMap<String, HashMap<Integer, Event>> eventList; // HashMap<username, HashMap<eventID, Event>>
+	private HashMap<String, User> userList; // HashMap<username, User>
 
 	public Program() {
 		client = new Client();
 		showLogin();
 	}
 	
-	private void initEventList() {
-		eventList = new HashMap<String, HashMap<Integer, Event>>();
+	private void initData() {
+		User[] users = getAllUsers();
 		userList = new HashMap<String, User>();
-		// TODO get events for each user
+		eventList = new HashMap<String, HashMap<Integer, Event>>();
+		for (User user : users) {
+			userList.put(user.getUsername(), user);
+			ArrayList<Event> events = getEventsForUser(user);
+			HashMap<Integer, Event> eventMap = new HashMap<Integer, Event>();
+			for (Event event : events) {
+				eventMap.put(event.getId(), event);
+			}
+			eventList.put(user.getUsername(), eventMap);
+		}
 	}
 	
 	public void showLogin() {
@@ -35,6 +43,7 @@ public class Program {
 	public void showMainWindow() {
 		if (currentUser != null) {
 			new MainWindow(this, currentUser);
+			initData();
 		} else {
 			new LoginWindow(this);
 		}
@@ -86,9 +95,9 @@ public class Program {
 	}
 	
 	
-	public ArrayList<Event> getAllEvents(){
+	public ArrayList<Event> getEventsForUser(User user){
 		System.out.println("Fetching events");
-		Response res = client.send(new Request(QueryAction.LIST_ALL_EVENTS, currentUser));
+		Response res = client.send(new Request(QueryAction.LIST_EVENTS_FOR_USER, user));
 		ArrayList<Event> result = new ArrayList<Event>();
 		if (res.getData() != null && res.getData() instanceof DataList) {
 			DataList dl = (DataList) res.getData();
@@ -143,7 +152,7 @@ public class Program {
 			return null;
 		}
 	}
-	public User[] getAllUsers(){
+	public User[] getAllUsers() {
 		System.out.println("Fetching users");
 		Response res = client.send(new Request(QueryAction.LIST_USERS, null));
 		ArrayList<User> users = null;
