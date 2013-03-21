@@ -1,4 +1,4 @@
-package client.GUI;
+package client.GUI.temp;
 
 import java.awt.Color;
 import java.awt.Dimension;

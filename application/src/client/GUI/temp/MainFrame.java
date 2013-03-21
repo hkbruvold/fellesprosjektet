@@ -1,4 +1,4 @@
-package client.GUI;
+package client.GUI.temp;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -8,6 +8,9 @@ import java.util.ArrayList;
 import javax.swing.*;
 
 import client.Program;
+import client.GUI.NewEventWindow;
+import client.GUI.NotificationWindow;
+import client.GUI.SelectCalendars;
 import data.Notification;
 import data.User;
 
