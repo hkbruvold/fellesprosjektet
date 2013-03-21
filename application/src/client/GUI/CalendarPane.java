@@ -11,6 +11,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -257,7 +258,7 @@ public class CalendarPane extends JPanel {
 				for (int key: events.get(username).keySet()) {
 					Event event = events.get(username).get(key);
 					System.out.println(event.getStartDateTime());
-					System.out.println(daysOfWeek.toString());
+					System.out.println(Arrays.toString(daysOfWeek));
 					System.out.println(event.getDayOfWeek());
 					if (event.getStartDateTime().split(" ")[0].equalsIgnoreCase(daysOfWeek[event.getDayOfWeek()])) {
 						EventComponent eventComp = new EventComponent(event);
