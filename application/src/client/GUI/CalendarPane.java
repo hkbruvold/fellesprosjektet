@@ -44,10 +44,10 @@ public class CalendarPane extends JPanel {
 	
 	private ArrayList<ArrayList<EventComponent>> eventDayList;
 	private int[] laneSizes = new int[7];
-	private HashMap<EventComponent, Set<EventComponent>> overlapList;
+	private HashMap<EventComponent, ArrayList<EventComponent>> overlapList;
 	private HashMap<EventComponent, Integer> eventPosition; 
-	private HashMap<User, Set<EventComponent>> displayedEvents; // List to store all EventComponents
-	private Set<User> showUserCalendars; // List of users to show event from
+	private HashMap<User, ArrayList<EventComponent>> displayedEvents; // List to store all EventComponents
+	private ArrayList<User> showUserCalendars; // List of users to show event from
 
 	/**
 	 * Create the application.
@@ -129,7 +129,7 @@ public class CalendarPane extends JPanel {
 			addToCalendar(label, 0, i, 1, 1);
 		}
 		
-		showUserCalendars = new HashSet<User>();
+		showUserCalendars = new ArrayList<User>();
 		showUserCalendars.add(program.getCurrentUser());
 		
 		initEventData();
@@ -196,9 +196,9 @@ public class CalendarPane extends JPanel {
 		for (int i = 0; i < 7; i++) {
 			eventDayList.add(new ArrayList<EventComponent>());
 		}
-		overlapList = new HashMap<EventComponent, Set<EventComponent>>();
+		overlapList = new HashMap<EventComponent, ArrayList<EventComponent>>();
 		eventPosition = new HashMap<EventComponent, Integer>();
-		displayedEvents = new HashMap<User, Set<EventComponent>>();
+		displayedEvents = new HashMap<User, ArrayList<EventComponent>>();
 	}
 	
 	public void showCalendar() {
@@ -233,21 +233,21 @@ public class CalendarPane extends JPanel {
 	 */
 	private void addRelevantEvents() {
 		for (User user: showUserCalendars) {
-//			System.out.println(user.getName());
 			HashMap<String, HashMap<Integer,Event>> events = program.getEventList();
 			String username = user.getName().toLowerCase();
-//			System.out.println(events.keySet());
 			if (events.containsKey(username)) {
 				for (int key: events.get(username).keySet()) {
 					Event event = events.get(username).get(key);
-//					System.out.println(event.getStartDateTime());
-//					System.out.println(Arrays.toString(daysOfWeek));
-//					System.out.println(event.getDayOfWeek());
-					if (event.getStartDateTime().split(" ")[0].equalsIgnoreCase(daysOfWeek[event.getDayOfWeek()])) {
+					
+					String string_0 = event.getStartDateTime().split(" ")[0];
+//					String string_1 = daysOfWeek[event.getDayOfWeek()];
+//					if (string_0.equalsIgnoreCase(string_1)) {
+					
+					if (Arrays.asList(daysOfWeek).contains(string_0)) {
 						EventComponent eventComp = new EventComponent(event);
 						eventDayList.get(event.getDayOfWeek()).add(eventComp);
 						if (! overlapList.containsKey(event)) {
-							overlapList.put(eventComp, new HashSet<EventComponent>());
+							overlapList.put(eventComp, new ArrayList<EventComponent>());
 						}
 					}
 				}
@@ -280,7 +280,7 @@ public class CalendarPane extends JPanel {
 		
 		// Initialise event into displayedEvents if needed
 		if (! displayedEvents.containsKey(event.getUser())) {
-			displayedEvents.put(event.getUser(), new HashSet<EventComponent>());
+			displayedEvents.put(event.getUser(), new ArrayList<EventComponent>());
 		}
 		displayedEvents.get(event.getUser()).add(eventComp);
 
@@ -294,7 +294,7 @@ public class CalendarPane extends JPanel {
 		boolean[] takenLane = new boolean[laneSizes[eventComp.getEvent().getDayOfWeek()]];
 		
 		if (overlapList.containsKey(eventComp)) {
-			Set<EventComponent> eventOverlaps = overlapList.get(eventComp);
+			ArrayList<EventComponent> eventOverlaps = overlapList.get(eventComp);
 			for (EventComponent event0: eventOverlaps) {
 				if (eventPosition.containsKey(event0)) {
 					takenLane[(int)eventPosition.get(event0)] = true;

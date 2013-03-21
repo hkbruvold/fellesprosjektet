@@ -23,12 +23,10 @@ public class EventComponent extends JComponent { //TODO find proper component
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
-//		g.setColor(new Color(RGBBGColor[0], RGBBGColor[1], RGBBGColor[2]));
-		g.setColor(Color.BLUE);
+		g.setColor(new Color(RGBBGColor[0], RGBBGColor[1], RGBBGColor[2]));
 		g.fillRect(0, 0, getWidth(), getHeight());
 		
-//		g.setColor(new Color(RGBColor[0], RGBColor[1], RGBColor[2]));
-		g.setColor(Color.RED);
+		g.setColor(new Color(RGBColor[0], RGBColor[1], RGBColor[2]));
 		g.fillRect(borderWidth, borderWidth, getWidth()-2*borderWidth, getHeight()-2*borderWidth);
 		
 		g.setColor(Color.BLACK);
