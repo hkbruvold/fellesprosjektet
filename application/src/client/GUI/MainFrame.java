@@ -57,7 +57,7 @@ public class MainFrame extends JPanel implements ActionListener {
 	private void initFrame() {
 		frame = new JFrame(FRAME_NAME);
 		frame.setResizable(true);
-		frame.setLocationRelativeTo(null);
+//		frame.setLocationRelativeTo(null);
 		frame.setLayout(new FlowLayout());
 		frame.add(this);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

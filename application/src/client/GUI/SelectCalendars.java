@@ -99,7 +99,6 @@ public class SelectCalendars extends JPanel implements ActionListener {
 			} else {
 				calPanel.addCalendarsFromUsers(userList.getSelectedValuesList());
 			}
-			System.out.println(frame.getWidth() + ":" + frame.getHeight());
 			frame.dispose();
 		}
 	}
