@@ -46,8 +46,8 @@ public class CalendarPane extends JPanel {
 	private int[] laneSizes = new int[7];
 	private HashMap<EventComponent, ArrayList<EventComponent>> overlapList;
 	private HashMap<EventComponent, Integer> eventPosition; 
-	private HashMap<User, ArrayList<EventComponent>> displayedEvents; // List to store all EventComponents
 	private ArrayList<User> showUserCalendars; // List of users to show event from
+	private ArrayList<EventComponent> displayedComponents;
 
 	/**
 	 * Create the application.
@@ -131,9 +131,9 @@ public class CalendarPane extends JPanel {
 		
 		showUserCalendars = new ArrayList<User>();
 		showUserCalendars.add(program.getCurrentUser());
-		
+
 		initEventData();
-		
+		displayedComponents = new ArrayList<EventComponent>();
 	}
 	public void updateDates() {
 
@@ -198,7 +198,6 @@ public class CalendarPane extends JPanel {
 		}
 		overlapList = new HashMap<EventComponent, ArrayList<EventComponent>>();
 		eventPosition = new HashMap<EventComponent, Integer>();
-		displayedEvents = new HashMap<User, ArrayList<EventComponent>>();
 	}
 	
 	public void showCalendar() {
@@ -220,38 +219,27 @@ public class CalendarPane extends JPanel {
 	}
 	
 	private void hideAllEvents() {
-		System.out.println("size: " + displayedEvents.size());
-		for (User user: showUserCalendars) {
-			int i = 0;
-			if (displayedEvents.get(user) != null) {
-				int j = 0;
-				for (EventComponent ec: displayedEvents.get(user)) {
-					panel.remove(ec);
-					System.out.println("Removing " + i++ + " : " + j++);
-				}
-			}
+		for (EventComponent ec : displayedComponents) {
+			panel.remove(ec);
+			panel.repaint();
 		}
+		displayedComponents = new ArrayList<EventComponent>();
 	}
 	
 	/**
 	 * Adds events to list if it is to be shown
 	 */
 	private void addRelevantEvents() {
+		HashMap<String, HashMap<Integer,Event>> events = program.getEventList();
 		for (User user: showUserCalendars) {
-			HashMap<String, HashMap<Integer,Event>> events = program.getEventList();
-			String username = user.getName().toLowerCase();
+			String username = user.getUsername();
 			if (events.containsKey(username)) {
-				for (int key: events.get(username).keySet()) {
-					Event event = events.get(username).get(key);
-					
+				for (Event event : events.get(username).values()) {
 					String string_0 = event.getStartDateTime().split(" ")[0];
-//					String string_1 = daysOfWeek[event.getDayOfWeek()];
-//					if (string_0.equalsIgnoreCase(string_1)) {
-					
 					if (Arrays.asList(daysOfWeek).contains(string_0)) {
 						EventComponent eventComp = new EventComponent(event);
 						eventDayList.get(event.getDayOfWeek()).add(eventComp);
-						if (! overlapList.containsKey(event)) {
+						if (!overlapList.containsKey(event)) {
 							overlapList.put(eventComp, new ArrayList<EventComponent>());
 						}
 					}
@@ -281,13 +269,10 @@ public class CalendarPane extends JPanel {
 		if (program.getCurrentUser() != event.getUser()) {
 			eventComp.setColor(new int[] {126, 126, 126});
 		}
-		
-		// Initialise event into displayedEvents if needed
-		if (! displayedEvents.containsKey(event.getUser())) {
-			displayedEvents.put(event.getUser(), new ArrayList<EventComponent>());
-		}
-		displayedEvents.get(event.getUser()).add(eventComp);
 
+		// Stored here so that it can easily be removed later
+		displayedComponents.add(eventComp);
+		
 		eventComp.setBounds(x, y, width, height);
 		panel.add(eventComp);
 		eventComp.addMouseListener(new EventMouseListener());
@@ -364,12 +349,10 @@ public class CalendarPane extends JPanel {
 
 	public void setWeek(int newweek){
 		week = newweek;
-		showCalendar();
 		//TODO update calendar view
 	}
 	public void setYear(int newyear){
 		year = newyear;
-		showCalendar();
 		//TODO update calendar view
 	}
 
