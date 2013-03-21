@@ -124,7 +124,7 @@ public class Program {
 		}
 		return groupArray;
 	}
-	public ArrayList<Notification> getAllNotifications(){
+	public ArrayList<Notification> getNotificationsToCurrentUser(){
 		System.out.println("Fetching notifications");
 		Response res = client.send(new Request(QueryAction.LIST_NOTIFICATIONS, currentUser));
 		if (res.getData() != null && res.getData() instanceof DataList) {

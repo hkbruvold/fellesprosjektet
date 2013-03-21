@@ -1,26 +1,13 @@
 package client.GUI;
 
-import java.awt.Dimension;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-import javax.swing.JButton;
-import javax.swing.JComponent;
-import javax.swing.JFrame;
-import javax.swing.JList;
-import javax.swing.JPanel;
-import javax.swing.ListSelectionModel;
+import javax.swing.*;
 
 import client.Program;
-
-import temp.TestObjects;
-
-import data.Event;
-import data.Room;
 import data.User;
 
 @SuppressWarnings("serial")
@@ -55,12 +42,13 @@ public class SelectCalendars extends JPanel implements ActionListener {
 
 	private void initFrame() {
 		frame = new JFrame(FRAME_NAME);
-		frame.setPreferredSize(new Dimension(250, 150)); // TODO?
+		frame.setPreferredSize(new Dimension(228, 248));
 		frame.setResizable(true);
 		frame.setLocationRelativeTo(null);
 		frame.getContentPane().add(this);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
+	
 	private void initPanel() {
 		c = new GridBagConstraints();
 		setLayout(new GridBagLayout());
@@ -68,11 +56,17 @@ public class SelectCalendars extends JPanel implements ActionListener {
 		closeButton = new JButton(BUTTON_CLOSE);
 		userList = new JList<User>(makeUserArray());
 		userList.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+		userList.setCellRenderer(new UserRenderer());
+		userList.setPreferredSize(new Dimension(175, 100));
+		userList.setMinimumSize(new Dimension(175, 100));
+		userList.setMaximumSize(new Dimension(175, 100));
 
 		c.insets = new Insets(0,0,5,0);
 		c.ipadx = 10;
 
-		addComponent(userList, 0, 0, 1, LINE_END);
+		
+		addComponent(new JScrollPane(userList), 0, 0, 1, LINE_END);
+		c.fill = GridBagConstraints.HORIZONTAL;
 		addComponent(closeButton, 0, 1, 1, LINE_START);
 
 		closeButton.addActionListener(this);
@@ -88,6 +82,7 @@ public class SelectCalendars extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource().equals(closeButton)) {
 			calPane.setShowUserCalendars(userList.getSelectedValuesList());
+			System.out.println(frame.getWidth() + ":" + frame.getHeight());
 			frame.dispose();
 		}
 	}

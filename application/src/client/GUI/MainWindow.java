@@ -4,37 +4,23 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 import javax.swing.*;
 
 import client.ChangePoller;
 import client.Program;
+import data.Notification;
 import data.User;
 
 @SuppressWarnings("serial")
-public class MainWindow extends JFrame {
+public class MainWindow extends JFrame implements ActionListener {
 
 	private CalendarPane calendarPane;
 	private Program program;
 	private User currentUser;
-
-	/**
-	 * Launch the application.
-	 */
-	/*
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					MainWindow window = new MainWindow(new Program());
-					window.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}*/
+	private JButton btnMessages;
 
 	/**
 	 * Create the application.
@@ -160,7 +146,8 @@ public class MainWindow extends JFrame {
 		});
 		verticalBox.add(btnnewEvent);
 
-		JButton btnMessages = new JButton("Meldinger");
+		btnMessages = new JButton("Meldinger");
+		btnMessages.addActionListener(this);
 		verticalBox.add(btnMessages);
 
 		JButton btnViewCalendars = new JButton("Se kalendre");
@@ -183,6 +170,7 @@ public class MainWindow extends JFrame {
 		JButton logOutButton = new JButton("Logg av");
 		logOutButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				program.quit();
 			}
 		});
 		GridBagConstraints gbc_logOutButton = new GridBagConstraints();
@@ -196,5 +184,15 @@ public class MainWindow extends JFrame {
 	
 	public CalendarPane getCalendarPane() {
 		return calendarPane;
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource().equals(btnMessages)) {
+			ArrayList<Notification> notifications = program.getNotificationsToCurrentUser();
+			for (Notification notification : notifications) {
+				new NotificationWindow(program, notification);
+			}
+		}
 	}
 }
