@@ -12,7 +12,7 @@ import java.util.HashMap;
 public class Program {
 	private Client client;
 	private MainWindow mainWindow;
-	public User currentUser;
+	private User currentUser;
 	private CurrentVersion version = new CurrentVersion(0L);
 	private HashMap<String, HashMap<Integer, Event>> eventList; // HashMap<username, HashMap<eventID, Event>>
 	private HashMap<String, User> userList; // HashMap<username, User>
