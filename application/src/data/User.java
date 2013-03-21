@@ -5,6 +5,7 @@ import java.io.Serializable;
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Root;
 
+@SuppressWarnings("serial")
 @Root
 public class User implements Serializable {
 	@Element

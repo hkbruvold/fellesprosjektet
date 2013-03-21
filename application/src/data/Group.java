@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.ArrayList;
 
+@SuppressWarnings("serial")
 public class Group implements Serializable {
 	private int id;
 	private String name;

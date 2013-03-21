@@ -6,6 +6,7 @@ import java.util.Calendar;
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Root;
 
+@SuppressWarnings("serial")
 @Root
 public abstract class Event implements Serializable {
 	@Element

@@ -5,10 +5,9 @@ import java.awt.Graphics;
 
 import javax.swing.JComponent;
 
-import client.Program;
-
 import data.Event;
 
+@SuppressWarnings("serial")
 public class EventComponent extends JComponent { //TODO find proper component
 	private Event event;
 	

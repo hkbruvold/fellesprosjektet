@@ -57,7 +57,7 @@ public class ServerThread extends Thread {
 		} else {
 			currentUser = null;
 		}
-		Update update = new Update(currentUser, dbComm);
+		Update update = new Update(dbComm);
 		Query query = new Query(currentUser, dbComm);
 		System.out.println(action);
 
@@ -152,7 +152,7 @@ public class ServerThread extends Thread {
 		switch (updateAction) {
 		case REMOVE_EVENT:
 			Event eventToRemove = (Event) data;
-			update = new Update(currentUser, dbComm);
+			update = new Update(dbComm);
 			update.deleteEvent(eventToRemove);
 		default:
 			System.out.println("case default");

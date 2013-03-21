@@ -3,13 +3,11 @@ package client.GUI;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Arrays;
 
 import javax.swing.*;
 
 import client.Program;
 import data.Authentication;
-import data.User;
 
 @SuppressWarnings("serial")
 public class LoginWindow extends JPanel implements ActionListener {

@@ -2,6 +2,7 @@ package data;
 
 import java.io.Serializable;
 
+@SuppressWarnings("serial")
 public class Room implements Serializable {
 	private int id;
 	private int size;

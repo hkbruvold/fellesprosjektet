@@ -2,11 +2,11 @@
 package data.communication;
 
 import java.io.Serializable;
-import java.util.HashMap;
 
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Root;
 
+@SuppressWarnings("serial")
 @Root
 public class Request implements Serializable {
 	@Element

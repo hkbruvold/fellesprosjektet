@@ -5,7 +5,6 @@ import java.util.Arrays;
 import data.*;
 
 public class TestObjects {
-	private static final String LOGIN = "login";
 	private static final String DATE_0 = "2013-03-20";
 	private static final String DATE_1 = "2013-03-20";
 	private static final String TIME_0 = "14:00";

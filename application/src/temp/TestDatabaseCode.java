@@ -10,7 +10,7 @@ public class TestDatabaseCode {
 	public TestDatabaseCode() {
 		DatabaseConnection dbConn = new DatabaseConnection("jdbc:mysql://localhost:3306/calendarDatabase", "root", "skip".toCharArray());
 		DatabaseCommunication dbComm = new DatabaseCommunication(dbConn);
-		this.update = new Update(TestObjects.getUser00(), dbComm);
+		this.update = new Update(dbComm);
 		fillDatabase();
 	}
 

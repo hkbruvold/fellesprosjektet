@@ -1,28 +1,15 @@
 package client.GUI;
 
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JComboBox;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
+import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
+import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 
-import javax.swing.Box;
-
-import temp.TestObjects;
-import javax.swing.ImageIcon;
-import java.awt.Dimension;
+import javax.swing.*;
 
 import client.ChangePoller;
 import client.Program;
-import data.Notification;
 import data.User;
 
 @SuppressWarnings("serial")
@@ -168,7 +155,7 @@ public class MainWindow extends JFrame {
 		JButton btnnewEvent = new JButton("Ny Avtale");
 		btnnewEvent.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				new NewEventWindow(program, calendarPane, currentUser, program.getAllUsers());
+				new NewEventWindow(program, currentUser, program.getAllUsers());
 			}
 		});
 		verticalBox.add(btnnewEvent);

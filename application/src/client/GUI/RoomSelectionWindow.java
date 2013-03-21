@@ -1,25 +1,13 @@
 package client.GUI;
 
-import java.awt.Dimension;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-import javax.swing.JButton;
-import javax.swing.JComponent;
-import javax.swing.JFrame;
-import javax.swing.JList;
-import javax.swing.JPanel;
-import javax.swing.ListSelectionModel;
+import javax.swing.*;
 
 import client.Program;
-
-import temp.TestObjects;
-
-import data.Event;
 import data.Room;
 
 @SuppressWarnings("serial")

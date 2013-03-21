@@ -1,32 +1,15 @@
 package client.GUI;
 
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Point;
+import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JViewport;
-import javax.swing.SwingConstants;
+import javax.swing.*;
 import javax.swing.border.MatteBorder;
 
 import client.Program;
@@ -305,7 +288,7 @@ public class CalendarPane extends JPanel {
 		eventComp.addMouseListener(new MouseListener() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				new NewEventWindow(program, CalendarPane.this, ((EventComponent) e.getComponent()).getEvent(), program.getAllUsers());
+				new NewEventWindow(program, ((EventComponent) e.getComponent()).getEvent(), program.getAllUsers());
 			}
 			@Override
 			public void mousePressed(MouseEvent e) {}

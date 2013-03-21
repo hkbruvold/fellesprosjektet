@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import org.simpleframework.xml.ElementList;
 import org.simpleframework.xml.Root;
 
+@SuppressWarnings("serial")
 @Root
 public class DataList implements Serializable {
 	@ElementList

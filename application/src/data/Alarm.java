@@ -2,6 +2,7 @@ package data;
 
 import java.io.Serializable;
 
+@SuppressWarnings("serial")
 public class Alarm implements Serializable {
 	private String timeBefore;
 	private String message;

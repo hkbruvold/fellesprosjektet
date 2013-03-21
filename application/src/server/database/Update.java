@@ -2,8 +2,6 @@ package server.database;
 
 import data.*;
 
-import temp.TestObjects;
-
 public class Update {
 	private static final String TABLE_ALARM = TableFields.ALARM.getTableName();
 	private static final String TABLE_EVENT = TableFields.EVENT.getTableName();
@@ -46,12 +44,10 @@ public class Update {
 	private static final String PARTICIPANT_STATUS_ACCEPTED = "1";
 	private static final String PARTICIPANT_STATUS_DECLINED = "2";
 
-	private User currentUser;
 	private DatabaseCommunication dbComm;
 	private boolean debugging = false;
 
-	public Update(User currentUser, DatabaseCommunication dbComm) {
-		this.currentUser = currentUser;
+	public Update(DatabaseCommunication dbComm) {
 		this.dbComm = dbComm;
 	}
 
@@ -349,7 +345,7 @@ public class Update {
 	public static void main(String[] args) {
 		DatabaseConnection dbConn = new DatabaseConnection("jdbc:mysql://localhost:3306/calendarDatabase", "root", "skip".toCharArray());
 		DatabaseCommunication dbComm = new DatabaseCommunication(dbConn);
-		Update update = new Update(TestObjects.getUser00(), dbComm);
+		Update update = new Update(dbComm);
 		update.debugging = true;
 
 	}

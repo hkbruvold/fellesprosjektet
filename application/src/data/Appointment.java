@@ -2,6 +2,7 @@ package data;
 
 import java.io.Serializable;
 
+@SuppressWarnings("serial")
 public class Appointment extends Event implements Serializable {
 
 	public Appointment(){

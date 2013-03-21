@@ -2,6 +2,7 @@ package data;
 
 import java.io.Serializable;
 
+@SuppressWarnings("serial")
 public class Notification implements Serializable {
 	private int id;
 	private String message;

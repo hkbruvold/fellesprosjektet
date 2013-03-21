@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import org.simpleframework.xml.ElementList;
 
+@SuppressWarnings("serial")
 public class Meeting extends Event implements Serializable{
 	@ElementList
 	private ArrayList<User> usersInvited;

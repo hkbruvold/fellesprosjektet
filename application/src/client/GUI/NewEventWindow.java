@@ -1,20 +1,14 @@
 package client.GUI;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
+import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 import javax.swing.*;
 
-import client.Client;
-import client.Program;
-
 import temp.TestObjects;
-
+import client.Program;
 import data.*;
 import data.Event;
 
@@ -61,13 +55,11 @@ public class NewEventWindow extends JPanel implements ActionListener, ItemListen
 	private User[] userArray;
 	private Room room;
 
-	private CalendarPane calendarPane;
 	private Program program;
 
 
-	public NewEventWindow(Program program, CalendarPane calendarPane, User user, User[] userArray) {
+	public NewEventWindow(Program program, User user, User[] userArray) {
 		this.program = program;
-		this.calendarPane = calendarPane;
 		this.user = user;
 		this.userArray = userArray;
 		initFrame();
@@ -81,9 +73,8 @@ public class NewEventWindow extends JPanel implements ActionListener, ItemListen
 		frame.setVisible(true);
 	}
 
-	public NewEventWindow(Program program, CalendarPane calendarPane, Event event, User[] userArray) {
+	public NewEventWindow(Program program, Event event, User[] userArray) {
 		this.program = program;
-		this.calendarPane = calendarPane;
 		this.calendarEvent = event;
 		this.userArray = userArray;
 		initFrame();
@@ -304,9 +295,7 @@ public class NewEventWindow extends JPanel implements ActionListener, ItemListen
 	}
 
 	public static void main(String[] args) {
-		//		new NewEventWindow(TestObjects.getCalendar00(), TestObjects.getUser02(), TestObjects.getUserArray01());
-		new NewEventWindow(new Program(), new CalendarPane(new Program()), TestObjects.getMeeting01(), TestObjects.getUserArray01());
-		//new NewEventWindow(new Program(), new CalendarPane(new Program()), TestObjects.getMeeting01(), program.getAllUsers());
+		new NewEventWindow(new Program(), TestObjects.getMeeting01(), TestObjects.getUserArray01());
 	}
 
 

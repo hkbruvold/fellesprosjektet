@@ -2,6 +2,7 @@ package data;
 
 import java.io.Serializable;
 
+@SuppressWarnings("serial")
 public class MeetingReply implements Serializable {
 	User user;
 	Meeting meeting;

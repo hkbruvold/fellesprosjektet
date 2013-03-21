@@ -108,13 +108,13 @@ public class ProgramHub extends JPanel implements ActionListener {
 		} else if (e.getSource().equals(meetingInvitationButton)) {
 			new MeetingInvitationWindow(program, TestObjects.getMeeting00(),TestObjects.getUser00());
 		} else if (e.getSource().equals(newEventButton)) {
-			new NewEventWindow(program, new CalendarPane(program), TestObjects.getUser00(), TestObjects.getUserArray01());
+			new NewEventWindow(program, TestObjects.getUser00(), TestObjects.getUserArray01());
 		} else if (e.getSource().equals(notificationButton)) {
 			new NotificationWindow(program, TestObjects.getNotification00());
 		} else if (e.getSource().equals(testDatabaseButton)) {
 			new TempTestDatabase();
 		} else if (e.getSource().equals(oldEventButton)) {
-			new NewEventWindow(program, new CalendarPane(program), TestObjects.getMeeting01(), TestObjects.getUserArray01());
+			new NewEventWindow(program, TestObjects.getMeeting01(), TestObjects.getUserArray01());
 		} else if (e.getSource().equals(alarmButton)) {
 			new AlarmWindow(program, TestObjects.getAlarm01());
 		} else if (e.getSource().equals(newGroupButton)) {
