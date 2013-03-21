@@ -14,7 +14,8 @@ public interface Action {
 		ADD_ALARM,
 	}
 	public enum UpdateAction implements Action {
-		REMOVE_EVENT,
+		UPDATE_EVENT,
+		REMOVE_EVENT, 
 	}
 	public enum QueryAction implements Action {
 		LIST_EVENTS_FOR_USER,

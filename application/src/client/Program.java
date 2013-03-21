@@ -103,8 +103,8 @@ public class Program {
 	}
 	
 	
-	public void editEvent(Event event/*, TODO */) {
-		// TODO (remember database!)
+	public void editEvent(Event event) {
+		Response res = client.send(new Request(UpdateAction.UPDATE_EVENT, event));
 	}
 	public void removeEvent(Event event) { 
 		Response res = client.send(new Request(UpdateAction.REMOVE_EVENT, event));

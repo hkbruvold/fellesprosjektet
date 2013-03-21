@@ -153,10 +153,18 @@ public class ServerThread extends Thread {
 	private void performUpdate(Serializable data, User currentUser, UpdateAction updateAction) {
 		Update update;
 		switch (updateAction) {
+		case UPDATE_EVENT:
+			Event eventToUpdate = (Event) data;
+			update = new Update(dbComm);
+			update.updateEvent(eventToUpdate);
+			send(new Response(Response.Status.OK, null));
+			break;
 		case REMOVE_EVENT:
 			Event eventToRemove = (Event) data;
 			update = new Update(dbComm);
 			update.deleteEvent(eventToRemove);
+			send(new Response(Response.Status.OK, null));
+			break;
 		default:
 			System.out.println("case default");
 			send(new Response(Response.Status.FAILED, null));

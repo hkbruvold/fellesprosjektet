@@ -272,13 +272,18 @@ public class NewEventWindow extends JPanel implements ActionListener, ItemListen
 					event = new Appointment(0, startDateTime, endDateTime, description, location, user);
 				}
 			}
-			event.setUser(user);
-			int id = program.registerEvent(event);
-			event.setId(id);
-			Alarm alarm = null;
-			if(alarmCheckBox.isSelected()){
-				alarm = new Alarm(alarmTimeBeforeField.getText(), "", user, event);
-				program.registerAlarm(alarm);
+			if (calendarEvent != null) {
+				event.setId(calendarEvent.getId());
+				program.editEvent(event);
+			} else {
+				event.setUser(user);
+				int id = program.registerEvent(event);
+				event.setId(id);
+				Alarm alarm = null;
+				if(alarmCheckBox.isSelected()){
+					alarm = new Alarm(alarmTimeBeforeField.getText(), "", user, event);
+					program.registerAlarm(alarm);
+				}
 			}
 			frame.dispose(); // Close if successful; show error message if not?
 		}
