@@ -27,6 +27,24 @@ public class Program {
 		}
 	}
 	
+	public void showLogin() {
+		new LoginWindow(this);
+	}
+
+	public void showMainWindow() {
+		if (currentUser != null) {
+			initData();
+			new MainFrame(this, currentUser);
+//			new MainWindow(this, currentUser);
+		} else {
+			new LoginWindow(this);
+		}
+	}
+
+	public void quit() {
+		System.exit(0);
+	}
+
 	private boolean handShake() {
 		Response res = client.send(new Request(MiscAction.HANDSHAKE, null));
 		if (res.getStatus().equals(Response.Status.CONNECTION_PROBLEM)) {
@@ -50,23 +68,6 @@ public class Program {
 			eventList.put(user.getUsername(), eventMap);
 		}
 	}
-	
-	public void showLogin() {
-		new LoginWindow(this);
-	}
-	
-	public void showMainWindow() {
-		if (currentUser != null) {
-			initData();
-			new MainWindow(this, currentUser);
-		} else {
-			new LoginWindow(this);
-		}
-	}
-	public void quit() {
-		System.exit(0);
-	}
-	
 	
 	public boolean login(Authentication auth) {
 		Response res = client.send(new Request(MiscAction.LOGIN, auth));
