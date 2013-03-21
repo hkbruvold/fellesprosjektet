@@ -15,6 +15,7 @@ public class TestDatabaseCode {
 	}
 
 	private void fillDatabase() {
+		update.startVersion();
 		insertUsers();
 		insertGroups();
 		insertRooms();

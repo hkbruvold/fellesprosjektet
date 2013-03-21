@@ -12,7 +12,7 @@ import java.util.HashMap;
 public class Program {
 	private Client client;
 	public User currentUser;
-	private CurrentVersion version = new CurrentVersion(1L);
+	private CurrentVersion version = new CurrentVersion(0L);
 	private HashMap<String, HashMap<Integer, Event>> eventList; // HashMap<username, HashMap<eventID, Event>>
 	private HashMap<String, User> userList; // HashMap<username, User>
 
@@ -86,6 +86,12 @@ public class Program {
 		return change;
 	}
 
+	public long getVersion() {
+		return version.getVersionNumber();
+	}
+	public void setVersion(long versionNumber) {
+		this.version = new CurrentVersion(versionNumber);
+	}
 	
 	public void addUser(User user){
 		// TODO remember to make sure username is available!

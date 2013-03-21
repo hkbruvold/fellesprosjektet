@@ -102,11 +102,16 @@ public class ServerThread extends Thread {
 			break;
 		case REQUEST_CHANGES:
 			CurrentVersion version = (CurrentVersion) data;
-			System.out.println(version);
-			String[] tableNames = new String[]{"User", "Event"}; // TODO request database
-			String[] identifiers = new String[]{"alice, bob", "6, 496"}; // TODO request database
-			send(new Response(Response.Status.OK, new ChangeData(2L, tableNames, identifiers)));
-			// TODO what if it fails?
+			long clientVersion = version.getVersionNumber();
+			long serverVersion = update.getVersion();
+			if (clientVersion == serverVersion) {
+				send(new Response(Response.Status.OK, new ChangeData(serverVersion, new String[]{""}, new String[]{""})));
+			} else {
+				String[] tableNames = new String[1];
+				String[] identifiers = new String[1];
+				send(new Response(Response.Status.OK, new ChangeData(serverVersion, tableNames, identifiers)));
+				// TODO what if it fails?
+			}
 			break;
 		default:
 			System.out.println("case default");

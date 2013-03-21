@@ -1,5 +1,8 @@
 package server.database;
 
+import java.util.ArrayList;
+import java.util.Properties;
+
 import data.*;
 
 public class Update {
@@ -57,7 +60,7 @@ public class Update {
 		values.append("'").append(alarm.getMessage()).append("'").append(", ");
 		values.append("'").append(alarm.getOwner().getUsername()).append("'").append(", ");
 		values.append(alarm.getEvent().getId()).append(" ");
-		int id = insertObject(TABLE_ALARM, FIELDS_ALARM, values.toString());
+		int id = insertObject(TABLE_ALARM, FIELDS_ALARM, values.toString(), "");
 		return id;
 	}
 	public void updateAlarm(Alarm alarm) {
@@ -70,13 +73,15 @@ public class Update {
 		StringBuilder condition = new StringBuilder();
 		condition.append("username=").append("'").append(alarm.getOwner().getUsername()).append("'").append(AND);
 		condition.append("eventID=").append(alarm.getEvent().getId()).append(" ");
-		updateObject(TABLE_ALARM, values.toString(), condition.toString());
+		String identifier = alarm.getOwner().getUsername() + ":" + alarm.getEvent().getId();
+		updateObject(TABLE_ALARM, values.toString(), condition.toString(), identifier);
 	}
 	public void deleteAlarm(Alarm alarm) {
 		StringBuilder condition = new StringBuilder();
 		condition.append("username=").append("'").append(alarm.getOwner().getUsername()).append("'").append(AND);
 		condition.append("eventID=").append(alarm.getEvent().getId()).append(" ");
-		deleteObject(TABLE_ALARM, condition.toString());
+		String identifier = alarm.getOwner().getUsername() + ":" + alarm.getEvent().getId();
+		deleteObject(TABLE_ALARM, condition.toString(), identifier);
 	}
 
 	public int insertEvent(Event event) {
@@ -91,7 +96,7 @@ public class Update {
 		} else if (event instanceof Meeting) {
 			values.append(BIT_TRUE).append(" ");
 		}
-		int id = insertObject(TABLE_EVENT, FIELDS_EVENT, values.toString());
+		int id = insertObject(TABLE_EVENT, FIELDS_EVENT, values.toString(), "");
 		event.setId(id);
 		if (event.getRoom() != null) {
 			insertReservedRoom(event, event.getRoom());
@@ -122,13 +127,13 @@ public class Update {
 		values.append(fields[5]).append("=").append(event instanceof Meeting ? BIT_TRUE : BIT_FALSE).append(" ");
 		StringBuilder condition = new StringBuilder();
 		condition.append("eventID=").append(event.getId());
-		updateObject(TABLE_EVENT, values.toString(), condition.toString());
+		updateObject(TABLE_EVENT, values.toString(), condition.toString(), ""+event.getId());
 		// TODO relations? (room reservation etc.)
 	}
 	public void deleteEvent(Event event) {
 		StringBuilder condition = new StringBuilder();
 		condition.append("eventID=").append(event.getId());
-		deleteObject(TABLE_EVENT, condition.toString());
+		deleteObject(TABLE_EVENT, condition.toString(), ""+event.getId());
 	}
 
 	public void insertGroup(Group group) {
@@ -136,7 +141,7 @@ public class Update {
 		values.append(group.getId()).append(", ");
 		values.append("'").append(group.getName()).append("'").append(", ");
 		values.append("'").append(group.getDescription()).append("'").append(" ");
-		int id = insertObject(TABLE_GROUPS, FIELDS_GROUPS, values.toString());
+		int id = insertObject(TABLE_GROUPS, FIELDS_GROUPS, values.toString(), "");
 		group.setId(id);
 		for (User user : group.getMembers()) {
 			insertIsMemberOf(user, group);
@@ -150,20 +155,20 @@ public class Update {
 		values.append(fields[2]).append("='").append(group.getDescription()).append("' ");
 		StringBuilder condition = new StringBuilder();
 		condition.append("groupID=").append(group.getId());
-		updateObject(TABLE_GROUPS, values.toString(), condition.toString());
+		updateObject(TABLE_GROUPS, values.toString(), condition.toString(), ""+group.getId());
 		// TODO relations? (members etc.)
 	}
 	public void deleteGroup(Group group) {
 		StringBuilder condition = new StringBuilder();
 		condition.append("groupID=").append(group.getId());
-		deleteObject(TABLE_GROUPS, condition.toString());
+		deleteObject(TABLE_GROUPS, condition.toString(), ""+group.getId());
 	}
 
 	public void insertNotification(Notification notification) {
 		StringBuilder values = new StringBuilder();
 		values.append(notification.getId()).append(", ");
 		values.append("'").append(notification.getMessage()).append("'").append(" ");
-		int id = insertObject(TABLE_NOTIFICATION, FIELDS_NOTIFICATION, values.toString());
+		int id = insertObject(TABLE_NOTIFICATION, FIELDS_NOTIFICATION, values.toString(), "");
 		notification.setId(id);
 		insertNotificationTo(notification.getRecipient(), notification);
 		if (notification.getEvent() != null) {
@@ -177,12 +182,12 @@ public class Update {
 		values.append(fields[1]).append("='").append(notification.getMessage()).append("' ");
 		StringBuilder condition = new StringBuilder();
 		condition.append("notificationID=").append(notification.getId());
-		updateObject(TABLE_NOTIFICATION, values.toString(), condition.toString());
+		updateObject(TABLE_NOTIFICATION, values.toString(), condition.toString(), ""+notification.getId());
 	}
 	public void deleteNotification(Notification notification) {
 		StringBuilder condition = new StringBuilder();
 		condition.append("notificationID=").append(notification.getId());
-		deleteObject(TABLE_NOTIFICATION, condition.toString());
+		deleteObject(TABLE_NOTIFICATION, condition.toString(), ""+notification.getId());
 	}
 
 	public void insertRoom(Room room) {
@@ -190,7 +195,7 @@ public class Update {
 		values.append(room.getId()).append(", ");
 		values.append(room.getSize()).append(", ");
 		values.append("'").append(room.getDescription()).append("'").append(" ");
-		insertObject(TABLE_ROOM, FIELDS_ROOM, values.toString());
+		insertObject(TABLE_ROOM, FIELDS_ROOM, values.toString(), "");
 	}
 	public void updateRoom(Room room) {
 		StringBuilder values = new StringBuilder();
@@ -200,12 +205,12 @@ public class Update {
 		values.append(fields[2]).append("='").append(room.getSize()).append("' ");
 		StringBuilder condition = new StringBuilder();
 		condition.append("roomID=").append(room.getId());
-		updateObject(TABLE_ROOM, values.toString(), condition.toString());
+		updateObject(TABLE_ROOM, values.toString(), condition.toString(), ""+room.getId());
 	}
 	public void deleteRoom(Room room) {
 		StringBuilder condition = new StringBuilder();
 		condition.append("roomID=").append(room.getId());
-		deleteObject(TABLE_ROOM, condition.toString());
+		deleteObject(TABLE_ROOM, condition.toString(), ""+room.getId());
 	}
 
 	public void insertUser(User user) {
@@ -214,7 +219,7 @@ public class Update {
 		values.append("'").append(user.getPassword()).append("'").append(", ");
 		values.append("'").append(user.getName()).append("'").append(", ");
 		values.append("'").append(user.getType()).append("'").append(" ");
-		insertObject(TABLE_USER, FIELDS_USER, values.toString());
+		insertObject(TABLE_USER, FIELDS_USER, values.toString(), user.getUsername());
 	}
 	public void updateUser(User user) {
 		StringBuilder values = new StringBuilder();
@@ -225,33 +230,33 @@ public class Update {
 		values.append(fields[3]).append("='").append(user.getType()).append("' ");
 		StringBuilder condition = new StringBuilder();
 		condition.append("username='").append(user.getUsername()).append("'");
-		updateObject(TABLE_USER, values.toString(), condition.toString());
+		updateObject(TABLE_USER, values.toString(), condition.toString(), user.getUsername());
 	}
 	public void deleteUser(User user) {
 		StringBuilder condition = new StringBuilder();
 		condition.append("username='").append(user.getUsername()).append("'");
-		deleteObject(TABLE_USER, condition.toString());
+		deleteObject(TABLE_USER, condition.toString(), user.getUsername());
 	}
 
 	public void insertIsMemberOf(User user, Group group) {
 		StringBuilder values = new StringBuilder();
 		values.append("'").append(user.getUsername()).append("'").append(", ");
 		values.append(group.getId()).append(" ");
-		insertObject(TABLE_IS_MEMBER_OF, FIELDS_IS_MEMBER_OF, values.toString());
+		insertObject(TABLE_IS_MEMBER_OF, FIELDS_IS_MEMBER_OF, values.toString(), user.getUsername() + ":" + group.getId());
 	}
 	// Should not have update
 	public void deleteIsMemberOf(User user, Group group) {
 		StringBuilder condition = new StringBuilder();
 		condition.append("username='").append(user.getUsername()).append("'").append(AND);
 		condition.append("groupID=").append(group.getId());
-		deleteObject(TABLE_IS_MEMBER_OF, condition.toString());
+		deleteObject(TABLE_IS_MEMBER_OF, condition.toString(), user.getUsername() + ":" + group.getId());
 	}
 
 	public void insertIsOwner(User user, Event event) {
 		StringBuilder values = new StringBuilder();
 		values.append("'").append(user.getUsername()).append("'").append(", ");
 		values.append(event.getId()).append(" ");
-		insertObject(TABLE_IS_OWNER, FIELDS_IS_OWNER, values.toString());
+		insertObject(TABLE_IS_OWNER, FIELDS_IS_OWNER, values.toString(), user.getUsername() + ":" + event.getId());
 	}
 	// Do we want update?
 	// Should not have delete (delete the event)
@@ -261,7 +266,7 @@ public class Update {
 		values.append("'").append(user.getUsername()).append("'").append(", ");
 		values.append(event.getId()).append(", ");
 		values.append("'").append(status).append("'").append(" ");
-		insertObject(TABLE_IS_PARTICIPANT, FIELDS_IS_PARTICIPANT, values.toString());
+		insertObject(TABLE_IS_PARTICIPANT, FIELDS_IS_PARTICIPANT, values.toString(), user.getUsername() + ":" + event.getId());
 	}
 	public void updateIsParticipant(User user, Event event, String status) {
 		StringBuilder values = new StringBuilder();
@@ -272,20 +277,20 @@ public class Update {
 		StringBuilder condition = new StringBuilder();
 		condition.append("username='").append(user.getUsername()).append("'").append(AND);
 		condition.append("eventID=").append(event.getId());
-		updateObject(TABLE_IS_PARTICIPANT, values.toString(), condition.toString());
+		updateObject(TABLE_IS_PARTICIPANT, values.toString(), condition.toString(), user.getUsername() + ":" + event.getId());
 	}
 	public void deleteIsParticipant(User user, Event event) {
 		StringBuilder condition = new StringBuilder();
 		condition.append("username='").append(user.getUsername()).append("'").append(AND);
 		condition.append("eventID=").append(event.getId());
-		deleteObject(TABLE_IS_PARTICIPANT, condition.toString());
+		deleteObject(TABLE_IS_PARTICIPANT, condition.toString(), user.getUsername() + ":" + event.getId());
 	}
 
 	public void insertNotificationTo(User user, Notification notification) {
 		StringBuilder values = new StringBuilder();
 		values.append("'").append(user.getUsername()).append("'").append(", ");
 		values.append(notification.getId()).append(" ");
-		insertObject(TABLE_NOTIFICATION_TO, FIELDS_NOTIFICATION_TO, values.toString());
+		insertObject(TABLE_NOTIFICATION_TO, FIELDS_NOTIFICATION_TO, values.toString(), user.getUsername() + ":" + notification.getId());
 	}
 	// Should not have update
 	// Should not have delete (delete the notification)
@@ -294,7 +299,7 @@ public class Update {
 		StringBuilder values = new StringBuilder();
 		values.append(notification.getId()).append(", ");
 		values.append(event.getId()).append(" ");
-		insertObject(TABLE_NOTIFICATION_FOR_EVENT, FIELDS_NOTIFICATION_FOR_EVENT, values.toString());
+		insertObject(TABLE_NOTIFICATION_FOR_EVENT, FIELDS_NOTIFICATION_FOR_EVENT, values.toString(), notification.getId() + ":" + event.getId());
 	}
 	// Should not have update
 	// Should not have delete (delete the notification)
@@ -303,18 +308,18 @@ public class Update {
 		StringBuilder values = new StringBuilder();
 		values.append(event.getId()).append(", ");
 		values.append(room.getId()).append(" ");
-		insertObject(TABLE_RESERVED_ROOM, FIELDS_RESERVED_ROOM, values.toString());
+		insertObject(TABLE_RESERVED_ROOM, FIELDS_RESERVED_ROOM, values.toString(), event.getId() + ":" + room.getId());
 	}
 	// Should not have update
 	public void deleteReservedRoom(Event event, Room room) {
 		StringBuilder condition = new StringBuilder();
 		condition.append("eventID=").append(event.getId()).append(AND);
 		condition.append("roomID=").append(room.getId());
-		deleteObject(TABLE_RESERVED_ROOM, condition.toString());
+		deleteObject(TABLE_RESERVED_ROOM, condition.toString(), event.getId() + ":" + room.getId());
 	}
 
 
-	private int insertObject(String tableName, String fields, String values) {
+	private int insertObject(String tableName, String fields, String values, String identifier) {
 		String updateString = String.format(INSERT_INTO_VALUES, tableName, fields, values);
 		int id = 0;
 		if (debugging) {
@@ -322,9 +327,16 @@ public class Update {
 		} else {
 			id = dbComm.update(updateString);
 		}
+		long version = getVersion();
+		long newVersion = version + 1;
+		if (identifier.length() > 0) {
+			dbComm.update("INSERT changes SET versionNumber=" + newVersion + ", tableName='" + tableName + "', identifiers='" + identifier + "'");
+		} else {
+			dbComm.update("INSERT changes SET versionNumber=" + newVersion + ", tableName='" + tableName + "', identifiers='" + id + "'");
+		}
 		return id;
 	}
-	private void updateObject(String tableName, String values, String condition) {
+	private void updateObject(String tableName, String values, String condition, String identifier) {
 		String updateString = String.format(UPDATE_SET_WHERE, tableName, values, condition);
 		if (debugging) {
 			System.out.println(updateString);
@@ -332,7 +344,7 @@ public class Update {
 			dbComm.update(updateString);
 		}
 	}
-	private void deleteObject(String tableName, String condition) {
+	private void deleteObject(String tableName, String condition, String identifier) {
 		String updateString = String.format(DELETE_FROM_WHERE, tableName, condition);
 		if (debugging) {
 			System.out.println(updateString);
@@ -341,6 +353,21 @@ public class Update {
 		}
 	}
 	
+	public void startVersion() {
+		dbComm.update("INSERT changes SET versionNumber=0, tableName='dummy', identifiers='dummy'");
+	}
+	
+	public long getVersion() {
+		ArrayList<Properties> pl = dbComm.query("SELECT MAX(versionNumber) AS versionNumber FROM changes");
+		if (pl.size() > 0) {
+			Properties p = pl.get(0);
+			String property = p.getProperty("versionNumber");
+			System.out.println(property);
+			return Long.parseLong(property);
+		} else {
+			return -1;
+		}
+	}
 
 	public static void main(String[] args) {
 		DatabaseConnection dbConn = new DatabaseConnection("jdbc:mysql://localhost:3306/calendarDatabase", "root", "skip".toCharArray());

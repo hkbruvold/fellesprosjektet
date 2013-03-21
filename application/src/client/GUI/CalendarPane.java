@@ -203,7 +203,7 @@ public class CalendarPane extends JPanel {
 	
 	public void showCalendar() {
 		// Remove previously shown events
-		//hideAllEvents();
+		hideAllEvents();
 		initEventData();
 		
 		addRelevantEvents();
@@ -220,9 +220,15 @@ public class CalendarPane extends JPanel {
 	}
 	
 	private void hideAllEvents() {
+		System.out.println("size: " + displayedEvents.size());
 		for (User user: showUserCalendars) {
-			for (EventComponent ec: displayedEvents.get(user)) {
-				panel.remove(ec);
+			int i = 0;
+			if (displayedEvents.get(user) != null) {
+				int j = 0;
+				for (EventComponent ec: displayedEvents.get(user)) {
+					panel.remove(ec);
+					System.out.println("Removing " + i++ + " : " + j++);
+				}
 			}
 		}
 	}
@@ -358,10 +364,12 @@ public class CalendarPane extends JPanel {
 
 	public void setWeek(int newweek){
 		week = newweek;
+		showCalendar();
 		//TODO update calendar view
 	}
 	public void setYear(int newyear){
 		year = newyear;
+		showCalendar();
 		//TODO update calendar view
 	}
 
@@ -370,16 +378,12 @@ public class CalendarPane extends JPanel {
 		public void mouseClicked(MouseEvent e) {
 			new NewEventWindow(program, ((EventComponent) e.getComponent()).getEvent(), program.getAllUsers());
 		}
-
 		@Override
 		public void mousePressed(MouseEvent e) {}
-
 		@Override
 		public void mouseReleased(MouseEvent e) {}
-
 		@Override
 		public void mouseEntered(MouseEvent e) {}
-
 		@Override
 		public void mouseExited(MouseEvent e) {}
 	}

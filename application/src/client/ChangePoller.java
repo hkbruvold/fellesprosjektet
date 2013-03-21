@@ -26,8 +26,20 @@ public class ChangePoller extends Thread {
 	}
 
 	private void request() {
-		ChangeData res = program.requestChanges();
-		System.out.println(res);
+		ChangeData changeData = program.requestChanges();
+		if (changeData == null) {
+			return;
+		}
+		long clientVersion = program.getVersion();
+		long serverVersion = changeData.getVersionNumber();
+		if (clientVersion == serverVersion) {
+			return;
+		}
+		System.out.println(changeData);
+		
+		
+		
+		program.setVersion(changeData.getVersionNumber());
 	}
 
 }

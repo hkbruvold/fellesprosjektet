@@ -140,3 +140,10 @@ CREATE TABLE isParticipant (
     PRIMARY KEY (username, eventID)
 );
 
+CREATE TABLE changes (
+    versionNumber INT NOT NULL,
+    tableName VARCHAR(32) NOT NULL,
+    identifiers MEDIUMTEXT NOT NULL,
+    PRIMARY KEY (versionNumber, tableName)
+);
+
