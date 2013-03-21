@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import javax.swing.*;
 
 import client.Program;
-import client.GUI.temp.CalPanel;
 import data.User;
 
 @SuppressWarnings("serial")
@@ -27,23 +26,10 @@ public class SelectCalendars extends JPanel implements ActionListener {
 
 	private Program program;
 	private CalendarPane calPane;
-	private CalPanel calPanel;
 
 	public SelectCalendars(Program program, CalendarPane calPane) {
 		this.program = program;
 		this.calPane = calPane;
-		userArrayList = new ArrayList<User>();
-		for (String i: program.getUserList().keySet()) {
-			userArrayList.add(program.getUserList().get(i));
-		}
-		initFrame();
-		initPanel();
-		frame.pack();
-		frame.setVisible(true);
-	}
-	public SelectCalendars(Program program, CalPanel calPanel) {
-		this.program = program;
-		this.calPanel = calPanel;
 		userArrayList = new ArrayList<User>();
 		for (String i: program.getUserList().keySet()) {
 			userArrayList.add(program.getUserList().get(i));
@@ -95,11 +81,7 @@ public class SelectCalendars extends JPanel implements ActionListener {
 
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource().equals(closeButton)) {
-			if (calPane != null) {
-				calPane.setShowUserCalendars(userList.getSelectedValuesList());
-			} else {
-				calPanel.addCalendarsFromUsers(userList.getSelectedValuesList());
-			}
+			calPane.setShowUserCalendars(userList.getSelectedValuesList());
 			frame.dispose();
 		}
 	}

@@ -11,6 +11,7 @@ import java.util.HashMap;
 
 public class Program {
 	private Client client;
+	private MainWindow mainWindow;
 	public User currentUser;
 	private CurrentVersion version = new CurrentVersion(0L);
 	private HashMap<String, HashMap<Integer, Event>> eventList; // HashMap<username, HashMap<eventID, Event>>
@@ -34,8 +35,7 @@ public class Program {
 	public void showMainWindow() {
 		if (currentUser != null) {
 			initData();
-//			new MainFrame(this, currentUser);
-			new MainWindow(this, currentUser);
+			mainWindow = new MainWindow(this, currentUser);
 		} else {
 			new LoginWindow(this);
 		}
@@ -54,7 +54,7 @@ public class Program {
 		}
 	}
 
-	private void initData() {
+	public void initData() {
 		User[] users = getAllUsers();
 		userList = new HashMap<String, User>();
 		eventList = new HashMap<String, HashMap<Integer, Event>>();
@@ -192,6 +192,10 @@ public class Program {
 	
 	public static void main(String[] args) {
 		new Program();
+	}
+	
+	public MainWindow getMainWindow() {
+		return mainWindow;
 	}
 	
 	public HashMap<String, HashMap<Integer, Event>> getEventList() {
