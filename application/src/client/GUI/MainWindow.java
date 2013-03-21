@@ -150,7 +150,7 @@ public class MainWindow extends JFrame implements ActionListener {
 		btnMessages.addActionListener(this);
 		verticalBox.add(btnMessages);
 
-		JButton btnViewCalendars = new JButton("Se kalendre");
+		JButton btnViewCalendars = new JButton("Kalendere");
 		btnViewCalendars.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				new SelectCalendars(program, calendarPane);
@@ -175,6 +175,7 @@ public class MainWindow extends JFrame implements ActionListener {
 		});
 		GridBagConstraints gbc_logOutButton = new GridBagConstraints();
 		gbc_logOutButton.anchor = GridBagConstraints.NORTHWEST;
+		gbc_logOutButton.fill = GridBagConstraints.HORIZONTAL;
 		gbc_logOutButton.insets = new Insets(0, 0, 0, 5);
 		gbc_logOutButton.gridx = 0;
 		gbc_logOutButton.gridy = 3;

@@ -18,9 +18,24 @@ public class Program {
 
 	public Program() {
 		client = new Client();
-		showLogin();
+		if (handShake()) {
+			showLogin();
+		} else {
+			Notification notification = new Notification();
+			notification.setMessage("Mangler forbindelse med server.");
+			new NotificationWindow(this, notification);
+		}
 	}
 	
+	private boolean handShake() {
+		Response res = client.send(new Request(MiscAction.HANDSHAKE, null));
+		if (res.getStatus().equals(Response.Status.CONNECTION_PROBLEM)) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+
 	private void initData() {
 		User[] users = getAllUsers();
 		userList = new HashMap<String, User>();

@@ -78,6 +78,9 @@ public class ServerThread extends Thread {
 
 	private void performMisc(Serializable data, Update update, Query query, MiscAction miscAction) {
 		switch (miscAction) {
+		case HANDSHAKE:
+			send(new Response(Response.Status.OK, null));
+			break;
 		case LOGIN:
 			Authentication auth = (Authentication) data;
 			User fetchedUser = query.queryUser(auth.getUsername());

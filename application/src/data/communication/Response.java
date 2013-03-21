@@ -35,6 +35,7 @@ public class Response implements Serializable {
 
 	public enum Status {
 		OK, 
-		FAILED;
+		FAILED, 
+		CONNECTION_PROBLEM;
 	}
 }

@@ -28,7 +28,7 @@ public class Client {
 			return res;
 		} catch (IOException e) {
 			System.err.println(e);
-			return null;
+			return new Response(Response.Status.CONNECTION_PROBLEM, null);
 		}
 	}
 
@@ -43,4 +43,5 @@ public class Client {
 		in.close();
 		socket.close();
 	}
+	
 }

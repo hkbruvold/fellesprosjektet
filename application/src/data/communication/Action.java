@@ -3,6 +3,7 @@ package data.communication;
 public interface Action {
 
 	public enum MiscAction implements Action {
+		HANDSHAKE,
 		LOGIN,
 		UPDATE_STATUS,
 		REQUEST_CHANGES,
