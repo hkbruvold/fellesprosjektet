@@ -220,7 +220,8 @@ public class CalendarPane extends JPanel {
 	
 	public void showCalendar() {
 		// Remove previously shown events
-		hideAllEvents();
+		//hideAllEvents();
+		initEventData();
 		
 		addRelevantEvents();
 		
@@ -248,14 +249,22 @@ public class CalendarPane extends JPanel {
 	 */
 	private void addRelevantEvents() {
 		for (User user: showUserCalendars) {
-			HashMap<Integer, Event> eventHash = program.getEventList().get(user.getName());
-			for (Integer key: eventHash.keySet()) {
-				Event event = eventHash.get(key);
-				if (event.getStartDateTime().split(" ")[0].equalsIgnoreCase(daysOfWeek[event.getDayOfWeek()])) {
-					EventComponent eventComp = new EventComponent(event);
-					eventDayList.get(event.getDayOfWeek()).add(eventComp);
-					if (! overlapList.containsKey(event)) {
-						overlapList.put(eventComp, new HashSet<EventComponent>());
+			System.out.println(user.getName());
+			HashMap<String, HashMap<Integer,Event>> events = program.getEventList();
+			String username = user.getName().toLowerCase();
+			System.out.println(events.keySet());
+			if (events.containsKey(username)) {
+				for (int key: events.get(username).keySet()) {
+					Event event = events.get(username).get(key);
+					System.out.println(event.getStartDateTime());
+					System.out.println(daysOfWeek.toString());
+					System.out.println(event.getDayOfWeek());
+					if (event.getStartDateTime().split(" ")[0].equalsIgnoreCase(daysOfWeek[event.getDayOfWeek()])) {
+						EventComponent eventComp = new EventComponent(event);
+						eventDayList.get(event.getDayOfWeek()).add(eventComp);
+						if (! overlapList.containsKey(event)) {
+							overlapList.put(eventComp, new HashSet<EventComponent>());
+						}
 					}
 				}
 			}
