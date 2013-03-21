@@ -6,8 +6,8 @@ Write a background thread that listens for changes such as NewMeetings, Invites,
 Make it possible to invite Groups to event
 
 Group managment:
-	Edit existing groups
-		Fetch all groups from server
+ - Edit existing groups
+ - Fetch all groups from server
 	
 		
 __Eivind__
@@ -15,7 +15,7 @@ __Eivind__
 __Hans-Kristian__
 Main/calendar window (framework in place)
 Fix calendarPane.addEvent(event) so that it acutally works - High priority
-	CalendarPane need to fetch events from the server!
+ - CalendarPane need to fetch events from the server!
 
 __Kaare__
 parseRequest i ServerThread
@@ -23,10 +23,12 @@ Add new groups
 
 __Kjell__
 (Testing and fixing small things here and there)
-Database queries (done, but changes might be needed)
-Database insert (done, but changes might be needed)
-Database update
-Database delete
+Database
+ - Store version numbers with data about changes
+ - queries (done, but changes might be needed)
+ - insert  (done, but changes might be needed)
+ - update  (done, but changes might be needed)
+ - delete  (done, but changes might be needed)
 
 __Vegard__
 Add option for selecting room in NewEventWindow
