@@ -216,13 +216,14 @@ public class CalendarPane extends JPanel {
 				addEventToCalendar(event);
 			}
 		}
+		panel.repaint();
 	}
 	
 	private void hideAllEvents() {
 		for (EventComponent ec : displayedComponents) {
 			panel.remove(ec);
-			panel.repaint();
 		}
+		panel.repaint();
 		displayedComponents = new ArrayList<EventComponent>();
 	}
 	
