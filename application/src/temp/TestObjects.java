@@ -6,10 +6,10 @@ import data.*;
 
 public class TestObjects {
 	private static final String LOGIN = "login";
-	private static final String DATE_0 = "2013-10-10";
-	private static final String DATE_1 = "2013-10-12";
-	private static final String TIME_0 = "20:00";
-	private static final String TIME_1 = "22:00";
+	private static final String DATE_0 = "2013-03-20";
+	private static final String DATE_1 = "2013-03-20";
+	private static final String TIME_0 = "14:00";
+	private static final String TIME_1 = "16:00";
 	private static final String DATE_TIME_0 = DATE_0 + " " + TIME_0;
 	private static final String DATE_TIME_1 = DATE_1 + " " + TIME_1;
 	private static final String DESCRIPTION = "Description";

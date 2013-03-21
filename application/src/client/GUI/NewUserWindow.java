@@ -23,7 +23,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 @SuppressWarnings("serial")
-public class NewUserWindow extends JFrame {
+public class NewUserWindow extends JFrame implements ActionListener {
 	private JFrame jFrame;
 	private JPanel contentPane;
 	private JTextField usernameField;
@@ -31,22 +31,8 @@ public class NewUserWindow extends JFrame {
 	private JTextField nameField;
 	private User user;
 	private Program program;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					NewUserWindow frame = new NewUserWindow(new Program());
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	private JButton saveButton;
+	private JComboBox<UserTypes> userType;
 
 	/**
 	 * Create the frame.
@@ -121,7 +107,7 @@ public class NewUserWindow extends JFrame {
 		gbc_lblNewLabel_3.gridy = 3;
 		contentPane.add(lblNewLabel_3, gbc_lblNewLabel_3);
 
-		final JComboBox<UserTypes> userType = new JComboBox<UserTypes>(UserTypes.values());
+		userType = new JComboBox<UserTypes>(UserTypes.values());
 		GridBagConstraints gbc_userType = new GridBagConstraints();
 		gbc_userType.insets = new Insets(0, 0, 5, 0);
 		gbc_userType.fill = GridBagConstraints.HORIZONTAL;
@@ -136,17 +122,9 @@ public class NewUserWindow extends JFrame {
 		gbc_horizontalBox.gridy = 5;
 		contentPane.add(horizontalBox, gbc_horizontalBox);
 
-		JButton btnNewButton = new JButton("Lagre");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				//TODO send to database
-				user = new User(usernameField.getText(),nameField.getText(),userType.getSelectedItem().toString());
-				user.setPassword(passwordField.getText());
-				program.addUser(user);
-				jFrame.dispose();
-			}
-		});
-		horizontalBox.add(btnNewButton);
+		saveButton = new JButton("Lagre");
+		saveButton.addActionListener(this);
+		horizontalBox.add(saveButton);
 
 		JButton btnNewButton_1 = new JButton("Lukk");
 		btnNewButton_1.addActionListener(new ActionListener() {
@@ -155,6 +133,32 @@ public class NewUserWindow extends JFrame {
 			}
 		});
 		horizontalBox.add(btnNewButton_1);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource().equals(saveButton)) {
+			user = new User(usernameField.getText(),nameField.getText(),userType.getSelectedItem().toString());
+			user.setPassword(passwordField.getText());
+			program.addUser(user);
+			jFrame.dispose();
+		}
+	}
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					NewUserWindow frame = new NewUserWindow(new Program());
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
 	}
 
 }
