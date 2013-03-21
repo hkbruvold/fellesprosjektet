@@ -34,8 +34,8 @@ public class Program {
 	public void showMainWindow() {
 		if (currentUser != null) {
 			initData();
-			new MainFrame(this, currentUser);
-//			new MainWindow(this, currentUser);
+//			new MainFrame(this, currentUser);
+			new MainWindow(this, currentUser);
 		} else {
 			new LoginWindow(this);
 		}
