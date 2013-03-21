@@ -16,7 +16,7 @@ public class ChangePoller extends Thread {
 	@Override
 	public void run(){
 		while(true){
-			request();
+//			request(); TODO temporary turned off to stop the sysouts
 			try {
 				sleep(INTERVAL);
 			} catch (InterruptedException e) {

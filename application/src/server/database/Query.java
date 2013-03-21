@@ -85,6 +85,19 @@ public class Query {
 		return alarm;
 	}
 
+	public ArrayList<Event> queryEvents(User user) {
+		ArrayList<Event> events = new ArrayList<Event>();
+		String query = String.format(
+				SELECT_FROM_WHERE, 
+				"event." + FIELDS_EVENT, 
+				TABLE_EVENT + " JOIN " + TABLE_IS_OWNER + " ON event.eventID=isOwner.eventID ", 
+				"username='" + user.getUsername() + "'");
+		ArrayList<Properties> pl = dbComm.query(query);
+		for (Properties p : pl) {
+			events.add(makeEvent(p, true));
+		}
+		return events;
+	}
 
 	public ArrayList<Event> queryEvents() {
 		ArrayList<Event> events = new ArrayList<Event>();

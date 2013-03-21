@@ -20,7 +20,6 @@ import client.GUI.EventComponent;
 
 @SuppressWarnings("serial")
 public class CalendarPane extends JPanel {
-
 	private static final int ROWS = 24;
 	private static final int COLLUMNS = 8;
 
@@ -212,9 +211,10 @@ public class CalendarPane extends JPanel {
 		// Generate data for display logic
 		generateLaneSizes();
 		
-		
 		for (int i = 0; i<7; i++) {
-			for (EventComponent event: eventDayList.get(i)) {
+			ArrayList<EventComponent> eventList = eventDayList.get(i);
+			System.out.println("Events for day number: " + i + " - " + eventList.size());
+			for (EventComponent event: eventList) {
 				addEventToCalendar(event);
 			}
 		}
@@ -233,16 +233,16 @@ public class CalendarPane extends JPanel {
 	 */
 	private void addRelevantEvents() {
 		for (User user: showUserCalendars) {
-			System.out.println(user.getName());
+//			System.out.println(user.getName());
 			HashMap<String, HashMap<Integer,Event>> events = program.getEventList();
 			String username = user.getName().toLowerCase();
-			System.out.println(events.keySet());
+//			System.out.println(events.keySet());
 			if (events.containsKey(username)) {
 				for (int key: events.get(username).keySet()) {
 					Event event = events.get(username).get(key);
-					System.out.println(event.getStartDateTime());
-					System.out.println(Arrays.toString(daysOfWeek));
-					System.out.println(event.getDayOfWeek());
+//					System.out.println(event.getStartDateTime());
+//					System.out.println(Arrays.toString(daysOfWeek));
+//					System.out.println(event.getDayOfWeek());
 					if (event.getStartDateTime().split(" ")[0].equalsIgnoreCase(daysOfWeek[event.getDayOfWeek()])) {
 						EventComponent eventComp = new EventComponent(event);
 						eventDayList.get(event.getDayOfWeek()).add(eventComp);
@@ -262,6 +262,7 @@ public class CalendarPane extends JPanel {
 		
 		int dayOfWeek = event.getDayOfWeek();
 		double startTime = start.get(Calendar.HOUR_OF_DAY) + (double) (start.get(Calendar.MINUTE)) * 100 / 60 / 100;
+		System.out.println("start: " + startTime);
 		double duration = (double) (end.getTimeInMillis() - start.getTimeInMillis()) / (1000*60*60);
 		
 		int position = getFreeLane(eventComp);
@@ -285,23 +286,7 @@ public class CalendarPane extends JPanel {
 
 		eventComp.setBounds(x, y, width, height);
 		panel.add(eventComp);
-		eventComp.addMouseListener(new MouseListener() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				new NewEventWindow(program, ((EventComponent) e.getComponent()).getEvent(), program.getAllUsers());
-			}
-			@Override
-			public void mousePressed(MouseEvent e) {}
-
-			@Override
-			public void mouseReleased(MouseEvent e) {}
-
-			@Override
-			public void mouseEntered(MouseEvent e) {}
-
-			@Override
-			public void mouseExited(MouseEvent e) {}
-		});
+		eventComp.addMouseListener(new EventMouseListener());
 		eventComp.setVisible(true);
 	}
 	
@@ -380,6 +365,25 @@ public class CalendarPane extends JPanel {
 	public void setYear(int newyear){
 		year = newyear;
 		//TODO update calendar view
+	}
+
+	private final class EventMouseListener implements MouseListener {
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			new NewEventWindow(program, ((EventComponent) e.getComponent()).getEvent(), program.getAllUsers());
+		}
+
+		@Override
+		public void mousePressed(MouseEvent e) {}
+
+		@Override
+		public void mouseReleased(MouseEvent e) {}
+
+		@Override
+		public void mouseEntered(MouseEvent e) {}
+
+		@Override
+		public void mouseExited(MouseEvent e) {}
 	}
 
 }

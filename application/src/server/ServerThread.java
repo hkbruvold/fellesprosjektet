@@ -184,7 +184,7 @@ public class ServerThread extends Thread {
 			break;
 		case LIST_EVENTS_FOR_USER:
 			query = new Query((User)data, dbComm); // Needed to get fetch alarms to the user
-			ArrayList<Event> eventList = query.queryEvents();
+			ArrayList<Event> eventList = query.queryEvents((User) data);
 			DataList eventDL = new DataList();
 			for (Event event2 : eventList) {
 				eventDL.add(event2);
