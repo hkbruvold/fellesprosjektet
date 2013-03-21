@@ -213,7 +213,6 @@ public class CalendarPane extends JPanel {
 		
 		for (int i = 0; i<7; i++) {
 			ArrayList<EventComponent> eventList = eventDayList.get(i);
-			System.out.println("Events for day number: " + i + " - " + eventList.size());
 			for (EventComponent event: eventList) {
 				addEventToCalendar(event);
 			}
@@ -262,7 +261,6 @@ public class CalendarPane extends JPanel {
 		
 		int dayOfWeek = event.getDayOfWeek();
 		double startTime = start.get(Calendar.HOUR_OF_DAY) + (double) (start.get(Calendar.MINUTE)) * 100 / 60 / 100;
-		System.out.println("start: " + startTime);
 		double duration = (double) (end.getTimeInMillis() - start.getTimeInMillis()) / (1000*60*60);
 		
 		int position = getFreeLane(eventComp);

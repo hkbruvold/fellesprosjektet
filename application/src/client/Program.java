@@ -59,12 +59,10 @@ public class Program {
 		userList = new HashMap<String, User>();
 		eventList = new HashMap<String, HashMap<Integer, Event>>();
 		for (User user : users) {
-			System.out.println(user.getUsername());
 			userList.put(user.getUsername(), user);
 			ArrayList<Event> events = getEventsForUser(user);
 			HashMap<Integer, Event> eventMap = new HashMap<Integer, Event>();
 			for (Event event : events) {
-				System.out.println(event.getUser().getUsername() + " \t" + event.getId() + " \t" + event.getStartDateTime());
 				eventMap.put(event.getId(), event);
 			}
 			eventList.put(user.getUsername(), eventMap);

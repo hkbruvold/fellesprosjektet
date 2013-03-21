@@ -40,7 +40,6 @@ public class MainWindow extends JFrame implements ActionListener {
 	private void initialize() {
 		Date currentDate = new Date();
 		int week = Integer.parseInt((new SimpleDateFormat("w")).format(currentDate));
-		System.out.println(week);
 		setBounds(100, 100, 1024, 576);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		GridBagLayout gridBagLayout = new GridBagLayout();
