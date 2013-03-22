@@ -46,7 +46,7 @@ public class CalendarPane extends JPanel {
 	private int[] laneSizes = new int[7];
 	private HashMap<EventComponent, ArrayList<EventComponent>> overlapList;
 	private HashMap<EventComponent, Integer> eventPosition; 
-	private ArrayList<User> showUserCalendars; // List of users to show event from
+	private ArrayList<String> showUserCalendars; // List of users to show events from. Note: use usernames!
 	private ArrayList<EventComponent> displayedComponents;
 
 	/**
@@ -129,8 +129,8 @@ public class CalendarPane extends JPanel {
 			addToCalendar(label, 0, i, 1, 1);
 		}
 		
-		showUserCalendars = new ArrayList<User>();
-		showUserCalendars.add(program.getCurrentUser());
+		showUserCalendars = new ArrayList<String>();
+		showUserCalendars.add(program.getCurrentUser().getUsername());
 
 		initEventData();
 		displayedComponents = new ArrayList<EventComponent>();
@@ -187,7 +187,9 @@ public class CalendarPane extends JPanel {
 	
 	public void setShowUserCalendars(List<User> users) {
 		for (User user: users) {
-			this.showUserCalendars.add(user);
+			if (!showUserCalendars.contains(user.getUsername())) {
+				this.showUserCalendars.add(user.getUsername());
+			}
 		}
 	}
 	
@@ -233,8 +235,7 @@ public class CalendarPane extends JPanel {
 	 */
 	private void addRelevantEvents() {
 		HashMap<String, HashMap<Integer,Event>> events = program.getEventList();
-		for (User user: showUserCalendars) {
-			String username = user.getUsername();
+		for (String username : showUserCalendars) {
 			if (events.containsKey(username)) {
 				for (Event event : events.get(username).values()) {
 					String string_0 = event.getStartDateTime().split(" ")[0];

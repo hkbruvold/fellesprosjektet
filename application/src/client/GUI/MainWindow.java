@@ -54,7 +54,6 @@ public class MainWindow extends JFrame implements ActionListener {
 			public void actionPerformed(ActionEvent e) {
 				calendarPane.setWeek(weekNumberBox.getSelectedIndex()+1);
 				calendarPane.updateDates();
-//				calendarPane.initEventData();
 				calendarPane.showCalendar();
 			}
 		});
@@ -115,7 +114,6 @@ public class MainWindow extends JFrame implements ActionListener {
 			public void actionPerformed(ActionEvent e) {
 				calendarPane.setYear(yearNumberBox.getSelectedIndex()+2013);
 				calendarPane.updateDates();
-//				calendarPane.initEventData();
 				calendarPane.showCalendar();
 			}
 		});

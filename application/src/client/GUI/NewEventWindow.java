@@ -227,8 +227,10 @@ public class NewEventWindow extends JPanel implements ActionListener, ItemListen
 	}
 
 	public void setRoom(Room room) {
-		this.room = room;
-		locationField.setText(room.toString());
+		if (room != null) {
+			this.room = room;
+			locationField.setText(room.toString());
+		}
 	}
 
 	@Override
