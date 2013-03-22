@@ -1,13 +1,14 @@
 package server;
 
-import java.net.*;
-import java.util.ArrayList;
 import java.io.*;
+import java.net.Socket;
+import java.util.ArrayList;
 
-import data.*;
-import data.communication.*;
-import data.communication.Action.*;
 import server.database.*;
+import data.*;
+import data.communication.Action;
+import data.communication.Action.*;
+import data.communication.*;
 
 public class ServerThread extends Thread {
 	private static final String HOST = "localhost";
@@ -107,9 +108,7 @@ public class ServerThread extends Thread {
 			if (clientVersion == serverVersion) {
 				send(new Response(Response.Status.OK, new ChangeData(serverVersion, new String[]{""}, new String[]{""})));
 			} else {
-				String[] tableNames = new String[1];
-				String[] identifiers = new String[1];
-				send(new Response(Response.Status.OK, new ChangeData(serverVersion, tableNames, identifiers)));
+				send(new Response(Response.Status.OK, update.getChanges(clientVersion)));
 				// TODO what if it fails?
 			}
 			break;

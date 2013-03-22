@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import data.*;
+import data.communication.ChangeData;
 
 public class Update {
 	private static final String TABLE_ALARM = TableFields.ALARM.getTableName();
@@ -371,7 +372,31 @@ public class Update {
 			return -1;
 		}
 	}
-
+	
+	public ChangeData getChanges(long versionNumber) { // TODO make sure this actually does what it is supposed to do
+		ChangeData cd = new ChangeData();
+		long currentVersion = getVersion();
+		cd.setVersionNumber(currentVersion);
+		ArrayList<Properties> pl = dbComm.query("" +
+				"SELECT versionNumber, tableName, identifiers " +
+				"FROM changes " +
+				"WHERE versionNumber > " + versionNumber + " AND versionNumber < " + currentVersion + " " + 
+				"ORDER BY versionNumber ASC");
+		ArrayList<String> tableNames = new ArrayList<String>();
+		ArrayList<String> identifiers = new ArrayList<String>();
+		for (Properties p : pl) {
+			tableNames.add(p.getProperty("tableName"));
+			identifiers.add(p.getProperty("identifiers"));
+		}
+		System.out.println("" +
+				" pl: " + pl.size() + 
+				" tn: " + tableNames.size() + 
+				" id: " + identifiers.size());
+		cd.setTableNames(tableNames.toArray(new String[0]));
+		cd.setIdentifiers(identifiers.toArray(new String[0]));
+		return cd;
+	}
+	
 	public static void main(String[] args) {
 		DatabaseConnection dbConn = new DatabaseConnection("jdbc:mysql://localhost:3306/calendarDatabase", "root", "skip".toCharArray());
 		DatabaseCommunication dbComm = new DatabaseCommunication(dbConn);
