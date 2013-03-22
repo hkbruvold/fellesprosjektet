@@ -101,30 +101,31 @@ public abstract class Event implements Serializable {
 	}
 	
 	public Calendar getStartDate() {
-		String date = this.startDateTime.split(" ")[0];
-		String time = this.startDateTime.split(" ")[1];
+		String[] date = this.startDateTime.split(" ")[0].split("-");
+		int YYYY = Integer.parseInt(date[0]);
+		int MM = Integer.parseInt(date[1]);
+		int dd = Integer.parseInt(date[2]);
+		
+		String[] time = this.startDateTime.split(" ")[1].split(":");
+		int HH = Integer.parseInt(time[0]);
+		int mm = Integer.parseInt(time[1]);
 		
 		Calendar cal = Calendar.getInstance();
-		cal.set(Integer.parseInt(date.split("-")[0]),
-				Integer.parseInt(date.split("-")[1]),
-				Integer.parseInt(date.split("-")[2]), 
-				Integer.parseInt(time.split(":")[0]),
-				Integer.parseInt(time.split(":")[1]));
-		
+		cal.set(YYYY, MM, dd, HH, mm);
 		return cal;
 	}
-	
 	public Calendar getEndDate() {
-		String date = this.endDateTime.split(" ")[0];
-		String time = this.endDateTime.split(" ")[1];
+		String[] date = this.endDateTime.split(" ")[0].split("-");
+		int YYYY = Integer.parseInt(date[0]);
+		int MM = Integer.parseInt(date[1]);
+		int dd = Integer.parseInt(date[2]);
+		
+		String[] time = this.endDateTime.split(" ")[1].split(":");
+		int HH = Integer.parseInt(time[0]);
+		int mm = Integer.parseInt(time[1]);
 		
 		Calendar cal = Calendar.getInstance();
-		cal.set(Integer.parseInt(date.split("-")[0]),
-				Integer.parseInt(date.split("-")[1]),
-				Integer.parseInt(date.split("-")[2]), 
-				Integer.parseInt(time.split(":")[0]),
-				Integer.parseInt(time.split(":")[1]));
-		
+		cal.set(YYYY, MM, dd, HH, mm);
 		return cal;
 	}
 	
