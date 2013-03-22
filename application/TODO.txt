@@ -24,7 +24,7 @@ Add new groups
 __Kjell__
 (Testing and fixing small things here and there)
 Database
- - Store version numbers with data about changes
+ - Store version numbers with data about changes (numbers ok, data needs more work)
  - queries (done, but changes might be needed)
  - insert  (done, but changes might be needed)
  - update  (done, but changes might be needed)
