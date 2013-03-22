@@ -37,8 +37,7 @@ public class ChangePoller extends Thread {
 		}
 		System.out.println(changeData);
 		
-		program.initData(); // TODO TEMP! Should only fetch new data
-		program.getMainWindow().getCalendarPane().showCalendar();
+		program.refreshCalendar();
 		
 		program.setVersion(changeData.getVersionNumber());
 	}

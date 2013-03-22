@@ -238,6 +238,7 @@ public class NewEventWindow extends JPanel implements ActionListener, ItemListen
 		if (e.getSource().equals(deleteButton)) {
 			// TODO delete the event, update database // use *calendarEvent*
 			program.removeEvent(calendarEvent);
+//			program.refreshCalendar(); // Using this will lag the GUI
 			frame.dispose();
 		} else if (e.getSource().equals(closeButton)) {
 			frame.dispose();
@@ -287,6 +288,7 @@ public class NewEventWindow extends JPanel implements ActionListener, ItemListen
 					program.registerAlarm(alarm);
 				}
 			}
+//			program.refreshCalendar(); // Using this will lag the GUI
 			frame.dispose(); // Close if successful; show error message if not?
 		}
 	}

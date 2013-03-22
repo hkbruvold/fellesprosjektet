@@ -54,7 +54,7 @@ public class Program {
 		}
 	}
 
-	public void initData() {
+	private void initData() {
 		User[] users = getAllUsers();
 		userList = new HashMap<String, User>();
 		eventList = new HashMap<String, HashMap<Integer, Event>>();
@@ -189,25 +189,27 @@ public class Program {
 		return userArray;
 	}
 	
-	
-	public static void main(String[] args) {
-		new Program();
+	public void refreshCalendar() {
+		initData();
+		mainWindow.getCalendarPane().showCalendar();
 	}
 	
 	public MainWindow getMainWindow() {
 		return mainWindow;
 	}
-	
 	public HashMap<String, HashMap<Integer, Event>> getEventList() {
 		return eventList;
 	}
-	
 	public HashMap<String, User> getUserList() {
 		return userList;
 	}
-	
 	public User getCurrentUser() {
 		return currentUser;
+	}
+
+	
+	public static void main(String[] args) {
+		new Program();
 	}
 
 }
