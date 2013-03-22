@@ -269,7 +269,7 @@ public class CalendarPane extends JPanel {
 		int y = (int) startTime*gridSizeY;
 		
 		// Set another colour for other users
-		if (program.getCurrentUser() != event.getUser()) {
+		if (!program.getCurrentUser().getUsername().equals(event.getUser().getUsername())) {
 			eventComp.setColor(new int[] {126, 126, 126});
 		}
 
