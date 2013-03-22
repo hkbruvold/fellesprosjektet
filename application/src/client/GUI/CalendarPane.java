@@ -210,6 +210,7 @@ public class CalendarPane extends JPanel {
 		// Generate data for display logic
 		generateLaneSizes();
 		
+		
 		for (int i = 0; i<7; i++) {
 			ArrayList<EventComponent> eventList = eventDayList.get(i);
 			for (EventComponent event: eventList) {

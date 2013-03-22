@@ -82,6 +82,7 @@ public class SelectCalendars extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource().equals(closeButton)) {
 			calPane.setShowUserCalendars(userList.getSelectedValuesList());
+			calPane.showCalendar();
 			frame.dispose();
 		}
 	}
