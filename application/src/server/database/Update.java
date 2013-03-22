@@ -327,8 +327,7 @@ public class Update {
 		} else {
 			id = dbComm.update(updateString);
 		}
-		long version = getVersion();
-		long newVersion = version + 1;
+		long newVersion = getVersion() + 1;
 		if (identifier.length() > 0) {
 			dbComm.update("INSERT changes SET versionNumber=" + newVersion + ", tableName='" + tableName + "', identifiers='" + identifier + "'");
 		} else {
@@ -343,6 +342,8 @@ public class Update {
 		} else {
 			dbComm.update(updateString);
 		}
+		long newVersion = getVersion() + 1;
+		dbComm.update("INSERT changes SET versionNumber=" + newVersion + ", tableName='" + tableName + "', identifiers='" + identifier + "'");
 	}
 	private void deleteObject(String tableName, String condition, String identifier) {
 		String updateString = String.format(DELETE_FROM_WHERE, tableName, condition);
@@ -351,6 +352,8 @@ public class Update {
 		} else {
 			dbComm.update(updateString);
 		}
+		long newVersion = getVersion() + 1;
+		dbComm.update("INSERT changes SET versionNumber=" + newVersion + ", tableName='" + tableName + "', identifiers='" + identifier + "'");
 	}
 	
 	public void startVersion() {
