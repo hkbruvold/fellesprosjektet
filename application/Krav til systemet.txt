@@ -1,40 +1,44 @@
-FERDIG : 1. Logge på. Ansatte får tilgang til kalendersystemet ved å logge seg på kalenderklienten med brukernavn og passord.
+FERDIG : 1. Logge pï¿½. Ansatte fï¿½r tilgang til kalendersystemet ved ï¿½ logge seg pï¿½ kalenderklienten med brukernavn og passord.
 
-FERDIG : 2. Legge inn avtale. Ansatte skal kunne legge inn avtaler i kalenderene sine. En avtale legges inn på avtaledato med et start- og sluttidspunkt, samt en kort beskrivelse av 
-avtalen ("Bil på verksted") og eventuelt sted for avtalen ("Strandveien Auto").
+FERDIG : 2. Legge inn avtale. Ansatte skal kunne legge inn avtaler i kalenderene sine. En avtale legges inn pï¿½ avtaledato med et start- og sluttidspunkt, samt en kort beskrivelse av 
+avtalen ("Bil pï¿½ verksted") og eventuelt sted for avtalen ("Strandveien Auto").
 
 FERDIG 3. Slette avtale. Ansatte skal kunne slette en avtale som ligger i en av kalenderene sine.
 
-FERIDG? 4. Endre avtale. Ansatte skal kunne endre på en avtale som ligger i en av kalenderene sine. Alle feltene kan endres.
+FERIDG? 4. Endre avtale. Ansatte skal kunne endre pï¿½ en avtale som ligger i en av kalenderene sine. Alle feltene kan endres.
+  Mangler oppdatering av romreservasjon og deltagere
 
-FERDIG? 5. Kalle inn til møte. En ansatt skal kunne kalle andre ansatte og grupper i Firma X inn til et møte. Den som kaller inn til møte kalles en møteleder. En ansatt skal kunne kalle 
-inn til møte på samme måte som han/hun legger ny avtale inn i en kalender. I tillegg til feltene for en vanlig avtale, inneholder også møteinnkallingen en liste over innkalte 
-møtedeltakere. 
+FERDIG? 5. Kalle inn til mï¿½te. En ansatt skal kunne kalle andre ansatte og grupper i Firma X inn til et mï¿½te. Den som kaller inn til mï¿½te kalles en mï¿½teleder. En ansatt skal kunne kalle 
+inn til mï¿½te pï¿½ samme mï¿½te som han/hun legger ny avtale inn i en kalender. I tillegg til feltene for en vanlig avtale, inneholder ogsï¿½ mï¿½teinnkallingen en liste over innkalte 
+mï¿½tedeltakere. 
 
-6. Motta møteinnkalling. Når en ansatt mottar innkalling til et møte, kan han/hun svare 'Godta' eller 'Forkast'. Ved å svare 'Godta', legges møteinnkallingen inn som en avtale 
-i den innkalte ansattes kalender. Om den ansatte svarer 'Avslag', sendes svar tilbake til møtelederen om at innkallingen ikke er godtatt. Møteleder kan da velge å finne et nytt 
-tidspunkt, avlyse møtet (se under) eller fjerne deltakeren fra innkallingslista.
+6. Motta mï¿½teinnkalling. Nï¿½r en ansatt mottar innkalling til et mï¿½te, kan han/hun svare 'Godta' eller 'Forkast'. Ved ï¿½ svare 'Godta', legges mï¿½teinnkallingen inn som en avtale 
+i den innkalte ansattes kalender. Om den ansatte svarer 'Avslag', sendes svar tilbake til mï¿½telederen om at innkallingen ikke er godtatt. Mï¿½teleder kan da velge ï¿½ finne et nytt 
+tidspunkt, avlyse mï¿½tet (se under) eller fjerne deltakeren fra innkallingslista.
+  Mye av vinduet var pÃ¥ plass sist jeg sÃ¥ det, men mangler mulighet for Ã¥ svare. 
 
-7. Endre møteinnkalling. Møteleder kan endre tidspunkt på en møteinnkalling. Det sendes da beskjed ut til alle møtedeltakerne, som kan svare 'Godta' eller 'Forkast'. Ved 
-å svare 'Godta', endres avtalen i den innkalte ansattes kalender. Ved å svare 'Forkast' sendes beskjed ut til alle innkalte møtedeltakere. Møteleder kan da velge å finne et 
-nytt tidspunkt eller å avlyse møtet (se under).
+7. Endre mï¿½teinnkalling. Mï¿½teleder kan endre tidspunkt pï¿½ en mï¿½teinnkalling. Det sendes da beskjed ut til alle mï¿½tedeltakerne, som kan svare 'Godta' eller 'Forkast'. Ved 
+ï¿½ svare 'Godta', endres avtalen i den innkalte ansattes kalender. Ved ï¿½ svare 'Forkast' sendes beskjed ut til alle innkalte mï¿½tedeltakere. Mï¿½teleder kan da velge ï¿½ finne et 
+nytt tidspunkt eller ï¿½ avlyse mï¿½tet (se under).
 
-8. Avlyse møte. Møteleder kan avlyse et møte. Det sendes da beskjed til alle møtedeltakerne, og systemet sletter møtet i deltakernes personlige kalender.
+8. Avlyse mï¿½te. Mï¿½teleder kan avlyse et mï¿½te. Det sendes da beskjed til alle mï¿½tedeltakerne, og systemet sletter mï¿½tet i deltakernes personlige kalender.
+  Dette er (delvis?) pÃ¥ plass pga. mÃ¥ten vi lagrer events. Mangler Ã¥ sende beskjed
 
-9. Melde avbud for møte. En ansatt kan melde avbud på en møteinnkalling ved å slette avtalen i sin personlige kalender. Når en ansatt melder avbud, sendes melding til alle 
-de andre møtedeltakerne. Møteleder kan da velge om møtet skal avlyses eller om han/hun skal endre tidspunkt på møtet.
+9. Melde avbud for mï¿½te. En ansatt kan melde avbud pï¿½ en mï¿½teinnkalling ved ï¿½ slette avtalen i sin personlige kalender. Nï¿½r en ansatt melder avbud, sendes melding til alle 
+de andre mï¿½tedeltakerne. Mï¿½teleder kan da velge om mï¿½tet skal avlyses eller om han/hun skal endre tidspunkt pï¿½ mï¿½tet.
 
-10.Reservere møterom. I stedet for å skrive inn sted for en avtale eller et møte, skal brukeren kunne reservere møterom. Kalendertjeneren skal lage en liste med 
-tilgjengelige møterom (tilgjengelig betyr ikke reserverte) i tidsperioden for avtalen/møtet. Brukeren kan da velge møterom fra denne listen. Om en avtale med 
-reservert møterom slettes, skal reservasjonen slettes på kalendertjeneren. Det samme gjelder for møter som avlyses.
+10.Reservere mï¿½terom. I stedet for ï¿½ skrive inn sted for en avtale eller et mï¿½te, skal brukeren kunne reservere mï¿½terom. Kalendertjeneren skal lage en liste med 
+tilgjengelige mï¿½terom (tilgjengelig betyr ikke reserverte) i tidsperioden for avtalen/mï¿½tet. Brukeren kan da velge mï¿½terom fra denne listen. Om en avtale med 
+reservert mï¿½terom slettes, skal reservasjonen slettes pï¿½ kalendertjeneren. Det samme gjelder for mï¿½ter som avlyses.
 
-NESTEN FERDIG 11.Visning. Kalenderklienten skal vise en ukekalender der alle avtaler og møter i den ansattes personlige kalender vises. Det skal være enkelt å bla mellom ukene.
+FERDIG(?) 11.Visning. Kalenderklienten skal vise en ukekalender der alle avtaler og mï¿½ter i den ansattes personlige kalender vises. Det skal vï¿½re enkelt ï¿½ bla mellom ukene.
 
-12. Spore møteinnkallinger. Kalenderklienten skal indikere i ukekalenderen om a) en møteinnkalling venter på svar fra en eller flere deltakere, b) en eller flere 
-møtedeltakere har avslått møteinnkalling, eller c) om alle innkalte har godtatt møteinnkallingen.
+12. Spore mï¿½teinnkallinger. Kalenderklienten skal indikere i ukekalenderen om a) en mï¿½teinnkalling venter pï¿½ svar fra en eller flere deltakere, b) en eller flere 
+mï¿½tedeltakere har avslï¿½tt mï¿½teinnkalling, eller c) om alle innkalte har godtatt mï¿½teinnkallingen.
 
-PÅBEGYNT? 13.Vis flere kalendre. Det skal være mulig å vise andre ansattes avtaler sammen med sine 
+NESTEN FERDIG? 13.Vis flere kalendre. Det skal vï¿½re mulig ï¿½ vise andre ansattes avtaler sammen med sine 
 egne i kalenderklienten.
+  Det er for Ã¸yebikket mulig Ã¥ endre andres avtaler ...
 
-14.Alarm. Det skal være mulig for hver ansatt å konfigurere enhver avtale slik at avtalen 
-genererer en alarm en gitt tid før møtet.
+14.Alarm. Det skal vï¿½re mulig for hver ansatt ï¿½ konfigurere enhver avtale slik at avtalen 
+genererer en alarm en gitt tid fï¿½r mï¿½tet.
