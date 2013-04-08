@@ -1,28 +1,19 @@
 package client.GUI;
 
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import java.awt.GridBagLayout;
-import javax.swing.JLabel;
-import java.awt.GridBagConstraints;
-import javax.swing.JComboBox;
+import java.awt.*;
 import java.awt.Insets;
-import java.util.ArrayList;
 
-import javax.swing.Box;
-import javax.swing.JButton;
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 
 import client.Program;
-
 import data.Group;
 
 @SuppressWarnings("serial")
 public class GroupOverviewWindow extends JFrame {
-
 	private JPanel contentPane;
+	
+	@SuppressWarnings("unused") 
 	private Program program;
 
 	/**

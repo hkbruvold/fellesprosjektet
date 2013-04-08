@@ -25,7 +25,9 @@ public class AlarmWindow extends JPanel implements ActionListener { // TODO This
 	private JTextArea notificationTextArea; // TODO?
 	private JButton closeButton;
 	private GridBagConstraints c;
-	private Program program;
+	
+	@SuppressWarnings("unused") 
+	private Program program; 
 
 	public AlarmWindow(Program program, Alarm alarm) {
 		this.program = program;

@@ -25,6 +25,8 @@ public class NotificationWindow extends JPanel implements ActionListener { // TO
 	private JTextArea notificationTextArea; // TODO?
 	private JButton closeButton;
 	private GridBagConstraints c;
+	
+	@SuppressWarnings("unused") 
 	private Program program;
 
 	public NotificationWindow(Program program, Notification notification) {

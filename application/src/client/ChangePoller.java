@@ -5,8 +5,10 @@ import data.communication.ChangeData;
 
 public class ChangePoller extends Thread {
 	private static final int INTERVAL = 5000;
-	private User currentUser;
 	private Program program;
+	
+	@SuppressWarnings("unused") 
+	private User currentUser;
 
 	public ChangePoller(User currentUser, Program program){
 		this.currentUser = currentUser;

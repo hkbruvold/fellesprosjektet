@@ -24,7 +24,9 @@ public class SelectCalendars extends JPanel implements ActionListener {
 	private JButton closeButton;
 	private GridBagConstraints c;
 
+	@SuppressWarnings("unused") 
 	private Program program;
+
 	private CalendarPane calPane;
 
 	public SelectCalendars(Program program, CalendarPane calPane) {

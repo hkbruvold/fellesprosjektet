@@ -31,6 +31,8 @@ public class NewGroupWindow extends JFrame {
 	private JButton btnSave;
 	private Box horizontalBox;
 	private JList<User> memberList;
+	
+	@SuppressWarnings("unused") 
 	private Program program;
 
 	/**
