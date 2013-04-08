@@ -22,13 +22,8 @@ parseRequest i ServerThread
 Add new groups
 
 __Kjell__
-(Testing and fixing small things here and there)
-Database
- - Store version numbers with data about changes (numbers ok, data needs more work)
- - queries (done, but changes might be needed)
- - insert  (done, but changes might be needed)
- - update  (done, but changes might be needed)
- - delete  (done, but changes might be needed)
+Make client request data from changelist received in ChangePoller
+Finish the last few database related parts
 
 __Vegard__
 Add option for selecting room in NewEventWindow
@@ -41,4 +36,5 @@ fix newUserWindow, and push new user to server
 Login from client, via database
 XML communication between client and server
 Fetch all users from server
-Method for getting notifications.
+Method for getting notifications. (?)
+Most database-related tasks
