@@ -30,7 +30,7 @@ import no.ntnu.fp.net.cl.KtnDatagram.Flag;
  * of the functionality, leaving message passing and error handling to this
  * implementation.
  * 
- * @author Sebjørn Birkeland and Stein Jakob Nordbø
+ * @author Sebjï¿½rn Birkeland and Stein Jakob Nordbï¿½
  * @see no.ntnu.fp.net.co.Connection
  * @see no.ntnu.fp.net.cl.ClSocket
  */
@@ -46,7 +46,7 @@ public class ConnectionImpl extends AbstractConnection {
      *            - the local port to associate with this connection
      */
     public ConnectionImpl(int myPort) {
-        throw new NotImplementedException();
+        super();
     }
 
     private String getIPv4Address() {
@@ -111,7 +111,38 @@ public class ConnectionImpl extends AbstractConnection {
      * @see AbstractConnection#sendAck(KtnDatagram, boolean)
      */
     public String receive() throws ConnectException, IOException {
-        throw new NotImplementedException();
+        int seq;
+    	
+    	// Throw exception if there is no connection
+    	if (state == State.CLOSED) {
+        	throw new ConnectException();
+        }
+        
+    	// start a loop to wait for packet
+    	while (true) {
+    		try {
+    			KtnDatagram datagram = receivePacket(false);
+    			
+    			// check IP address and port
+    			if (! datagram.getDest_addr().equals(myAddress) && 
+    					! (datagram.getDest_port() == myPort)) {
+    				continue; 
+    			}
+    			
+    			// check checksum
+    			if (datagram.getChecksum() != datagram.calculateChecksum()) {
+    				continue;
+    			}
+    			
+    			
+    		} catch (EOFException e) { //FIN packet is received
+    			
+    		}
+    	
+    	}
+    	
+    	
+    	
     }
 
     /**
