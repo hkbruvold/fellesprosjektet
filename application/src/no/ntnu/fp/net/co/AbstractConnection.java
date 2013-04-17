@@ -207,6 +207,7 @@ public abstract class AbstractConnection implements Connection {
      */
     protected synchronized void simplySendPacket(KtnDatagram packet) throws ClException, IOException {
         new ClSocket().send(packet);
+    
     }
 
     /**

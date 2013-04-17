@@ -13,6 +13,7 @@ import java.awt.MenuItem;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.Vector;
@@ -73,14 +74,29 @@ public class Gui extends JFrame {
         messages.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         inputFelt.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         loggedOn.setListData(new Vector());
-        inputFelt.addKeyListener(new KeyAdapter() {
-            public void keyTyped(KeyEvent e) {
-                if (e.getKeyChar() == KeyEvent.VK_ENTER) {
+        inputFelt.addKeyListener(new KeyListener() {
+			
+			@Override
+			public void keyTyped(KeyEvent e) {
+				
+            }
+			
+			@Override
+			public void keyReleased(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
                     sendMessage(inputFelt.getText());
                     inputFelt.setText("");
                 }
-            }
-        });
+				
+			}
+		});
+            
 
         MenuBar menubar = new MenuBar();
         Menu menu = new Menu("Settings");
@@ -100,7 +116,7 @@ public class Gui extends JFrame {
     }
 
     /**
-     * tar inn en array list av String objekter og viser den til høyre.
+     * tar inn en array list av String objekter og viser den til hï¿½yre.
      * 
      * @param liste
      */
@@ -109,8 +125,8 @@ public class Gui extends JFrame {
     }
 
     /**
-     * En metode som kaller sendMessage i hovedmodulen for å sende melding. Den
-     * kalles når man skriver inn tekst og trykker enter.
+     * En metode som kaller sendMessage i hovedmodulen for ï¿½ sende melding. Den
+     * kalles nï¿½r man skriver inn tekst og trykker enter.
      * 
      * @param message
      */

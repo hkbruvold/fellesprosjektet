@@ -19,7 +19,6 @@ import no.ntnu.fp.net.cl.ClException;
 import no.ntnu.fp.net.cl.ClSocket;
 import no.ntnu.fp.net.cl.KtnDatagram;
 import no.ntnu.fp.net.cl.KtnDatagram.Flag;
-import no.ntnu.fp.net.co.AbstractConnection.State;
 
 /**
  * Implementation of the Connection-interface. <br>
@@ -34,18 +33,17 @@ import no.ntnu.fp.net.co.AbstractConnection.State;
  * @see no.ntnu.fp.net.co.Connection
  * @see no.ntnu.fp.net.cl.ClSocket
  */
-public class ConnectionImpl extends AbstractConnection {
+public class CopyOfConnectionImpl extends AbstractConnection {
 
 	/** Keeps track of the used ports for each server port. */
 	private static Map<Integer, Boolean> usedPorts = Collections.synchronizedMap(new HashMap<Integer, Boolean>());
-
 	/**
 	 * Initialise initial sequence number and setup state machine.
 	 * 
 	 * @param myPort
 	 *            - the local port to associate with this connection
 	 */
-	public ConnectionImpl(int myPort) {
+	public CopyOfConnectionImpl(int myPort) {
 		super();
 		this.myPort = myPort;
 		this.myAddress = getIPv4Address();
@@ -53,14 +51,14 @@ public class ConnectionImpl extends AbstractConnection {
 		state = state.CLOSED;
 	}
 
-	public ConnectionImpl(String myAddress, int myPort, String remoteAddress, int remotePort) {
+
+	public CopyOfConnectionImpl(String myAddress, int myPort, String remoteAddress, int remotePort) {
 		this(myPort);
 		this.myAddress = myAddress;
 		this.remoteAddress = remoteAddress;
 		this.remotePort = remotePort;
 		state = state.SYN_RCVD;
 	}
-
 	private String getIPv4Address() {
 		try {
 			return InetAddress.getLocalHost().getHostAddress();
@@ -69,8 +67,7 @@ public class ConnectionImpl extends AbstractConnection {
 			return "127.0.0.1";
 		}
 	}
-
-
+	
 	private int newPort(){
 		int newPort = (int) (Math.random()*30000+10000);
 		return newPort;
@@ -121,7 +118,6 @@ public class ConnectionImpl extends AbstractConnection {
 
 		state = State.ESTABLISHED;
 	}
-
 	/**
 	 * Listen for, and accept, incoming connections.
 	 * 
@@ -143,7 +139,7 @@ public class ConnectionImpl extends AbstractConnection {
 		// Lag en connection og Send syn-ack
 		CopyOfConnectionImpl conn = new CopyOfConnectionImpl(this.myAddress, newPort() , this.remoteAddress, this.remotePort);
 
-
+		
 		KtnDatagram synAck = constructInternalPacket(Flag.SYN_ACK);
 		try {
 			conn.sendAck(syn, true);
@@ -162,6 +158,7 @@ public class ConnectionImpl extends AbstractConnection {
 		conn.state = State.ESTABLISHED;
 		return (Connection)conn;
 
+
 	}
 
 	/**
@@ -179,10 +176,13 @@ public class ConnectionImpl extends AbstractConnection {
 	public void send(String msg) throws ConnectException, IOException {
 		System.out.println("Trying to send with state: ");
 		System.out.println(state.name());
-
-
+		
+		
 		KtnDatagram packet = constructDataPacket(msg);
 		KtnDatagram ack = sendDataPacketWithRetransmit(packet);
+		
+		
+
 	}
 
 	/**
@@ -194,7 +194,7 @@ public class ConnectionImpl extends AbstractConnection {
 	 * @see AbstractConnection#sendAck(KtnDatagram, boolean)
 	 */
 	public String receive() throws ConnectException, IOException {
-		/*	int seq;
+		/*int seq;
 
 		// Throw exception if there is no connection
 		if (state == State.CLOSED) {
@@ -224,13 +224,14 @@ public class ConnectionImpl extends AbstractConnection {
 
 		}*/
 
+
 		//Just receive a pck and see what it is  ?
 		System.out.println("Run Receive!");
 		KtnDatagram packet = null;
-		packet = receivePacket(false);
+			packet = receivePacket(false);
 		if(packet == null)
 			return receive();
-
+		
 		sendAck(packet, false);
 		//System.out.println("Tried to recieve, was: " + packet.getPayload());	
 		return (String)packet.getPayload();
@@ -258,5 +259,6 @@ public class ConnectionImpl extends AbstractConnection {
 	 */
 	protected boolean isValid(KtnDatagram packet) {
 		return true;
+		//throw new NotImplementedException();
 	}
 }

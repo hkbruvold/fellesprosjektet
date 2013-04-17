@@ -185,10 +185,11 @@ public class ChatServer extends JFrame {
             public void run() {
                 while (true) {
                     try {
-                        DBG("Server lytter på:" + listenPort);
+                        DBG("Server lytter pï¿½:" + listenPort);
                         newConn = server.accept();
                         message = newConn.receive();
-
+                        
+                        
                         if (message.substring(0, 6).equals("Hello:")) {
                             User newUser;
                             DBG("Fikk inn connection fra: "
@@ -199,10 +200,10 @@ public class ChatServer extends JFrame {
                             broadcast(getUsers().toString());
                         }
                     } catch (SocketTimeoutException e) {
-		      DBG("startServer(): Noe gikk galt, forsøk igjen.");
+		      DBG("startServer(): Noe gikk galt, forsï¿½k igjen.");
 		      e.printStackTrace();
                     } catch (IOException e) {
-		      DBG("startServer(): Noe gikk galt, forsøk igjen.");
+		      DBG("startServer(): Noe gikk galt, forsï¿½k igjen.");
 		      e.printStackTrace();
                     }
                 }

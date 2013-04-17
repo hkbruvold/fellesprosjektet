@@ -9,3 +9,5 @@ bin
 /application/build/
 /nbproject/private/
 /build/
+
+*.txt

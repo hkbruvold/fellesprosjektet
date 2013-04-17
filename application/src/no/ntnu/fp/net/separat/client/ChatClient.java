@@ -10,6 +10,8 @@ import java.net.InetAddress;
 import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
 
+import javax.swing.JOptionPane;
+
 import no.ntnu.fp.net.admin.Log;
 import no.ntnu.fp.net.admin.Settings;
 import no.ntnu.fp.net.co.Connection;
@@ -43,6 +45,10 @@ public class ChatClient {
     private static boolean SIMPLE_CONNECTION = true;
 
     public ChatClient(String address, int port) {
+    	this.username = JOptionPane.showInputDialog(gui,"default eller default2:");
+  	  if(username.equals("default2")){
+  		  thisPort = 5556;
+  	  }
         port_to_server = port;
         addressServer= address;
         if (SIMPLE_CONNECTION) {
@@ -50,13 +56,14 @@ public class ChatClient {
         } else {
             connection = new ConnectionImpl(thisPort);
         }
-        //	  this.username = JOptionPane.showInputDialog(gui,"Skriv inn
-        // navn:");
+        	  
         gui = new Gui("Chat klient laget av Geir", this);
         this.login(username);
 
         gui.setDefaultCloseOperation(Gui.EXIT_ON_CLOSE);
     }
+    
+
 
     private class RecieveThread extends Thread {
         public boolean run = true;
@@ -76,8 +83,11 @@ public class ChatClient {
         }
     }
 
+
+    
     public void sendMessage(String message) {
         send(this.username + ": " + message);
+    	
     }
 
     public void login(String username) {
@@ -86,6 +96,7 @@ public class ChatClient {
         try {
             connection.connect(InetAddress.getByName(addressServer),
                     port_to_server);
+            System.out.println("Send Hello");
             connection.send("Hello:" + username);
             recieveThread = new RecieveThread();
             recieveThread.start();
