@@ -257,6 +257,16 @@ public class ConnectionImpl extends AbstractConnection {
 	 * @return true if packet is free of errors, false otherwise.
 	 */
 	protected boolean isValid(KtnDatagram packet) {
-		return true;
-	}
+    	if(packet != null){
+    		System.out.println("The packet is empty");
+    		if(packet.getChecksum() == packet.calculateChecksum()){
+    			if(packet.getSeq_nr() == lastDataPacketSent.getSeq_nr()+1){
+    				if(packet.getSrc_port() == remotePort && packet.getSrc_addr() == remoteAddress){
+    					return true;
+    				}
+    			}
+    		}
+    	}
+    	return false;
+    }
 }
