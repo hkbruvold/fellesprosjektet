@@ -10,4 +10,4 @@ bin
 /nbproject/private/
 /build/
 
-*.txt
+log
