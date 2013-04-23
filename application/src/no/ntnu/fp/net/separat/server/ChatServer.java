@@ -15,14 +15,12 @@ import java.util.Iterator;
 
 import javax.swing.JFrame;
 import javax.swing.JList;
-import javax.swing.JOptionPane;
 
 import no.ntnu.fp.net.admin.Log;
 import no.ntnu.fp.net.admin.Settings;
 import no.ntnu.fp.net.co.Connection;
 import no.ntnu.fp.net.co.ConnectionImpl;
 import no.ntnu.fp.net.co.SimpleConnection;
-import no.ntnu.fp.net.separat.client.ChatClient;
 
 /**
  * @author Geir Vevle
@@ -33,7 +31,7 @@ public class ChatServer extends JFrame {
 	public static boolean SIMPLE_CONNECTION = false;
 	private Connection server;
 	private String addressServer = "localhost";
-	private ArrayList users;
+	private ArrayList<User> users;
 	private int listenPort = 4444;
 	private boolean run = true;
 	private InetAddress localAddress;
@@ -154,7 +152,7 @@ public class ChatServer extends JFrame {
 		} catch (UnknownHostException e1) {
 			e1.printStackTrace();
 		}
-		users = new ArrayList();
+		users = new ArrayList<User>();
 		
 		if (SIMPLE_CONNECTION)
 			server = new SimpleConnection(listenPort);
@@ -198,10 +196,10 @@ public class ChatServer extends JFrame {
 		}
 	}
 	
-	private ArrayList getUsers() {
-		ArrayList userList = new ArrayList();
-		for (int i = 0; i < users.size(); i++) {
-			userList.add(((User) users.get(i)).name);
+	private ArrayList<String> getUsers() {
+		ArrayList<String> userList = new ArrayList<String>();
+		for (User user : users) {
+			userList.add(user.name);
 		}
 		userlist.setListData(userList.toArray());
 		return userList;
