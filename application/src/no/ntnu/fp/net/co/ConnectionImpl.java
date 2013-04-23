@@ -3,7 +3,6 @@
  */
 package no.ntnu.fp.net.co;
 
-import java.io.EOFException;
 import java.io.IOException;
 import java.net.ConnectException;
 import java.net.InetAddress;
@@ -13,13 +12,9 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-
-import no.ntnu.fp.net.admin.Log;
-import no.ntnu.fp.net.cl.ClException;
 import no.ntnu.fp.net.cl.ClSocket;
 import no.ntnu.fp.net.cl.KtnDatagram;
 import no.ntnu.fp.net.cl.KtnDatagram.Flag;
-import no.ntnu.fp.net.co.AbstractConnection.State;
 
 /**
  * Implementation of the Connection-interface. <br>
@@ -50,7 +45,7 @@ public class ConnectionImpl extends AbstractConnection {
 		this.myPort = myPort;
 		this.myAddress = getIPv4Address();
 		this.nextSequenceNo = 1;
-		state = state.CLOSED;
+		state = State.CLOSED;
 	}
 
 	public ConnectionImpl(String myAddress, int myPort, String remoteAddress, int remotePort) {
@@ -58,7 +53,7 @@ public class ConnectionImpl extends AbstractConnection {
 		this.myAddress = myAddress;
 		this.remoteAddress = remoteAddress;
 		this.remotePort = remotePort;
-		state = state.SYN_RCVD;
+		state = State.SYN_RCVD;
 	}
 
 	private String getIPv4Address() {
@@ -258,7 +253,7 @@ public class ConnectionImpl extends AbstractConnection {
 	 */
 	protected boolean isValid(KtnDatagram packet) {
     	if(packet != null){
-    		System.out.println("The packet is empty");
+    		System.out.println("The packet is empty"); // Why?
     		if(packet.getChecksum() == packet.calculateChecksum()){
     			if(packet.getSeq_nr() == lastDataPacketSent.getSeq_nr()+1){
     				if(packet.getSrc_port() == remotePort && packet.getSrc_addr() == remoteAddress){
