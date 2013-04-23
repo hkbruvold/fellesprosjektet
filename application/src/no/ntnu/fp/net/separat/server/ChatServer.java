@@ -11,7 +11,6 @@ import java.net.InetAddress;
 import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 import javax.swing.JFrame;
 import javax.swing.JList;
@@ -131,9 +130,8 @@ public class ChatServer extends JFrame {
 	}
 	
 	private synchronized void broadcast(String mess) {
-		for (Iterator iter = users.iterator(); iter.hasNext();) {
-			User element = (User) iter.next();
-			element.send(mess);
+		for (User user : users) {
+			user.send(mess);
 		}
 	}
 	
