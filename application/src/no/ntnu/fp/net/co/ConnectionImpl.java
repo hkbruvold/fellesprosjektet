@@ -168,8 +168,9 @@ public class ConnectionImpl extends AbstractConnection {
 		
 		KtnDatagram packet = constructDataPacket(msg);
 		KtnDatagram ack = sendDataPacketWithRetransmit(packet);
-		if (ack == null || ack.getFlag() != Flag.ACK) { // XXX is this correct?
-			throw new IOException();
+		if(ack != null && ack.getFlag() != Flag.ACK){
+			lastDataPacketSent = packet;
+			lastValidPacketReceived = ack;
 		}
 	}
 	
