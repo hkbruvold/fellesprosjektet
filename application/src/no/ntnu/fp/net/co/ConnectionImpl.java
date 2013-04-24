@@ -168,7 +168,7 @@ public class ConnectionImpl extends AbstractConnection {
 		
 		KtnDatagram packet = constructDataPacket(msg);
 		KtnDatagram ack = sendDataPacketWithRetransmit(packet);
-		if (ack == null || ack.getFlag() != Flag.ACK) { // is this correct?
+		if (ack == null || ack.getFlag() != Flag.ACK) { // XXX is this correct?
 			throw new IOException();
 		}
 	}
@@ -212,11 +212,11 @@ public class ConnectionImpl extends AbstractConnection {
 		System.out.println("Run Receive!");
 		KtnDatagram packet = null;
 		packet = receivePacket(false);
-		if (packet == null) {
+		if (packet == null) { // XXX Why is this not a loop?
 			return receive();
 		}
 		sendAck(packet, false);
-		// System.out.println("Tried to recieve, was: " + packet.getPayload());
+//		System.out.println("Tried to receive, was: " + packet.getPayload());
 		return (String) packet.getPayload();
 	}
 	
@@ -239,7 +239,7 @@ public class ConnectionImpl extends AbstractConnection {
 	 */
 	protected boolean isValid(KtnDatagram packet) {
 		if (packet != null) {
-			System.out.println("The packet is empty"); // Why?
+			System.out.println("The packet is empty"); // XXX Why?
 			if (packet.getChecksum() == packet.calculateChecksum()) {
 				if (packet.getSeq_nr() == lastDataPacketSent.getSeq_nr() + 1) {
 					if (packet.getSrc_port() == remotePort && packet.getSrc_addr() == remoteAddress) {
