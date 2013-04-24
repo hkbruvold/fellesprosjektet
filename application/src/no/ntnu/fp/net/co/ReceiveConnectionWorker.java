@@ -34,7 +34,7 @@ public class ReceiveConnectionWorker extends Thread {
             }
         }
         catch (Exception e) {
-            e.printStackTrace(); // TODO: better handling of exceptions
+            e.printStackTrace(); // todo: better handling of exceptions
         }
     }
     

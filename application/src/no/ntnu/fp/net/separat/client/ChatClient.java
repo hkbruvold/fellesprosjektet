@@ -109,17 +109,15 @@ public class ChatClient {
 		try {
 			connection.send(data);
 		} catch (ConnectException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 	
 	public void disconnect() {
 		recieveThread.run = false;
-		// XXX: Geir: Do not call suspend() on the receive thread, as this
+		// xxx: Geir: Do not call suspend() on the receive thread, as this
 		// stops all receives, including waiting for ACK on the packet that
 		// is sent (username+"is closing") and the FIN...
 		// --SJ 2006-01-01
@@ -128,7 +126,6 @@ public class ChatClient {
 		try {
 			connection.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

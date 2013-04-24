@@ -86,23 +86,20 @@ public class ChatServer extends JFrame {
 				
 			} else if (mess.equals(new String(name + " is closing"))) {
 				
-				// recieveThread.run = false;
-				// recieveThread = null;
-				// try {
-				// conn.close();
-				// } catch (IOException e1) {
-				// // TODO Auto-generated catch block
-				// e1.printStackTrace();
-				// }
-				// ChatServer.this.users.remove(this);
-				// ChatServer.this
-				// .broadcast(ChatServer.this.getUsers().toString());
-				// try {
-				// this.finalize();
-				// } catch (Throwable e) {
-				// // TODO Auto-generated catch block
-				// e.printStackTrace();
-				// }
+//				recieveThread.run = false;
+//				recieveThread = null;
+//				try {
+//					conn.close();
+//				} catch (IOException e1) {
+//					e1.printStackTrace();
+//				}
+//				ChatServer.this.users.remove(this);
+//				ChatServer.this.broadcast(ChatServer.this.getUsers().toString());
+//				try {
+//					this.finalize();
+//				} catch (Throwable e) {
+//					e.printStackTrace();
+//				}
 			} else if (mess.substring(0, 1).equals("/")) {
 				if (mess.substring(1, 9).equals("newName:")) {
 					String oldName = name;
@@ -124,7 +121,6 @@ public class ChatServer extends JFrame {
 				DBG("User.send(): Disconnect requested.");
 				this.recieveThread.run = false;
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}

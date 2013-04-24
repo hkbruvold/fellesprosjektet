@@ -84,11 +84,11 @@ public class ReceiveMessageWorker extends Thread {
                 }
             }
             catch (IOException e2) {
-                // TODO: better handle exception
+                // todo: better handle exception
             }
         }
         catch (IOException e) {
-            // TODO: better handle exception
+            // todo: better handle exception
         }
     }
 
