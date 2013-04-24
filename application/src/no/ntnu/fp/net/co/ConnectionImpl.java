@@ -30,10 +30,10 @@ import no.ntnu.fp.net.cl.KtnDatagram.Flag;
  * @see no.ntnu.fp.net.cl.ClSocket
  */
 public class ConnectionImpl extends AbstractConnection {
-
+	
 	/** Keeps track of the used ports for each server port. */
 	private static Map<Integer, Boolean> usedPorts = Collections.synchronizedMap(new HashMap<Integer, Boolean>());
-
+	
 	/**
 	 * Initialise initial sequence number and setup state machine.
 	 * 
@@ -47,7 +47,7 @@ public class ConnectionImpl extends AbstractConnection {
 		this.nextSequenceNo = 1;
 		state = State.CLOSED;
 	}
-
+	
 	public ConnectionImpl(String myAddress, int myPort, String remoteAddress, int remotePort) {
 		this(myPort);
 		this.myAddress = myAddress;
@@ -55,22 +55,15 @@ public class ConnectionImpl extends AbstractConnection {
 		this.remotePort = remotePort;
 		state = State.SYN_RCVD;
 	}
-
+	
 	private String getIPv4Address() {
 		try {
 			return InetAddress.getLocalHost().getHostAddress();
-		}
-		catch (UnknownHostException e) {
+		} catch (UnknownHostException e) {
 			return "127.0.0.1";
 		}
 	}
-
-
-	private int newPort(){
-		int newPort = (int) (Math.random()*30000+10000);
-		return newPort;
-	}
-
+	
 	/**
 	 * Establish a connection to a remote location.
 	 * 
@@ -84,39 +77,36 @@ public class ConnectionImpl extends AbstractConnection {
 	 *             If timeout expires before connection is completed.
 	 * @see Connection#connect(InetAddress, int)
 	 */
-	public void connect(InetAddress remoteAddress, int remotePort) throws IOException,
-	SocketTimeoutException {
+	public void connect(InetAddress remoteAddress, int remotePort) throws IOException, SocketTimeoutException {
 		this.remoteAddress = remoteAddress.getHostAddress();
 		this.remotePort = remotePort;
-		//Send syn til mottaker
+		
+		// Send syn to receiver
 		KtnDatagram syn = constructInternalPacket(Flag.SYN);
-
 		try {
 			simplySendPacket(syn);
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-
-		//Vent paa syn-ack
-
-
+		
+		// Wait for syn-ack
 		KtnDatagram synAck = null;
-		while(synAck == null){
-
+		while (synAck == null) {
 			synAck = receiveAck();
 		}
 		this.remotePort = synAck.getSrc_port();
-		//Send ack
+
+		// Send ack
 		KtnDatagram ack = constructInternalPacket(Flag.ACK);
 		try {
 			sendAck(ack, false);
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-
+		
 		state = State.ESTABLISHED;
 	}
-
+	
 	/**
 	 * Listen for, and accept, incoming connections.
 	 * 
@@ -125,38 +115,39 @@ public class ConnectionImpl extends AbstractConnection {
 	 */
 	public Connection accept() throws IOException, SocketTimeoutException {
 		state = State.LISTEN;
-
-		//Venter paa syn
-
+		
+		// Wait for syn
 		KtnDatagram syn = null;
-		while(syn == null || syn.getFlag() != Flag.SYN){
+		while (syn == null || syn.getFlag() != Flag.SYN) {
 			syn = receivePacket(true);
 		}
 		this.remoteAddress = syn.getSrc_addr();
 		this.remotePort = syn.getSrc_port();
 		this.state = State.SYN_RCVD;
-		// Lag en connection og Send syn-ack
-		ConnectionImpl conn = new ConnectionImpl(this.myAddress, newPort() , this.remoteAddress, this.remotePort);
 
-
+		// Make a connection and Send syn-ack
+		ConnectionImpl conn = new ConnectionImpl(this.myAddress, newPort(), this.remoteAddress, this.remotePort);
 		KtnDatagram synAck = constructInternalPacket(Flag.SYN_ACK);
 		try {
-			conn.sendAck(syn, true);
+			conn.sendAck(synAck, true);
 			conn.state = State.LISTEN;
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-
-		//Receive ack
+		
+		// Receive ack
 		KtnDatagram ack = null;
-		while(ack == null){
+		while (ack == null) {
 			ack = conn.receiveAck();
 		}
-		//state = State.ESTABLISHED;
+		// state = State.ESTABLISHED;
 		state = State.LISTEN;
 		conn.state = State.ESTABLISHED;
-		return (Connection)conn;
-
+		return (Connection) conn;
+	}
+	private int newPort() {
+		int newPort = (int) (Math.random() * 30000 + 10000);
+		return newPort;
 	}
 
 	/**
@@ -174,12 +165,11 @@ public class ConnectionImpl extends AbstractConnection {
 	public void send(String msg) throws ConnectException, IOException {
 		System.out.println("Trying to send with state: ");
 		System.out.println(state.name());
-
-
+		
 		KtnDatagram packet = constructDataPacket(msg);
 		KtnDatagram ack = sendDataPacketWithRetransmit(packet);
 	}
-
+	
 	/**
 	 * Wait for incoming data.
 	 * 
@@ -189,51 +179,44 @@ public class ConnectionImpl extends AbstractConnection {
 	 * @see AbstractConnection#sendAck(KtnDatagram, boolean)
 	 */
 	public String receive() throws ConnectException, IOException {
-		/*	int seq;
-
-		// Throw exception if there is no connection
-		if (state == State.CLOSED) {
-			throw new ConnectException();
-		}
-
-		// start a loop to wait for packet
-		while (true) {
-			try {
-				KtnDatagram datagram = receivePacket(false);
-
-				// check IP address and port
-				if (! datagram.getDest_addr().equals(myAddress) && 
-						! (datagram.getDest_port() == myPort)) {
-					continue; 
-				}
-
-				// check checksum
-				if (datagram.getChecksum() != datagram.calculateChecksum()) {
-					continue;
-				}
-
-
-			} catch (EOFException e) { //FIN packet is received
-
-			}
-
-		}*/
-
-		//Just receive a pck and see what it is  ?
+//		int seq;
+//		
+//		// Throw exception if there is no connection
+//		if (state == State.CLOSED) {
+//			throw new ConnectException();
+//		}
+//		
+//		// start a loop to wait for packet
+//		while (true) {
+//			try {
+//				KtnDatagram datagram = receivePacket(false);
+//				
+//				// check IP address and port
+//				if (!datagram.getDest_addr().equals(myAddress) && !(datagram.getDest_port() == myPort)) {
+//					continue;
+//				}
+//				
+//				// check checksum
+//				if (datagram.getChecksum() != datagram.calculateChecksum()) {
+//					continue;
+//				}
+//			} catch (EOFException e) { // FIN packet is received
+//			
+//			}
+//		}
+		
+		// Just receive a pck and see what it is ?
 		System.out.println("Run Receive!");
 		KtnDatagram packet = null;
 		packet = receivePacket(false);
-		if(packet == null)
+		if (packet == null) {
 			return receive();
-
+		}
 		sendAck(packet, false);
-		//System.out.println("Tried to recieve, was: " + packet.getPayload());	
-		return (String)packet.getPayload();
-
-
-
+		// System.out.println("Tried to recieve, was: " + packet.getPayload());
+		return (String) packet.getPayload();
 	}
-
+	
 	/**
 	 * Close the connection.
 	 * 
@@ -242,7 +225,7 @@ public class ConnectionImpl extends AbstractConnection {
 	public void close() throws IOException {
 		state = State.CLOSED;
 	}
-
+	
 	/**
 	 * Test a packet for transmission errors. This function should only called
 	 * with data or ACK packets in the ESTABLISHED state.
@@ -252,16 +235,16 @@ public class ConnectionImpl extends AbstractConnection {
 	 * @return true if packet is free of errors, false otherwise.
 	 */
 	protected boolean isValid(KtnDatagram packet) {
-    	if(packet != null){
-    		System.out.println("The packet is empty"); // Why?
-    		if(packet.getChecksum() == packet.calculateChecksum()){
-    			if(packet.getSeq_nr() == lastDataPacketSent.getSeq_nr()+1){
-    				if(packet.getSrc_port() == remotePort && packet.getSrc_addr() == remoteAddress){
-    					return true;
-    				}
-    			}
-    		}
-    	}
-    	return false;
-    }
+		if (packet != null) {
+			System.out.println("The packet is empty"); // Why?
+			if (packet.getChecksum() == packet.calculateChecksum()) {
+				if (packet.getSeq_nr() == lastDataPacketSent.getSeq_nr() + 1) {
+					if (packet.getSrc_port() == remotePort && packet.getSrc_addr() == remoteAddress) {
+						return true;
+					}
+				}
+			}
+		}
+		return false;
+	}
 }
