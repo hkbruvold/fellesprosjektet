@@ -13,7 +13,7 @@ import temp.TestObjects;
 import data.Alarm;
 
 @SuppressWarnings("serial")
-public class AlarmWindow extends JPanel implements ActionListener { // TODO This needs a fix
+public class AlarmWindow extends JPanel implements ActionListener { // todo This needs a fix
 	private static final String FRAME_NAME = "Beskjed"; 
 	private static final String BUTTON_CLOSE = "Lukk";
 
@@ -22,7 +22,7 @@ public class AlarmWindow extends JPanel implements ActionListener { // TODO This
 
 	private Alarm alarm;
 	private JFrame frame;
-	private JTextArea notificationTextArea; // TODO?
+	private JTextArea notificationTextArea;
 	private JButton closeButton;
 	private GridBagConstraints c;
 	
@@ -42,7 +42,7 @@ public class AlarmWindow extends JPanel implements ActionListener { // TODO This
 
 	private void initFrame() {
 		frame = new JFrame(FRAME_NAME);
-		frame.setPreferredSize(new Dimension(250, 150)); // TODO?
+		frame.setPreferredSize(new Dimension(250, 150));
 		frame.setResizable(true);
 		frame.setLocationRelativeTo(null);
 		frame.getContentPane().add(this);

@@ -143,7 +143,7 @@ public class CalendarPane extends JPanel {
 		DateFormat ISOdf = new SimpleDateFormat("yyyy-MM-dd");
 		//int date = 0;
 		//int month = 0;
-		//TODO Fetch events from database, and add them all to the calendarPane!
+		//todo Fetch events from database, and add them all to the calendarPane!
 		
 		daysOfWeek = new String[7];
 		
@@ -361,11 +361,11 @@ public class CalendarPane extends JPanel {
 
 	public void setWeek(int newweek){
 		week = newweek;
-		//TODO update calendar view
+		//todo update calendar view
 	}
 	public void setYear(int newyear){
 		year = newyear;
-		//TODO update calendar view
+		//todo update calendar view
 	}
 
 	private final class EventMouseListener implements MouseListener {

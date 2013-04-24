@@ -110,7 +110,7 @@ public class NewGroupWindow extends JFrame {
 		gbc_labelMembers.gridy = 3;
 		contentPane.add(labelMembers, gbc_labelMembers);
 
-		//TODO Get all users from server
+		//todo Get all users from server
 		ArrayList<User> users = new ArrayList<User>();
 		//Temporary!
 		users.add(temp.TestObjects.getUser00());

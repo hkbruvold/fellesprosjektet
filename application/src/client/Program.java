@@ -95,7 +95,7 @@ public class Program {
 	}
 	
 	public void addUser(User user){
-		// TODO remember to make sure username is available!
+		// todo remember to make sure username is available!
 		Response res = client.send(new Request(InsertAction.ADD_USER, user));
 	}
 	public int registerEvent(Event event) {

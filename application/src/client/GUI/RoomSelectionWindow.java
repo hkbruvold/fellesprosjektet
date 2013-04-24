@@ -52,7 +52,7 @@ public class RoomSelectionWindow extends JPanel implements ActionListener {
 
 	private void initFrame() {
 		frame = new JFrame(FRAME_NAME);
-		frame.setPreferredSize(new Dimension(250, 150)); // TODO?
+		frame.setPreferredSize(new Dimension(250, 150)); // temp?
 		frame.setResizable(true);
 		frame.setLocationRelativeTo(null);
 		frame.getContentPane().add(this);

@@ -30,10 +30,6 @@ public class DatabaseCommunication {
 			return -1;
 		}
 	}
-	public int batchUpdate(/* TODO */) {
-		// TODO
-		return -1;
-	}
 
 	private ArrayList<Properties> makeQuery(String query) throws ClassNotFoundException, SQLException {
 		dbConn.init();

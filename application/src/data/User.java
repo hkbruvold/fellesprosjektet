@@ -25,8 +25,6 @@ public class User implements Serializable {
 		this.type = type;
 	}
 
-	// TODO
-
 	public String toString() {
 		return String.format("User; Username: %s, Name: %s, Type: %s", username, name, type);
 	}

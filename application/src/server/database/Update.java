@@ -129,7 +129,7 @@ public class Update {
 		StringBuilder condition = new StringBuilder();
 		condition.append("eventID=").append(event.getId());
 		updateObject(TABLE_EVENT, values.toString(), condition.toString(), ""+event.getId());
-		// TODO relations? (room reservation etc.)
+		// todo relations? (room reservation etc.)
 	}
 	public void deleteEvent(Event event) {
 		StringBuilder condition = new StringBuilder();
@@ -157,7 +157,7 @@ public class Update {
 		StringBuilder condition = new StringBuilder();
 		condition.append("groupID=").append(group.getId());
 		updateObject(TABLE_GROUPS, values.toString(), condition.toString(), ""+group.getId());
-		// TODO relations? (members etc.)
+		// todo relations? (members etc.)
 	}
 	public void deleteGroup(Group group) {
 		StringBuilder condition = new StringBuilder();
@@ -373,7 +373,7 @@ public class Update {
 		}
 	}
 	
-	public ChangeData getChanges(long versionNumber) { // TODO make sure this actually does what it is supposed to do
+	public ChangeData getChanges(long versionNumber) { // todo make sure this actually does what it is supposed to do
 		ChangeData cd = new ChangeData();
 		long currentVersion = getVersion();
 		cd.setVersionNumber(currentVersion);

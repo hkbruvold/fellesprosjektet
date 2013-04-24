@@ -145,10 +145,10 @@ public class MeetingInvitationWindow extends JPanel implements ActionListener, I
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource().equals(closeButton)) {
-			// TODO ?
-					frame.dispose();
+			// todo ?
+			frame.dispose();
 		} else if (e.getSource().equals(declineButton)) {
-			// TODO Set user based on the user of the program
+			// todo Set user based on the user of the program
 			MeetingReply meetingReply = new MeetingReply(user, meeting, "DECLINED");
 			System.out.println(meetingReply.toString());
 			program.updateStatus(meetingReply);

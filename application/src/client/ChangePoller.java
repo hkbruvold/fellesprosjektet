@@ -38,7 +38,7 @@ public class ChangePoller extends Thread {
 			return;
 		}
 		System.out.println(changeData);
-		// TODO use cangedata to update client-side data
+		// todo use cangedata to update client-side data
 		program.refreshCalendar(); // need to be changed when the above todo is finished
 		program.setVersion(changeData.getVersionNumber());
 	}

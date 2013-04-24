@@ -8,7 +8,7 @@ import javax.swing.JComponent;
 import data.Event;
 
 @SuppressWarnings("serial")
-public class EventComponent extends JComponent { //TODO find proper component
+public class EventComponent extends JComponent {
 	private Event event;
 	
 	private int borderWidth = 1; //Border width in pixels

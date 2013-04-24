@@ -109,7 +109,7 @@ public class ServerThread extends Thread {
 				send(new Response(Response.Status.OK, new ChangeData(serverVersion, new String[]{""}, new String[]{""})));
 			} else {
 				send(new Response(Response.Status.OK, update.getChanges(clientVersion)));
-				// TODO what if it fails?
+				// todo what if it fails?
 			}
 			break;
 		default:
@@ -129,7 +129,7 @@ public class ServerThread extends Thread {
 			} else {
 				send(new Response(Response.Status.OK, eventId)); 
 			}
-			// TODO what if relations fails?
+			// todo what if relations fails?
 			break;
 		case ADD_ALARM:
 			Alarm alarm = (Alarm) data;
@@ -139,13 +139,13 @@ public class ServerThread extends Thread {
 			} else {
 				send(new Response(Response.Status.OK, alarmResult)); 
 			}
-			// TODO what if relations fails?
+			// todo what if relations fails?
 			break;
 		case ADD_USER:
 			User user = (User) data;
 			update.insertUser(user);
 			send(new Response(Response.Status.OK, null));
-			// TODO what if it fails?
+			// todo what if it fails?
 			break;
 		default:
 			System.out.println("case default");
@@ -183,7 +183,7 @@ public class ServerThread extends Thread {
 			Group group = new Group(0, "result", "dummy");
 			group.addMembers(userList);
 			send(new Response(Response.Status.OK, group));
-			// TODO what if it fails?
+			// todo what if it fails?
 			break;
 		case LIST_ROOMS:
 			ArrayList<Room> roomList = query.queryRooms();
@@ -192,7 +192,7 @@ public class ServerThread extends Thread {
 				roomDL.add(room);
 			}
 			send(new Response(Response.Status.OK, roomDL));
-			// TODO what if it fails?
+			// todo what if it fails?
 			break;
 		case LIST_EVENTS_FOR_USER:
 			query = new Query((User)data, dbComm); // Needed to get fetch alarms to the user

@@ -8,7 +8,7 @@ public class Notification implements Serializable {
 	private String message;
 	private Event event;
 	private User recipient;
-	// TODO private 'something' options;
+	// todo private 'something' options;
 
 	public Notification(){
 	}
@@ -23,7 +23,7 @@ public class Notification implements Serializable {
 		this.message = message;
 		this.event = event;
 		this.recipient = recipient;
-		// TODO options
+		// todo options
 	}
 
 	public String toString() {
@@ -54,5 +54,5 @@ public class Notification implements Serializable {
 	public void setRecipient(User recipient) {
 		this.recipient = recipient;
 	}
-	// TODO getter and setter for options
+	// todo getter and setter for options
 }

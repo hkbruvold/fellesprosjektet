@@ -109,7 +109,7 @@ public class NewEventWindow extends JPanel implements ActionListener, ItemListen
 			participantsList.setSelectedIndices(indecies);
 		}
 
-		// TODO
+		// todo?
 
 		frame.pack();
 		frame.setVisible(true);
@@ -117,7 +117,7 @@ public class NewEventWindow extends JPanel implements ActionListener, ItemListen
 
 	private void initFrame() {
 		frame = new JFrame(FRAME_NAME);
-		frame.setPreferredSize(new Dimension(400, 350)); // TODO temp
+		frame.setPreferredSize(new Dimension(400, 350)); // temp
 		frame.setResizable(false);
 		frame.setLocationRelativeTo(null);
 		frame.getContentPane().add(this);
@@ -236,7 +236,7 @@ public class NewEventWindow extends JPanel implements ActionListener, ItemListen
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource().equals(deleteButton)) {
-			// TODO delete the event, update database // use *calendarEvent*
+			// todo delete the event, update database // use *calendarEvent*
 			program.removeEvent(calendarEvent);
 //			program.refreshCalendar(); // Using this will lag the GUI
 			frame.dispose();
