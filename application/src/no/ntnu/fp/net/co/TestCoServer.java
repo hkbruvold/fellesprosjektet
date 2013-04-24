@@ -18,6 +18,7 @@ import no.ntnu.fp.net.co.Connection;
  * @author seb, steinjak
  *
  */
+@SuppressWarnings({ "static-access" })
 public class TestCoServer {
 
   /**

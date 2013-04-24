@@ -22,6 +22,7 @@ import no.ntnu.fp.net.co.Connection;
  * @author Thomas &Oslash;sterlie
  * @version 0.1
  */
+@SuppressWarnings({ "unused" })
 public class ReceiveMessageWorker extends Thread {
 
     private boolean isRunning;

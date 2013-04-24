@@ -24,6 +24,7 @@ import no.ntnu.fp.net.co.SimpleConnection;
  *         This chat client GUI is made just as an experiment. Also used as a
  *         demo program in TTM4100 on NTNU 2005.
  */
+@SuppressWarnings({ "unused" })
 public class ChatClient {
 	private static int portUsed = 0;
 	private String username = "default";

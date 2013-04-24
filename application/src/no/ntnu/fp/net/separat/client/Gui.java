@@ -32,6 +32,7 @@ import javax.swing.JTextField;
  * 
  * This chat client GUI is made just as an experiment. Also used as a demo program in TTM4100 on NTNU 2005.
  */
+@SuppressWarnings({ "unused", "serial", "rawtypes", "unchecked", "deprecation" })
 public class Gui extends JFrame {
 
     private JTextArea messages;

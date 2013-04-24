@@ -26,6 +26,7 @@ import no.ntnu.fp.net.co.SimpleConnection;
  * 
  *         This is a Chat srver made only as a experiment.
  */
+@SuppressWarnings({ "unused", "serial", "rawtypes", "unchecked" })
 public class ChatServer extends JFrame {
 	public static boolean SIMPLE_CONNECTION = false;
 	private Connection server;
