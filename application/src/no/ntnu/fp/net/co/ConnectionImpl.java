@@ -136,7 +136,7 @@ public class ConnectionImpl extends AbstractConnection {
 		this.remotePort = syn.getSrc_port();
 		this.state = State.SYN_RCVD;
 		// Lag en connection og Send syn-ack
-		CopyOfConnectionImpl conn = new CopyOfConnectionImpl(this.myAddress, newPort() , this.remoteAddress, this.remotePort);
+		ConnectionImpl conn = new ConnectionImpl(this.myAddress, newPort() , this.remoteAddress, this.remotePort);
 
 
 		KtnDatagram synAck = constructInternalPacket(Flag.SYN_ACK);
