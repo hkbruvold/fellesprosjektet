@@ -172,6 +172,10 @@ public class ConnectionImpl extends AbstractConnection {
 			lastDataPacketSent = packet;
 			lastValidPacketReceived = ack;
 		}
+		if (ack == null || ack.getFlag() != Flag.ACK) { // XXX is this correct?
+			throw new IOException();
+		}
+
 	}
 	
 	/**
