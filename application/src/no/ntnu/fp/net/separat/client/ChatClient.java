@@ -40,6 +40,9 @@ public class ChatClient {
 		this.username = JOptionPane.showInputDialog(gui, "default eller default2:");
 		if (username.equals("default2")) {
 			thisPort = 5556;
+		} else if (!username.equals("default")) {
+			String code = "" + username.hashCode();
+			thisPort = Integer.parseInt(code.substring(code.length()-5, code.length()-1));
 		}
 		port_to_server = port;
 		addressServer = address;
