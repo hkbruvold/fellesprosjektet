@@ -194,10 +194,11 @@ public class ConnectionImpl extends AbstractConnection {
 			if(!isValid(ack)) {
 			} else if(ack.getAck() > nextSequenceNo-1) {
 			} else if (ack.getAck() < nextSequenceNo-1) {
-				nextSequenceNo--;
+				//nextSequenceNo--;
 				send(msg);
 				return;
 			} else {
+				lastValidPacketReceived = ack;
 				System.out.println("ack is valid");
 			}
 		}
@@ -237,7 +238,7 @@ public class ConnectionImpl extends AbstractConnection {
 			if(!isGhostPacket(datagram)) {
 				System.out.println("Not a ghost packet");
 				if(isValid(datagram)) {
-					if(lastDatagramReceived != null && datagram.getSeq_nr()-1!=lastDatagramReceived.getSeq_nr()) {
+					if(lastDatagramReceived != null && datagram.getSeq_nr()-1!=lastValidPacketReceived.getSeq_nr()) {
 						System.out.println("1");
 						sendAck(lastDatagramReceived, false);
 						return receive();
@@ -245,6 +246,7 @@ public class ConnectionImpl extends AbstractConnection {
 						System.out.println("2");
 						sendAck(datagram, false);
 						lastDatagramReceived = datagram;
+						lastValidPacketReceived = datagram;
 						return (String) datagram.getPayload();
 					}
 				} else {
@@ -340,7 +342,7 @@ public class ConnectionImpl extends AbstractConnection {
 	
 	private boolean isGhostPacket(KtnDatagram datagram) {
     	if(datagram.getSrc_addr() != null) {
-    		return !(datagram.getSrc_addr().equals(remoteAddress) && datagram.getSrc_port()==remotePort);
+    		return !(/*datagram.getSrc_addr().equals(remoteAddress &&*/ datagram.getSrc_port()==remotePort);
     	}
     	return true;
     }
