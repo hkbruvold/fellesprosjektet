@@ -193,8 +193,13 @@ public class ConnectionImpl extends AbstractConnection {
 		} else { 
 			System.out.println("got ack");
 			if(!isValid(ack)) {
+				resends++;
+				nextSequenceNo--;
+				send(msg);
+				resends = 0;
+				return;
 			} else if(ack.getAck() > nextSequenceNo-1) {
-				resends++;//treating ghost (ack)package as if we did not receive ack from other side
+				resends++;
 				nextSequenceNo--;
 				send(msg);
 				resends = 0;
@@ -262,7 +267,8 @@ public class ConnectionImpl extends AbstractConnection {
 				} else {
  					if(lastValidPacketReceived != null) {
  						System.out.println("3");
- 						sendAck(lastDatagramReceived, false);
+ 						nextSequenceNo--;
+ 						sendAck(lastValidPacketReceived, false);
  						return receive();
  					}
  					return receive();
