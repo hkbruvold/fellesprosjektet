@@ -238,9 +238,9 @@ public class ConnectionImpl extends AbstractConnection {
 			if(!isGhostPacket(datagram)) {
 				System.out.println("Not a ghost packet");
 				if(isValid(datagram)) {
-					if(lastDatagramReceived != null && datagram.getSeq_nr()-1!=lastValidPacketReceived.getSeq_nr()) {
+					if(lastValidPacketReceived != null && datagram.getSeq_nr()-1!=lastValidPacketReceived.getSeq_nr()) {
 						System.out.println("1");
-						sendAck(lastDatagramReceived, false);
+						sendAck(lastValidPacketReceived, false);
 						return receive();
 					} else {
 						System.out.println("2");
@@ -250,9 +250,9 @@ public class ConnectionImpl extends AbstractConnection {
 						return (String) datagram.getPayload();
 					}
 				} else {
- 					if(lastDatagramReceived != null) {
+ 					if(lastValidPacketReceived != null) {
  						System.out.println("3");
- 						sendAck(lastDatagramReceived, false);
+ 						sendAck(lastValidPacketReceived, false);
  						return receive();
  					}
  					return receive();
