@@ -182,6 +182,7 @@ public class ConnectionImpl extends AbstractConnection {
 			System.out.println("No ack received");
 			if(resends < MAXRESENDS) {
 				resends++;
+				nextSequenceNo--;
 				send(msg);
 				resends = 0;
 				return;
@@ -194,11 +195,12 @@ public class ConnectionImpl extends AbstractConnection {
 			if(!isValid(ack)) {
 			} else if(ack.getAck() > nextSequenceNo-1) {
 				resends++;//treating ghost (ack)package as if we did not receive ack from other side
+				nextSequenceNo--;
 				send(msg);
 				resends = 0;
 				return;
 			} else if (ack.getAck() < nextSequenceNo-1) {
-				//nextSequenceNo--;
+				nextSequenceNo--;
 				send(msg);
 				return;
 			} else {
@@ -244,6 +246,10 @@ public class ConnectionImpl extends AbstractConnection {
 				if(isValid(datagram)) {
 					if(lastValidPacketReceived != null && datagram.getSeq_nr()-1!=lastValidPacketReceived.getSeq_nr()) {
 						System.out.println("1");
+						System.out.println("Failed packet null check or seqNr check, true is bad: 1. null check, 2. seqNr check");
+						System.out.println(lastValidPacketReceived != null);
+						System.out.println(datagram.getSeq_nr()!=lastValidPacketReceived.getSeq_nr()-1);
+						nextSequenceNo--;
 						sendAck(lastValidPacketReceived, false);
 						return receive();
 					} else {
