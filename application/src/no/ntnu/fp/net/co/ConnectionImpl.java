@@ -342,7 +342,7 @@ public class ConnectionImpl extends AbstractConnection {
 	
 	private boolean isGhostPacket(KtnDatagram datagram) {
     	if(datagram.getSrc_addr() != null) {
-    		return !(/*datagram.getSrc_addr().equals(remoteAddress &&*/ datagram.getSrc_port()==remotePort);
+    		return !(datagram.getSrc_addr().equals(remoteAddress) && datagram.getSrc_port()==remotePort);
     	}
     	return true;
     }

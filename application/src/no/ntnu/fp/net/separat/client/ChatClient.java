@@ -137,6 +137,13 @@ public class ChatClient {
 		Log.setLogName("Klienten");
 		Settings settings = new Settings();
 		address = settings.getServerAddress();
+		if (address.equals("localhost")) {
+			try {
+				address = InetAddress.getLocalHost().getHostAddress();
+			} catch (UnknownHostException e) {
+				e.printStackTrace();
+			}
+		}
 		port = settings.getServerPort();
 		SIMPLE_CONNECTION = settings.useSimpleConnection();
 		
