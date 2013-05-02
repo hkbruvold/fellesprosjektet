@@ -186,7 +186,6 @@ public class ConnectionImpl extends AbstractConnection {
 			resendNumber++;
 			if (resendNumber > 0) {
 				System.out.println("Did not receive ack while sending data, resending number " + resendNumber + "...");
-				nextSequenceNo--; // set back seq number when package is resent.
 			}
 			System.out.println("Trying to send package");
 			ack = sendDataPacketWithRetransmit(packet);
@@ -194,13 +193,16 @@ public class ConnectionImpl extends AbstractConnection {
 				System.out.println("Got ACK package");
 				if (!isValid(ack)) { // Invalid checksum
 					System.out.println("Invalid checksum");
-				} else if (ack.getAck() != nextSequenceNo -1) { // wrong ACK number
-					System.out.println("Wrong ACK number");
+				} else if (ack.getAck() < nextSequenceNo - 1) { // old ACK received
+					System.out.println("Received old ACK package");
+				} else if (ack.getAck() != nextSequenceNo - 1) { // wrong ACK number
+					System.out.println("Wrong ACK number. nextSequenceNo: " + nextSequenceNo);
 				} else { // correct ACK number and checksum
 					System.out.println("Got correct ACK number");
 					lastValidPacketReceived = ack;
 					break;
 				}
+				nextSequenceNo--; // set back seq number when package is resent.
 			}
 		}
 		if (resendNumber >= MAXRESENDS) {
