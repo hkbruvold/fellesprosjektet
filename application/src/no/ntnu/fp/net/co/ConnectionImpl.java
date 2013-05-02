@@ -38,7 +38,7 @@ public class ConnectionImpl extends AbstractConnection {
 	private ClSocket socket = new ClSocket();
     private final int MAXRESENDS = 5;
     private final int MAXRERECEIVES = 5;
-    private int resends = 0;
+    private int resendNumber = 0;
     private int rereceives = 0;
     private KtnDatagram lastDatagramReceived = null;
 	
@@ -55,6 +55,7 @@ public class ConnectionImpl extends AbstractConnection {
 		state = State.CLOSED;
 	}
 	
+	/* Used for incoming connections */
 	public ConnectionImpl(String myAddress, int myPort, String remoteAddress, int remotePort) {
 		this.myPort = myPort;
 		this.myAddress = myAddress;
@@ -121,11 +122,12 @@ public class ConnectionImpl extends AbstractConnection {
 	 * @see Connection#accept()
 	 */
 	public Connection accept() throws IOException, SocketTimeoutException {
+		System.out.println("Expected state: CLOSED or LISTEN. Current state: " + this.state);
 		state = State.LISTEN;
 		
 		// Wait for syn
 		KtnDatagram syn = null;
-		while (syn == null || syn.getFlag() != Flag.SYN) {
+		while (syn == null || syn.getFlag() != Flag.SYN) { 
 			syn = receivePacket(true);
 		}
 		this.remoteAddress = syn.getSrc_addr();
@@ -133,25 +135,25 @@ public class ConnectionImpl extends AbstractConnection {
 		this.state = State.SYN_RCVD;
 
 		// Make a connection and Send syn-ack
-		ConnectionImpl conn = new ConnectionImpl(this.myAddress, newPort(), this.remoteAddress, this.remotePort);
-		KtnDatagram synAck = constructInternalPacket(Flag.SYN_ACK);
+		ConnectionImpl newConnection = new ConnectionImpl(this.myAddress, newPort(), this.remoteAddress, this.remotePort);
 		try {
-			conn.sendAck(synAck, true);
-			conn.state = State.LISTEN;
+			newConnection.sendAck(syn, true);
+			newConnection.state = State.LISTEN;
 		} catch (Exception e) {
+			System.out.println("Failed to send syn-ack");
 			// TODO: handle exception
 		}
 		
 		// Receive ack
-		KtnDatagram ack = conn.receiveAck();
+		KtnDatagram ack = newConnection.receiveAck();
 		if(ack == null || ack.getFlag() != Flag.ACK) {
     		throw new SocketTimeoutException();
     	}
-		// state = State.ESTABLISHED;
 		state = State.LISTEN;
-		conn.state = State.ESTABLISHED;
-		return (Connection) conn;
+		newConnection.state = State.ESTABLISHED;
+		return (Connection) newConnection;
 	}
+	
 	private int newPort() {
 		int newPort = (int) (Math.random() * 30000 + 10000);
 		return newPort;
@@ -171,20 +173,50 @@ public class ConnectionImpl extends AbstractConnection {
 	 */
 	public void send(String msg) throws ConnectException, IOException {
 		if(state != State.ESTABLISHED) {
-			System.out.println(state);
 			throw new ConnectException("Connection not established");
 		}
-		
-		System.out.println(state);
+		System.out.println("Expected state: ESTABLISHED. Current state: " + this.state);
+
 		KtnDatagram packet = constructDataPacket(msg);
+		KtnDatagram ack = null;
+		
+		//boolean wrongACK = true;
+		resendNumber = -1; // -1 because act is initially null
+		while (/*(ack == null || wrongACK) && */resendNumber < MAXRESENDS) {
+			resendNumber++;
+			if (resendNumber > 0) {
+				System.out.println("Did not receive ack while sending data, resending number " + resendNumber + "...");
+				nextSequenceNo--; // set back seq number when package is resent.
+			}
+			System.out.println("Trying to send package");
+			ack = sendDataPacketWithRetransmit(packet);
+			if (ack != null) {
+				System.out.println("Got ACK package");
+				if (!isValid(ack)) { // Invalid checksum
+					System.out.println("Invalid checksum");
+				} else if (ack.getAck() != nextSequenceNo -1) { // wrong ACK number
+					System.out.println("Wrong ACK number");
+				} else { // correct ACK number and checksum
+					System.out.println("Got correct ACK number");
+					lastValidPacketReceived = ack;
+					break;
+				}
+			}
+		}
+		if (resendNumber >= MAXRESENDS) {
+			state = State.CLOSED;
+			throw new ConnectException("Lost connection");
+		}
+		
+		/*
 		KtnDatagram ack = sendDataPacketWithRetransmit(packet);
 		if(ack == null) {
 			System.out.println("No ack received");
-			if(resends < MAXRESENDS) {
-				resends++;
+			if(resendNumber < MAXRESENDS) {
+				resendNumber++;
 				nextSequenceNo--;
 				send(msg);
-				resends = 0;
+				resendNumber = 0;
 				return;
 			} else {
 				state = State.CLOSED;
@@ -193,16 +225,16 @@ public class ConnectionImpl extends AbstractConnection {
 		} else { 
 			System.out.println("got ack");
 			if(!isValid(ack)) {
-				resends++;
+				resendNumber++;
 				nextSequenceNo--;
 				send(msg);
-				resends = 0;
+				resendNumber = 0;
 				return;
 			} else if(ack.getAck() > nextSequenceNo-1) {
-				resends++;
+				resendNumber++;
 				nextSequenceNo--;
 				send(msg);
-				resends = 0;
+				resendNumber = 0;
 				return;
 			} else if (ack.getAck() < nextSequenceNo-1) {
 				nextSequenceNo--;
@@ -212,7 +244,7 @@ public class ConnectionImpl extends AbstractConnection {
 				lastValidPacketReceived = ack;
 				System.out.println("ack is valid");
 			}
-		}
+		} */
 
 	}
 	
@@ -313,7 +345,7 @@ public class ConnectionImpl extends AbstractConnection {
 			state = State.FIN_WAIT_1;
 			ack = receiveAck();
 			if(ack == null){
-				if(resends < MAXRESENDS){
+				if(resendNumber < MAXRESENDS){
 					reclose();
 					return;	
 				}
