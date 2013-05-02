@@ -207,45 +207,6 @@ public class ConnectionImpl extends AbstractConnection {
 			state = State.CLOSED;
 			throw new ConnectException("Lost connection");
 		}
-		
-		/*
-		KtnDatagram ack = sendDataPacketWithRetransmit(packet);
-		if(ack == null) {
-			System.out.println("No ack received");
-			if(resendNumber < MAXRESENDS) {
-				resendNumber++;
-				nextSequenceNo--;
-				send(msg);
-				resendNumber = 0;
-				return;
-			} else {
-				state = State.CLOSED;
-				throw new ConnectException("lost connection");
-			}
-		} else { 
-			System.out.println("got ack");
-			if(!isValid(ack)) {
-				resendNumber++;
-				nextSequenceNo--;
-				send(msg);
-				resendNumber = 0;
-				return;
-			} else if(ack.getAck() > nextSequenceNo-1) {
-				resendNumber++;
-				nextSequenceNo--;
-				send(msg);
-				resendNumber = 0;
-				return;
-			} else if (ack.getAck() < nextSequenceNo-1) {
-				nextSequenceNo--;
-				send(msg);
-				return;
-			} else {
-				lastValidPacketReceived = ack;
-				System.out.println("ack is valid");
-			}
-		} */
-
 	}
 	
 	/**
