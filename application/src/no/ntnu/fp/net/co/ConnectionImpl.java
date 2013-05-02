@@ -180,9 +180,8 @@ public class ConnectionImpl extends AbstractConnection {
 		KtnDatagram packet = constructDataPacket(msg);
 		KtnDatagram ack = null;
 		
-		//boolean wrongACK = true;
 		resendNumber = -1; // -1 because act is initially null
-		while (/*(ack == null || wrongACK) && */resendNumber < MAXRESENDS) {
+		while (resendNumber < MAXRESENDS) {
 			resendNumber++;
 			if (resendNumber > 0) {
 				System.out.println("Did not receive ack while sending data, resending number " + resendNumber + "...");
@@ -202,7 +201,6 @@ public class ConnectionImpl extends AbstractConnection {
 					lastValidPacketReceived = ack;
 					break;
 				}
-				nextSequenceNo--; // set back seq number when package is resent.
 			}
 		}
 		if (resendNumber >= MAXRESENDS) {
